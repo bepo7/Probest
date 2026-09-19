@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Resumo completo de Probabilidade e Estatística" />
+  <title>Seção 2 — Probabilidade e Estatística</title>
+  <link rel="stylesheet" href="site.css" />
+</head>
+<body class="section-2">
+  <header class="site-header"><a class="brand" href="index.html">Probabilidade &amp; Estatística</a></header>
+  <div class="page-wrap"><div class="layout">
+    <nav class="site-nav" aria-label="Seções do resumo"><h2>Seções</h2><ol><li><a href="secao-1.html">Fundamentos de probabilidade</a></li><li><a href="secao-2.html">Estatística descritiva e análise gráfica</a></li><li><a href="secao-3.html">Variáveis aleatórias discretas</a></li><li><a href="secao-4.html">Variáveis aleatórias contínuas</a></li><li><a href="secao-5.html">Variáveis aleatórias conjuntas</a></li><li><a href="secao-6.html">Guia de decisão</a></li><li><a href="secao-7.html">Formulário condensado</a></li><li><a href="secao-8.html">Checklist de prova</a></li><li><a href="secao-9.html">Referências usadas</a></li></ol></nav>
+    <main class="content"><a class="section-jump" href="index.html">Voltar à página inicial</a><span class="eyebrow">Resumo para prova</span><h1
+id="estatística-descritiva-e-análise-gráfica">2. Estatística descritiva
+e análise gráfica</h1>
+<h2 id="medidas-de-posição-e-dispersão">2.1 Medidas de posição e
+dispersão</h2>
+<p>Para uma amostra
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">x_1,\ldots,x_n</annotation></semantics></math>:</p>
+<ul>
+<li><strong>Média:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msub><mi>x</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\displaystyle \bar x=\frac1n\sum_{i=1}^n x_i</annotation></semantics></math>.</li>
+<li><strong>Mediana:</strong> valor central da amostra ordenada; se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+é par, normalmente se usa a média dos dois centrais.</li>
+<li><strong>Moda:</strong> valor ou região de maior
+frequência/densidade.</li>
+<li><strong>Variância populacional:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup><mo>=</mo><mfrac><mn>1</mn><mi>N</mi></mfrac><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></msubsup><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mi>μ</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\displaystyle \sigma^2=\frac1N\sum_{i=1}^{N}(x_i-\mu)^2</annotation></semantics></math>.</li>
+<li><strong>Variância amostral não viesada:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>s</mi><mn>2</mn></msup><mo>=</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mover><mi>x</mi><mo accent="true">‾</mo></mover><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup><mo>=</mo><mfrac><mrow><mo>∑</mo><msubsup><mi>x</mi><mi>i</mi><mn>2</mn></msubsup><mo>−</mo><mi>n</mi><msup><mover><mi>x</mi><mo accent="true">‾</mo></mover><mn>2</mn></msup></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+s^2=\frac1{n-1}\sum_{i=1}^{n}(x_i-\bar x)^2
+   =\frac{\sum x_i^2-n\bar x^2}{n-1}.
+</annotation></semantics></math></li>
+<li><strong>Desvio-padrão:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>=</mo><msqrt><msup><mi>s</mi><mn>2</mn></msup></msqrt></mrow><annotation encoding="application/x-tex">s=\sqrt{s^2}</annotation></semantics></math>,
+na mesma unidade dos dados.</li>
+<li><strong>Coeficiente de variação:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>V</mi><mo>=</mo><mi>s</mi><mi>/</mi><mo stretchy="false" form="prefix">|</mo><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">\displaystyle CV=s/|\bar x|</annotation></semantics></math>
+(ou
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>100</mn><mi>C</mi><mi>V</mi><mi>%</mi></mrow><annotation encoding="application/x-tex">100CV\%</annotation></semantics></math>).
+É adimensional, mas não é adequado se a média estiver próxima de
+zero.</li>
+<li><strong>Padronização:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>i</mi></msub><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">\displaystyle z_i=(x_i-\bar x)/s</annotation></semantics></math>,
+ou
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Z</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mi>σ</mi></mrow><annotation encoding="application/x-tex">Z=(X-\mu)/\sigma</annotation></semantics></math>
+na população.</li>
+</ul>
+<p><strong>Propriedades.</strong> A média é sensível a extremos; a
+mediana é robusta. Somar
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
+a todos os dados soma
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
+à média/mediana e não altera a variância. Multiplicar por
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+multiplica a média por
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>,
+o desvio por
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>b</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|b|</annotation></semantics></math>
+e a variância por
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>b</mi><mn>2</mn></msup><annotation encoding="application/x-tex">b^2</annotation></semantics></math>.</p>
+<p><strong>Exemplo.</strong> Nos dados
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>9</mn></mrow><annotation encoding="application/x-tex">2,4,9</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">\bar x=5</annotation></semantics></math>,
+a mediana é 4 e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>s</mi><mn>2</mn></msup><mo>=</mo><mo stretchy="false" form="prefix">[</mo><mn>9</mn><mo>+</mo><mn>1</mn><mo>+</mo><mn>16</mn><mo stretchy="false" form="postfix">]</mo><mi>/</mi><mn>2</mn><mo>=</mo><mn>13</mn></mrow><annotation encoding="application/x-tex">s^2=[9+1+16]/2=13</annotation></semantics></math>.</p>
+<h2 id="histograma">2.2 Histograma</h2>
+<figure class="concept-figure">
+<img src="graficos-analise.svg" alt="Histograma, ECDF, boxplot e scatterplot." />
+<figcaption>
+Visualizações da seção 2: use histogramas para frequências, ECDF para
+acumuladas, boxplots para quantis e scatterplots para pares.
+</figcaption>
+</figure>
+<p>O histograma agrupa dados quantitativos em classes
+(<strong>bins</strong>). Para classes de largura
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mi>j</mi></msub><annotation encoding="application/x-tex">h_j</annotation></semantics></math>
+possivelmente diferente, a altura correta de um histograma de densidade
+é</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="normal">altura</mtext><mi>j</mi></msub><mo>=</mo><mfrac><msub><mi>n</mi><mi>j</mi></msub><mrow><mi>n</mi><msub><mi>h</mi><mi>j</mi></msub></mrow></mfrac><mo>,</mo></mrow><annotation encoding="application/x-tex">
+\text{altura}_j=\frac{n_j}{nh_j},
+</annotation></semantics></math></p>
+<p>de modo que a área da barra seja
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mi>j</mi></msub><mi>/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">n_j/n</annotation></semantics></math>
+e a soma das áreas seja 1. Defina
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><msub><mi>x</mi><mi mathvariant="normal">max</mi></msub><mo>−</mo><msub><mi>x</mi><mi mathvariant="normal">min</mi></msub></mrow><annotation encoding="application/x-tex">R=x_{\max}-x_{\min}</annotation></semantics></math>,
+número de classes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+e largura
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>≈</mo><mi>R</mi><mi>/</mi><mi>k</mi></mrow><annotation encoding="application/x-tex">h\approx R/k</annotation></semantics></math>.</p>
+<p>Há três escalas comuns:</p>
+<ul>
+<li><strong>frequência absoluta:</strong> altura
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><msub><mi>n</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">=n_j</annotation></semantics></math>;</li>
+<li><strong>frequência relativa:</strong> altura
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><msub><mi>n</mi><mi>j</mi></msub><mi>/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">=n_j/n</annotation></semantics></math>;</li>
+<li><strong>densidade:</strong> altura
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><msub><mi>n</mi><mi>j</mi></msub><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><msub><mi>h</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">=n_j/(nh_j)</annotation></semantics></math>.</li>
+</ul>
+<p>Com bins de larguras diferentes, somente o histograma de densidade
+preserva corretamente a interpretação pela <strong>área</strong>. A
+frequência de uma classe corresponde aproximadamente a
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><msub><mi>h</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">f(x_j)h_j</annotation></semantics></math>
+quando o bin é estreito e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
+varia pouco nele.</p>
+<h3 id="regras-de-binning">Regras de binning</h3>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 40%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr>
+<th>Regra</th>
+<th style="text-align: right;">Número/largura sugerida</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sturges</strong></td>
+<td
+style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mo stretchy="false" form="prefix">⌈</mo><mn>1</mn><mo>+</mo><msub><mrow><mi mathvariant="normal">log</mi><mo>&#8289;</mo></mrow><mn>2</mn></msub><mi>n</mi><mo stretchy="false" form="postfix">⌉</mo><mo>≈</mo><mo stretchy="false" form="prefix">⌈</mo><mn>1</mn><mo>+</mo><mn>3</mn><mo>,</mo><mn>322</mn><msub><mrow><mi mathvariant="normal">log</mi><mo>&#8289;</mo></mrow><mn>10</mn></msub><mi>n</mi><mo stretchy="false" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">k=\lceil1+\log_2n\rceil\approx\lceil1+3{,}322\log_{10}n\rceil</annotation></semantics></math></td>
+<td>Amostras pequenas/moderadas; pode suavizar demais dados
+grandes/multimodais.</td>
+</tr>
+<tr>
+<td><strong>Scott</strong></td>
+<td
+style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>3</mn><mo>,</mo><mn>49</mn><mi>s</mi><mspace width="0.167em"></mspace><msup><mi>n</mi><mrow><mi>−</mi><mn>1</mn><mi>/</mi><mn>3</mn></mrow></msup></mrow><annotation encoding="application/x-tex">h=3{,}49s\,n^{-1/3}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mo stretchy="false" form="prefix">⌈</mo><mi>R</mi><mi>/</mi><mi>h</mi><mo stretchy="false" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">k=\lceil R/h\rceil</annotation></semantics></math></td>
+<td>Dados aproximadamente normais, sem forte assimetria; sensível a
+outliers.</td>
+</tr>
+<tr>
+<td><strong>Freedman–Diaconis</strong></td>
+<td
+style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>2</mn><mi>I</mi><mi>Q</mi><mi>R</mi><mspace width="0.167em"></mspace><msup><mi>n</mi><mrow><mi>−</mi><mn>1</mn><mi>/</mi><mn>3</mn></mrow></msup></mrow><annotation encoding="application/x-tex">h=2IQR\,n^{-1/3}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mo stretchy="false" form="prefix">⌈</mo><mi>R</mi><mi>/</mi><mi>h</mi><mo stretchy="false" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">k=\lceil R/h\rceil</annotation></semantics></math></td>
+<td>Robusta a outliers e caudas longas.</td>
+</tr>
+</tbody>
+</table>
+<p>Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mi>Q</mi><mi>R</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">IQR=0</annotation></semantics></math>,
+Freedman–Diaconis degenera. O histograma depende da largura <strong>e da
+origem</strong> dos bins: confira escolhas alternativas.</p>
+<p><strong>Exemplo.</strong> Para
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">n=100</annotation></semantics></math>,
+Sturges sugere
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mo stretchy="false" form="prefix">⌈</mo><mn>1</mn><mo>+</mo><msub><mrow><mi mathvariant="normal">log</mi><mo>&#8289;</mo></mrow><mn>2</mn></msub><mn>100</mn><mo stretchy="false" form="postfix">⌉</mo><mo>=</mo><mn>8</mn></mrow><annotation encoding="application/x-tex">k=\lceil1+\log_2 100\rceil=8</annotation></semantics></math>.</p>
+<h2 id="distribuição-multimodal">2.3 Distribuição multimodal</h2>
+<p>Uma distribuição é unimodal se tem um pico dominante, bimodal se tem
+dois e multimodal se tem vários. Modos podem indicar
+subpopulações/mecanismos distintos, mas também podem ser artefatos de
+bins estreitos, ruído ou amostra pequena. Compare diferentes bins, ECDF,
+densidade suavizada e gráficos separados por grupo.</p>
+<p><strong>Exemplo.</strong> Tempos de cache hit e cache miss misturados
+podem produzir dois picos, embora cada grupo isolado seja unimodal.</p>
+<h2 id="cdf-e-ecdf">2.4 CDF e ECDF</h2>
+<p>A função distribuição acumulada de qualquer variável é</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>≤</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+F_X(x)=P(X\le x).
+</annotation></semantics></math></p>
+<p>Ela é não decrescente, contínua à direita, limitada entre 0 e 1, com
+limites 0 em
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mi>∞</mi></mrow><annotation encoding="application/x-tex">-\infty</annotation></semantics></math>
+e 1 em
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>+</mi><mi>∞</mi></mrow><annotation encoding="application/x-tex">+\infty</annotation></semantics></math>.
+Em geral,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>&lt;</mo><mi>X</mi><mo>≤</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><msup><mi>x</mi><mo>−</mo></msup><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+P(a&lt;X\le b)=F_X(b)-F_X(a),
+\qquad
+P(X=x)=F_X(x)-F_X(x^-).
+</annotation></semantics></math></p>
+<p>A função distribuição empírica é</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mn>𝟏</mn><mo stretchy="false" form="prefix">{</mo><msub><mi>x</mi><mi>i</mi></msub><mo>≤</mo><mi>x</mi><mo stretchy="false" form="postfix">}</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+F_n(x)=\frac1n\sum_{i=1}^n\mathbf1\{x_i\le x\}.
+</annotation></semantics></math></p>
+<p>Ela é uma função em degraus, não usa bins e facilita a leitura de
+percentis e caudas.</p>
+<p><strong>Exemplo.</strong> Para
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">1,2,2,5</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>3</mn><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">F_n(2)=3/4</annotation></semantics></math>.</p>
+<h2 id="percentis-e-quantis">2.5 Percentis e quantis</h2>
+<p>O quantil de ordem
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>p</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0&lt;p&lt;1</annotation></semantics></math>,
+é</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>q</mi><mi>p</mi></msub><mo>=</mo><msup><mi>F</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mi mathvariant="normal">inf</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">{</mo><mi>x</mi><mo>:</mo><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>≥</mo><mi>p</mi><mo stretchy="false" form="postfix">}</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+q_p=F^{-1}(p)=\inf\{x:F(x)\ge p\}.
+</annotation></semantics></math></p>
+<p>Casos importantes:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mn>1</mn></msub><mo>=</mo><msub><mi>q</mi><mrow><mn>0</mn><mo>,</mo><mn>25</mn></mrow></msub></mrow><annotation encoding="application/x-tex">Q_1=q_{0,25}</annotation></semantics></math>,
+mediana
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mn>2</mn></msub><mo>=</mo><msub><mi>q</mi><mrow><mn>0</mn><mo>,</mo><mn>50</mn></mrow></msub></mrow><annotation encoding="application/x-tex">Q_2=q_{0,50}</annotation></semantics></math>
+e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mn>3</mn></msub><mo>=</mo><msub><mi>q</mi><mrow><mn>0</mn><mo>,</mo><mn>75</mn></mrow></msub></mrow><annotation encoding="application/x-tex">Q_3=q_{0,75}</annotation></semantics></math>.
+Para uma amostra ordenada, o método de <strong>posto mais
+próximo</strong> usado nos slides é</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>q</mi><mi>p</mi></msub><mo>=</mo><msub><mi>x</mi><mrow><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">⌈</mo><mi>n</mi><mi>p</mi><mo stretchy="false" form="postfix">⌉</mo><mo stretchy="false" form="postfix">)</mo></mrow></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+q_p=x_{(\lceil np\rceil)}.
+</annotation></semantics></math></p>
+<p>Softwares podem interpolar e dar valores diferentes. Para uma
+distribuição contínua estritamente crescente, resolva
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>q</mi><mi>p</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">F(q_p)=p</annotation></semantics></math>.</p>
+<p><strong>Exemplo.</strong> Com
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>20</mn></mrow><annotation encoding="application/x-tex">n=20</annotation></semantics></math>,
+o percentil 75 pelo posto mais próximo é
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mrow><mo stretchy="false" form="prefix">(</mo><mn>15</mn><mo stretchy="false" form="postfix">)</mo></mrow></msub><annotation encoding="application/x-tex">x_{(15)}</annotation></semantics></math>.</p>
+<h2 id="boxplot">2.6 Boxplot</h2>
+<p>O boxplot usa:</p>
+<ul>
+<li>caixa de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Q</mi><mn>1</mn></msub><annotation encoding="application/x-tex">Q_1</annotation></semantics></math>
+a
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Q</mi><mn>3</mn></msub><annotation encoding="application/x-tex">Q_3</annotation></semantics></math>,
+com linha na mediana;</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mi>Q</mi><mi>R</mi><mo>=</mo><msub><mi>Q</mi><mn>3</mn></msub><mo>−</mo><msub><mi>Q</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">IQR=Q_3-Q_1</annotation></semantics></math>;</li>
+<li>cercas
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><msub><mi>Q</mi><mn>1</mn></msub><mo>−</mo><mn>1</mn><mo>,</mo><mn>5</mn><mi>I</mi><mi>Q</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">L=Q_1-1{,}5IQR</annotation></semantics></math>
+e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mo>=</mo><msub><mi>Q</mi><mn>3</mn></msub><mo>+</mo><mn>1</mn><mo>,</mo><mn>5</mn><mi>I</mi><mi>Q</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">U=Q_3+1{,}5IQR</annotation></semantics></math>;</li>
+<li>bigodes no menor/maior dado dentro das cercas;</li>
+<li>pontos fora das cercas como <strong>potenciais</strong>
+outliers.</li>
+</ul>
+<p>É não paramétrico e ótimo para comparar grupos, mas esconde
+multimodalidade e, usualmente, o tamanho amostral.</p>
+<p><strong>Exemplo.</strong> Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mn>1</mn></msub><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">Q_1=10</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mn>3</mn></msub><mo>=</mo><mn>18</mn></mrow><annotation encoding="application/x-tex">Q_3=18</annotation></semantics></math>,
+então
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mi>Q</mi><mi>R</mi><mo>=</mo><mn>8</mn></mrow><annotation encoding="application/x-tex">IQR=8</annotation></semantics></math>
+e as cercas são
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">-2</annotation></semantics></math>
+e 30.</p>
+<h2 id="scatterplot">2.7 Scatterplot</h2>
+<p>Representa pares
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>,</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(x_i,y_i)</annotation></semantics></math>
+e mostra direção, intensidade, forma da associação, clusters,
+heterocedasticidade e outliers. Um padrão forte não prova causalidade.
+Pearson mede apenas associação linear; uma curva perfeita pode ter
+correlação zero.</p>
+<p><strong>Exemplo.</strong> Pontos próximos de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mn>2</mn><mi>x</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">y=2x+1</annotation></semantics></math>
+mostram associação linear positiva; um extremo pode alterar fortemente a
+correlação.</p>
+<h2 id="qq-plot">2.8 QQ plot</h2>
+<p>Compara quantis de duas amostras, plotando</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">(</mo><msub><mi>Q</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><msub><mi>p</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>,</mo><msub><mi>Q</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><msub><mi>p</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo minsize="120%" maxsize="120%" stretchy="true" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\bigl(Q_X(p_i),Q_Y(p_i)\bigr).
+</annotation></semantics></math></p>
+<p>Pontos perto de uma reta indicam formas semelhantes. A reta de 45°
+indica também localização/escala semelhantes; outra
+inclinação/intercepto pode indicar apenas mudança de escala/localização.
+Curvatura sistemática indica assimetria ou caudas diferentes.</p>
+<p><strong>Exemplo.</strong> Se uma amostra é aproximadamente o dobro da
+outra, os pontos ficam perto de uma reta de inclinação 2.</p>
+<h2 id="probability-plot">2.9 Probability plot</h2>
+<p>Compara dados ordenados com quantis teóricos:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">(</mo><msup><mi>F</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><msub><mi>p</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>,</mo><msub><mi>x</mi><mrow><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo></mrow></msub><mo minsize="120%" maxsize="120%" stretchy="true" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>p</mi><mi>i</mi></msub><mo>≈</mo><mfrac><mrow><mi>i</mi><mo>−</mo><mn>0</mn><mo>,</mo><mn>5</mn></mrow><mi>n</mi></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\bigl(F^{-1}(p_i),x_{(i)}\bigr),
+\qquad p_i\approx\frac{i-0{,}5}{n}.
+</annotation></semantics></math></p>
+<p>Se a família teórica é adequada, os pontos ficam aproximadamente em
+uma reta. Desvios nas pontas sugerem caudas diferentes/outliers;
+amostras pequenas oscilam naturalmente.</p>
+<p><strong>Exemplo.</strong> Dados
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mn>10</mn><mo>,</mo><msup><mn>2</mn><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">N(10,2^2)</annotation></semantics></math>
+comparados à normal padrão produzem aproximadamente uma reta com
+intercepto 10 e inclinação 2.</p>
+<hr /><p class="source-note">Conteúdo proveniente integralmente de <a href="Resumo_Completo_Probabilidade_Estatistica.md">Resumo_Completo_Probabilidade_Estatistica.md</a> e <a href="conteudo_adicional_necessario.md">conteudo_adicional_necessario.md</a>.</p></main>
+  </div></div>
+</body>
+</html>

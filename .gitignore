@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+
+# Arquivos pesados (> 100 MB são bloqueados pelo GitHub)
+*.pdf

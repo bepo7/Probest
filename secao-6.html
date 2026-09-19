@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Resumo completo de Probabilidade e Estatística" />
+  <title>Seção 6 — Probabilidade e Estatística</title>
+  <link rel="stylesheet" href="site.css" />
+</head>
+<body class="section-6">
+  <header class="site-header"><a class="brand" href="index.html">Probabilidade &amp; Estatística</a></header>
+  <div class="page-wrap"><div class="layout">
+    <nav class="site-nav" aria-label="Seções do resumo"><h2>Seções</h2><ol><li><a href="secao-1.html">Fundamentos de probabilidade</a></li><li><a href="secao-2.html">Estatística descritiva e análise gráfica</a></li><li><a href="secao-3.html">Variáveis aleatórias discretas</a></li><li><a href="secao-4.html">Variáveis aleatórias contínuas</a></li><li><a href="secao-5.html">Variáveis aleatórias conjuntas</a></li><li><a href="secao-6.html">Guia de decisão</a></li><li><a href="secao-7.html">Formulário condensado</a></li><li><a href="secao-8.html">Checklist de prova</a></li><li><a href="secao-9.html">Referências usadas</a></li></ol></nav>
+    <main class="content"><a class="section-jump" href="index.html">Voltar à página inicial</a><span class="eyebrow">Resumo para prova</span><h1
+id="guia-de-decisão">6. Guia de decisão</h1>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Sinal no enunciado</th>
+<th>Ferramenta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“ao menos um”</td>
+<td>Complemento
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">nenhum</mtext><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">1-P(\text{nenhum})</annotation></semantics></math>.</td>
+</tr>
+<tr>
+<td>espaço finito equiprovável</td>
+<td>Contagem favorável/total.</td>
+</tr>
+<tr>
+<td>ordem importa, pode repetir</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mi>k</mi></msup><annotation encoding="application/x-tex">n^k</annotation></semantics></math>.</td>
+</tr>
+<tr>
+<td>ordem importa, sem repetir</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mi>!</mi></mrow><annotation encoding="application/x-tex">n!/(n-k)!</annotation></semantics></math>.</td>
+</tr>
+<tr>
+<td>ordem não importa, sem repetir</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mfrac linethickness="0"><mi>n</mi><mi>k</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\binom nk</annotation></semantics></math>.</td>
+</tr>
+<tr>
+<td>ordem não importa, com repetição</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mfrac linethickness="0"><mrow><mi>n</mi><mo>+</mo><mi>k</mi><mo>−</mo><mn>1</mn></mrow><mi>k</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\binom{n+k-1}{k}</annotation></semantics></math>.</td>
+</tr>
+<tr>
+<td>“sabendo que”</td>
+<td>Probabilidade condicional.</td>
+</tr>
+<tr>
+<td>inverter condicionamento</td>
+<td>Bayes + probabilidade total.</td>
+</tr>
+<tr>
+<td>classes/servidores/origens</td>
+<td>Partição + probabilidade total.</td>
+</tr>
+<tr>
+<td>um sucesso/fracasso</td>
+<td>Bernoulli.</td>
+</tr>
+<tr>
+<td>sucessos em
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+ensaios</td>
+<td>Binomial.</td>
+</tr>
+<tr>
+<td>sem reposição em população finita</td>
+<td>Hipergeométrica.</td>
+</tr>
+<tr>
+<td>tentativas até primeiro sucesso</td>
+<td>Geométrica.</td>
+</tr>
+<tr>
+<td>tentativas até
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>-ésimo
+sucesso</td>
+<td>Binomial negativa.</td>
+</tr>
+<tr>
+<td>contagem com taxa constante</td>
+<td>Poisson; parâmetro = taxa × intervalo.</td>
+</tr>
+<tr>
+<td>tempo até próximo evento</td>
+<td>Exponencial.</td>
+</tr>
+<tr>
+<td>tempo até
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-ésimo
+evento</td>
+<td>Gamma/Erlang.</td>
+</tr>
+<tr>
+<td>soma de exponenciais com taxas diferentes</td>
+<td>Hipoexponencial.</td>
+</tr>
+<tr>
+<td>mistura de classes exponenciais</td>
+<td>Hiperexponencial.</td>
+</tr>
+<tr>
+<td>medida limitada equiprovável</td>
+<td>Uniforme.</td>
+</tr>
+<tr>
+<td>medida simétrica de muitos efeitos</td>
+<td>Normal.</td>
+</tr>
+<tr>
+<td>cauda de lei de potência</td>
+<td>Pareto/Zipf; confira quais momentos existem.</td>
+</tr>
+<tr>
+<td>tabela/densidade de duas variáveis</td>
+<td>Marginais, condicionais, independência.</td>
+</tr>
+<tr>
+<td>soma de variáveis</td>
+<td>Convolução; médias somam; variâncias usam covariância.</td>
+</tr>
+<tr>
+<td>primeira/última tarefa</td>
+<td>Mínimo/máximo.</td>
+</tr>
+<tr>
+<td>média global por grupos</td>
+<td>Esperança total.</td>
+</tr>
+<tr>
+<td>variância global por grupos</td>
+<td>Variância total.</td>
+</tr>
+<tr>
+<td>associação linear</td>
+<td>Scatterplot + covariância/correlação.</td>
+</tr>
+<tr>
+<td>limite universal para afastamento da média</td>
+<td>Desigualdade de Chebyshev.</td>
+</tr>
+<tr>
+<td>estabilidade da média/frequência com
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+grande</td>
+<td>Lei dos Grandes Números.</td>
+</tr>
+<tr>
+<td>soma ou média grande de i.i.d.</td>
+<td>TCL, se não houver solução exata simples.</td>
+</tr>
+<tr>
+<td>marginais normais e dependência linear parametrizada</td>
+<td>Normal bivariada.</td>
+</tr>
+</tbody>
+</table>
+<hr /><p class="source-note">Conteúdo proveniente integralmente de <a href="Resumo_Completo_Probabilidade_Estatistica.md">Resumo_Completo_Probabilidade_Estatistica.md</a> e <a href="conteudo_adicional_necessario.md">conteudo_adicional_necessario.md</a>.</p></main>
+  </div></div>
+</body>
+</html>

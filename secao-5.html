@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Resumo completo de Probabilidade e Estatística" />
+  <title>Seção 5 — Probabilidade e Estatística</title>
+  <link rel="stylesheet" href="site.css" />
+</head>
+<body class="section-5">
+  <header class="site-header"><a class="brand" href="index.html">Probabilidade &amp; Estatística</a></header>
+  <div class="page-wrap"><div class="layout">
+    <nav class="site-nav" aria-label="Seções do resumo"><h2>Seções</h2><ol><li><a href="secao-1.html">Fundamentos de probabilidade</a></li><li><a href="secao-2.html">Estatística descritiva e análise gráfica</a></li><li><a href="secao-3.html">Variáveis aleatórias discretas</a></li><li><a href="secao-4.html">Variáveis aleatórias contínuas</a></li><li><a href="secao-5.html">Variáveis aleatórias conjuntas</a></li><li><a href="secao-6.html">Guia de decisão</a></li><li><a href="secao-7.html">Formulário condensado</a></li><li><a href="secao-8.html">Checklist de prova</a></li><li><a href="secao-9.html">Referências usadas</a></li></ol></nav>
+    <main class="content"><a class="section-jump" href="index.html">Voltar à página inicial</a><span class="eyebrow">Resumo para prova</span><h1
+id="variáveis-aleatórias-conjuntas">5. Variáveis aleatórias
+conjuntas</h1>
+<h2 id="cdf-conjunta">5.1 CDF conjunta</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>≤</mo><mi>x</mi><mo>,</mo><mi>Y</mi><mo>≤</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+F_{X,Y}(x,y)=P(X\le x,Y\le y).
+</annotation></semantics></math></p>
+<p>Para um retângulo:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>&lt;</mo><mi>X</mi><mo>≤</mo><mi>b</mi><mo>,</mo><mspace width="0.222em"></mspace><mi>c</mi><mo>&lt;</mo><mi>Y</mi><mo>≤</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow></mrow></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>b</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mi>−</mi><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>c</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{aligned}
+P(a&lt;X\le b,\ c&lt;Y\le d)
+={}&amp;F(b,d)-F(a,d)\\
+&amp;-F(b,c)+F(a,c).
+\end{aligned}
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munder><mi mathvariant="normal">lim</mi><mrow><mi>y</mi><mo>→</mo><mi>∞</mi></mrow></munder><msub><mi>F</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>F</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munder><mi mathvariant="normal">lim</mi><mrow><mi>x</mi><mo>→</mo><mi>∞</mi></mrow></munder><msub><mi>F</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+F_X(x)=\lim_{y\to\infty}F_{X,Y}(x,y),
+\qquad
+F_Y(y)=\lim_{x\to\infty}F_{X,Y}(x,y).
+</annotation></semantics></math></p>
+<p><strong>Exemplo.</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>&lt;</mo><mi>X</mi><mo>≤</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>&lt;</mo><mi>Y</mi><mo>≤</mo><mn>3</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>3</mn><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>3</mn><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(0&lt;X\le1,2&lt;Y\le3)=F(1,3)-F(0,3)-F(1,2)+F(0,2)</annotation></semantics></math>.</p>
+<h2 id="distribuição-conjunta-discreta">5.2 Distribuição conjunta
+discreta</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo>,</mo><mi>Y</mi><mo>=</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>p</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>≥</mo><mn>0</mn><mo>,</mo></mrow><annotation encoding="application/x-tex">
+p_{X,Y}(x,y)=P(X=x,Y=y),\qquad
+p_{X,Y}(x,y)\ge0,
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo>∑</mo><mi>x</mi></munder><munder><mo>∑</mo><mi>y</mi></munder><msub><mi>p</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\sum_x\sum_yp_{X,Y}(x,y)=1.
+</annotation></semantics></math></p>
+<p>Marginais:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munder><mo>∑</mo><mi>y</mi></munder><msub><mi>p</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>p</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munder><mo>∑</mo><mi>x</mi></munder><msub><mi>p</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+p_X(x)=\sum_yp_{X,Y}(x,y),
+\qquad
+p_Y(y)=\sum_xp_{X,Y}(x,y).
+</annotation></semantics></math></p>
+<p><strong>Exemplo.</strong> Se a linha
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">X=1</annotation></semantics></math>
+contém
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">0{,}1,0{,}2,0{,}15</annotation></semantics></math>,
+então
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>=</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn><mo>,</mo><mn>45</mn></mrow><annotation encoding="application/x-tex">P(X=1)=0{,}45</annotation></semantics></math>.</p>
+<h2 id="densidade-conjunta-contínua">5.3 Densidade conjunta
+contínua</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>≥</mo><mn>0</mn><mo>,</mo><mspace width="2.0em"></mspace><msub><mo>∬</mo><msup><mi>ℝ</mi><mn>2</mn></msup></msub><msub><mi>f</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mspace width="0.167em"></mspace><mi>d</mi><mi>x</mi><mi>d</mi><mi>y</mi><mo>=</mo><mn>1</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+f_{X,Y}(x,y)\ge0,\qquad
+\iint_{\mathbb R^2}f_{X,Y}(x,y)\,dxdy=1.
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>∈</mo><mi>R</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mo>∬</mo><mi>R</mi></msub><msub><mi>f</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mspace width="0.167em"></mspace><mi>d</mi><mi>x</mi><mi>d</mi><mi>y</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+P((X,Y)\in R)=\iint_Rf_{X,Y}(x,y)\,dxdy.
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mrow><mi>−</mi><mi>∞</mi></mrow><mi>∞</mi></msubsup><msub><mi>f</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>y</mi><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mrow><mi>−</mi><mi>∞</mi></mrow><mi>∞</mi></msubsup><msub><mi>f</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>x</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+f_X(x)=\int_{-\infty}^{\infty}f_{X,Y}(x,y)dy,
+\qquad
+f_Y(y)=\int_{-\infty}^{\infty}f_{X,Y}(x,y)dx.
+</annotation></semantics></math></p>
+<p><strong>Cuidado:</strong> respeite o suporte. Em
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mi>y</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0&lt;x&lt;y&lt;1</annotation></semantics></math>,
+para
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+fixo integre
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
+de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+a 1; para
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
+fixo, integre
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+de 0 a
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>.</p>
+<p><strong>Exemplo.</strong> Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">f(x,y)=2</annotation></semantics></math>
+no triângulo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mi>y</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0&lt;x&lt;y&lt;1</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mi>x</mi><mn>12</mn></msubsup><mi>d</mi><mi>y</mi><mo>=</mo><mn>2</mn><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_X(x)=\int_x^12dy=2(1-x)</annotation></semantics></math>.</p>
+<h2 id="distribuições-condicionais">5.4 Distribuições condicionais</h2>
+<p>Caso discreto:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><msub><mi>p</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>p</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+p_{Y\mid X}(y\mid x)=\frac{p_{X,Y}(x,y)}{p_X(x)}.
+</annotation></semantics></math></p>
+<p>Caso contínuo:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><msub><mi>f</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+f_{Y\mid X}(y\mid x)=\frac{f_{X,Y}(x,y)}{f_X(x)}.
+</annotation></semantics></math></p>
+<p>Para cada
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>,
+a condicional deve somar/integrar 1.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>p</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>p</mi><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+p_{X,Y}(x,y)=p_X(x)p_{Y\mid X}(y\mid x)
+</annotation></semantics></math></p>
+<p>e analogamente para densidades.</p>
+<p><strong>Exemplo.</strong> Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn><mo>,</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">p(1,2)=0{,}15</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn><mo>,</mo><mn>45</mn></mrow><annotation encoding="application/x-tex">p_X(1)=0{,}45</annotation></semantics></math>,
+então
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>=</mo><mn>2</mn><mo>∣</mo><mi>X</mi><mo>=</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">P(Y=2\mid X=1)=1/3</annotation></semantics></math>.</p>
+<h2 id="independência-de-variáveis">5.5 Independência de variáveis</h2>
+<p>Equivalências:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>F</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+F_{X,Y}(x,y)=F_X(x)F_Y(y),
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>p</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>p</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mspace width="1.0em"></mspace><mtext mathvariant="normal">ou</mtext><mspace width="1.0em"></mspace><msub><mi>f</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+p_{X,Y}(x,y)=p_X(x)p_Y(y)
+\quad\text{ou}\quad
+f_{X,Y}(x,y)=f_X(x)f_Y(y)
+</annotation></semantics></math></p>
+<p>em todo o suporte. Também, a distribuição condicional não depende da
+outra variável. Um suporte não retangular, como
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mi>y</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0&lt;x&lt;y&lt;1</annotation></semantics></math>,
+geralmente já impede independência. Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+são independentes,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">g(X)</annotation></semantics></math>
+e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">h(Y)</annotation></semantics></math>
+também são.</p>
+<p><strong>Exemplo.</strong> Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn><mo>,</mo><mn>42</mn></mrow><annotation encoding="application/x-tex">p(0,0)=0{,}42</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn><mo>,</mo><mn>60</mn></mrow><annotation encoding="application/x-tex">p_X(0)=0{,}60</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn><mo>,</mo><mn>70</mn></mrow><annotation encoding="application/x-tex">p_Y(0)=0{,}70</annotation></semantics></math>,
+essa célula fatora; é preciso verificar <strong>todas</strong> as
+células.</p>
+<h2 id="lotus-bidimensional">5.6 LOTUS bidimensional</h2>
+<p>Discreto:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>g</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mo>=</mo><munder><mo>∑</mo><mi>x</mi></munder><munder><mo>∑</mo><mi>y</mi></munder><mi>g</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>p</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+E[g(X,Y)]=\sum_x\sum_yg(x,y)p_{X,Y}(x,y).
+</annotation></semantics></math></p>
+<p>Contínuo:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>g</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mo>∬</mo><mi>g</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>f</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>x</mi><mi>d</mi><mi>y</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+E[g(X,Y)]=\iint g(x,y)f_{X,Y}(x,y)dxdy.
+</annotation></semantics></math></p>
+<p>Sem exigir independência:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>a</mi><mi>X</mi><mo>+</mo><mi>b</mi><mi>Y</mi><mo>+</mo><mi>c</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>a</mi><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>X</mi><mo stretchy="false" form="postfix">]</mo><mo>+</mo><mi>b</mi><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo stretchy="false" form="postfix">]</mo><mo>+</mo><mi>c</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+E[aX+bY+c]=aE[X]+bE[Y]+c.
+</annotation></semantics></math></p>
+<p>Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X,Y</annotation></semantics></math>
+são independentes:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>g</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>g</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+E[g(X)h(Y)]=E[g(X)]E[h(Y)],
+</annotation></semantics></math></p>
+<p>em particular
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>X</mi><mi>Y</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>X</mi><mo stretchy="false" form="postfix">]</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">E[XY]=E[X]E[Y]</annotation></semantics></math>.</p>
+<p><strong>Exemplo.</strong> Em uma tabela conjunta,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>X</mi><mi>Y</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">E[XY]</annotation></semantics></math>
+é a soma de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mi>y</mi><mspace width="0.167em"></mspace><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">xy\,p(x,y)</annotation></semantics></math>
+sobre as células.</p>
+<h2 id="esperança-condicional-e-lei-da-esperança-total">5.7 Esperança
+condicional e lei da esperança total</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><munder><mo>∑</mo><mi>y</mi></munder><mi>y</mi><mspace width="0.167em"></mspace><msub><mi>p</mi><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+E[Y\mid X=x]=\sum_yy\,p_{Y\mid X}(y\mid x)
+</annotation></semantics></math></p>
+<p>ou</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mo>∫</mo><mi>y</mi><msub><mi>f</mi><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>y</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+E[Y\mid X=x]=\int y f_{Y\mid X}(y\mid x)dy.
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo stretchy="false" form="postfix">]</mo><mo stretchy="false" form="postfix">]</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+E[Y]=E[E[Y\mid X]].
+</annotation></semantics></math></p>
+<p>Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+é discreta:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><munder><mo>∑</mo><mi>x</mi></munder><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">]</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+E[Y]=\sum_xE[Y\mid X=x]P(X=x).
+</annotation></semantics></math></p>
+<p>Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+é contínua:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mo>∫</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">]</mo><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>x</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+E[Y]=\int E[Y\mid X=x]f_X(x)dx.
+</annotation></semantics></math></p>
+<p><strong>Exemplo.</strong> Carga baixa com probabilidade 0,7 e alta
+com 0,3, latências médias 80 e 140:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mn>0</mn><mo>,</mo><mn>7</mn><mo stretchy="false" form="prefix">(</mo><mn>80</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>0</mn><mo>,</mo><mn>3</mn><mo stretchy="false" form="prefix">(</mo><mn>140</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">E[Y]=0{,}7(80)+0{,}3(140)</annotation></semantics></math>.</p>
+<h2 id="lei-da-variância-total">5.8 Lei da variância total</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mo>+</mo><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo stretchy="false" form="postfix">]</mo><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+Var(Y)=E[Var(Y\mid X)]+Var(E[Y\mid X]).
+</annotation></semantics></math></p>
+<p>O primeiro termo mede variação dentro dos grupos; o segundo, variação
+entre as médias dos grupos. Também:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><msup><mi>Y</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><msup><mi>Y</mi><mn>2</mn></msup><mo>∣</mo><mi>X</mi><mo stretchy="false" form="postfix">]</mo><mo stretchy="false" form="postfix">]</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+E[Y^2]=E[E[Y^2\mid X]].
+</annotation></semantics></math></p>
+<p><strong>Exemplo.</strong> Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">Y\mid X=x</annotation></semantics></math>
+é exponencial de média
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\theta(x)</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>θ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">Var(Y\mid X=x)=\theta(x)^2</annotation></semantics></math>.</p>
+<h2 id="covariância">5.9 Covariância</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>X</mi><mo stretchy="false" form="postfix">]</mo><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>−</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo stretchy="false" form="postfix">]</mo><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>X</mi><mi>Y</mi><mo stretchy="false" form="postfix">]</mo><mo>−</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>X</mi><mo stretchy="false" form="postfix">]</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo stretchy="false" form="postfix">]</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+Cov(X,Y)=E[(X-E[X])(Y-E[Y])]
+=E[XY]-E[X]E[Y].
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+Cov(X,X)=Var(X),
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mi>X</mi><mo>+</mo><mi>b</mi><mo>,</mo><mi>c</mi><mi>Y</mi><mo>+</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>a</mi><mi>c</mi><mspace width="0.167em"></mspace><mi>C</mi><mi>o</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+Cov(aX+b,cY+d)=ac\,Cov(X,Y),
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>v</mi><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><munder><mo>∑</mo><mi>i</mi></munder><msub><mi>a</mi><mi>i</mi></msub><msub><mi>X</mi><mi>i</mi></msub><mo>,</mo><munder><mo>∑</mo><mi>j</mi></munder><msub><mi>b</mi><mi>j</mi></msub><msub><mi>Y</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munder><mo>∑</mo><mi>i</mi></munder><munder><mo>∑</mo><mi>j</mi></munder><msub><mi>a</mi><mi>i</mi></msub><msub><mi>b</mi><mi>j</mi></msub><mi>C</mi><mi>o</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>,</mo><msub><mi>Y</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+Cov\!\left(\sum_i a_iX_i,\sum_jb_jY_j\right)
+=\sum_i\sum_ja_ib_jCov(X_i,Y_j).
+</annotation></semantics></math></p>
+<p>Independência implica covariância zero, mas o inverso é falso em
+geral.</p>
+<p><strong>Exemplo.</strong> Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+é simétrica em
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1,0,1</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><msup><mi>X</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">Y=X^2</annotation></semantics></math>,
+pode ocorrer
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">Cov(X,Y)=0</annotation></semantics></math>,
+embora
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+dependa totalmente de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>.</p>
+<h2 id="correlação">5.10 Correlação</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ρ</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo>=</mo><mfrac><mrow><mi>C</mi><mi>o</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>σ</mi><mi>X</mi></msub><msub><mi>σ</mi><mi>Y</mi></msub></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><mo>−</mo><mn>1</mn><mo>≤</mo><mi>ρ</mi><mo>≤</mo><mn>1</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\rho_{X,Y}=\frac{Cov(X,Y)}{\sigma_X\sigma_Y},
+\qquad -1\le\rho\le1.
+</annotation></semantics></math></p>
+<ul>
+<li>o sinal dá a direção linear;</li>
+<li>módulo próximo de 1 indica forte alinhamento linear;</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>=</mo><mi>±</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">\rho=\pm1</annotation></semantics></math>
+indica relação linear perfeita;</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\rho=0</annotation></semantics></math>
+não garante independência.</li>
+</ul>
+<p>A correlação é adimensional. Translações não a alteram; escalas
+positivas não a alteram; multiplicação por constante negativa inverte o
+sinal. Para variáveis <strong>conjuntamente normais</strong>, correlação
+zero implica independência.</p>
+<p><strong>Exemplo.</strong> Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mn>3</mn><mi>X</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">Y=3X+2</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">Var(X)&gt;0</annotation></semantics></math>,
+então
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ρ</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\rho_{X,Y}=1</annotation></semantics></math>.</p>
+<h3 id="normal-bivariada">Normal bivariada</h3>
+<p>Para
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>ρ</mi><mo stretchy="false" form="prefix">|</mo><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|\rho|&lt;1</annotation></semantics></math>,
+uma normal bivariada com médias
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>μ</mi><mi>X</mi></msub><mo>,</mo><msub><mi>μ</mi><mi>Y</mi></msub></mrow><annotation encoding="application/x-tex">\mu_X,\mu_Y</annotation></semantics></math>,
+desvios
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>σ</mi><mi>X</mi></msub><mo>,</mo><msub><mi>σ</mi><mi>Y</mi></msub></mrow><annotation encoding="application/x-tex">\sigma_X,\sigma_Y</annotation></semantics></math>
+e correlação
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ρ</mi><annotation encoding="application/x-tex">\rho</annotation></semantics></math>
+tem densidade</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>f</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow></mrow></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mfrac><mn>1</mn><mrow><mn>2</mn><mi>π</mi><msub><mi>σ</mi><mi>X</mi></msub><msub><mi>σ</mi><mi>Y</mi></msub><msqrt><mrow><mn>1</mn><mo>−</mo><msup><mi>ρ</mi><mn>2</mn></msup></mrow></msqrt></mrow></mfrac></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mi>×</mi><mrow><mi mathvariant="normal">exp</mi><mo>&#8289;</mo></mrow><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">{</mo><mi>−</mi><mfrac><mn>1</mn><mrow><mn>2</mn><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>ρ</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mrow><mo stretchy="true" form="prefix">[</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>x</mi><mo>−</mo><msub><mi>μ</mi><mi>X</mi></msub></mrow><msub><mi>σ</mi><mi>X</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>ρ</mi><mfrac><mrow><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>−</mo><msub><mi>μ</mi><mi>X</mi></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo>−</mo><msub><mi>μ</mi><mi>Y</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>σ</mi><mi>X</mi></msub><msub><mi>σ</mi><mi>Y</mi></msub></mrow></mfrac><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>y</mi><mo>−</mo><msub><mi>μ</mi><mi>Y</mi></msub></mrow><msub><mi>σ</mi><mi>Y</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">]</mo></mrow><mo stretchy="true" form="postfix">}</mo></mrow><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{aligned}
+f_{X,Y}(x,y)
+={}&amp;\frac{1}
+{2\pi\sigma_X\sigma_Y\sqrt{1-\rho^2}}\\
+&amp;\times
+\exp\!\left\{
+-\frac1{2(1-\rho^2)}
+\left[
+\left(\frac{x-\mu_X}{\sigma_X}\right)^2
+-2\rho
+\frac{(x-\mu_X)(y-\mu_Y)}{\sigma_X\sigma_Y}
++\left(\frac{y-\mu_Y}{\sigma_Y}\right)^2
+\right]
+\right\}.
+\end{aligned}
+</annotation></semantics></math></p>
+<p>Propriedades:</p>
+<ul>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>∼</mo><mi>N</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>μ</mi><mi>X</mi></msub><mo>,</mo><msubsup><mi>σ</mi><mi>X</mi><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">X\sim N(\mu_X,\sigma_X^2)</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>∼</mo><mi>N</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>μ</mi><mi>Y</mi></msub><mo>,</mo><msubsup><mi>σ</mi><mi>Y</mi><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Y\sim N(\mu_Y,\sigma_Y^2)</annotation></semantics></math>;</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>ρ</mi><msub><mi>σ</mi><mi>X</mi></msub><msub><mi>σ</mi><mi>Y</mi></msub></mrow><annotation encoding="application/x-tex">Cov(X,Y)=\rho\sigma_X\sigma_Y</annotation></semantics></math>;</li>
+<li>qualquer combinação
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>X</mi><mo>+</mo><mi>b</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">aX+bY</annotation></semantics></math>
+é normal;</li>
+<li>neste modelo,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\rho=0</annotation></semantics></math>
+implica independência;</li>
+<li>quando
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>=</mo><mi>±</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">\rho=\pm1</annotation></semantics></math>,
+há relação linear perfeita e a distribuição é degenerada, sem densidade
+bidimensional usual;</li>
+<li>a condicional é
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo>∼</mo><mi>N</mi><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mi>Y</mi></msub><mo>+</mo><mi>ρ</mi><mfrac><msub><mi>σ</mi><mi>Y</mi></msub><msub><mi>σ</mi><mi>X</mi></msub></mfrac><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>−</mo><msub><mi>μ</mi><mi>X</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="0.222em"></mspace><msubsup><mi>σ</mi><mi>Y</mi><mn>2</mn></msubsup><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>ρ</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+Y\mid X=x\sim N\!\left(
+\mu_Y+\rho\frac{\sigma_Y}{\sigma_X}(x-\mu_X),
+\ \sigma_Y^2(1-\rho^2)
+\right).
+</annotation></semantics></math></li>
+</ul>
+<p><strong>Exemplo.</strong> Se ambas as marginais são padrão e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>=</mo><mn>0</mn><mo>,</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">\rho=0{,}6</annotation></semantics></math>,
+então
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo>∼</mo><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>6</mn><mi>x</mi><mo>,</mo><mn>0</mn><mo>,</mo><mn>64</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Y\mid X=x\sim N(0{,}6x,0{,}64)</annotation></semantics></math>.</p>
+<h2 id="covariância-e-correlação-amostrais">5.11 Covariância e
+correlação amostrais</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mrow><mi>X</mi><mi>Y</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><mover><mi>y</mi><mo accent="true">‾</mo></mover><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+s_{XY}=\frac1{n-1}\sum_{i=1}^n(x_i-\bar x)(y_i-\bar y),
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mrow><mi>X</mi><mi>Y</mi></mrow></msub><mo>=</mo><mfrac><mrow><munder><mo>∑</mo><mi>i</mi></munder><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><mover><mi>y</mi><mo accent="true">‾</mo></mover><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msqrt><mrow><munder><mo>∑</mo><mi>i</mi></munder><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mover><mi>x</mi><mo accent="true">‾</mo></mover><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mrow></msqrt><msqrt><mrow><munder><mo>∑</mo><mi>i</mi></munder><mo stretchy="false" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><mover><mi>y</mi><mo accent="true">‾</mo></mover><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mrow></msqrt></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+r_{XY}=
+\frac{\sum_i(x_i-\bar x)(y_i-\bar y)}
+{\sqrt{\sum_i(x_i-\bar x)^2}\sqrt{\sum_i(y_i-\bar y)^2}}.
+</annotation></semantics></math></p>
+<p>A matriz de correlação é simétrica, tem 1 na diagonal e resume os
+pares. Correlação alta pode sinalizar redundância, mas não decide
+sozinha a remoção de uma variável.</p>
+<p><strong>Exemplo.</strong> Padronizar bytes e segundos não altera
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>,
+mas coloca medidas em escala comparável.</p>
+<h2 id="soma-e-combinação-linear">5.12 Soma e combinação linear</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>X</mi><mo>+</mo><mi>Y</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>X</mi><mo stretchy="false" form="postfix">]</mo><mo>+</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo stretchy="false" form="postfix">]</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+E[X+Y]=E[X]+E[Y],
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>+</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>2</mn><mi>C</mi><mi>o</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+Var(X+Y)=Var(X)+Var(Y)+2Cov(X,Y),
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mi>X</mi><mo>+</mo><mi>b</mi><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>a</mi><mn>2</mn></msup><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>2</mn><mi>a</mi><mi>b</mi><mi>C</mi><mi>o</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+Var(aX+bY)=a^2Var(X)+b^2Var(Y)+2abCov(X,Y).
+</annotation></semantics></math></p>
+<p>Se são independentes, as covariâncias são zero.</p>
+<p>Convolução discreta para
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Z</mi><mo>=</mo><mi>X</mi><mo>+</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">Z=X+Y</annotation></semantics></math>
+independente:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>Z</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>z</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munder><mo>∑</mo><mi>x</mi></munder><msub><mi>p</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>p</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>z</mi><mo>−</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+p_Z(z)=\sum_xp_X(x)p_Y(z-x).
+</annotation></semantics></math></p>
+<p>Convolução contínua:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>Z</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>z</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mrow><mi>−</mi><mi>∞</mi></mrow><mi>∞</mi></msubsup><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>z</mi><mo>−</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>x</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+f_Z(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)dx.
+</annotation></semantics></math></p>
+<p><strong>Exemplo.</strong> A soma de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>o</mi><mi>i</mi><mi>s</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>λ</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Pois(\lambda_1)</annotation></semantics></math>
+e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>o</mi><mi>i</mi><mi>s</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>λ</mi><mn>2</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Pois(\lambda_2)</annotation></semantics></math>
+independentes é
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>o</mi><mi>i</mi><mi>s</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>λ</mi><mn>1</mn></msub><mo>+</mo><msub><mi>λ</mi><mn>2</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Pois(\lambda_1+\lambda_2)</annotation></semantics></math>.</p>
+<h2 id="mínimo-máximo-e-competição-entre-tempos">5.13 Mínimo, máximo e
+competição entre tempos</h2>
+<p>Para independentes:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">min</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>&gt;</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>&gt;</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>&gt;</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+P(\min(X,Y)&gt;t)=P(X&gt;t)P(Y&gt;t),
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi mathvariant="normal">min</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><mo stretchy="false" form="prefix">[</mo><mn>1</mn><mo>−</mo><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mo stretchy="false" form="prefix">[</mo><mn>1</mn><mo>−</mo><msub><mi>F</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+F_{\min}(t)=1-[1-F_X(t)][1-F_Y(t)],
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi mathvariant="normal">max</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>F</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+F_{\max}(t)=F_X(t)F_Y(t).
+</annotation></semantics></math></p>
+<p>Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>∼</mo><mi>E</mi><mi>x</mi><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">X\sim Exp(\lambda)</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>∼</mo><mi>E</mi><mi>x</mi><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mi>μ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Y\sim Exp(\mu)</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">min</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mi>E</mi><mi>x</mi><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo>+</mo><mi>μ</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+\min(X,Y)\sim Exp(\lambda+\mu),
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>&lt;</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mi>λ</mi><mrow><mi>λ</mi><mo>+</mo><mi>μ</mi></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>&lt;</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mi>μ</mi><mrow><mi>λ</mi><mo>+</mo><mi>μ</mi></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+P(X&lt;Y)=\frac{\lambda}{\lambda+\mu},
+\qquad
+P(Y&lt;X)=\frac{\mu}{\lambda+\mu}.
+</annotation></semantics></math></p>
+<p>Para contínuas independentes em geral:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>&lt;</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo>∫</mo><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">[</mo><mn>1</mn><mo>−</mo><msub><mi>F</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mi>d</mi><mi>x</mi><mo>=</mo><mo>∫</mo><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>y</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+P(X&lt;Y)=\int f_X(x)[1-F_Y(x)]dx
+=\int F_X(y)f_Y(y)dy.
+</annotation></semantics></math></p>
+<p>Para discretas:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mi>x</mi></msub><msub><mi>p</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>&gt;</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\sum_xp_X(x)P(Y&gt;x)</annotation></semantics></math>,
+cuidando dos empates.</p>
+<p><strong>Exemplo.</strong> Entre exponenciais de taxas 2 e 3, a de
+taxa 2 termina primeiro com probabilidade
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>/</mi><mn>5</mn></mrow><annotation encoding="application/x-tex">2/5</annotation></semantics></math>.</p>
+<h2 id="modelos-condicionais-cobrados">5.14 Modelos condicionais
+cobrados</h2>
+<h3 id="poissonexponencial-misto">Poisson–Exponencial misto</h3>
+<p>Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>∼</mo><mi>P</mi><mi>o</mi><mi>i</mi><mi>s</mi><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">X\sim Pois(\lambda)</annotation></semantics></math>
+e</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo>∼</mo><mi>E</mi><mi>x</mi><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mrow><mtext mathvariant="normal">média </mtext><mspace width="0.333em"></mspace></mrow><mi>θ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>α</mi><mo>+</mo><mi>β</mi><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+Y\mid X=x\sim Exp(\text{média }\theta(x)=\alpha+\beta x),
+</annotation></semantics></math></p>
+<p>então</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mi>α</mi><mo>+</mo><mi>β</mi><mi>x</mi></mrow></mfrac><msup><mi>e</mi><mrow><mi>−</mi><mi>y</mi><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>+</mo><mi>β</mi><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup><mo>,</mo></mrow><annotation encoding="application/x-tex">
+f_{Y\mid X}(y\mid x)=\frac1{\alpha+\beta x}
+e^{-y/(\alpha+\beta x)},
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>g</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>f</mi><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+g_{X,Y}(x,y)=P(X=x)f_{Y\mid X}(y\mid x),
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>α</mi><mo>+</mo><mi>β</mi><mi>X</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>α</mi><mo>+</mo><mi>β</mi><mi>λ</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">
+E[Y]=E[\alpha+\beta X]=\alpha+\beta\lambda,
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>&gt;</mo><msup><mi>y</mi><mo>*</mo></msup><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>x</mi><mo>=</mo><mn>0</mn></mrow><mo accent="false">∞</mo></munderover><msup><mi>e</mi><mrow><mi>−</mi><msup><mi>y</mi><mo>*</mo></msup><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>+</mo><mi>β</mi><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup><msup><mi>e</mi><mrow><mi>−</mi><mi>λ</mi></mrow></msup><mfrac><msup><mi>λ</mi><mi>x</mi></msup><mrow><mi>x</mi><mi>!</mi></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+P(Y&gt;y^*)=\sum_{x=0}^{\infty}
+e^{-y^*/(\alpha+\beta x)}
+e^{-\lambda}\frac{\lambda^x}{x!}.
+</annotation></semantics></math></p>
+<p><strong>Exemplo.</strong> Dado
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">X=3</annotation></semantics></math>,
+a média é
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>+</mo><mn>3</mn><mi>β</mi></mrow><annotation encoding="application/x-tex">\alpha+3\beta</annotation></semantics></math>
+e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>&gt;</mo><msup><mi>y</mi><mo>*</mo></msup><mo>∣</mo><mi>X</mi><mo>=</mo><mn>3</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>e</mi><mrow><mi>−</mi><msup><mi>y</mi><mo>*</mo></msup><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>+</mo><mn>3</mn><mi>β</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">P(Y&gt;y^*\mid X=3)=e^{-y^*/(\alpha+3\beta)}</annotation></semantics></math>.</p>
+<h3 id="gamma-condicional">Gamma condicional</h3>
+<p>Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo>∼</mo><mi>G</mi><mi>a</mi><mi>m</mi><mi>m</mi><mi>a</mi><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>θ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Y\mid X=x\sim Gamma(k,\theta(x))</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>k</mi><mi>θ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="1.0em"></mspace><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>k</mi><mi>θ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup><mo>,</mo><mspace width="1.0em"></mspace><mi>D</mi><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msqrt><mi>k</mi></msqrt><mi>θ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+E[Y\mid X=x]=k\theta(x),
+\quad
+Var(Y\mid X=x)=k\theta(x)^2,
+\quad
+DP(Y\mid X=x)=\sqrt{k}\theta(x).
+</annotation></semantics></math></p>
+<p><strong>Exemplo.</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">k=4</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>5</mn><mo>+</mo><mn>0</mn><mo>,</mo><mn>1</mn><mi>x</mi></mrow><annotation encoding="application/x-tex">\theta(x)=5+0{,}1x</annotation></semantics></math>:
+em
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>20</mn></mrow><annotation encoding="application/x-tex">x=20</annotation></semantics></math>,
+escala 7, média 28, desvio 14.</p>
+<h3 id="modelo-linear-gaussiano">Modelo linear gaussiano</h3>
+<p>Se</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mi>a</mi><mo>+</mo><mi>b</mi><mi>X</mi><mo>+</mo><mi>ε</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">
+Y=a+bX+\varepsilon,
+</annotation></semantics></math></p>
+<p>com
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ε</mi><annotation encoding="application/x-tex">\varepsilon</annotation></semantics></math>
+independente de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>ε</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">E[\varepsilon]=0</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>ε</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mi>σ</mi><mi>ε</mi><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">Var(\varepsilon)=\sigma_\varepsilon^2</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>a</mi><mo>+</mo><mi>b</mi><mi>x</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">
+E[Y\mid X=x]=a+bx,
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>a</mi><mo>+</mo><mi>b</mi><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>X</mi><mo stretchy="false" form="postfix">]</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+E[Y]=a+bE[X],
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>b</mi><mn>2</mn></msup><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msubsup><mi>σ</mi><mi>ε</mi><mn>2</mn></msubsup><mo>,</mo></mrow><annotation encoding="application/x-tex">
+Var(Y)=b^2Var(X)+\sigma_\varepsilon^2,
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>b</mi><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+Cov(X,Y)=bVar(X),
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>r</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><mi>b</mi><msub><mi>σ</mi><mi>X</mi></msub></mrow><msqrt><mrow><msup><mi>b</mi><mn>2</mn></msup><msubsup><mi>σ</mi><mi>X</mi><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>σ</mi><mi>ε</mi><mn>2</mn></msubsup></mrow></msqrt></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+Corr(X,Y)=
+\frac{b\sigma_X}{\sqrt{b^2\sigma_X^2+\sigma_\varepsilon^2}}.
+</annotation></semantics></math></p>
+<p>Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ε</mi><annotation encoding="application/x-tex">\varepsilon</annotation></semantics></math>
+são normais:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>∼</mo><mi>N</mi><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo>+</mo><mi>b</mi><msub><mi>μ</mi><mi>X</mi></msub><mo>,</mo><mspace width="0.222em"></mspace><msup><mi>b</mi><mn>2</mn></msup><msubsup><mi>σ</mi><mi>X</mi><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>σ</mi><mi>ε</mi><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+Y\sim N\!\left(a+b\mu_X,\ b^2\sigma_X^2+\sigma_\varepsilon^2\right).
+</annotation></semantics></math></p>
+<p><strong>Exemplo.</strong> Em
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mn>300</mn><mo>−</mo><mn>0</mn><mo>,</mo><mn>8</mn><mi>X</mi><mo>+</mo><mi>ε</mi></mrow><annotation encoding="application/x-tex">Y=300-0{,}8X+\varepsilon</annotation></semantics></math>,
+cada unidade extra de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+reduz a média condicional de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+em 0,8;
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>−</mi><mn>0</mn><mo>,</mo><mn>8</mn><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Cov(X,Y)=-0{,}8Var(X)</annotation></semantics></math>.</p>
+<hr />
+<hr />
+<h2 id="complementos-para-resolver-as-listas">Complementos para resolver
+as listas</h2>
+<h3
+id="tópico-10-dupla-parametrização-de-condicionais-exponenciais-taxa-vs.-média">Tópico
+10: Dupla Parametrização de Condicionais Exponenciais (Taxa
+vs. Média)</h3>
+<p><em>Adicionar na Seção 5.14.</em></p>
+<p>Ao trabalhar com variáveis aleatórias onde
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">Y \mid X = x</annotation></semantics></math>
+tem distribuição exponencial: - <strong>Se especificada por taxa
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\lambda(x)</annotation></semantics></math>:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>λ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><msup><mi>e</mi><mrow><mi>−</mi><mi>λ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mi>y</mi></mrow></msup><mo>,</mo><mspace width="1.0em"></mspace><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mi>λ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mo>,</mo><mspace width="1.0em"></mspace><mtext mathvariant="normal">Var</mtext><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mi>λ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">f_{Y \mid X}(y \mid x) = \lambda(x) e^{-\lambda(x) y}, \quad E[Y \mid X = x] = \frac{1}{\lambda(x)}, \quad \text{Var}(Y \mid X = x) = \frac{1}{\lambda(x)^2}</annotation></semantics></math>
+- <strong>Se especificada por média/escala
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\theta(x)</annotation></semantics></math>:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mi>θ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><msup><mi>e</mi><mrow><mi>−</mi><mi>y</mi><mi>/</mi><mi>θ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup><mo>,</mo><mspace width="1.0em"></mspace><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>θ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="1.0em"></mspace><mtext mathvariant="normal">Var</mtext><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>θ</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">f_{Y \mid X}(y \mid x) = \frac{1}{\theta(x)} e^{-y/\theta(x)}, \quad E[Y \mid X = x] = \theta(x), \quad \text{Var}(Y \mid X = x) = \theta(x)^2</annotation></semantics></math></p>
+<p><em>Atenção à notação do enunciado:</em> a escrita
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>∣</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo>∼</mo><mtext mathvariant="normal">Exp</mtext><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mo>+</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Y \mid X = x \sim \text{Exp}(2+x)</annotation></semantics></math>
+não tem convenção universal. Use sempre a definição fornecida: se o
+parâmetro for a taxa,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>2</mn><mo>+</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\lambda=2+x</annotation></semantics></math>;
+se for média/escala,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><mn>2</mn><mo>+</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\theta=2+x</annotation></semantics></math>.
+Nas listas que motivaram este complemento, o parâmetro é explicitamente
+a taxa.</p>
+<hr /><p class="source-note">Conteúdo proveniente integralmente de <a href="Resumo_Completo_Probabilidade_Estatistica.md">Resumo_Completo_Probabilidade_Estatistica.md</a> e <a href="conteudo_adicional_necessario.md">conteudo_adicional_necessario.md</a>.</p></main>
+  </div></div>
+</body>
+</html>
