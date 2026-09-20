@@ -64,6 +64,13 @@ math[display="block"] { overflow-x: auto; padding: .5rem 0; }
 .worked-example p:last-child { margin-bottom: 0; }
 .worked-example .equation { max-width: 100%; overflow-x: auto; padding: .65rem .4rem; text-align: center; font-size: 1.04rem; font-family: Cambria, "Times New Roman", serif; }
 .worked-example table { background: white; }
+.study-detail { margin: 2rem 0; padding: 1.25rem 1.5rem; border: 1px solid color-mix(in srgb, var(--base) 25%, white); border-radius: 14px; background: linear-gradient(145deg, var(--base-soft), #fff 75%); }
+.study-detail h3 { margin-top: 0; }
+.study-detail table, .study-examples { background: white; }
+.study-detail table { overflow-wrap: anywhere; }
+.study-equation { max-width: 100%; overflow-x: auto; text-align: center; font-family: Cambria, "Times New Roman", serif; font-size: 1.1rem; }
+.study-examples { padding: .8rem 1.05rem; border-radius: 10px; }
+.study-examples p:last-child { margin-bottom: 0; }
 .source-note { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
 .section-jump { display: inline-flex; gap: .45rem; align-items: center; margin: 0 0 1.3rem; color: var(--base); font-size: .9rem; font-weight: 700; text-decoration: none; }
 .section-jump::before { content: "←"; font-size: 1.2rem; }
