@@ -59,6 +59,11 @@ math[display="block"] { overflow-x: auto; padding: .5rem 0; }
 .concept-figure { margin: 1.7rem 0 2.2rem; padding: 1rem; background: linear-gradient(145deg, var(--base-soft), #fff); border: 1px solid color-mix(in srgb, var(--base) 26%, white); border-radius: 13px; }
 .concept-figure img { display: block; width: 100%; height: auto; border-radius: 8px; background: white; }
 .concept-figure figcaption { margin: .8rem .35rem .1rem; color: var(--muted); font-size: .9rem; }
+.worked-example { margin: 1.8rem 0; padding: 1.1rem 1.35rem; border: 1px solid color-mix(in srgb, var(--base) 26%, white); border-radius: 13px; background: linear-gradient(145deg, var(--base-soft), #fff 85%); }
+.worked-example h3 { margin: 0 0 .7rem; }
+.worked-example p:last-child { margin-bottom: 0; }
+.worked-example .equation { max-width: 100%; overflow-x: auto; padding: .65rem .4rem; text-align: center; font-size: 1.04rem; font-family: Cambria, "Times New Roman", serif; }
+.worked-example table { background: white; }
 .source-note { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
 .section-jump { display: inline-flex; gap: .45rem; align-items: center; margin: 0 0 1.3rem; color: var(--base); font-size: .9rem; font-weight: 700; text-decoration: none; }
 .section-jump::before { content: "←"; font-size: 1.2rem; }

@@ -415,11 +415,26 @@ amostras grandes; histogramas de densidade tendem a representar melhor a
 distribuição subjacente. A LGN reduz <strong>erro aleatório</strong>,
 mas não corrige viés de amostragem, dependência, instrumento
 descalibrado ou outro erro sistemático.</p>
+<p>Em um histograma de densidade, para uma classe de largura fixa, a fração de observações nessa classe se aproxima da probabilidade da classe. A altura da barra se aproxima dessa probabilidade dividida pela largura. Para que o desenho acompanhe bem a curva da densidade, as classes também precisam ser suficientemente estreitas e conter observações suficientes.</p>
 <p><strong>Exemplo.</strong> Para
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>X</mi><mi>i</mi></msub><mo>∼</mo><mi>B</mi><mi>e</mi><mi>r</mi><mi>n</mi><mi>o</mi><mi>u</mi><mi>l</mi><mi>l</mi><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">X_i\sim Bernoulli(p)</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mi>n</mi></msub><annotation encoding="application/x-tex">\bar X_n</annotation></semantics></math>
 é a proporção amostral de sucessos e converge para
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>.</p>
+<div class="worked-example">
+<h3>Como interpretar a LGN: lançamentos de uma moeda</h3>
+<p>Defina <var>X<sub>i</sub></var> = 1 se o lançamento <var>i</var> der cara e 0 se der coroa. Para uma moeda justa, cada <var>X<sub>i</sub></var> tem média 0,5 e variância 0,25. A média <var>X̄<sub>n</sub></var> é exatamente a <strong>proporção de caras</strong> em <var>n</var> lançamentos. Sua média é 0,5 e seu desvio-padrão é 0,5/√<var>n</var>.</p>
+<p>Se considerarmos “perto de 0,5” o intervalo inclusivo de 0,4 a 0,6, a distribuição binomial dá:</p>
+<table>
+<thead><tr><th>Lançamentos (<var>n</var>)</th><th>Intervalo para o número de caras</th><th>Probabilidade exata de 0,4 ≤ <var>X̄<sub>n</sub></var> ≤ 0,6</th></tr></thead>
+<tbody>
+<tr><td>10</td><td>4 a 6</td><td>0,65625</td></tr>
+<tr><td>100</td><td>40 a 60</td><td>0,96480</td></tr>
+<tr><td>500</td><td>200 a 300</td><td>0,999994</td></tr>
+</tbody>
+</table>
+<p>A chance de a proporção cair nesse intervalo cresce com <var>n</var>. A LGN afirma que, para <strong>qualquer tolerância fixa positiva</strong>, essa chance tende a 1 quando <var>n</var> cresce. Ela não garante que uma amostra específica terá exatamente 50% de caras nem fornece, sozinha, a probabilidade para um <var>n</var> escolhido. Para uma tolerância menor, em geral são necessários mais lançamentos.</p>
+</div>
 <h2 id="teorema-central-do-limite">4.15 Teorema Central do Limite</h2>
 <p>Se
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>X</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>X</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">X_1,\ldots,X_n</annotation></semantics></math>
@@ -475,6 +490,17 @@ distribui ao redor</strong> desse limite e em qual escala
 <p><strong>Exemplo.</strong> Tempos i.i.d. com média 6 e variância 36: a
 soma de 100 é aproximadamente
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mn>600</mn><mo>,</mo><mn>3600</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">N(600,3600)</annotation></semantics></math>.</p>
+<div class="worked-example">
+<h3>Como aplicar o TCL a 100 lançamentos</h3>
+<p>Seja <var>S</var> o número de caras em 100 lançamentos independentes de uma moeda justa. Exatamente, <var>S</var> segue uma binomial <var>Bin</var>(100; 0,5). Sua média é 100 · 0,5 = <strong>50</strong>, sua variância é 100 · 0,5 · 0,5 = <strong>25</strong> e seu desvio-padrão é <strong>5</strong>. Pelo TCL, podemos aproximar a distribuição de <var>S</var> pela normal <var>Y</var> ∼ <var>N</var>(50; 25); o segundo parâmetro aqui é a <strong>variância</strong>, não o desvio-padrão.</p>
+<p><strong>Exatamente 55 caras:</strong> como 55 é um único valor inteiro, usamos a correção de continuidade e representamos esse valor pelo intervalo de 54,5 a 55,5 na normal:</p>
+<p class="equation">P(<var>S</var> = 55) ≈ P(54,5 ≤ <var>Y</var> ≤ 55,5) = Φ(1,1) − Φ(0,9) ≈ <strong>0,04839</strong>.</p>
+<p>O cálculo binomial exato é C(100, 55) · (0,5)<sup>100</sup> ≈ <strong>0,04847</strong>, ou cerca de 4,85%.</p>
+<p><strong>Mais de 55 caras:</strong> isso significa pelo menos 56; a fronteira corrigida é 55,5:</p>
+<p class="equation">P(<var>S</var> &gt; 55) ≈ P(<var>Y</var> &gt; 55,5) = 1 − Φ((55,5 − 50)/5) = 1 − Φ(1,1) ≈ <strong>0,13567</strong>.</p>
+<p>O valor binomial exato é aproximadamente <strong>0,13563</strong>. As notas do MIT usam a aproximação mais rápida sem correção de continuidade: 1 − Φ(1) ≈ 0,1587. Ela serve para entender o TCL, mas a correção de continuidade fica bem mais próxima do resultado exato neste caso. “Exatamente 55”, “pelo menos 55” e “mais de 55” são eventos diferentes.</p>
+</div>
+<p>O TCL descreve a <strong>distribuição da soma ou da média</strong>, não exige que cada observação individual seja normal. Para aplicar a uma média, use média μ e desvio-padrão σ/√<var>n</var>; para uma soma, use média <var>n</var>μ e desvio-padrão σ√<var>n</var>. A aproximação pode melhorar em ritmos diferentes: dados muito assimétricos, como tempos exponenciais, costumam exigir amostras maiores do que dados aproximadamente simétricos. Se houver uma distribuição exata simples, como a binomial neste exemplo, ela permite conferir a aproximação.</p>
 <hr />
 <hr />
 <h2 id="complementos-para-resolver-as-listas">Complementos para resolver
