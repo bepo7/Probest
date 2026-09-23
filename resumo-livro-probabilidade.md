@@ -527,6 +527,35 @@ Por isso, “o \(k\)-ésimo evento ocorreu até \(t\)” e “pelo menos \(k\) e
 \{T_k\le t\}=\{N(t)\ge k\}.
 \]
 
+**Corrida entre duas exponenciais.** Se
+
+\[
+A\sim\operatorname{Exp}(\lambda),
+\qquad
+B\sim\operatorname{Exp}(\mu)
+\]
+
+são independentes, então:
+
+\[
+\begin{aligned}
+P(A<B)
+&=\int_0^\infty P(A<B\mid B=x)f_B(x)\,dx\\
+&=\int_0^\infty P(A<x)f_B(x)\,dx\\
+&=\int_0^\infty F_A(x)f_B(x)\,dx\\
+&=\int_0^\infty(1-e^{-\lambda x})\mu e^{-\mu x}\,dx\\
+&=\boxed{\frac{\lambda}{\lambda+\mu}}.
+\end{aligned}
+\]
+
+Analogamente,
+
+\[
+P(B<A)=\frac{\mu}{\lambda+\mu},
+\qquad
+P(A=B)=0.
+\]
+
 Relações particulares da família Gamma:
 
 \[
