@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" role="img" aria-labelledby="title desc">
+  <title id="title">Formatos da distribuição Beta</title>
+  <desc id="desc">Quatro gráficos com exemplos de distribuição Beta: uniforme, simétrica concentrada no centro, assimétrica para a esquerda ou direita e em formato de U.</desc>
+  <rect width="1000" height="620" rx="20" fill="#fffdf8"/>
+
+  <g font-family="Inter, system-ui, sans-serif" fill="#2d2a22">
+    <text x="38" y="42" font-size="24" font-weight="700" fill="#59400b">Como α e β alteram a distribuição Beta</text>
+    <text x="38" y="68" font-size="15" fill="#6b665d">Todas as curvas têm suporte entre 0 e 1; a área sob cada curva é igual a 1.</text>
+
+    <g>
+      <rect x="35" y="88" width="440" height="205" rx="14" fill="#ffffff" stroke="#e4dcc6"/>
+      <text x="55" y="118" font-size="17" font-weight="700">Uniforme</text>
+      <text x="55" y="140" font-size="14" fill="#6b665d">Beta(1, 1)</text>
+      <path d="M70 254H450M70 254V155" fill="none" stroke="#958e80" stroke-width="2"/>
+      <path d="M70 190H450" fill="none" stroke="#8a6514" stroke-width="5" stroke-linecap="round"/>
+      <text x="65" y="276" font-size="13">0</text>
+      <text x="445" y="276" font-size="13">1</text>
+      <text x="257" y="276" font-size="13">x</text>
+      <text x="47" y="165" font-size="13">f(x)</text>
+      <text x="183" y="178" font-size="13" fill="#8a6514">densidade constante</text>
+    </g>
+
+    <g>
+      <rect x="525" y="88" width="440" height="205" rx="14" fill="#ffffff" stroke="#e4dcc6"/>
+      <text x="545" y="118" font-size="17" font-weight="700">Concentrada no centro</text>
+      <text x="545" y="140" font-size="14" fill="#6b665d">Beta(2, 2)</text>
+      <path d="M560 254H940M560 254V155" fill="none" stroke="#958e80" stroke-width="2"/>
+      <path d="M560 254C645 253 668 166 750 166C832 166 855 253 940 254" fill="none" stroke="#326f9f" stroke-width="5" stroke-linecap="round"/>
+      <text x="555" y="276" font-size="13">0</text>
+      <text x="935" y="276" font-size="13">1</text>
+      <text x="747" y="276" font-size="13">x</text>
+      <text x="537" y="165" font-size="13">f(x)</text>
+      <text x="691" y="158" font-size="13" fill="#326f9f">α = β &gt; 1</text>
+    </g>
+
+    <g>
+      <rect x="35" y="330" width="440" height="245" rx="14" fill="#ffffff" stroke="#e4dcc6"/>
+      <text x="55" y="360" font-size="17" font-weight="700">Assimétricas</text>
+      <path d="M70 536H450M70 536V390" fill="none" stroke="#958e80" stroke-width="2"/>
+      <path d="M70 536C88 476 111 405 146 405C205 405 226 529 450 536" fill="none" stroke="#438a69" stroke-width="5" stroke-linecap="round"/>
+      <path d="M70 536C294 529 315 405 374 405C409 405 432 476 450 536" fill="none" stroke="#b54e5c" stroke-width="5" stroke-linecap="round"/>
+      <line x1="88" y1="381" x2="116" y2="381" stroke="#438a69" stroke-width="5" stroke-linecap="round"/>
+      <text x="124" y="386" font-size="13">Beta(2, 5): perto de 0</text>
+      <line x1="257" y1="381" x2="285" y2="381" stroke="#b54e5c" stroke-width="5" stroke-linecap="round"/>
+      <text x="293" y="386" font-size="13">Beta(5, 2): perto de 1</text>
+      <text x="65" y="558" font-size="13">0</text>
+      <text x="445" y="558" font-size="13">1</text>
+      <text x="257" y="558" font-size="13">x</text>
+      <text x="47" y="400" font-size="13">f(x)</text>
+    </g>
+
+    <g>
+      <rect x="525" y="330" width="440" height="245" rx="14" fill="#ffffff" stroke="#e4dcc6"/>
+      <text x="545" y="360" font-size="17" font-weight="700">Formato de U</text>
+      <text x="545" y="382" font-size="14" fill="#6b665d">Beta(0,5; 0,5)</text>
+      <path d="M560 536H940M560 536V390" fill="none" stroke="#958e80" stroke-width="2"/>
+      <path d="M563 395C578 490 642 513 750 513C858 513 922 490 937 395" fill="none" stroke="#7b4fa3" stroke-width="5" stroke-linecap="round"/>
+      <text x="555" y="558" font-size="13">0</text>
+      <text x="935" y="558" font-size="13">1</text>
+      <text x="747" y="558" font-size="13">x</text>
+      <text x="537" y="400" font-size="13">f(x)</text>
+      <text x="669" y="500" font-size="13" fill="#7b4fa3">mais massa nas extremidades</text>
+    </g>
+  </g>
+</svg>

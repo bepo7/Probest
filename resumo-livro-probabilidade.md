@@ -292,12 +292,12 @@ A mediana é \(q_{0{,}5}\); os quartis são \(q_{0{,}25}\), \(q_{0{,}5}\) e \(q_
 
 | Distribuição e suporte | PMF | Média | Variância |
 |---|---|---:|---:|
-| Bernoulli \(X\in\{0,1\}\) | \(p^x(1-p)^{1-x}\) | \(p\) | \(p(1-p)\) |
-| Binomial \(k=0,\ldots,n\) | \(\binom nkp^k(1-p)^{n-k}\) | \(np\) | \(np(1-p)\) |
-| Geométrica \(k=1,2,\ldots\) | \((1-p)^{k-1}p\) | \(1/p\) | \((1-p)/p^2\) |
-| Binomial negativa: ensaio do \(r\)-ésimo sucesso | \(\binom{k-1}{r-1}p^r(1-p)^{k-r}\) | \(r/p\) | \(r(1-p)/p^2\) |
-| Poisson \(k=0,1,\ldots\) | \(e^{-\lambda}\lambda^k/k!\) | \(\lambda\) | \(\lambda\) |
-| Hipergeométrica | \(\dfrac{\binom Kk\binom{N-K}{n-k}}{\binom Nn}\) | \(nK/N\) | \(n\frac KN(1-\frac KN)\frac{N-n}{N-1}\) |
+| Bernoulli \(\operatorname{Bern}(p)\), \(X\in\{0,1\}\) | \(p^x(1-p)^{1-x}\) | \(p\) | \(p(1-p)\) |
+| Binomial \(\operatorname{Bin}(n,p)\), \(k=0,\ldots,n\) | \(\binom nkp^k(1-p)^{n-k}\) | \(np\) | \(np(1-p)\) |
+| Geométrica \(\operatorname{Geom}(p)\), \(k=1,2,\ldots\) | \((1-p)^{k-1}p\) | \(1/p\) | \((1-p)/p^2\) |
+| Binomial negativa \(\operatorname{NegBin}(r,p)\): ensaio do \(r\)-ésimo sucesso | \(\binom{k-1}{r-1}p^r(1-p)^{k-r}\) | \(r/p\) | \(r(1-p)/p^2\) |
+| Poisson \(\operatorname{Pois}(\lambda)\), \(k=0,1,\ldots\) | \(e^{-\lambda}\lambda^k/k!\) | \(\lambda\) | \(\lambda\) |
+| Hipergeométrica \(\operatorname{Hipergeom}(N,K,n)\) | \(\dfrac{\binom Kk\binom{N-K}{n-k}}{\binom Nn}\) | \(nK/N\) | \(n\frac KN(1-\frac KN)\frac{N-n}{N-1}\) |
 
 #### Quando usar cada distribuição discreta
 
@@ -348,7 +348,52 @@ P(X>m+n\mid X>m)=P(X>n).
 | Qui-quadrado \(\chi^2_k\) | \(\operatorname{Gamma}(k/2,\text{taxa }1/2)\) | \(k\) | \(2k\) |
 | Cauchy padrão | \(1/[\pi(1+x^2)]\) | não existe | não existe |
 
-Todas as distribuições Gamma e Erlang desta página usam a parametrização **forma–taxa**. Na parametrização forma–escala, a escala é \(\theta=1/\lambda\).
+#### Parâmetros da Gamma e da Erlang
+
+O símbolo \(\Gamma(\alpha)\) no denominador da PDF é a **função Gamma**, não uma nova variável nem uma probabilidade. Ela funciona como constante de normalização, fazendo a área total sob a densidade ser igual a \(1\):
+
+\[
+\Gamma(\alpha)=\int_0^\infty u^{\alpha-1}e^{-u}\,du.
+\]
+
+Ela generaliza o fatorial. Para inteiros positivos,
+
+\[
+\Gamma(k)=(k-1)!.
+\]
+
+Na parametrização **forma–taxa**, usada nesta página:
+
+- \(\alpha>0\) é a **forma**: controla o formato e a assimetria da curva. Na Erlang, a forma é o inteiro \(k\), correspondente ao número de etapas ou eventos aguardados;
+- \(\lambda>0\) é a **taxa**, com unidade inversa à de \(X\). Na interpretação de espera de um processo de Poisson, ela mede quantos eventos são esperados por unidade de tempo. Quanto maior \(\lambda\), menor tende a ser o tempo de espera;
+- a média e a variância são \(E[X]=\alpha/\lambda\) e \(Var(X)=\alpha/\lambda^2\).
+
+Alguns livros usam a parametrização **forma–escala**. A escala \(\theta\) tem a mesma unidade de \(X\); na interpretação de espera, representa o tempo médio por etapa. Ela é o inverso da taxa:
+
+\[
+\boxed{\theta=\frac1\lambda}
+\qquad\Longleftrightarrow\qquad
+\boxed{\lambda=\frac1\theta}.
+\]
+
+Com escala, a mesma densidade é escrita como
+
+\[
+f_X(x)=
+\frac{1}{\Gamma(\alpha)\theta^\alpha}
+x^{\alpha-1}e^{-x/\theta},
+\qquad x>0,
+\]
+
+e
+
+\[
+E[X]=\alpha\theta,
+\qquad
+Var(X)=\alpha\theta^2.
+\]
+
+Portanto, antes de usar uma fórmula Gamma, verifique se o segundo parâmetro é uma **taxa** \(\lambda\) ou uma **escala** \(\theta\).
 
 #### Quando usar cada distribuição contínua
 
@@ -363,11 +408,9 @@ Todas as distribuições Gamma e Erlang desta página usam a parametrização **
 | Qui-quadrado | Uma soma de quadrados de normais padrão independentes | Positiva e assimétrica à direita; torna-se menos assimétrica com mais graus de liberdade |
 | Cauchy | Um fenômeno com caudas extremamente pesadas, como a razão de duas normais padrão independentes | Não possui média nem variância; a média amostral não se estabiliza como no caso usual |
 
-Funções especiais:
+A função Beta que aparece na densidade de \(\operatorname{Beta}(\alpha,\beta)\) é
 
 \[
-\Gamma(\alpha)=\int_0^\infty x^{\alpha-1}e^{-x}\,dx,
-\qquad
 B(\alpha,\beta)=\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}.
 \]
 
@@ -393,6 +436,48 @@ Z=\frac{X-\mu}{\sigma}\sim N(0,1),
 P(a<X<b)=\Phi\!\left(\frac{b-\mu}{\sigma}\right)
 -\Phi\!\left(\frac{a-\mu}{\sigma}\right).
 \]
+
+#### Exemplo numérico de padronização
+
+Suponha que
+
+\[
+X\sim N(100,15^2).
+\]
+
+Aqui, \(\mu=100\), \(\sigma^2=15^2=225\) e, portanto, o desvio-padrão é \(\sigma=15\). A variável padronizada é
+
+\[
+Z=\frac{X-100}{15}\sim N(0,1).
+\]
+
+Por exemplo, o valor \(X=130\) corresponde a
+
+\[
+z=\frac{130-100}{15}=2.
+\]
+
+Isso significa que \(130\) está a dois desvios-padrão acima da média. Para calcular \(P(85<X<130)\), padronizamos os dois limites:
+
+\[
+\frac{85-100}{15}=-1,
+\qquad
+\frac{130-100}{15}=2.
+\]
+
+Logo,
+
+\[
+\begin{aligned}
+P(85<X<130)
+&=P(-1<Z<2)\\
+&=\Phi(2)-\Phi(-1)\\
+&\approx 0{,}9772-0{,}1587\\
+&=\boxed{0{,}8185}.
+\end{aligned}
+\]
+
+Portanto, a probabilidade de \(X\) ficar entre \(85\) e \(130\) é aproximadamente \(81{,}85\%\).
 
 Regra 68–95–99,7%: aproximadamente 68%, 95% e 99,7% da massa normal ficam a 1, 2 e 3 desvios-padrão da média.
 
@@ -480,11 +565,46 @@ A Normal também surge aproximadamente para somas e médias de muitas variáveis
 
 Na Beta, os parâmetros \(\alpha\) e \(\beta\) controlam onde a densidade se concentra. Com \(\alpha=\beta=1\), não há região preferida e surge a Uniforme em \((0,1)\). Se \(\alpha>\beta\), há maior concentração perto de \(1\); se \(\beta>\alpha\), perto de \(0\). Quando ambos são maiores que \(1\), a massa tende ao interior; quando ambos são menores que \(1\), tende às extremidades.
 
+<figure class="concept-figure">
+  <img src="graficos-beta.svg" alt="Quatro gráficos comparando os formatos uniforme, central, assimétrico e em U da distribuição Beta." />
+  <figcaption>A Beta(1,1) é uniforme; parâmetros maiores que 1 podem concentrar a massa no interior, parâmetros desiguais deslocam a concentração e parâmetros menores que 1 favorecem as extremidades.</figcaption>
+</figure>
+
 **Binomial, Hipergeométrica, Poisson e Normal.**
 
 - A Hipergeométrica usa retiradas sem reposição. Quando a amostra é pequena diante da população, retirar um item quase não altera as probabilidades seguintes; por isso ela se aproxima de \(\operatorname{Bin}(n,K/N)\).
 - A Binomial se aproxima da Poisson quando há muitos ensaios, cada sucesso é raro e \(np\) permanece em uma escala moderada. A Poisson simplifica a contagem desses eventos raros.
 - A Binomial se aproxima da Normal quando as quantidades esperadas de sucessos, \(np\), e fracassos, \(n(1-p)\), são suficientemente grandes. Nesse caso, a distribuição discreta fica aproximadamente simétrica e em forma de sino.
+
+**Exemplo — defeitos raros.** Uma fábrica produz \(1\,000\) peças, e cada peça tem probabilidade \(p=0{,}002\) de apresentar defeito, independentemente das demais. Se \(X\) é o número de peças defeituosas:
+
+\[
+X\sim\operatorname{Bin}(1000,0{,}002),
+\qquad
+\lambda=np=1000(0{,}002)=2.
+\]
+
+A probabilidade binomial exata de encontrar exatamente três peças defeituosas é
+
+\[
+\begin{aligned}
+P(X=3)
+&=\binom{1000}{3}(0{,}002)^3(0{,}998)^{997}\\
+&\approx 0{,}1806.
+\end{aligned}
+\]
+
+Como \(n\) é grande, \(p\) é pequeno e \(np=2\), podemos usar \(Y\sim\operatorname{Pois}(2)\):
+
+\[
+\begin{aligned}
+P(Y=3)
+&=e^{-2}\frac{2^3}{3!}\\
+&\approx 0{,}1804.
+\end{aligned}
+\]
+
+Os resultados são muito próximos: aproximadamente \(18{,}06\%\) pela Binomial e \(18{,}04\%\) pela Poisson. A vantagem da Poisson é substituir o coeficiente \(\binom{1000}{3}\) por uma conta bem mais simples.
 
 ### Variáveis mistas
 
