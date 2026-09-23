@@ -91,6 +91,24 @@ P(A\mid B)=\frac{P(A\cap B)}{P(B)},
 \qquad
 P(A\cap B)=P(A\mid B)P(B).
 </annotation></semantics></math></p>
+<p>Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>H</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">H_1,\ldots,H_m</annotation></semantics></math>
+é uma partição de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>,
+o denominador pode ser calculado pela lei da probabilidade total:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo>∣</mo><msub><mi>H</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>H</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+P(B)=\sum_{i=1}^{m}P(B\mid H_i)P(H_i).
+</annotation></semantics></math></p>
+<p>Em particular, usando a partição
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>A</mi><mo>,</mo><msup><mi>A</mi><mi>c</mi></msup><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{A,A^c\}</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><menclose notation="box"><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo>∣</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo>∣</mo><msup><mi>A</mi><mi>c</mi></msup><mo stretchy="false" form="postfix">)</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>A</mi><mi>c</mi></msup><mo stretchy="false" form="postfix">)</mo></mrow></menclose><annotation encoding="application/x-tex">
+\boxed{P(B)=P(B\mid A)P(A)+P(B\mid A^c)P(A^c)}
+</annotation></semantics></math></p>
+<p>ou, como
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>A</mi><mi>c</mi></msup><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A^c)=1-P(A)</annotation></semantics></math>,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo>∣</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo>∣</mo><msup><mi>A</mi><mi>c</mi></msup><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">[</mo><mn>1</mn><mo>−</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+P(B)=P(B\mid A)P(A)+P(B\mid A^c)[1-P(A)].
+</annotation></semantics></math></p>
 <p>Regra da cadeia:</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>A</mi><mn>1</mn></msub><mo>∩</mo><mi>⋯</mi><mo>∩</mo><msub><mi>A</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>A</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo><munderover><mo>∏</mo><mrow><mi>i</mi><mo>=</mo><mn>2</mn></mrow><mi>n</mi></munderover><mi>P</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>A</mi><mi>i</mi></msub><mo>∣</mo><msub><mi>A</mi><mn>1</mn></msub><mo>∩</mo><mi>⋯</mi><mo>∩</mo><msub><mi>A</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
 P(A_1\cap\cdots\cap A_n)
@@ -221,11 +239,20 @@ F_X(x)=\int_{-\infty}^{x}f_X(t)\,dt,
 \qquad
 P(a&lt;X\le b)=F_X(b)-F_X(a).
 </annotation></semantics></math></p>
-<p>Quando a derivada existe,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>F</mi><msup><mi>X</mi><mo>′</mo></msup></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_X(x)=F_X&#39;(x)</annotation></semantics></math>.
-Para uma variável contínua,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">P(X=x)=0</annotation></semantics></math>;
-a densidade não é uma probabilidade pontual e pode ser maior que 1.</p>
+<p>Quando
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>F</mi><mi>X</mi></msub><annotation encoding="application/x-tex">F_X</annotation></semantics></math>
+é derivável no ponto
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>,
+a densidade é a derivada da função de distribuição acumulada:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mi>d</mi><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+f_X(x)=\frac{d}{dx}F_X(x).
+</annotation></semantics></math></p>
+<p>Para uma variável contínua,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">P(X=x)=0</annotation></semantics></math>.
+A densidade
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_X(x)</annotation></semantics></math>
+não é uma probabilidade pontual e pode ser maior que 1; probabilidades
+são obtidas pela área sob a densidade em um intervalo.</p>
 <p>Toda CDF é não decrescente, contínua à direita e satisfaz
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mi mathvariant="normal">lim</mi><mrow><mi>x</mi><mo>→</mo><mi>−</mi><mi>∞</mi></mrow></munder><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn><mo>,</mo><mspace width="2.0em"></mspace><munder><mi mathvariant="normal">lim</mi><mrow><mi>x</mi><mo>→</mo><mi>∞</mi></mrow></munder><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
 \lim_{x\to-\infty}F_X(x)=0,
@@ -281,16 +308,53 @@ que satisfazem
 f_Y(y)=\sum_i\frac{f_X(x_i)}{|g&#39;(x_i)|}.
 </annotation></semantics></math></p>
 <h3 id="quantis">Quantis</h3>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>q</mi><mi>p</mi></msub><mo>=</mo><msubsup><mi>F</mi><mi>X</mi><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mi mathvariant="normal">inf</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">{</mo><mi>x</mi><mo>:</mo><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>≥</mo><mi>p</mi><mo stretchy="false" form="postfix">}</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
-q_p=F_X^{-1}(p)=\inf\{x:F_X(x)\ge p\}.
+<p>O quantil de ordem
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>,
+com
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>p</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0&lt;p&lt;1</annotation></semantics></math>,
+é o valor
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>q</mi><mi>p</mi></msub><annotation encoding="application/x-tex">q_p</annotation></semantics></math>
+abaixo do qual está uma proporção
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
+da probabilidade. Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>F</mi><mi>X</mi></msub><annotation encoding="application/x-tex">F_X</annotation></semantics></math>
+é contínua e estritamente crescente:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><msub><mi>q</mi><mi>p</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>p</mi><mspace width="2.0em"></mspace><mo>⇔</mo><mspace width="2.0em"></mspace><menclose notation="box"><mrow><msub><mi>q</mi><mi>p</mi></msub><mo>=</mo><msubsup><mi>F</mi><mi>X</mi><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow></menclose><mi>.</mi></mrow><annotation encoding="application/x-tex">
+F_X(q_p)=p
+\qquad\Longleftrightarrow\qquad
+\boxed{q_p=F_X^{-1}(p)}.
 </annotation></semantics></math></p>
+<p>Para qualquer CDF, inclusive quando há saltos ou trechos planos,
+usa-se a definição generalizada:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><menclose notation="box"><mrow><msub><mi>q</mi><mi>p</mi></msub><mo>=</mo><mrow><mi mathvariant="normal">inf</mi><mo>&#8289;</mo></mrow><mrow><mo stretchy="true" form="prefix">{</mo><mspace width="0.167em"></mspace><mi>x</mi><mo>∈</mo><mi>ℝ</mi><mspace width="0.278em"></mspace><mo>:</mo><mspace width="0.278em"></mspace><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>≥</mo><mi>p</mi><mspace width="0.167em"></mspace><mo stretchy="true" form="postfix">}</mo></mrow></mrow></menclose><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\boxed{
+q_p=\inf\left\{\,x\in\mathbb{R}\;:\;F_X(x)\ge p\,\right\}
+}.
+</annotation></semantics></math></p>
+<p>O operador
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">inf</mi><annotation encoding="application/x-tex">\inf</annotation></semantics></math>
+significa <strong>ínfimo</strong>: o menor limite inferior do conjunto.
+Em uma distribuição discreta, essa mesma ideia normalmente pode ser
+escrita de forma mais intuitiva como</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>q</mi><mi>p</mi></msub><mo>=</mo><mrow><mi mathvariant="normal">min</mi><mo>&#8289;</mo></mrow><mrow><mo stretchy="true" form="prefix">{</mo><mspace width="0.167em"></mspace><mi>x</mi><mo>∈</mo><msub><mi>S</mi><mi>X</mi></msub><mspace width="0.278em"></mspace><mo>:</mo><mspace width="0.278em"></mspace><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>≥</mo><mi>p</mi><mspace width="0.167em"></mspace><mo stretchy="true" form="postfix">}</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
+q_p=\min\left\{\,x\in S_X\;:\;F_X(x)\ge p\,\right\},
+</annotation></semantics></math></p>
+<p>em que
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>S</mi><mi>X</mi></msub><annotation encoding="application/x-tex">S_X</annotation></semantics></math>
+é o suporte de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>.
+Assim,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>q</mi><mi>p</mi></msub><annotation encoding="application/x-tex">q_p</annotation></semantics></math>
+é o primeiro valor em que a probabilidade acumulada alcança ou
+ultrapassa
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>.</p>
 <p>A mediana é
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>q</mi><mrow><mn>0</mn><mo>,</mo><mn>5</mn></mrow></msub><annotation encoding="application/x-tex">q_{0,5}</annotation></semantics></math>;
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>q</mi><mrow><mn>0</mn><mo>,</mo><mn>5</mn></mrow></msub><annotation encoding="application/x-tex">q_{0{,}5}</annotation></semantics></math>;
 os quartis são
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>q</mi><mrow><mn>0</mn><mo>,</mo><mn>25</mn></mrow></msub><annotation encoding="application/x-tex">q_{0,25}</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>q</mi><mrow><mn>0</mn><mo>,</mo><mn>5</mn></mrow></msub><annotation encoding="application/x-tex">q_{0,5}</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>q</mi><mrow><mn>0</mn><mo>,</mo><mn>25</mn></mrow></msub><annotation encoding="application/x-tex">q_{0{,}25}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>q</mi><mrow><mn>0</mn><mo>,</mo><mn>5</mn></mrow></msub><annotation encoding="application/x-tex">q_{0{,}5}</annotation></semantics></math>
 e
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>q</mi><mrow><mn>0</mn><mo>,</mo><mn>75</mn></mrow></msub><annotation encoding="application/x-tex">q_{0,75}</annotation></semantics></math>.</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>q</mi><mrow><mn>0</mn><mo>,</mo><mn>75</mn></mrow></msub><annotation encoding="application/x-tex">q_{0{,}75}</annotation></semantics></math>.</p>
 <h2 id="distribuições-essenciais">4. Distribuições essenciais</h2>
 <h3 id="discretas">Discretas</h3>
 <table style="width:100%;">
@@ -365,25 +429,93 @@ style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/
 </tr>
 </tbody>
 </table>
-<p>Critérios: binomial conta sucessos em ensaios independentes com o
-mesmo
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>;
-hipergeométrica amostra sem reposição; geométrica espera o primeiro
-sucesso; binomial negativa espera o
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>-ésimo;
-Poisson conta eventos com taxa constante. Para uma taxa
+<h4 id="quando-usar-cada-distribuição-discreta">Quando usar cada
+distribuição discreta</h4>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Distribuição</th>
+<th>Use quando a variável representa</th>
+<th>Características principais</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bernoulli</td>
+<td>O resultado de um único ensaio: sucesso ou fracasso</td>
+<td>Apenas
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>
+ou
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>;
+parâmetro
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>=</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">p=P(X=1)</annotation></semantics></math></td>
+</tr>
+<tr>
+<td>Binomial</td>
+<td>O número de sucessos em
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+ensaios independentes, todos com o mesmo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math></td>
+<td>Número
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+fixo de ensaios; há reposição ou independência equivalente</td>
+</tr>
+<tr>
+<td>Geométrica</td>
+<td>O número de ensaios até o primeiro sucesso</td>
+<td>Suporte começa em
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>;
+possui a propriedade sem memória</td>
+</tr>
+<tr>
+<td>Binomial negativa</td>
+<td>O número de ensaios até o
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>-ésimo
+sucesso</td>
+<td>Generaliza a geométrica;
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
-em intervalo
+é fixo e os ensaios têm o mesmo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math></td>
+</tr>
+<tr>
+<td>Poisson</td>
+<td>O número de ocorrências em um intervalo de tempo, comprimento, área
+ou volume</td>
+<td>Taxa média constante e ocorrências independentes; média e variância
+iguais a
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></td>
+</tr>
+<tr>
+<td>Hipergeométrica</td>
+<td>O número de sucessos em
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+retiradas sem reposição de uma população finita</td>
+<td>As retiradas são dependentes; use
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+para o tamanho da população e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
+para o total de sucessos</td>
+</tr>
+</tbody>
+</table>
+<p>Para um processo com taxa
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ν</mi><annotation encoding="application/x-tex">\nu</annotation></semantics></math>
+por unidade e intervalo de tamanho
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>,
-use
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mi>r</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\lambda=rt</annotation></semantics></math>.</p>
+o parâmetro da contagem de Poisson é
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mi>ν</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\lambda=\nu t</annotation></semantics></math>.</p>
 <p>Aproximações frequentes:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>i</mi><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>,</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>≈</mo><mi>P</mi><mi>o</mi><mi>i</mi><mi>s</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mspace width="1.0em"></mspace><mrow><mrow><mtext mathvariant="normal">quando </mtext><mspace width="0.333em"></mspace></mrow><mi>n</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> é grande e </mtext><mspace width="0.333em"></mspace></mrow><mi>p</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> é pequeno</mtext></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
-Bin(n,p)\approx Pois(np)
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Bin</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>,</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>≈</mo><mrow><mi mathvariant="normal">Pois</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mspace width="1.0em"></mspace><mrow><mrow><mtext mathvariant="normal">quando </mtext><mspace width="0.333em"></mspace></mrow><mi>n</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> é grande e </mtext><mspace width="0.333em"></mspace></mrow><mi>p</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> é pequeno</mtext></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
+\operatorname{Bin}(n,p)\approx \operatorname{Pois}(np)
 \quad\text{quando \(n\) é grande e \(p\) é pequeno},
 </annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>i</mi><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>,</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>≈</mo><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>p</mi><mo>,</mo><mi>n</mi><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mspace width="1.0em"></mspace><mrow><mrow><mtext mathvariant="normal">quando </mtext><mspace width="0.333em"></mspace></mrow><mrow><mi>n</mi><mi>p</mi></mrow><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> e </mtext><mspace width="0.333em"></mspace></mrow><mrow><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> são suficientemente grandes</mtext></mrow></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
-Bin(n,p)\approx N(np,np(1-p))
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Bin</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>,</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>≈</mo><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>p</mi><mo>,</mo><mi>n</mi><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mspace width="1.0em"></mspace><mrow><mrow><mtext mathvariant="normal">quando </mtext><mspace width="0.333em"></mspace></mrow><mrow><mi>n</mi><mi>p</mi></mrow><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> e </mtext><mspace width="0.333em"></mspace></mrow><mrow><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> são suficientemente grandes</mtext></mrow></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\operatorname{Bin}(n,p)\approx N(np,np(1-p))
 \quad\text{quando \(np\) e \(n(1-p)\) são suficientemente grandes}.
 </annotation></semantics></math></p>
 <p>Na aproximação normal de uma variável inteira, use a correção de
@@ -423,7 +555,7 @@ style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/
 </tr>
 <tr>
 <td>Exponencial
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>x</mi><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Exp(\lambda)</annotation></semantics></math></td>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Exp</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\operatorname{Exp}(\lambda)</annotation></semantics></math></td>
 <td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><msup><mi>e</mi><mrow><mi>−</mi><mi>λ</mi><mi>x</mi></mrow></msup><mo>,</mo><mspace width="0.222em"></mspace><mi>x</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda e^{-\lambda x},\ x\ge0</annotation></semantics></math></td>
 <td
 style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mi>λ</mi></mrow><annotation encoding="application/x-tex">1/\lambda</annotation></semantics></math></td>
@@ -441,7 +573,7 @@ style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/
 </tr>
 <tr>
 <td>Gamma forma–taxa
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>a</mi><mi>m</mi><mi>m</mi><mi>a</mi><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Gamma(\alpha,\lambda)</annotation></semantics></math></td>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Gamma</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\operatorname{Gamma}(\alpha,\lambda)</annotation></semantics></math></td>
 <td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle displaystyle="true"><mfrac><msup><mi>λ</mi><mi>α</mi></msup><mrow><mi mathvariant="normal">Γ</mi><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mstyle><msup><mi>x</mi><mrow><mi>α</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>e</mi><mrow><mi>−</mi><mi>λ</mi><mi>x</mi></mrow></msup></mrow><annotation encoding="application/x-tex">\dfrac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}</annotation></semantics></math></td>
 <td
 style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mi>/</mi><mi>λ</mi></mrow><annotation encoding="application/x-tex">\alpha/\lambda</annotation></semantics></math></td>
@@ -449,8 +581,18 @@ style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/
 style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mi>/</mi><msup><mi>λ</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\alpha/\lambda^2</annotation></semantics></math></td>
 </tr>
 <tr>
+<td>Erlang
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Erlang</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\operatorname{Erlang}(k,\lambda)</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi>…</mi></mrow><annotation encoding="application/x-tex">k=1,2,\ldots</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle displaystyle="true"><mfrac><msup><mi>λ</mi><mi>k</mi></msup><mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>!</mi></mrow></mfrac></mstyle><msup><mi>x</mi><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>e</mi><mrow><mi>−</mi><mi>λ</mi><mi>x</mi></mrow></msup><mo>,</mo><mspace width="0.222em"></mspace><mi>x</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\dfrac{\lambda^k}{(k-1)!}x^{k-1}e^{-\lambda x},\ x\ge0</annotation></semantics></math></td>
+<td
+style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>/</mi><mi>λ</mi></mrow><annotation encoding="application/x-tex">k/\lambda</annotation></semantics></math></td>
+<td
+style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>/</mi><msup><mi>λ</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">k/\lambda^2</annotation></semantics></math></td>
+</tr>
+<tr>
 <td>Beta
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>e</mi><mi>t</mi><mi>a</mi><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Beta(\alpha,\beta)</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Beta</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\operatorname{Beta}(\alpha,\beta)</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>x</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0&lt;x&lt;1</annotation></semantics></math></td>
 <td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mstyle displaystyle="true"><mfrac><mrow><msup><mi>x</mi><mrow><mi>α</mi><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>x</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>β</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><mrow><mi>B</mi><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mstyle><annotation encoding="application/x-tex">\dfrac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)}</annotation></semantics></math></td>
 <td
@@ -461,7 +603,7 @@ style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/
 <tr>
 <td>Qui-quadrado
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>χ</mi><mi>k</mi><mn>2</mn></msubsup><annotation encoding="application/x-tex">\chi^2_k</annotation></semantics></math></td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>a</mi><mi>m</mi><mi>m</mi><mi>a</mi><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mi>/</mi><mn>2</mn><mo>,</mo><mrow><mtext mathvariant="normal">taxa </mtext><mspace width="0.333em"></mspace></mrow><mn>1</mn><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Gamma(k/2,\text{taxa }1/2)</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Gamma</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mi>/</mi><mn>2</mn><mo>,</mo><mrow><mtext mathvariant="normal">taxa </mtext><mspace width="0.333em"></mspace></mrow><mn>1</mn><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\operatorname{Gamma}(k/2,\text{taxa }1/2)</annotation></semantics></math></td>
 <td
 style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math></td>
 <td
@@ -472,6 +614,91 @@ style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/
 <td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mo stretchy="false" form="prefix">[</mo><mi>π</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">1/[\pi(1+x^2)]</annotation></semantics></math></td>
 <td style="text-align: right;">não existe</td>
 <td style="text-align: right;">não existe</td>
+</tr>
+</tbody>
+</table>
+<p>Todas as distribuições Gamma e Erlang desta página usam a
+parametrização <strong>forma–taxa</strong>. Na parametrização
+forma–escala, a escala é
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><mn>1</mn><mi>/</mi><mi>λ</mi></mrow><annotation encoding="application/x-tex">\theta=1/\lambda</annotation></semantics></math>.</p>
+<h4 id="quando-usar-cada-distribuição-contínua">Quando usar cada
+distribuição contínua</h4>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Distribuição</th>
+<th>Use quando a variável representa</th>
+<th>Características principais</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Uniforme</td>
+<td>Um valor em
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[a,b]</annotation></semantics></math>
+sem preferência por nenhuma região do intervalo</td>
+<td>Densidade constante e suporte limitado</td>
+</tr>
+<tr>
+<td>Exponencial</td>
+<td>O tempo até a primeira ocorrência de um processo de Poisson ou uma
+duração com taxa de falha constante</td>
+<td>Positiva, assimétrica à direita e sem memória</td>
+</tr>
+<tr>
+<td>Gamma</td>
+<td>Um tempo ou uma quantidade positiva cuja forma pode variar além do
+modelo exponencial</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
+pode ser qualquer número positivo; quando
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
+é inteiro, é uma soma de exponenciais de mesma taxa</td>
+</tr>
+<tr>
+<td>Erlang</td>
+<td>O tempo até o
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-ésimo
+evento de um processo de Poisson</td>
+<td>Caso Gamma com forma inteira
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>;
+soma de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+exponenciais independentes de mesma taxa</td>
+</tr>
+<tr>
+<td>Normal</td>
+<td>Uma medida aproximadamente simétrica ou a soma/média de muitos
+efeitos pequenos</td>
+<td>Determinada por
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math>
+e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>σ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math>;
+simétrica e fechada sob combinações lineares independentes</td>
+</tr>
+<tr>
+<td>Beta</td>
+<td>Uma proporção ou probabilidade limitada ao intervalo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(0,1)</annotation></semantics></math></td>
+<td>Muito flexível: pode ser uniforme, simétrica, assimétrica ou em
+forma de U</td>
+</tr>
+<tr>
+<td>Qui-quadrado</td>
+<td>Uma soma de quadrados de normais padrão independentes</td>
+<td>Positiva e assimétrica à direita; torna-se menos assimétrica com
+mais graus de liberdade</td>
+</tr>
+<tr>
+<td>Cauchy</td>
+<td>Um fenômeno com caudas extremamente pesadas, como a razão de duas
+normais padrão independentes</td>
+<td>Não possui média nem variância; a média amostral não se estabiliza
+como no caso usual</td>
 </tr>
 </tbody>
 </table>
@@ -512,6 +739,171 @@ evento:</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>T</mi><mi>k</mi></msub><mo>≤</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>≥</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
 P(T_k\le t)=P(N(t)\ge k).
 </annotation></semantics></math></p>
+<h4 id="como-as-distribuições-se-relacionam">Como as distribuições se
+relacionam</h4>
+<p><strong>Bernoulli, Binomial, Geométrica e Binomial negativa.</strong>
+Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>X</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>X</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">X_1,\ldots,X_n</annotation></semantics></math>
+são Bernoulli independentes com o mesmo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>,
+então</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>X</mi><mi>i</mi></msub><mo>∼</mo><mrow><mi mathvariant="normal">Bin</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>,</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\sum_{i=1}^{n}X_i\sim \operatorname{Bin}(n,p).
+</annotation></semantics></math></p>
+<p>Cada Bernoulli registra se houve sucesso em <strong>um</strong>
+ensaio. Somar
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+indicadores Bernoulli equivale a contar quantos sucessos ocorreram nos
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+ensaios, produzindo a Binomial.</p>
+<p>A Geométrica espera apenas o <strong>primeiro</strong> sucesso. A
+Binomial negativa repete essa espera até acumular
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
+sucessos; por isso, a Geométrica é o caso
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">r=1</annotation></semantics></math>,
+e a soma de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
+esperas geométricas independentes com o mesmo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
+tem distribuição Binomial negativa.</p>
+<p><strong>Poisson, Exponencial, Gamma e Erlang.</strong> Em um processo
+de Poisson de taxa
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mrow><mi mathvariant="normal">Pois</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>W</mi><mi>i</mi></msub><mo>∼</mo><mrow><mi mathvariant="normal">Exp</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+N(t)\sim \operatorname{Pois}(\lambda t),
+\qquad
+W_i\sim \operatorname{Exp}(\lambda),
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>k</mi></msub><mo>=</mo><msub><mi>W</mi><mn>1</mn></msub><mo>+</mo><mi>⋯</mi><mo>+</mo><msub><mi>W</mi><mi>k</mi></msub><mo>∼</mo><mrow><mi mathvariant="normal">Erlang</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mi mathvariant="normal">Gamma</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+T_k=W_1+\cdots+W_k
+\sim \operatorname{Erlang}(k,\lambda)
+=\operatorname{Gamma}(k,\lambda),
+</annotation></semantics></math></p>
+<p>em que
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>W</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>W</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">W_1,\ldots,W_k</annotation></semantics></math>
+são os tempos independentes entre eventos e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mi>k</mi></msub><annotation encoding="application/x-tex">T_k</annotation></semantics></math>
+é o tempo até o
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-ésimo
+evento. Assim, Poisson conta <strong>quantos eventos</strong> ocorreram,
+enquanto Exponencial, Erlang e Gamma modelam <strong>quanto
+tempo</strong> se espera.</p>
+<p>Em outras palavras:</p>
+<ul>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">N(t)</annotation></semantics></math>
+responde “quantos eventos ocorreram até o tempo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>?”;</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>W</mi><mn>1</mn></msub><annotation encoding="application/x-tex">W_1</annotation></semantics></math>
+responde “quanto tempo até o primeiro evento?”;</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mi>k</mi></msub><annotation encoding="application/x-tex">T_k</annotation></semantics></math>
+responde “quanto tempo até completar
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+eventos?”.</li>
+</ul>
+<p>Por isso, “o
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-ésimo
+evento ocorreu até
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>”
+e “pelo menos
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+eventos ocorreram até
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>”
+descrevem exatamente o mesmo acontecimento:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><msub><mi>T</mi><mi>k</mi></msub><mo>≤</mo><mi>t</mi><mo stretchy="false" form="postfix">}</mo><mo>=</mo><mo stretchy="false" form="prefix">{</mo><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>≥</mo><mi>k</mi><mo stretchy="false" form="postfix">}</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\{T_k\le t\}=\{N(t)\ge k\}.
+</annotation></semantics></math></p>
+<p>Relações particulares da família Gamma:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Exp</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mi mathvariant="normal">Gamma</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><mrow><mi mathvariant="normal">Erlang</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mi mathvariant="normal">Gamma</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><msubsup><mi>χ</mi><mi>ν</mi><mn>2</mn></msubsup><mo>=</mo><mrow><mi mathvariant="normal">Gamma</mi><mo>&#8289;</mo></mrow><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>ν</mi><mn>2</mn></mfrac><mo>,</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\operatorname{Exp}(\lambda)=\operatorname{Gamma}(1,\lambda),
+\qquad
+\operatorname{Erlang}(k,\lambda)=\operatorname{Gamma}(k,\lambda),
+\qquad
+\chi_\nu^2=\operatorname{Gamma}\!\left(\frac{\nu}{2},\frac12\right).
+</annotation></semantics></math></p>
+<p>Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>G</mi><mn>1</mn></msub><mo>∼</mo><mrow><mi mathvariant="normal">Gamma</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>α</mi><mn>1</mn></msub><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">G_1\sim \operatorname{Gamma}(\alpha_1,\lambda)</annotation></semantics></math>
+e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>G</mi><mn>2</mn></msub><mo>∼</mo><mrow><mi mathvariant="normal">Gamma</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>α</mi><mn>2</mn></msub><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">G_2\sim \operatorname{Gamma}(\alpha_2,\lambda)</annotation></semantics></math>
+são independentes e têm a mesma taxa:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>G</mi><mn>1</mn></msub><mo>+</mo><msub><mi>G</mi><mn>2</mn></msub><mo>∼</mo><mrow><mi mathvariant="normal">Gamma</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>α</mi><mn>1</mn></msub><mo>+</mo><msub><mi>α</mi><mn>2</mn></msub><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+G_1+G_2\sim \operatorname{Gamma}(\alpha_1+\alpha_2,\lambda).
+</annotation></semantics></math></p>
+<p>A Exponencial representa uma única etapa de espera. A Erlang soma um
+número inteiro
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+dessas etapas. A Gamma mantém a mesma estrutura, mas permite qualquer
+forma
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\alpha&gt;0</annotation></semantics></math>,
+oferecendo maior flexibilidade. Ao somar Gammas independentes de
+<strong>mesma taxa</strong>, as formas se somam; se as taxas forem
+diferentes, essa regra simples não vale.</p>
+<p>O Qui-quadrado também pertence à família Gamma: seus graus de
+liberdade
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ν</mi><annotation encoding="application/x-tex">\nu</annotation></semantics></math>
+determinam a forma
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ν</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\nu/2</annotation></semantics></math>,
+enquanto sua taxa é
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">1/2</annotation></semantics></math>.</p>
+<p><strong>Normal e Qui-quadrado.</strong> Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Z</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>Z</mi><mi>ν</mi></msub></mrow><annotation encoding="application/x-tex">Z_1,\ldots,Z_\nu</annotation></semantics></math>
+são normais padrão independentes:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>ν</mi></munderover><msubsup><mi>Z</mi><mi>i</mi><mn>2</mn></msubsup><mo>∼</mo><msubsup><mi>χ</mi><mi>ν</mi><mn>2</mn></msubsup><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\sum_{i=1}^{\nu}Z_i^2\sim\chi_\nu^2.
+</annotation></semantics></math></p>
+<p>Somas de normais independentes continuam normais: as médias se somam
+e, por independência, as variâncias também. Já elevar normais padrão ao
+quadrado elimina o sinal e produz parcelas positivas; a soma de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ν</mi><annotation encoding="application/x-tex">\nu</annotation></semantics></math>
+desses quadrados gera um Qui-quadrado com
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ν</mi><annotation encoding="application/x-tex">\nu</annotation></semantics></math>
+graus de liberdade.</p>
+<p>A Normal também surge aproximadamente para somas e médias de muitas
+variáveis, mesmo que as parcelas originais não sejam normais, pelas
+condições do Teorema Central do Limite.</p>
+<p><strong>Beta e Uniforme.</strong></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Beta</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>U</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\operatorname{Beta}(1,1)=U(0,1).
+</annotation></semantics></math></p>
+<p>Na Beta, os parâmetros
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
+e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
+controlam onde a densidade se concentra. Com
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mi>β</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\alpha=\beta=1</annotation></semantics></math>,
+não há região preferida e surge a Uniforme em
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(0,1)</annotation></semantics></math>.
+Se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>&gt;</mo><mi>β</mi></mrow><annotation encoding="application/x-tex">\alpha&gt;\beta</annotation></semantics></math>,
+há maior concentração perto de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>;
+se
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi><mo>&gt;</mo><mi>α</mi></mrow><annotation encoding="application/x-tex">\beta&gt;\alpha</annotation></semantics></math>,
+perto de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>.
+Quando ambos são maiores que
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>,
+a massa tende ao interior; quando ambos são menores que
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>,
+tende às extremidades.</p>
+<p><strong>Binomial, Hipergeométrica, Poisson e Normal.</strong></p>
+<ul>
+<li>A Hipergeométrica usa retiradas sem reposição. Quando a amostra é
+pequena diante da população, retirar um item quase não altera as
+probabilidades seguintes; por isso ela se aproxima de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Bin</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>,</mo><mi>K</mi><mi>/</mi><mi>N</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\operatorname{Bin}(n,K/N)</annotation></semantics></math>.</li>
+<li>A Binomial se aproxima da Poisson quando há muitos ensaios, cada
+sucesso é raro e
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>p</mi></mrow><annotation encoding="application/x-tex">np</annotation></semantics></math>
+permanece em uma escala moderada. A Poisson simplifica a contagem desses
+eventos raros.</li>
+<li>A Binomial se aproxima da Normal quando as quantidades esperadas de
+sucessos,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>p</mi></mrow><annotation encoding="application/x-tex">np</annotation></semantics></math>,
+e fracassos,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">n(1-p)</annotation></semantics></math>,
+são suficientemente grandes. Nesse caso, a distribuição discreta fica
+aproximadamente simétrica e em forma de sino.</li>
+</ul>
 <h3 id="variáveis-mistas">Variáveis mistas</h3>
 <p>Uma variável mista combina massas
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>=</mo><msub><mi>a</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>p</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">P(X=a_j)=p_j</annotation></semantics></math>
@@ -644,19 +1036,21 @@ p_Z(z)=\sum_xp_X(x)p_Y(z-x),
 f_Z(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\,dx.
 </annotation></semantics></math></p>
 <p>Fechamentos úteis para variáveis independentes:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>i</mi><mi>n</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>n</mi><mn>1</mn></msub><mo>,</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>B</mi><mi>i</mi><mi>n</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>n</mi><mn>2</mn></msub><mo>,</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mi>B</mi><mi>i</mi><mi>n</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>n</mi><mn>1</mn></msub><mo>+</mo><msub><mi>n</mi><mn>2</mn></msub><mo>,</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
-Bin(n_1,p)+Bin(n_2,p)\sim Bin(n_1+n_2,p),
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Bin</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>n</mi><mn>1</mn></msub><mo>,</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mrow><mi mathvariant="normal">Bin</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>n</mi><mn>2</mn></msub><mo>,</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mrow><mi mathvariant="normal">Bin</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>n</mi><mn>1</mn></msub><mo>+</mo><msub><mi>n</mi><mn>2</mn></msub><mo>,</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+\operatorname{Bin}(n_1,p)+\operatorname{Bin}(n_2,p)
+\sim \operatorname{Bin}(n_1+n_2,p),
 </annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>o</mi><mi>i</mi><mi>s</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>λ</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>P</mi><mi>o</mi><mi>i</mi><mi>s</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>λ</mi><mn>2</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mi>P</mi><mi>o</mi><mi>i</mi><mi>s</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>λ</mi><mn>1</mn></msub><mo>+</mo><msub><mi>λ</mi><mn>2</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
-Pois(\lambda_1)+Pois(\lambda_2)\sim Pois(\lambda_1+\lambda_2),
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Pois</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>λ</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mrow><mi mathvariant="normal">Pois</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>λ</mi><mn>2</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mrow><mi mathvariant="normal">Pois</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>λ</mi><mn>1</mn></msub><mo>+</mo><msub><mi>λ</mi><mn>2</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+\operatorname{Pois}(\lambda_1)+\operatorname{Pois}(\lambda_2)
+\sim \operatorname{Pois}(\lambda_1+\lambda_2),
 </annotation></semantics></math></p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>μ</mi><mn>1</mn></msub><mo>,</mo><msubsup><mi>σ</mi><mn>1</mn><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>N</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>μ</mi><mn>2</mn></msub><mo>,</mo><msubsup><mi>σ</mi><mn>2</mn><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mi>N</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>μ</mi><mn>1</mn></msub><mo>+</mo><msub><mi>μ</mi><mn>2</mn></msub><mo>,</mo><msubsup><mi>σ</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>σ</mi><mn>2</mn><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
 N(\mu_1,\sigma_1^2)+N(\mu_2,\sigma_2^2)
 \sim N(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2),
 </annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>a</mi><mi>m</mi><mi>m</mi><mi>a</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>α</mi><mn>1</mn></msub><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>G</mi><mi>a</mi><mi>m</mi><mi>m</mi><mi>a</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>α</mi><mn>2</mn></msub><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mi>G</mi><mi>a</mi><mi>m</mi><mi>m</mi><mi>a</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>α</mi><mn>1</mn></msub><mo>+</mo><msub><mi>α</mi><mn>2</mn></msub><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
-Gamma(\alpha_1,\lambda)+Gamma(\alpha_2,\lambda)
-\sim Gamma(\alpha_1+\alpha_2,\lambda).
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Gamma</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>α</mi><mn>1</mn></msub><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mrow><mi mathvariant="normal">Gamma</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>α</mi><mn>2</mn></msub><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mrow><mi mathvariant="normal">Gamma</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>α</mi><mn>1</mn></msub><mo>+</mo><msub><mi>α</mi><mn>2</mn></msub><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\operatorname{Gamma}(\alpha_1,\lambda)+\operatorname{Gamma}(\alpha_2,\lambda)
+\sim \operatorname{Gamma}(\alpha_1+\alpha_2,\lambda).
 </annotation></semantics></math></p>
 <p>Para variáveis independentes:</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mrow><mrow><mi mathvariant="normal">max</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>X</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munder><mo>∏</mo><mi>i</mi></munder><msub><mi>F</mi><msub><mi>X</mi><mi>i</mi></msub></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
@@ -738,6 +1132,11 @@ M_{X_1+\cdots+X_n}(s)=\prod_iM_{X_i}(s).
 <td>Gamma forma–taxa
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\alpha,\lambda)</annotation></semantics></math></td>
 <td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo>−</mo><mi>s</mi><mo stretchy="false" form="postfix">)</mo><msup><mo stretchy="false" form="postfix">)</mo><mi>α</mi></msup><mo>,</mo><mspace width="0.222em"></mspace><mi>s</mi><mo>&lt;</mo><mi>λ</mi></mrow><annotation encoding="application/x-tex">(\lambda/(\lambda-s))^\alpha,\ s&lt;\lambda</annotation></semantics></math></td>
+</tr>
+<tr>
+<td>Erlang
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(k,\lambda)</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo>−</mo><mi>s</mi><mo stretchy="false" form="postfix">)</mo><msup><mo stretchy="false" form="postfix">)</mo><mi>k</mi></msup><mo>,</mo><mspace width="0.222em"></mspace><mi>s</mi><mo>&lt;</mo><mi>λ</mi></mrow><annotation encoding="application/x-tex">(\lambda/(\lambda-s))^k,\ s&lt;\lambda</annotation></semantics></math></td>
 </tr>
 <tr>
 <td>Normal

@@ -68,6 +68,24 @@ P(A\mid B)=\frac{P(A\cap B)}{P(B)},
 P(A\cap B)=P(A\mid B)P(B).
 \]
 
+Se \(H_1,\ldots,H_m\) é uma partição de \(\Omega\), o denominador pode ser calculado pela lei da probabilidade total:
+
+\[
+P(B)=\sum_{i=1}^{m}P(B\mid H_i)P(H_i).
+\]
+
+Em particular, usando a partição \(\{A,A^c\}\):
+
+\[
+\boxed{P(B)=P(B\mid A)P(A)+P(B\mid A^c)P(A^c)}
+\]
+
+ou, como \(P(A^c)=1-P(A)\),
+
+\[
+P(B)=P(B\mid A)P(A)+P(B\mid A^c)[1-P(A)].
+\]
+
 Regra da cadeia:
 
 \[
@@ -172,7 +190,13 @@ F_X(x)=\int_{-\infty}^{x}f_X(t)\,dt,
 P(a<X\le b)=F_X(b)-F_X(a).
 \]
 
-Quando a derivada existe, \(f_X(x)=F_X'(x)\). Para uma variável contínua, \(P(X=x)=0\); a densidade não é uma probabilidade pontual e pode ser maior que 1.
+Quando \(F_X\) é derivável no ponto \(x\), a densidade é a derivada da função de distribuição acumulada:
+
+\[
+f_X(x)=\frac{d}{dx}F_X(x).
+\]
+
+Para uma variável contínua, \(P(X=x)=0\). A densidade \(f_X(x)\) não é uma probabilidade pontual e pode ser maior que 1; probabilidades são obtidas pela área sob a densidade em um intervalo.
 
 Toda CDF é não decrescente, contínua à direita e satisfaz
 \[
@@ -236,11 +260,31 @@ f_Y(y)=\sum_i\frac{f_X(x_i)}{|g'(x_i)|}.
 
 ### Quantis
 
+O quantil de ordem \(p\), com \(0<p<1\), é o valor \(q_p\) abaixo do qual está uma proporção \(p\) da probabilidade. Se \(F_X\) é contínua e estritamente crescente:
+
 \[
-q_p=F_X^{-1}(p)=\inf\{x:F_X(x)\ge p\}.
+F_X(q_p)=p
+\qquad\Longleftrightarrow\qquad
+\boxed{q_p=F_X^{-1}(p)}.
 \]
 
-A mediana é \(q_{0,5}\); os quartis são \(q_{0,25}\), \(q_{0,5}\) e \(q_{0,75}\).
+Para qualquer CDF, inclusive quando há saltos ou trechos planos, usa-se a definição generalizada:
+
+\[
+\boxed{
+q_p=\inf\left\{\,x\in\mathbb{R}\;:\;F_X(x)\ge p\,\right\}
+}.
+\]
+
+O operador \(\inf\) significa **ínfimo**: o menor limite inferior do conjunto. Em uma distribuição discreta, essa mesma ideia normalmente pode ser escrita de forma mais intuitiva como
+
+\[
+q_p=\min\left\{\,x\in S_X\;:\;F_X(x)\ge p\,\right\},
+\]
+
+em que \(S_X\) é o suporte de \(X\). Assim, \(q_p\) é o primeiro valor em que a probabilidade acumulada alcança ou ultrapassa \(p\).
+
+A mediana é \(q_{0{,}5}\); os quartis são \(q_{0{,}25}\), \(q_{0{,}5}\) e \(q_{0{,}75}\).
 
 ## 4. Distribuições essenciais
 
@@ -255,17 +299,28 @@ A mediana é \(q_{0,5}\); os quartis são \(q_{0,25}\), \(q_{0,5}\) e \(q_{0,75}
 | Poisson \(k=0,1,\ldots\) | \(e^{-\lambda}\lambda^k/k!\) | \(\lambda\) | \(\lambda\) |
 | Hipergeométrica | \(\dfrac{\binom Kk\binom{N-K}{n-k}}{\binom Nn}\) | \(nK/N\) | \(n\frac KN(1-\frac KN)\frac{N-n}{N-1}\) |
 
-Critérios: binomial conta sucessos em ensaios independentes com o mesmo \(p\); hipergeométrica amostra sem reposição; geométrica espera o primeiro sucesso; binomial negativa espera o \(r\)-ésimo; Poisson conta eventos com taxa constante. Para uma taxa \(r\) em intervalo \(t\), use \(\lambda=rt\).
+#### Quando usar cada distribuição discreta
+
+| Distribuição | Use quando a variável representa | Características principais |
+|---|---|---|
+| Bernoulli | O resultado de um único ensaio: sucesso ou fracasso | Apenas \(0\) ou \(1\); parâmetro \(p=P(X=1)\) |
+| Binomial | O número de sucessos em \(n\) ensaios independentes, todos com o mesmo \(p\) | Número \(n\) fixo de ensaios; há reposição ou independência equivalente |
+| Geométrica | O número de ensaios até o primeiro sucesso | Suporte começa em \(1\); possui a propriedade sem memória |
+| Binomial negativa | O número de ensaios até o \(r\)-ésimo sucesso | Generaliza a geométrica; \(r\) é fixo e os ensaios têm o mesmo \(p\) |
+| Poisson | O número de ocorrências em um intervalo de tempo, comprimento, área ou volume | Taxa média constante e ocorrências independentes; média e variância iguais a \(\lambda\) |
+| Hipergeométrica | O número de sucessos em \(n\) retiradas sem reposição de uma população finita | As retiradas são dependentes; use \(N\) para o tamanho da população e \(K\) para o total de sucessos |
+
+Para um processo com taxa \(\nu\) por unidade e intervalo de tamanho \(t\), o parâmetro da contagem de Poisson é \(\lambda=\nu t\).
 
 Aproximações frequentes:
 
 \[
-Bin(n,p)\approx Pois(np)
+\operatorname{Bin}(n,p)\approx \operatorname{Pois}(np)
 \quad\text{quando \(n\) é grande e \(p\) é pequeno},
 \]
 
 \[
-Bin(n,p)\approx N(np,np(1-p))
+\operatorname{Bin}(n,p)\approx N(np,np(1-p))
 \quad\text{quando \(np\) e \(n(1-p)\) são suficientemente grandes}.
 \]
 
@@ -285,12 +340,28 @@ P(X>m+n\mid X>m)=P(X>n).
 | Distribuição | PDF no suporte | Média | Variância |
 |---|---|---:|---:|
 | Uniforme \(U(a,b)\) | \(1/(b-a)\) | \((a+b)/2\) | \((b-a)^2/12\) |
-| Exponencial \(Exp(\lambda)\) | \(\lambda e^{-\lambda x},\ x\ge0\) | \(1/\lambda\) | \(1/\lambda^2\) |
+| Exponencial \(\operatorname{Exp}(\lambda)\) | \(\lambda e^{-\lambda x},\ x\ge0\) | \(1/\lambda\) | \(1/\lambda^2\) |
 | Normal \(N(\mu,\sigma^2)\) | \(\dfrac1{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/(2\sigma^2)}\) | \(\mu\) | \(\sigma^2\) |
-| Gamma forma–taxa \(Gamma(\alpha,\lambda)\) | \(\dfrac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}\) | \(\alpha/\lambda\) | \(\alpha/\lambda^2\) |
-| Beta \(Beta(\alpha,\beta)\), \(0<x<1\) | \(\dfrac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)}\) | \(\dfrac\alpha{\alpha+\beta}\) | \(\dfrac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}\) |
-| Qui-quadrado \(\chi^2_k\) | \(Gamma(k/2,\text{taxa }1/2)\) | \(k\) | \(2k\) |
+| Gamma forma–taxa \(\operatorname{Gamma}(\alpha,\lambda)\) | \(\dfrac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}\) | \(\alpha/\lambda\) | \(\alpha/\lambda^2\) |
+| Erlang \(\operatorname{Erlang}(k,\lambda)\), \(k=1,2,\ldots\) | \(\dfrac{\lambda^k}{(k-1)!}x^{k-1}e^{-\lambda x},\ x\ge0\) | \(k/\lambda\) | \(k/\lambda^2\) |
+| Beta \(\operatorname{Beta}(\alpha,\beta)\), \(0<x<1\) | \(\dfrac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)}\) | \(\dfrac\alpha{\alpha+\beta}\) | \(\dfrac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}\) |
+| Qui-quadrado \(\chi^2_k\) | \(\operatorname{Gamma}(k/2,\text{taxa }1/2)\) | \(k\) | \(2k\) |
 | Cauchy padrão | \(1/[\pi(1+x^2)]\) | não existe | não existe |
+
+Todas as distribuições Gamma e Erlang desta página usam a parametrização **forma–taxa**. Na parametrização forma–escala, a escala é \(\theta=1/\lambda\).
+
+#### Quando usar cada distribuição contínua
+
+| Distribuição | Use quando a variável representa | Características principais |
+|---|---|---|
+| Uniforme | Um valor em \([a,b]\) sem preferência por nenhuma região do intervalo | Densidade constante e suporte limitado |
+| Exponencial | O tempo até a primeira ocorrência de um processo de Poisson ou uma duração com taxa de falha constante | Positiva, assimétrica à direita e sem memória |
+| Gamma | Um tempo ou uma quantidade positiva cuja forma pode variar além do modelo exponencial | \(\alpha\) pode ser qualquer número positivo; quando \(\alpha\) é inteiro, é uma soma de exponenciais de mesma taxa |
+| Erlang | O tempo até o \(k\)-ésimo evento de um processo de Poisson | Caso Gamma com forma inteira \(k\); soma de \(k\) exponenciais independentes de mesma taxa |
+| Normal | Uma medida aproximadamente simétrica ou a soma/média de muitos efeitos pequenos | Determinada por \(\mu\) e \(\sigma^2\); simétrica e fechada sob combinações lineares independentes |
+| Beta | Uma proporção ou probabilidade limitada ao intervalo \((0,1)\) | Muito flexível: pode ser uniforme, simétrica, assimétrica ou em forma de U |
+| Qui-quadrado | Uma soma de quadrados de normais padrão independentes | Positiva e assimétrica à direita; torna-se menos assimétrica com mais graus de liberdade |
+| Cauchy | Um fenômeno com caudas extremamente pesadas, como a razão de duas normais padrão independentes | Não possui média nem variância; a média amostral não se estabiliza como no caso usual |
 
 Funções especiais:
 
@@ -330,6 +401,90 @@ Gamma representa, entre outras aplicações, o tempo até o \(\alpha\)-ésimo ev
 \[
 P(T_k\le t)=P(N(t)\ge k).
 \]
+
+#### Como as distribuições se relacionam
+
+**Bernoulli, Binomial, Geométrica e Binomial negativa.** Se \(X_1,\ldots,X_n\) são Bernoulli independentes com o mesmo \(p\), então
+
+\[
+\sum_{i=1}^{n}X_i\sim \operatorname{Bin}(n,p).
+\]
+
+Cada Bernoulli registra se houve sucesso em **um** ensaio. Somar \(n\) indicadores Bernoulli equivale a contar quantos sucessos ocorreram nos \(n\) ensaios, produzindo a Binomial.
+
+A Geométrica espera apenas o **primeiro** sucesso. A Binomial negativa repete essa espera até acumular \(r\) sucessos; por isso, a Geométrica é o caso \(r=1\), e a soma de \(r\) esperas geométricas independentes com o mesmo \(p\) tem distribuição Binomial negativa.
+
+**Poisson, Exponencial, Gamma e Erlang.** Em um processo de Poisson de taxa \(\lambda\):
+
+\[
+N(t)\sim \operatorname{Pois}(\lambda t),
+\qquad
+W_i\sim \operatorname{Exp}(\lambda),
+\]
+
+\[
+T_k=W_1+\cdots+W_k
+\sim \operatorname{Erlang}(k,\lambda)
+=\operatorname{Gamma}(k,\lambda),
+\]
+
+em que \(W_1,\ldots,W_k\) são os tempos independentes entre eventos e \(T_k\) é o tempo até o \(k\)-ésimo evento. Assim, Poisson conta **quantos eventos** ocorreram, enquanto Exponencial, Erlang e Gamma modelam **quanto tempo** se espera.
+
+Em outras palavras:
+
+- \(N(t)\) responde “quantos eventos ocorreram até o tempo \(t\)?”;
+- \(W_1\) responde “quanto tempo até o primeiro evento?”;
+- \(T_k\) responde “quanto tempo até completar \(k\) eventos?”.
+
+Por isso, “o \(k\)-ésimo evento ocorreu até \(t\)” e “pelo menos \(k\) eventos ocorreram até \(t\)” descrevem exatamente o mesmo acontecimento:
+
+\[
+\{T_k\le t\}=\{N(t)\ge k\}.
+\]
+
+Relações particulares da família Gamma:
+
+\[
+\operatorname{Exp}(\lambda)=\operatorname{Gamma}(1,\lambda),
+\qquad
+\operatorname{Erlang}(k,\lambda)=\operatorname{Gamma}(k,\lambda),
+\qquad
+\chi_\nu^2=\operatorname{Gamma}\!\left(\frac{\nu}{2},\frac12\right).
+\]
+
+Se \(G_1\sim \operatorname{Gamma}(\alpha_1,\lambda)\) e \(G_2\sim \operatorname{Gamma}(\alpha_2,\lambda)\) são independentes e têm a mesma taxa:
+
+\[
+G_1+G_2\sim \operatorname{Gamma}(\alpha_1+\alpha_2,\lambda).
+\]
+
+A Exponencial representa uma única etapa de espera. A Erlang soma um número inteiro \(k\) dessas etapas. A Gamma mantém a mesma estrutura, mas permite qualquer forma \(\alpha>0\), oferecendo maior flexibilidade. Ao somar Gammas independentes de **mesma taxa**, as formas se somam; se as taxas forem diferentes, essa regra simples não vale.
+
+O Qui-quadrado também pertence à família Gamma: seus graus de liberdade \(\nu\) determinam a forma \(\nu/2\), enquanto sua taxa é \(1/2\).
+
+**Normal e Qui-quadrado.** Se \(Z_1,\ldots,Z_\nu\) são normais padrão independentes:
+
+\[
+\sum_{i=1}^{\nu}Z_i^2\sim\chi_\nu^2.
+\]
+
+Somas de normais independentes continuam normais: as médias se somam e, por independência, as variâncias também. Já elevar normais padrão ao quadrado elimina o sinal e produz parcelas positivas; a soma de \(\nu\) desses quadrados gera um Qui-quadrado com \(\nu\) graus de liberdade.
+
+A Normal também surge aproximadamente para somas e médias de muitas variáveis, mesmo que as parcelas originais não sejam normais, pelas condições do Teorema Central do Limite.
+
+**Beta e Uniforme.**
+
+\[
+\operatorname{Beta}(1,1)=U(0,1).
+\]
+
+Na Beta, os parâmetros \(\alpha\) e \(\beta\) controlam onde a densidade se concentra. Com \(\alpha=\beta=1\), não há região preferida e surge a Uniforme em \((0,1)\). Se \(\alpha>\beta\), há maior concentração perto de \(1\); se \(\beta>\alpha\), perto de \(0\). Quando ambos são maiores que \(1\), a massa tende ao interior; quando ambos são menores que \(1\), tende às extremidades.
+
+**Binomial, Hipergeométrica, Poisson e Normal.**
+
+- A Hipergeométrica usa retiradas sem reposição. Quando a amostra é pequena diante da população, retirar um item quase não altera as probabilidades seguintes; por isso ela se aproxima de \(\operatorname{Bin}(n,K/N)\).
+- A Binomial se aproxima da Poisson quando há muitos ensaios, cada sucesso é raro e \(np\) permanece em uma escala moderada. A Poisson simplifica a contagem desses eventos raros.
+- A Binomial se aproxima da Normal quando as quantidades esperadas de sucessos, \(np\), e fracassos, \(n(1-p)\), são suficientemente grandes. Nesse caso, a distribuição discreta fica aproximadamente simétrica e em forma de sino.
 
 ### Variáveis mistas
 
@@ -475,11 +630,13 @@ f_Z(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\,dx.
 Fechamentos úteis para variáveis independentes:
 
 \[
-Bin(n_1,p)+Bin(n_2,p)\sim Bin(n_1+n_2,p),
+\operatorname{Bin}(n_1,p)+\operatorname{Bin}(n_2,p)
+\sim \operatorname{Bin}(n_1+n_2,p),
 \]
 
 \[
-Pois(\lambda_1)+Pois(\lambda_2)\sim Pois(\lambda_1+\lambda_2),
+\operatorname{Pois}(\lambda_1)+\operatorname{Pois}(\lambda_2)
+\sim \operatorname{Pois}(\lambda_1+\lambda_2),
 \]
 
 \[
@@ -488,8 +645,8 @@ N(\mu_1,\sigma_1^2)+N(\mu_2,\sigma_2^2)
 \]
 
 \[
-Gamma(\alpha_1,\lambda)+Gamma(\alpha_2,\lambda)
-\sim Gamma(\alpha_1+\alpha_2,\lambda).
+\operatorname{Gamma}(\alpha_1,\lambda)+\operatorname{Gamma}(\alpha_2,\lambda)
+\sim \operatorname{Gamma}(\alpha_1+\alpha_2,\lambda).
 \]
 
 Para variáveis independentes:
@@ -554,6 +711,7 @@ MGFs úteis:
 | Poisson \((\lambda)\) | \(\exp[\lambda(e^s-1)]\) |
 | Exponencial de taxa \(\lambda\) | \(\lambda/(\lambda-s),\ s<\lambda\) |
 | Gamma forma–taxa \((\alpha,\lambda)\) | \((\lambda/(\lambda-s))^\alpha,\ s<\lambda\) |
+| Erlang \((k,\lambda)\) | \((\lambda/(\lambda-s))^k,\ s<\lambda\) |
 | Normal \((\mu,\sigma^2)\) | \(\exp(\mu s+\sigma^2s^2/2)\) |
 
 ### Função característica
