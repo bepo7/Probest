@@ -28,6 +28,7 @@ body.section-6 { --base: #356fa4; --base-dark: #244d72; --base-soft: #e2edf8; }
 body.section-7 { --base: #8b5377; --base-dark: #5e374f; --base-soft: #f4e5ef; }
 body.section-8 { --base: #547b35; --base-dark: #385322; --base-soft: #e9f1df; }
 body.section-9 { --base: #4f6475; --base-dark: #334552; --base-soft: #e6edf1; }
+body.section-10 { --base: #8a6514; --base-dark: #59400b; --base-soft: #f8efd5; }
 
 .site-header { padding: 1.25rem max(1rem, calc((100vw - 1100px) / 2)); background: color-mix(in srgb, var(--base-dark) 94%, #000); color: white; }
 .brand { display: inline-flex; align-items: center; gap: .65rem; color: white; text-decoration: none; font-size: .95rem; font-weight: 750; letter-spacing: .01em; }
@@ -82,6 +83,7 @@ math[display="block"] { overflow-x: auto; padding: .5rem 0; }
   .site-nav { grid-template-columns: 1fr; gap: .55rem; margin-bottom: 1rem; }
   .site-nav ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .content { border-radius: 14px; padding: 1.5rem; }
+  .content table { display: block; overflow-x: auto; }
 }
 @media (max-width: 450px) { .site-nav ol { grid-template-columns: 1fr; } body { font-size: 15px; } }
 @media print { body { background: white; } .site-header, .site-nav { display: none; } .page-wrap { width: 100%; margin: 0; } .content { padding: 0; border: 0; box-shadow: none; } }
