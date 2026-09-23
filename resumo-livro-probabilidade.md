@@ -769,13 +769,105 @@ N(\mu_1,\sigma_1^2)+N(\mu_2,\sigma_2^2)
 \sim \operatorname{Gamma}(\alpha_1+\alpha_2,\lambda).
 \]
 
-Para variáveis independentes:
+#### Máximo e mínimo de duas variáveis
+
+Defina
 
 \[
-F_{\max(X_1,\ldots,X_n)}(t)=\prod_iF_{X_i}(t),
+M=\max(X,Y),
+\qquad
+L=\min(X,Y).
+\]
+
+Para o **máximo** ser menor ou igual a \(t\), as duas variáveis precisam ser menores ou iguais a \(t\):
+
+\[
+\{M\le t\}=\{X\le t,\;Y\le t\}.
+\]
+
+Logo, em geral,
+
+\[
+F_M(t)=F_{X,Y}(t,t).
+\]
+
+Se \(X\) e \(Y\) são independentes, a CDF do máximo é
+
+\[
+\boxed{F_M(t)=F_X(t)F_Y(t)}.
+\]
+
+Para o **mínimo** ser maior que \(t\), as duas variáveis precisam ser maiores que \(t\):
+
+\[
+\{L>t\}=\{X>t,\;Y>t\}.
+\]
+
+Assim, para variáveis independentes,
+
+\[
+P(L>t)=[1-F_X(t)][1-F_Y(t)]
+\]
+
+e, tomando o complemento,
+
+\[
+\boxed{
+F_L(t)=1-[1-F_X(t)][1-F_Y(t)]
+}.
+\]
+
+Se \(X\) e \(Y\) são contínuas e independentes, basta derivar as CDFs para obter as densidades:
+
+\[
+\boxed{
+f_M(t)=f_X(t)F_Y(t)+F_X(t)f_Y(t)
+},
 \]
 
 \[
+\boxed{
+f_L(t)=f_X(t)[1-F_Y(t)]+[1-F_X(t)]f_Y(t)
+}.
+\]
+
+Portanto, o procedimento é: encontre \(F_X\) e \(F_Y\), verifique a independência, monte a CDF do máximo ou mínimo e derive somente se a questão pedir a PDF.
+
+Sem independência, não se pode multiplicar as CDFs. Para variáveis contínuas com densidade conjunta:
+
+\[
+F_M(t)=
+\int_{-\infty}^{t}\int_{-\infty}^{t}
+f_{X,Y}(x,y)\,dy\,dx,
+\]
+
+\[
+F_L(t)=
+1-\int_{t}^{\infty}\int_{t}^{\infty}
+f_{X,Y}(x,y)\,dy\,dx.
+\]
+
+**Exemplo.** Se \(X,Y\sim U(0,1)\) são independentes, então, para \(0\le t\le1\), \(F_X(t)=F_Y(t)=t\). Portanto:
+
+\[
+F_M(t)=t^2,
+\qquad
+f_M(t)=2t,
+\]
+
+\[
+F_L(t)=1-(1-t)^2=2t-t^2,
+\qquad
+f_L(t)=2(1-t).
+\]
+
+O máximo se concentra mais perto de \(1\), enquanto o mínimo se concentra mais perto de \(0\).
+
+Para mais de duas variáveis independentes, as mesmas ideias se generalizam:
+
+\[
+F_{\max(X_1,\ldots,X_n)}(t)=\prod_iF_{X_i}(t),
+\qquad
 P(\min(X_1,\ldots,X_n)>t)=\prod_i[1-F_{X_i}(t)].
 \]
 
