@@ -52,6 +52,7 @@ p, li { max-width: 78ch; }
 a { color: var(--base); text-underline-offset: .16em; }
 blockquote { margin: 1.5rem 0; padding: 1rem 1.2rem; border-left: 4px solid var(--base); background: var(--base-soft); border-radius: 0 10px 10px 0; }
 table { width: 100%; margin: 1.4rem 0; border-collapse: collapse; font-size: .93rem; }
+.section-10 table { display: block; max-width: 100%; overflow-x: auto; }
 th, td { padding: .65rem .72rem; border: 1px solid var(--line); text-align: left; vertical-align: top; }
 th { background: var(--base-soft); color: var(--base-dark); }
 tr:nth-child(even) { background: #fafcfd; }

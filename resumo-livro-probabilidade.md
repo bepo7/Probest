@@ -290,14 +290,14 @@ A mediana é \(q_{0{,}5}\); os quartis são \(q_{0{,}25}\), \(q_{0{,}5}\) e \(q_
 
 ### Discretas
 
-| Distribuição e suporte | PMF | Média | Variância |
-|---|---|---:|---:|
-| Bernoulli \(\operatorname{Bern}(p)\), \(X\in\{0,1\}\) | \(p^x(1-p)^{1-x}\) | \(p\) | \(p(1-p)\) |
-| Binomial \(\operatorname{Bin}(n,p)\), \(k=0,\ldots,n\) | \(\binom nkp^k(1-p)^{n-k}\) | \(np\) | \(np(1-p)\) |
-| Geométrica \(\operatorname{Geom}(p)\), \(k=1,2,\ldots\) | \((1-p)^{k-1}p\) | \(1/p\) | \((1-p)/p^2\) |
-| Binomial negativa \(\operatorname{NegBin}(r,p)\): ensaio do \(r\)-ésimo sucesso | \(\binom{k-1}{r-1}p^r(1-p)^{k-r}\) | \(r/p\) | \(r(1-p)/p^2\) |
-| Poisson \(\operatorname{Pois}(\lambda)\), \(k=0,1,\ldots\) | \(e^{-\lambda}\lambda^k/k!\) | \(\lambda\) | \(\lambda\) |
-| Hipergeométrica \(\operatorname{Hipergeom}(N,K,n)\) | \(\dfrac{\binom Kk\binom{N-K}{n-k}}{\binom Nn}\) | \(nK/N\) | \(n\frac KN(1-\frac KN)\frac{N-n}{N-1}\) |
+| Distribuição e suporte | PMF | CDF \(F_X\) | Média | Variância |
+|---|---|---|---:|---:|
+| Bernoulli \(\operatorname{Bern}(p)\), \(X\in\{0,1\}\) | \(p^x(1-p)^{1-x}\) | \(\begin{cases}0,&x<0\\1-p,&0\le x<1\\1,&x\ge1\end{cases}\) | \(p\) | \(p(1-p)\) |
+| Binomial \(\operatorname{Bin}(n,p)\), \(k=0,\ldots,n\) | \(\binom nkp^k(1-p)^{n-k}\) | \(F_X(k)=\displaystyle\sum_{j=0}^{k}\binom njp^j(1-p)^{n-j}\) | \(np\) | \(np(1-p)\) |
+| Geométrica \(\operatorname{Geom}(p)\), \(k=1,2,\ldots\) | \((1-p)^{k-1}p\) | \(F_X(k)=1-(1-p)^k\) | \(1/p\) | \((1-p)/p^2\) |
+| Binomial negativa \(\operatorname{NegBin}(r,p)\), \(k=r,r+1,\ldots\): ensaio do \(r\)-ésimo sucesso | \(\binom{k-1}{r-1}p^r(1-p)^{k-r}\) | \(F_X(k)=\displaystyle\sum_{j=r}^{k}\binom{j-1}{r-1}p^r(1-p)^{j-r}\) | \(r/p\) | \(r(1-p)/p^2\) |
+| Poisson \(\operatorname{Pois}(\lambda)\), \(k=0,1,\ldots\) | \(e^{-\lambda}\lambda^k/k!\) | \(F_X(k)=e^{-\lambda}\displaystyle\sum_{j=0}^{k}\lambda^j/j!\) | \(\lambda\) | \(\lambda\) |
+| Hipergeométrica \(\operatorname{Hipergeom}(N,K,n)\) | \(\dfrac{\binom Kk\binom{N-K}{n-k}}{\binom Nn}\) | \(F_X(k)=\displaystyle\sum_{j=\max(0,n-N+K)}^{\min(k,n,K)}\dfrac{\binom Kj\binom{N-K}{n-j}}{\binom Nn}\) | \(nK/N\) | \(n\frac KN(1-\frac KN)\frac{N-n}{N-1}\) |
 
 #### Quando usar cada distribuição discreta
 
@@ -337,16 +337,32 @@ P(X>m+n\mid X>m)=P(X>n).
 
 ### Contínuas
 
-| Distribuição | PDF no suporte | Média | Variância |
-|---|---|---:|---:|
-| Uniforme \(U(a,b)\) | \(1/(b-a)\) | \((a+b)/2\) | \((b-a)^2/12\) |
-| Exponencial \(\operatorname{Exp}(\lambda)\) | \(\lambda e^{-\lambda x},\ x\ge0\) | \(1/\lambda\) | \(1/\lambda^2\) |
-| Normal \(N(\mu,\sigma^2)\) | \(\dfrac1{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/(2\sigma^2)}\) | \(\mu\) | \(\sigma^2\) |
-| Gamma forma–taxa \(\operatorname{Gamma}(\alpha,\lambda)\) | \(\dfrac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}\) | \(\alpha/\lambda\) | \(\alpha/\lambda^2\) |
-| Erlang \(\operatorname{Erlang}(k,\lambda)\), \(k=1,2,\ldots\) | \(\dfrac{\lambda^k}{(k-1)!}x^{k-1}e^{-\lambda x},\ x\ge0\) | \(k/\lambda\) | \(k/\lambda^2\) |
-| Beta \(\operatorname{Beta}(\alpha,\beta)\), \(0<x<1\) | \(\dfrac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)}\) | \(\dfrac\alpha{\alpha+\beta}\) | \(\dfrac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}\) |
-| Qui-quadrado \(\chi^2_k\) | \(\operatorname{Gamma}(k/2,\text{taxa }1/2)\) | \(k\) | \(2k\) |
-| Cauchy padrão | \(1/[\pi(1+x^2)]\) | não existe | não existe |
+| Distribuição | PDF no suporte | CDF \(F_X(x)\) | Média | Variância |
+|---|---|---|---:|---:|
+| Uniforme \(U(a,b)\) | \(1/(b-a),\ a<x<b\) | \(\begin{cases}0,&x<a\\(x-a)/(b-a),&a\le x\le b\\1,&x>b\end{cases}\) | \((a+b)/2\) | \((b-a)^2/12\) |
+| Exponencial \(\operatorname{Exp}(\lambda)\) | \(\lambda e^{-\lambda x},\ x\ge0\) | \(\begin{cases}0,&x<0\\1-e^{-\lambda x},&x\ge0\end{cases}\) | \(1/\lambda\) | \(1/\lambda^2\) |
+| Normal \(N(\mu,\sigma^2)\) | \(\dfrac1{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/(2\sigma^2)}\) | \(\Phi\!\left((x-\mu)/\sigma\right)\) | \(\mu\) | \(\sigma^2\) |
+| Gamma forma–taxa \(\operatorname{Gamma}(\alpha,\lambda)\), \(x>0\) | \(\dfrac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}\) | \(\gamma(\alpha,\lambda x)/\Gamma(\alpha)\) | \(\alpha/\lambda\) | \(\alpha/\lambda^2\) |
+| Erlang \(\operatorname{Erlang}(k,\lambda)\), \(k=1,2,\ldots,\ x\ge0\) | \(\dfrac{\lambda^k}{(k-1)!}x^{k-1}e^{-\lambda x}\) | \(1-e^{-\lambda x}\displaystyle\sum_{j=0}^{k-1}(\lambda x)^j/j!\) | \(k/\lambda\) | \(k/\lambda^2\) |
+| Beta \(\operatorname{Beta}(\alpha,\beta)\), \(0<x<1\) | \(\dfrac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)}\) | \(I_x(\alpha,\beta)=\dfrac1{B(\alpha,\beta)}\displaystyle\int_0^x t^{\alpha-1}(1-t)^{\beta-1}\,dt\) | \(\dfrac\alpha{\alpha+\beta}\) | \(\dfrac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}\) |
+| Qui-quadrado \(\chi^2_k\), \(x>0\) | \(\operatorname{Gamma}(k/2,\text{taxa }1/2)\) | \(\gamma(k/2,x/2)/\Gamma(k/2)\) | \(k\) | \(2k\) |
+| Cauchy padrão, \(x\in\mathbb R\) | \(1/[\pi(1+x^2)]\) | \(\dfrac12+\dfrac1\pi\arctan(x)\) | não existe | não existe |
+
+Nas distribuições discretas, as somas da CDF são mostradas para valores inteiros \(k\) do suporte; entre dois inteiros, a CDF permanece constante. Para Gamma, Erlang e Qui-quadrado, \(F_X(x)=0\) quando \(x\le0\). Para a Beta, \(F_X(x)=0\) quando \(x\le0\) e \(F_X(x)=1\) quando \(x\ge1\).
+
+Nas CDFs acima,
+
+\[
+\Phi(z)=\frac1{\sqrt{2\pi}}\int_{-\infty}^{z}e^{-u^2/2}\,du
+\]
+
+é a CDF da Normal padrão,
+
+\[
+\gamma(s,z)=\int_0^z u^{s-1}e^{-u}\,du
+\]
+
+é a função gamma incompleta inferior, e \(I_x(\alpha,\beta)\) é a função beta incompleta regularizada.
 
 #### Parâmetros da Gamma e da Erlang
 
@@ -435,6 +451,18 @@ Z=\frac{X-\mu}{\sigma}\sim N(0,1),
 \[
 P(a<X<b)=\Phi\!\left(\frac{b-\mu}{\sigma}\right)
 -\Phi\!\left(\frac{a-\mu}{\sigma}\right).
+\]
+
+Para \(Z\sim N(0,1)\), a probabilidade da cauda direita é
+
+\[
+\boxed{P(Z>z)=1-\Phi(z)}.
+\]
+
+Pela simetria da Normal padrão, para \(z\ge0\):
+
+\[
+\boxed{P(-z\le Z\le z)=2\Phi(z)-1}.
 \]
 
 #### Exemplo numérico de padronização
@@ -721,6 +749,32 @@ Lei da esperança total:
 
 \[
 E[Y]=E[E[Y\mid X]].
+\]
+
+Se \(X\) é discreta, a mesma lei pode ser escrita como
+
+\[
+\boxed{
+E[Y]=\sum_x E[Y\mid X=x]P(X=x)
+}.
+\]
+
+Se \(X\) é contínua, a soma é substituída por uma integral:
+
+\[
+\boxed{
+E[Y]
+=\int_{-\infty}^{\infty}
+E[Y\mid X=x]f_X(x)\,dx
+=E[E[Y\mid X]]
+}.
+\]
+
+Os limites devem acompanhar o suporte de \(X\). Por exemplo, se \(X\) só assume valores em \([0,1]\), então:
+
+\[
+E[Y]
+=\int_0^1 E[Y\mid X=x]f_X(x)\,dx.
 \]
 
 Lei da variância total:
