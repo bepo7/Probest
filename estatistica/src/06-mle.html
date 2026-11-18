@@ -1,0 +1,122 @@
+<span class="eyebrow">Seção 6 · Estimação pontual frequentista</span>
+<h1>Estimação por máxima verossimilhança (MLE)</h1>
+<p class="lead">Ideia: entre todos os valores possíveis do parâmetro, escolha aquele que torna os dados observados <b>mais prováveis</b>. A receita é sempre a mesma: likelihood → log → derivada → zero → conferir.</p>
+
+<div class="toc"><strong>Nesta página</strong><ol>
+<li><a href="#def">Likelihood e log-likelihood</a></li>
+<li><a href="#receita">A receita em 5 passos</a></li>
+<li><a href="#poisson">Exemplo: Poisson</a></li>
+<li><a href="#normal">Exemplo: Normal (dois parâmetros)</a></li>
+<li><a href="#uniforme">Quando a derivada não serve: Uniforme</a></li>
+<li><a href="#pareto">Exemplo: Pareto</a></li>
+<li><a href="#agrupados">Dados agrupados em tabela</a></li>
+<li><a href="#propriedades">Propriedades do MLE</a></li>
+<li><a href="#momentos">Método dos momentos</a></li>
+<li><a href="#spoiler">Resultados das distribuições da Lista MLE</a></li>
+</ol></div>
+
+<h2 id="def">6.1 Likelihood e log-likelihood</h2>
+<div class="box def"><span class="box-title">Definição</span>
+<p>Para dados i.i.d. $x_1,\dots,x_n$ com pmf/pdf $f(x\mid\theta)$, a <b>função de verossimilhança</b> é</p>
+$$L(\theta) = f(x_1,\dots,x_n\mid\theta) = \prod_{i=1}^n f(x_i\mid\theta),$$
+<p>vista como função de $\theta$ com os dados <b>fixos</b>. A <b>log-verossimilhança</b> é $\ell(\theta)=\ln L(\theta)=\sum_{i}\ln f(x_i\mid\theta)$.</p>
+$$\hat\theta_{\text{MLE}} = \arg\max_\theta L(\theta) = \arg\max_\theta \ell(\theta).$$</div>
+<p>Por que usar o log? Porque $\ln$ é crescente (não muda onde está o máximo) e transforma o <b>produto</b> em <b>soma</b>, que é muito mais fácil de derivar.</p>
+<div class="box warn"><span class="box-title">Cuidado</span>
+<p>A likelihood é igual à pmf/pdf conjunta, mas o papel das variáveis troca: na pmf, $\theta$ é fixo e $x$ varia; na likelihood, $x$ é fixo e $\theta$ varia.</p></div>
+
+<h2 id="receita">6.2 A receita em 5 passos</h2>
+<ol class="steps">
+<li>Escreva $f(x_i\mid\theta)$ e o produto $L(\theta)$.</li>
+<li>Tire o log: $\ell(\theta)=\sum\ln f(x_i\mid\theta)$. Simplifique (separe o que depende de $\theta$).</li>
+<li>Derive: $\ell'(\theta)$. Constantes que não dependem de $\theta$ somem aqui.</li>
+<li>Resolva $\ell'(\hat\theta)=0$.</li>
+<li>Confira: é máximo ($\ell''\lt 0$ ou análise do sinal), está no domínio do parâmetro e não há máximo na borda.</li>
+</ol>
+
+<h2 id="poisson">6.3 Exemplo: Poisson</h2>
+<div class="example"><span class="box-title">Exemplo 6.1</span>
+<p>O número de mensagens por minuto num chat segue Poisson$(\lambda)$. Em 5 minutos foram contadas $3,5,2,4,6$. Ache o MLE de $\lambda$ (primeiro em geral, depois com os números).</p>
+<ol class="steps">
+<li>$f(x\mid\lambda)=\dfrac{\lambda^{x}e^{-\lambda}}{x!}$, então $L(\lambda)=\prod\dfrac{\lambda^{x_i}e^{-\lambda}}{x_i!}=\dfrac{\lambda^{\sum x_i}e^{-n\lambda}}{\prod x_i!}$.</li>
+<li>$\ell(\lambda)=\Big(\sum x_i\Big)\ln\lambda - n\lambda - \sum\ln(x_i!)$.</li>
+<li>$\ell'(\lambda)=\dfrac{\sum x_i}{\lambda}-n$.</li>
+<li>$\ell'=0 \Rightarrow \hat\lambda=\dfrac{\sum x_i}{n}=\bar x$.</li>
+<li>$\ell''(\lambda)=-\sum x_i/\lambda^2\lt0$: é máximo.</li>
+</ol>
+<p>Com os dados: $\hat\lambda = 20/5 = 4$ mensagens por minuto.</p></div>
+<div data-widget="mle"></div>
+
+<h2 id="normal">6.4 Exemplo: Normal com dois parâmetros</h2>
+<div class="example"><span class="box-title">Exemplo 6.2</span>
+<p>$X_i\sim N(\mu,\sigma^2)$, ambos desconhecidos. Com dois parâmetros, derive em relação a cada um (derivadas parciais) e resolva o sistema.</p>
+$$\ell(\mu,\sigma^2) = -\frac n2\ln(2\pi) - \frac n2\ln\sigma^2 - \frac{1}{2\sigma^2}\sum(x_i-\mu)^2.$$
+<ul>
+<li>$\dfrac{\partial\ell}{\partial\mu}=\dfrac{1}{\sigma^2}\sum(x_i-\mu)=0\ \Rightarrow\ \hat\mu=\bar x$.</li>
+<li>$\dfrac{\partial\ell}{\partial\sigma^2}=-\dfrac{n}{2\sigma^2}+\dfrac{1}{2\sigma^4}\sum(x_i-\mu)^2=0\ \Rightarrow\ \hat\sigma^2=\dfrac1n\sum(x_i-\bar x)^2$.</li>
+</ul>
+<p>Com os dados $4{,}1;\ 5{,}3;\ 3{,}8;\ 4{,}9;\ 5{,}4$: $\hat\mu=4{,}7$ e $\hat\sigma^2 = \frac{0{,}36+0{,}36+0{,}81+0{,}04+0{,}49}{5}=\frac{2{,}06}{5}=0{,}412$.</p>
+<p>Repare: o MLE da variância divide por $n$, não por $n-1$, e por isso é <b>viesado</b> ($s^2 = 2{,}06/4=0{,}515$ é o não viesado).</p></div>
+
+<h2 id="uniforme">6.5 Quando a derivada não serve: Uniforme$[0,\theta]$</h2>
+<div class="example"><span class="box-title">Exemplo 6.3</span>
+<p>$X_i\sim\text{Uniforme}[0,\theta]$ com dados $2{,}1;\ 0{,}7;\ 3{,}4;\ 1{,}9$.</p>
+<p>$f(x\mid\theta)=\frac1\theta$ se $0\le x\le\theta$, e 0 caso contrário. Então</p>
+$$L(\theta)=\begin{cases}\theta^{-n}, & \theta\ge\max_i x_i\\[2pt] 0, & \theta\lt\max_i x_i\ (\text{algum dado seria impossível}).\end{cases}$$
+<p>Derivar $\theta^{-n}$ dá $-n\theta^{-n-1}$, que <b>nunca</b> é zero: a função é decrescente onde é positiva. Então o máximo está no <b>menor $\theta$ permitido</b>:</p>
+$$\hat\theta_{\text{MLE}}=\max_i x_i = 3{,}4.$$
+<p>Desenhe $L(\theta)$: zero até 3,4, salta para $3{,}4^{-4}$ e depois decresce. Esse tipo de argumento ("analise a função diretamente, sem derivada") aparece sempre que <b>o suporte depende do parâmetro</b>.</p></div>
+<div class="box tip"><span class="box-title">Generalizando o raciocínio</span>
+<p>Para Uniforme$[a,b]$ com os dois extremos desconhecidos: $L=(b-a)^{-n}$ se $a\le\min x_i$ e $b\ge\max x_i$. Para maximizar, queremos o intervalo <b>mais curto possível</b> que ainda contenha todos os dados: $\hat a=\min x_i$, $\hat b=\max x_i$. O mesmo princípio serve para versões discretas (valores inteiros): pense qual é o menor valor do parâmetro que não torna nenhum dado impossível.</p></div>
+
+<h2 id="pareto">6.6 Exemplo: Pareto (cauda pesada da P1)</h2>
+<div class="example"><span class="box-title">Exemplo 6.4</span>
+<p>Tamanhos de arquivos (em MB, todos $\ge 1$) seguem Pareto com $x_m=1$: $f(x\mid\alpha)=\alpha x^{-\alpha-1}$, $x\ge1$. Dados: $1{,}2;\ 2{,}5;\ 1{,}1;\ 3{,}0;\ 1{,}6$.</p>
+<ul class="steps">
+<li>$\ell(\alpha)=n\ln\alpha-(\alpha+1)\sum\ln x_i$.</li>
+<li>$\ell'(\alpha)=\frac n\alpha-\sum\ln x_i=0\ \Rightarrow\ \hat\alpha=\dfrac{n}{\sum\ln x_i}$.</li>
+<li>$\sum\ln x_i = 0{,}182+0{,}916+0{,}095+1{,}099+0{,}470=2{,}763$, então $\hat\alpha=5/2{,}763\approx1{,}81$.</li>
+</ul></div>
+
+<h2 id="agrupados">6.7 Dados agrupados em tabela de frequências</h2>
+<p>Muitas questões dão os dados como "o valor $x$ apareceu $c_x$ vezes". A likelihood continua sendo o produto, só que cada fator aparece elevado à frequência: $L(\theta)=\prod_x f(x\mid\theta)^{c_x}$.</p>
+<div class="example"><span class="box-title">Exemplo 6.5 — defeitos por placa</span>
+<p>Foram inspecionadas 50 placas e contado o número de defeitos de cada uma:</p>
+<table><thead><tr><th>defeitos $x$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<tbody><tr><td>nº de placas</td><td>12</td><td>18</td><td>11</td><td>6</td><td>3</td></tr></tbody></table>
+<p>Modelo: defeitos $\sim$ Poisson$(\lambda)$, mesmo $\lambda$ para todas as placas. Pelo Exemplo 6.1, $\hat\lambda=\bar x$, e</p>
+$$\bar x=\frac{0\cdot12+1\cdot18+2\cdot11+3\cdot6+4\cdot3}{50}=\frac{70}{50}=1{,}4.$$
+<p>Esse valor é usado depois para testar se o modelo Poisson é adequado (<a href="09-testes.html#gof">teste χ² de aderência</a>).</p></div>
+<div class="box recog"><span class="box-title">Reconheça o modelo</span>
+<p>"Cada um dos $m$ grupos fez $k$ ensaios e contou sucessos" → cada grupo é uma Binomial$(k,\theta)$, e a likelihood total é o produto das $m$ binomiais. O MLE junta tudo: total de sucessos sobre total de ensaios.</p></div>
+
+<h2 id="propriedades">6.8 Propriedades do MLE</h2>
+<ul>
+<li><b>Invariância:</b> o MLE de $g(\theta)$ é $g(\hat\theta)$. Ex.: o MLE do desvio padrão é $\sqrt{\hat\sigma^2}$; o MLE de $P(X=0)=e^{-\lambda}$ é $e^{-\bar x}$.</li>
+<li><b>Consistente:</b> $\hat\theta\to\theta$ quando $n\to\infty$.</li>
+<li><b>Assintoticamente normal e eficiente:</b> para $n$ grande, $\hat\theta\approx N\big(\theta,\ 1/(n I(\theta))\big)$, onde $I(\theta)$ é a informação de Fisher. É isso que justifica intervalos e testes "z" baseados no MLE.</li>
+<li><b>Pode ser viesado</b> em amostras pequenas (ex.: $\hat\sigma^2$, máximo da Uniforme).</li>
+<li>MLE = MAP com prior uniforme (<a href="05-map-priors.html#map-mle">seção 5.5</a>).</li>
+</ul>
+
+<h2 id="momentos">6.9 Método dos momentos (alternativa simples)</h2>
+<p>Iguale momentos teóricos aos amostrais e resolva: $E[X]=\bar x$, $E[X^2]=\frac1n\sum x_i^2$, ...</p>
+<div class="example"><span class="box-title">Exemplo 6.6</span>
+<p>Uniforme$[0,\theta]$: $E[X]=\theta/2=\bar x\Rightarrow\hat\theta_{\text{MM}}=2\bar x$. Com os dados do Exemplo 6.3, $\bar x=2{,}025$ e $\hat\theta_{\text{MM}}=4{,}05$ (o MLE deu 3,4). Os dois métodos podem discordar; o MLE costuma ter menor erro quadrático.</p></div>
+
+<h2 id="spoiler">6.10 Resultados das distribuições cobradas na Lista MLE</h2>
+<div class="box warn"><span class="box-title">Só abra depois de tentar a lista</span>
+<p>A Lista MLE pede o MLE de algumas distribuições específicas. Os exemplos acima ensinam todas as técnicas necessárias (derivada do log, produto de pmfs, análise sem derivada). Tente sozinho primeiro.</p></div>
+<details class="sol"><summary>Mostrar tabela de resultados (spoiler)</summary><div>
+<table>
+<thead><tr><th>Modelo</th><th>MLE</th><th>Dica da dedução</th></tr></thead>
+<tbody>
+<tr><td>Bernoulli / Binomial ($k$ sucessos em $n$)</td><td>$\hat\theta=k/n$</td><td>$\ell=k\ln\theta+(n-k)\ln(1-\theta)$</td></tr>
+<tr><td>Exponencial$(\lambda)$</td><td>$\hat\lambda=1/\bar x$</td><td>$\ell=n\ln\lambda-\lambda\sum x_i$</td></tr>
+<tr><td>Geométrica$(p)$ (nº de tentativas até o 1º sucesso)</td><td>$\hat p=1/\bar x$</td><td>$\ell=n\ln p+(\sum x_i-n)\ln(1-p)$; use invariância para reparametrizações</td></tr>
+<tr><td>Uniforme discreta em $\{1,\dots,N\}$</td><td>$\hat N=\max x_i$</td><td>mesmo argumento da Uniforme contínua</td></tr>
+<tr><td>Poisson$(\lambda)$</td><td>$\hat\lambda=\bar x$</td><td>Exemplo 6.1</td></tr>
+<tr><td>Normal$(\mu,\sigma^2)$</td><td>$\bar x$ e $\frac1n\sum(x_i-\bar x)^2$</td><td>Exemplo 6.2</td></tr>
+</tbody></table>
+</div></details>
+<p class="source-note">Fontes: MIT 18.05 aula 10 (Intro to Statistics; MLE); Pishro-Nik 8.2.3; Brunton ep. 15–21.</p>

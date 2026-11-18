@@ -1,0 +1,107 @@
+<span class="eyebrow">Seção 1 · Base de tudo</span>
+<h1>Da probabilidade à estatística</h1>
+<p class="lead">Na P1, o modelo era conhecido e você calculava probabilidades. Na P2 o caminho se inverte: você tem <b>dados</b> e quer descobrir algo sobre o <b>modelo</b> (um parâmetro $\theta$). Esta seção traz o vocabulário e os resultados de amostragem que todas as outras usam.</p>
+
+<div class="toc"><strong>Nesta página</strong><ol>
+<li><a href="#pop">População, amostra e parâmetro</a></li>
+<li><a href="#estimador">Estimador × estimativa; viés e variância</a></li>
+<li><a href="#media">Média amostral e o TCL</a></li>
+<li><a href="#s2">Variância amostral: por que $n-1$</a></li>
+<li><a href="#normais">Amostras normais: $\chi^2$ e $t$</a></li>
+<li><a href="#quantis">Notação de valores críticos</a></li>
+<li><a href="#escolas">As duas escolas: bayesiana e frequentista</a></li>
+</ol></div>
+
+<h2 id="pop">1.1 População, amostra e parâmetro</h2>
+<div class="box def"><span class="box-title">Definições</span>
+<ul>
+<li><b>População / modelo:</b> a distribuição de onde os dados vêm, por exemplo $X \sim \text{Poisson}(\lambda)$ ou $X\sim N(\mu,\sigma^2)$.</li>
+<li><b>Parâmetro</b> $\theta$: número desconhecido que fixa o modelo ($\lambda$, $\mu$, $\sigma^2$, $p$...).</li>
+<li><b>Amostra aleatória (i.i.d.):</b> $X_1,\dots,X_n$ independentes e com a mesma distribuição do modelo. Os valores observados são $x_1,\dots,x_n$ (minúsculas).</li>
+<li><b>Estatística:</b> qualquer função dos dados que não depende de $\theta$, por exemplo $\bar X$, $S^2$, $\max X_i$.</li>
+</ul></div>
+<p>Toda a P2 responde, de formas diferentes, a três perguntas sobre $\theta$:</p>
+<table>
+<thead><tr><th>Pergunta</th><th>Resposta frequentista</th><th>Resposta bayesiana</th></tr></thead>
+<tbody>
+<tr><td>Qual o melhor palpite para $\theta$?</td><td>Estimativa pontual: <a href="06-mle.html">MLE</a></td><td><a href="05-map-priors.html">MAP</a> ou média da posterior</td></tr>
+<tr><td>Quão incerto é esse palpite?</td><td><a href="07-intervalos.html">Intervalo de confiança</a></td><td>Distribuição posterior / intervalo de probabilidade</td></tr>
+<tr><td>Os dados contradizem uma hipótese?</td><td><a href="08-nhst.html">Teste de hipótese (NHST)</a>, p-valor</td><td>Probabilidade posterior da hipótese, <a href="03-preditiva-odds.html">odds e fator de Bayes</a></td></tr>
+</tbody></table>
+
+<h2 id="estimador">1.2 Estimador × estimativa; viés e variância</h2>
+<div class="box def"><span class="box-title">Definição</span>
+<p>Um <b>estimador</b> $\hat\Theta = g(X_1,\dots,X_n)$ é uma variável aleatória (uma regra). A <b>estimativa</b> $\hat\theta = g(x_1,\dots,x_n)$ é o número que a regra produz com os dados observados.</p>
+<ul>
+<li><b>Viés:</b> $B(\hat\Theta) = E[\hat\Theta] - \theta$. Não viesado se $E[\hat\Theta]=\theta$.</li>
+<li><b>Erro quadrático médio:</b> $\text{MSE}(\hat\Theta) = E[(\hat\Theta-\theta)^2] = \text{Var}(\hat\Theta) + B(\hat\Theta)^2$.</li>
+<li><b>Consistente:</b> $\hat\Theta_n \to \theta$ em probabilidade quando $n\to\infty$ (basta MSE $\to 0$).</li>
+</ul></div>
+<div class="example"><span class="box-title">Exemplo 1.1 — dois estimadores para o máximo</span>
+<p>Seja $X_i\sim\text{Uniforme}[0,\theta]$. Dois candidatos: $\hat\Theta_1 = 2\bar X$ e $\hat\Theta_2 = \max_i X_i$.</p>
+<ul>
+<li>$E[2\bar X] = 2\cdot\theta/2 = \theta$: <b>não viesado</b>, com $\text{Var}(2\bar X) = 4\cdot\frac{\theta^2/12}{n} = \frac{\theta^2}{3n}$.</li>
+<li>$P(\max X_i \le y) = (y/\theta)^n$, então $E[\max X_i] = \frac{n}{n+1}\theta$: <b>viesado para baixo</b> (o máximo nunca passa de $\theta$). Mesmo assim seu MSE é $\frac{2\theta^2}{(n+1)(n+2)}$, bem menor que $\frac{\theta^2}{3n}$ para $n$ grande.</li>
+</ul>
+<p><b>Lição:</b> não viesado não quer dizer melhor. O máximo é o <a href="06-mle.html#uniforme">MLE</a> desse modelo.</p>
+</div>
+
+<h2 id="media">1.3 Média amostral e o Teorema Central do Limite</h2>
+<p>Se $E[X_i]=\mu$ e $\text{Var}(X_i)=\sigma^2$:</p>
+$$\bar X = \frac1n\sum_{i=1}^n X_i,\qquad E[\bar X]=\mu,\qquad \text{Var}(\bar X)=\frac{\sigma^2}{n},\qquad \text{erro padrão} = \frac{\sigma}{\sqrt n}.$$
+<div class="box tip"><span class="box-title">TCL — a frase que justifica quase todo teste z</span>
+<p>Para $n$ grande (regra prática $n\ge 30$), qualquer que seja a distribuição de $X_i$ (com variância finita),
+$$Z=\frac{\bar X-\mu}{\sigma/\sqrt n}\ \approx\ N(0,1).$$
+Se os $X_i$ já são normais, isso é <b>exato</b> para qualquer $n$.</p></div>
+<div class="box warn"><span class="box-title">Cuidado</span>
+<p>Var$(\bar X)$ divide por $n$; o desvio padrão divide por $\sqrt n$. Para reduzir pela metade a margem de erro, você precisa de <b>4 vezes</b> mais dados.</p></div>
+
+<h2 id="s2">1.4 Variância amostral: por que $n-1$</h2>
+$$S^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2 = \frac{1}{n-1}\Big(\sum X_i^2 - n\bar X^2\Big).$$
+<p>A conta-chave: $E\big[\sum (X_i-\bar X)^2\big] = (n-1)\sigma^2$. Usar $\bar X$ no lugar de $\mu$ "gasta" um grau de liberdade, porque os desvios $X_i-\bar X$ somam zero. Dividindo por $n-1$, $E[S^2]=\sigma^2$ (não viesado). Já a versão com $1/n$ (que é o <a href="06-mle.html#normal">MLE</a> da normal) tem viés $-\sigma^2/n$.</p>
+<div class="example"><span class="box-title">Exemplo 1.2 — estatísticas de uma amostra</span>
+<p>Tempos (em s) de 5 execuções de um script: $12,\ 15,\ 9,\ 14,\ 10$.</p>
+<ul class="steps">
+<li>Média: $\bar x = 60/5 = 12$.</li>
+<li>Desvios: $0,\ 3,\ -3,\ 2,\ -2$ (somam 0, como deveriam). Quadrados: $0,9,9,4,4$, soma $26$.</li>
+<li>$s^2 = 26/4 = 6{,}5$ e $s=\sqrt{6{,}5}\approx 2{,}55$. A versão "/n" daria $26/5=5{,}2$.</li>
+<li>Mediana: ordene $9,10,12,14,15$; o valor central é $12$.</li>
+</ul></div>
+
+<h2 id="normais">1.5 Amostras normais: as distribuições $\chi^2$ e $t$</h2>
+<p>Quando $X_i \sim N(\mu,\sigma^2)$ i.i.d., valem três fatos exatos que sustentam os intervalos e testes "t" e "$\chi^2$":</p>
+<div class="box def"><span class="box-title">Três resultados (amostra normal)</span>
+<ol>
+<li>$\bar X \sim N(\mu, \sigma^2/n)$.</li>
+<li>$\dfrac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1}$, independente de $\bar X$.</li>
+<li>$T=\dfrac{\bar X-\mu}{S/\sqrt n} \sim t_{n-1}$ (t de Student com $n-1$ graus de liberdade).</li>
+</ol></div>
+<ul>
+<li><b>$\chi^2_k$:</b> soma de $k$ normais padrão independentes ao quadrado. Média $k$, variância $2k$, só assume valores positivos e é assimétrica. É uma Gamma$(k/2, 1/2)$ (lembra da P1?).</li>
+<li><b>$t_k$:</b> $Z/\sqrt{V/k}$ com $Z\sim N(0,1)$ e $V\sim\chi^2_k$ independentes. Simétrica em torno de 0, com caudas mais pesadas que a normal; $t_k\to N(0,1)$ quando $k\to\infty$. Com $k\ge 30$ a diferença já é pequena.</li>
+</ul>
+<p>A intuição: trocar o $\sigma$ verdadeiro pela estimativa $S$ adiciona incerteza, e as caudas mais grossas da $t$ pagam por isso.</p>
+<div data-widget="tables"></div>
+
+<h2 id="quantis">1.6 Notação de valores críticos (leia antes das tabelas!)</h2>
+<div class="box warn"><span class="box-title">Convenção usada neste site (e no livro do Pishro-Nik)</span>
+<p>$z_\alpha$ é o valor com <b>área $\alpha$ à direita</b>: $P(Z > z_\alpha)=\alpha$, ou seja, $z_\alpha = \Phi^{-1}(1-\alpha)$. Do mesmo jeito, $t_{\alpha,k}$ e $\chi^2_{\alpha,k}$ deixam área $\alpha$ à direita.</p>
+<p>O MIT escreve $z_{0.025}$ às vezes como "quantil 0,975", e a tabela do MIT de $t$ e $\chi^2$ dá exatamente esses valores de cauda direita. Sempre confira <b>qual cauda</b> a tabela usa.</p></div>
+<table>
+<thead><tr><th>Confiança / nível</th><th>$\alpha$</th><th class="num">$z_{\alpha}$ (unilateral)</th><th class="num">$z_{\alpha/2}$ (bilateral)</th></tr></thead>
+<tbody>
+<tr><td>90%</td><td>0,10</td><td class="num">1,282</td><td class="num">1,645</td></tr>
+<tr><td>95%</td><td>0,05</td><td class="num">1,645</td><td class="num">1,960</td></tr>
+<tr><td>98%</td><td>0,02</td><td class="num">2,054</td><td class="num">2,326</td></tr>
+<tr><td>99%</td><td>0,01</td><td class="num">2,326</td><td class="num">2,576</td></tr>
+</tbody></table>
+
+<h2 id="escolas">1.7 As duas escolas</h2>
+<div class="grid2">
+<div class="card"><h3>Bayesiana (seções 2 a 5)</h3>
+<p>$\theta$ é tratado como <b>variável aleatória</b>. Você começa com uma <b>prior</b> $p(\theta)$, observa dados e calcula a <b>posterior</b> $p(\theta\mid\text{dados})$ pelo Teorema de Bayes. Responde perguntas como "qual a probabilidade de $H$ ser verdadeira?".</p></div>
+<div class="card"><h3>Frequentista (seções 6 a 10)</h3>
+<p>$\theta$ é <b>fixo e desconhecido</b>; só os dados são aleatórios. Probabilidades falam de "o que aconteceria repetindo o experimento": MLE, intervalos de confiança, p-valores, níveis de significância.</p></div>
+</div>
+<p>A comparação detalhada está na <a href="11-freq-bayes-regressao.html">seção 11</a>.</p>
+<p class="source-note">Fontes: MIT 18.05 (leitura 10), Pishro-Nik cap. 8.1–8.2, Brunton ep. 2–6.</p>

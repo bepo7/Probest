@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Estatística (P2) de Probabilidade e Estatística: inferência bayesiana, MLE, intervalos de confiança e testes de hipótese, com exemplos resolvidos.">
+<title>NHST: fundamentos · Probest P2</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23176b87'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>θ</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/site.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/site.js"></script>
+</head>
+<body class="s8">
+<header class="site-header"><a class="brand" href="index.html">Probest P2 · Estatística</a><span class="header-actions"><a class="switch" href="../index.html">↔ Trocar matéria</a><button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">◐ tema</button></span></header>
+<div class="page-wrap">
+<nav class="site-nav" aria-label="Seções"><details ><summary>Seções do site</summary><ol start="0"><li><a href="index.html">Início e roteiro</a></li><li><a href="01-amostras.html">Da probabilidade à estatística</a></li><li><a href="02-bayes-discreto.html">Bayes com hipóteses discretas</a></li><li><a href="03-preditiva-odds.html">Probabilidade preditiva e odds</a></li><li><a href="04-bayes-continuo.html">Priors contínuas e conjugadas</a></li><li><a href="05-map-priors.html">MAP, escolha de priors, MAP × MLE</a></li><li><a href="06-mle.html">Máxima verossimilhança (MLE)</a></li><li><a href="07-intervalos.html">Intervalos de confiança</a></li><li><a href="08-nhst.html" aria-current="page">Testes de hipótese: fundamentos</a></li><li><a href="09-testes.html">Catálogo de testes (z, t, χ², F)</a></li><li><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança</a></li><li><a href="11-freq-bayes-regressao.html">Frequentista × Bayesiano, bootstrap, regressão</a></li><li><a href="12-exercicios.html">Exercícios de treino (com solução)</a></li><li><a href="13-formulario.html">Formulário + tabelas interativas</a></li><li><a href="14-mapa-listas.html">Mapa das listas, checklist e fontes</a></li></ol></details></nav>
+<main class="content">
+<span class="eyebrow">Seção 8 · Testes de hipótese I</span>
+<h1>Testes de hipótese (NHST): fundamentos</h1>
+<p class="lead">NHST = <i>null hypothesis significance testing</i>. A lógica é de "prova por contradição probabilística": suponha $H_0$; se os dados forem muito improváveis sob $H_0$, rejeite $H_0$. Esta página cobre a linguagem (erros, α, β, potência, p-valor), que é cobrada em todas as questões de teste.</p>
+
+<div class="toc"><strong>Nesta página</strong><ol>
+<li><a href="#ingredientes">Ingredientes de um teste</a></li>
+<li><a href="#lados">Uni e bicaudal; simples e composta</a></li>
+<li><a href="#erros">Erros tipo I e II, α, β e potência</a></li>
+<li><a href="#binomial">Exemplo discreto: Binomial</a></li>
+<li><a href="#pvalor">p-valor</a></li>
+<li><a href="#z-poder">Teste z com potência e tamanho de amostra</a></li>
+<li><a href="#exp">Teste com uma única observação</a></li>
+<li><a href="#beta-mu">β como função do parâmetro</a></li>
+<li><a href="#armadilhas">Armadilhas de interpretação</a></li>
+</ol></div>
+
+<h2 id="ingredientes">8.1 Ingredientes de um teste</h2>
+<div class="box def"><span class="box-title">Os seis elementos</span>
+<ol>
+<li><b>$H_0$ (hipótese nula):</b> a posição padrão, cética, "nada mudou" (ex.: $\mu=\mu_0$, moeda justa, sistemas iguais).</li>
+<li><b>$H_1$ ou $H_A$ (alternativa):</b> o que você quer mostrar (ex.: $\mu\gt\mu_0$, nova versão é mais rápida).</li>
+<li><b>Estatística de teste</b> $W$: um número calculado dos dados (ex.: $Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n}$).</li>
+<li><b>Distribuição nula:</b> a distribuição de $W$ <b>supondo $H_0$ verdadeira</b> (ex.: $N(0,1)$).</li>
+<li><b>Região de rejeição</b> $R$: valores de $W$ que levam a rejeitar $H_0$ (ex.: $W\gt 1{,}645$). O complemento é a região de aceitação.</li>
+<li><b>Nível de significância</b> $\alpha = P(W\in R\mid H_0)$, fixado antes (tipicamente 0,05).</li>
+</ol></div>
+<div class="box warn"><span class="box-title">Escolha de $H_0$ e $H_1$</span>
+<p>A afirmação que você quer <b>demonstrar</b> vai em $H_1$. "A versão nova é mais rápida" → $H_0:\mu_{\text{novo}}=\mu_{\text{antigo}}$ (ou $\ge$), $H_1:\mu_{\text{novo}}\lt\mu_{\text{antigo}}$. Nunca coloque em $H_0$ aquilo que quer provar: o teste só consegue "rejeitar $H_0$" ou "não ter evidência suficiente para rejeitar".</p></div>
+
+<h2 id="lados">8.2 Uni e bicaudal; hipóteses simples e compostas</h2>
+<table>
+<thead><tr><th>$H_1$</th><th>Tipo</th><th>Região de rejeição (estatística z)</th></tr></thead>
+<tbody>
+<tr><td>$\mu\gt\mu_0$</td><td>unilateral à direita</td><td>$z\gt z_\alpha$</td></tr>
+<tr><td>$\mu\lt\mu_0$</td><td>unilateral à esquerda</td><td>$z\lt -z_\alpha$</td></tr>
+<tr><td>$\mu\ne\mu_0$</td><td>bilateral</td><td>$|z|\gt z_{\alpha/2}$ (α dividido entre as duas caudas)</td></tr>
+</tbody></table>
+<ul>
+<li><b>Hipótese simples:</b> especifica a distribuição por completo (ex.: $\mu=40$ com $\sigma$ conhecido).</li>
+<li><b>Hipótese composta:</b> um conjunto de valores (ex.: $\mu\gt40$, ou $\mu=40$ com $\sigma$ desconhecido). Para alternativas compostas, a potência é uma <b>função</b> do valor verdadeiro.</li>
+</ul>
+
+<h2 id="erros">8.3 Erros tipo I e II, α, β e potência</h2>
+<div class="table-wrap"><table>
+<thead><tr><th></th><th>$H_0$ verdadeira</th><th>$H_1$ verdadeira</th></tr></thead>
+<tbody>
+<tr><th>Não rejeito $H_0$</th><td>acerto ($1-\alpha$)</td><td><b>Erro tipo II</b> (prob. $\beta$)</td></tr>
+<tr><th>Rejeito $H_0$</th><td><b>Erro tipo I</b> (prob. $\alpha$)</td><td>acerto: <b>potência</b> $1-\beta$</td></tr>
+</tbody></table></div>
+<div class="box def"><span class="box-title">Definições</span>
+<ul>
+<li>$\alpha=P(\text{rejeitar }H_0\mid H_0)$ = nível de significância = probabilidade de <b>falso positivo</b>.</li>
+<li>$\beta=P(\text{não rejeitar }H_0\mid H_1)$ = probabilidade de <b>falso negativo</b>.</li>
+<li><b>Potência</b> $=1-\beta=P(\text{rejeitar }H_0\mid H_1)$: a chance de detectar um efeito que existe.</li>
+</ul></div>
+<div class="box recog"><span class="box-title">Relações que caem em V/F</span>
+<ul>
+<li>Diminuir $\alpha$ (ser mais exigente) <b>aumenta $\beta$ e diminui a potência</b>, com $n$ fixo. A região de rejeição encolhe, então é mais difícil rejeitar mesmo quando $H_1$ é verdade.</li>
+<li>Aumentar $n$ <b>aumenta a potência</b> (para $\alpha$ fixo), porque as distribuições de $\bar X$ ficam mais estreitas.</li>
+<li>Quanto mais longe o valor verdadeiro estiver de $\mu_0$, <b>maior a potência</b>.</li>
+<li>$\alpha$ e $\beta$ não somam 1: são probabilidades sob hipóteses diferentes.</li>
+</ul></div>
+
+<h2 id="binomial">8.4 Exemplo discreto: teste Binomial</h2>
+<div class="example"><span class="box-title">Exemplo 8.1 — adivinho de cara ou coroa</span>
+<p>Uma pessoa diz que prevê o resultado de uma moeda justa melhor que o acaso. Em 20 tentativas, seja $X$ o número de acertos e $\theta$ a probabilidade de acerto.</p>
+<ul class="steps">
+<li>$H_0:\theta=0{,}5$ (chuta ao acaso); $H_1:\theta\gt0{,}5$. Estatística: $X$; distribuição nula: Bin$(20;\ 0{,}5)$.</li>
+<li>Região de rejeição $\{X\ge 15\}$: $\alpha=P(X\ge15\mid\theta=0{,}5)=0{,}0207$. (Com $\{X\ge14\}$ seria $0{,}0577\gt0{,}05$; em testes discretos não dá para acertar $\alpha$ exatamente, então pegue a maior região com $\alpha\le$ o nível pedido.)</li>
+<li>Potência se na verdade $\theta=0{,}7$: $P(X\ge15\mid\theta=0{,}7)=0{,}416$. Ou seja, $\beta=0{,}584$: com só 20 tentativas, há 58% de chance de não detectar um bom adivinho.</li>
+<li>Se a pessoa acertar 14: não rejeitamos $H_0$ ao nível 0,05. O p-valor é $P(X\ge14\mid H_0)=0{,}0577$.</li>
+</ul></div>
+
+<h2 id="pvalor">8.5 p-valor</h2>
+<div class="box def"><span class="box-title">Definição</span>
+<p>O p-valor é a probabilidade, <b>supondo $H_0$ verdadeira</b>, de a estatística de teste ser <b>tão extrema ou mais</b> que o valor observado (na direção de $H_1$):</p>
+<ul>
+<li>unilateral à direita: $p=P(W\ge w_{\text{obs}}\mid H_0)$;</li>
+<li>unilateral à esquerda: $p=P(W\le w_{\text{obs}}\mid H_0)$;</li>
+<li>bilateral (distribuição simétrica): $p=2\,P(W\ge|w_{\text{obs}}|\mid H_0)$.</li>
+</ul>
+<p><b>Regra de decisão:</b> rejeite $H_0$ se $p\le\alpha$. Equivale a "$w_{\text{obs}}$ está na região de rejeição".</p></div>
+<p>O p-valor é o <b>menor $\alpha$</b> com o qual você ainda rejeitaria $H_0$ com esses dados. Para estatísticas contínuas, $P(W\gt w)=P(W\ge w)$, então tanto faz escrever $\gt$ ou $\ge$.</p>
+<div class="box warn"><span class="box-title">O que o p-valor NÃO é</span>
+<ul>
+<li>Não é $P(H_0\mid\text{dados})$. Essa é uma probabilidade bayesiana e exige prior.</li>
+<li>Não é a probabilidade de o resultado ser "acaso".</li>
+<li>p-valor grande não prova $H_0$; só mostra falta de evidência contra ela.</li>
+</ul></div>
+
+<h2 id="z-poder">8.6 Teste z com potência e tamanho de amostra</h2>
+<div class="example"><span class="box-title">Exemplo 8.2 — a bateria nova dura mais?</span>
+<p>Baterias antigas duram em média 500 h, com $\sigma=40$ h (conhecido). Testa-se um lote de $n=16$ baterias novas. $H_0:\mu=500$; $H_1:\mu\gt500$; $\alpha=0{,}05$.</p>
+<ol class="steps">
+<li><b>Estatística:</b> $Z=\dfrac{\bar X-500}{40/\sqrt{16}}=\dfrac{\bar X-500}{10}\sim N(0,1)$ sob $H_0$.</li>
+<li><b>Região de rejeição:</b> $Z\gt z_{0,05}=1{,}645$, ou em termos de $\bar X$: $\bar X\gt500+1{,}645(10)=516{,}45$ h.</li>
+<li><b>Decisão</b> com $\bar x=517$: $z=1{,}7\gt1{,}645$ → rejeita $H_0$. p-valor $=P(Z\ge1{,}7)=0{,}0446\lt0{,}05$.</li>
+<li><b>Potência contra $\mu=520$:</b> agora $\bar X\sim N(520,10^2)$, então
+$$1-\beta=P(\bar X\gt516{,}45\mid\mu=520)=P\Big(Z\gt\frac{516{,}45-520}{10}\Big)=P(Z\gt-0{,}355)=0{,}639.$$</li>
+<li><b>Efeito de α:</b> com $\alpha=0{,}01$, o corte vira $500+2{,}326(10)=523{,}26$ e a potência cai para $P(Z\gt0{,}326)=0{,}372$.</li>
+<li><b>Tamanho de amostra para potência 0,9</b> (com $\alpha=0{,}05$): precisamos que o corte $500+1{,}645\frac{40}{\sqrt n}$ fique $1{,}2816$ desvios abaixo de 520:
+$$500+1{,}645\tfrac{40}{\sqrt n}=520-1{,}2816\tfrac{40}{\sqrt n}\ \Rightarrow\ \sqrt n=\frac{(1{,}645+1{,}2816)\,40}{20}=5{,}853\ \Rightarrow\ n\ge34{,}3\ \Rightarrow\ n=35.$$</li>
+</ol></div>
+<div class="box def"><span class="box-title">Fórmula geral (unilateral, teste z)</span>
+$$n\ \ge\ \left(\frac{(z_\alpha+z_\beta)\,\sigma}{|\mu_1-\mu_0|}\right)^2,\qquad\text{com } z_\beta=\Phi^{-1}(1-\beta)=\Phi^{-1}(\text{potência}).$$
+<p>Para bilateral, troque $z_\alpha$ por $z_{\alpha/2}$ (aproximação que ignora a cauda oposta).</p></div>
+<div data-widget="power" data-init="500,520,40,16,0.05,right"></div>
+<p>Use o visualizador: mude $\alpha$, $n$ e $\mu_1$ e veja a área de potência (laranja) e a área $\alpha$ (azul) mudarem. É exatamente o "esboço" que as questões pedem.</p>
+
+<h2 id="exp">8.7 Teste com uma única observação</h2>
+<div class="example"><span class="box-title">Exemplo 8.3 — Exponencial</span>
+<p>A vida útil $X$ de um componente é Exponencial$(\lambda)$. O padrão é $\lambda=1$ (média 1 ano). Um fornecedor diz que o dele dura mais ($\lambda\lt1$). Você testa <b>um</b> componente: $H_0:\lambda=1$, $H_1:\lambda\lt1$, rejeitando se $X\gt c$.</p>
+<ul>
+<li>$\alpha=P(X\gt c\mid\lambda=1)=e^{-c}=0{,}05\Rightarrow c=\ln20\approx3{,}0$ anos.</li>
+<li>Potência se $\lambda=0{,}25$ (média 4 anos): $P(X\gt3{,}0\mid\lambda=0{,}25)=e^{-0{,}25\cdot3{,}0}\approx0{,}47$; $\beta\approx0{,}53$.</li>
+<li>Se o componente durou 2,2 anos: não rejeita; p-valor $=e^{-2{,}2}=0{,}11$.</li>
+</ul>
+<p><b>Lição:</b> para qualquer distribuição, $\alpha$ e $\beta$ são só probabilidades de a estatística cair (ou não) na região de rejeição, calculadas sob cada hipótese. Não precisa ser normal.</p></div>
+
+<h2 id="beta-mu">8.8 β como função do parâmetro (curva de potência)</h2>
+<p>Para o teste z <b>bilateral</b> de $H_0:\mu=\mu_0$ (aceita se $|Z|\le z_{\alpha/2}$), se o valor verdadeiro é $\mu$:</p>
+$$\beta(\mu)=P\big(\text{aceitar}\mid\mu\big)=\Phi\Big(z_{\alpha/2}-\frac{\mu-\mu_0}{\sigma/\sqrt n}\Big)-\Phi\Big(-z_{\alpha/2}-\frac{\mu-\mu_0}{\sigma/\sqrt n}\Big).$$
+<p><b>Como chegar lá:</b> aceitar ⇔ $\mu_0-z_{\alpha/2}\frac{\sigma}{\sqrt n}\le\bar X\le\mu_0+z_{\alpha/2}\frac{\sigma}{\sqrt n}$; padronize usando a média verdadeira $\mu$. Em $\mu=\mu_0$, $\beta=1-\alpha$; longe de $\mu_0$, $\beta\to0$.</p>
+<p>Ex.: baterias ($\mu_0=500,\ \sigma=40,\ n=16$) com teste bilateral a 5%: $\beta(520)=\Phi(1{,}96-2)-\Phi(-1{,}96-2)\approx0{,}484$.</p>
+
+<h2 id="armadilhas">8.9 Armadilhas de interpretação</h2>
+<ul>
+<li><b>"Não rejeitar" ≠ "aceitar como verdade".</b> Pode ser só falta de dados (potência baixa).</li>
+<li><b>Significância estatística ≠ importância prática.</b> Com $n$ enorme, diferenças minúsculas dão p-valor pequeno. Reporte também o tamanho do efeito / IC.</li>
+<li><b>Múltiplos testes (p-hacking):</b> fazendo 20 testes independentes a 5% com todas as $H_0$ verdadeiras, $P(\text{pelo menos um falso positivo})=1-0{,}95^{20}\approx0{,}64$. Escolher o teste depois de olhar os dados invalida o α.</li>
+<li><b>Taxa de alarmes falsos entre os rejeitados</b> ("das pessoas multadas, quantas não estavam correndo?") <b>não</b> é α: depende de quantos casos são realmente $H_0$, ou seja, de uma prior (Bayes!).</li>
+</ul>
+<p class="source-note">Fontes: MIT 18.05 aulas 17 e 18 (NHST I e II), Problem Set 8; Pishro-Nik 8.4.1–8.4.3; Brunton ep. 8–14.</p>
+
+<div class="pager"><a href="07-intervalos.html">← Intervalos de confiança</a><a href="09-testes.html">Catálogo de testes (z, t, χ², F) →</a></div>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<span class="eyebrow">Seção 4 · Inferência bayesiana III</span>
+<h1>Priors contínuas, likelihoods contínuas e conjugadas</h1>
+<p class="lead">Quando o parâmetro pode assumir qualquer valor num intervalo (uma proporção $\theta\in[0,1]$, uma média $\mu\in\mathbb R$), a tabela vira uma conta com densidades. As listas e a prova cobram os <b>quatro casos</b> abaixo.</p>
+
+<table>
+<thead><tr><th></th><th>Likelihood discreta (dados contáveis)</th><th>Likelihood contínua (dados medidos)</th></tr></thead>
+<tbody>
+<tr><th>Prior discreta</th><td><a href="02-bayes-discreto.html">Seção 2</a>: tabela comum</td><td><a href="#disc-cont">4.5</a>: tabela usando densidade $f(x\mid\theta)$</td></tr>
+<tr><th>Prior contínua</th><td><a href="#betabin">4.3</a>: Beta-Binomial</td><td><a href="#normal">4.6</a>: Normal-Normal</td></tr>
+</tbody></table>
+
+<div class="toc"><strong>Nesta página</strong><ol>
+<li><a href="#cont">Bayes com densidades</a></li>
+<li><a href="#beta">A distribuição Beta</a></li>
+<li><a href="#betabin">Beta-Binomial (prior contínua, dados discretos)</a></li>
+<li><a href="#pred-beta">Preditivas no modelo Beta</a></li>
+<li><a href="#disc-cont">Prior discreta, likelihood contínua</a></li>
+<li><a href="#normal">Normal-Normal</a></li>
+<li><a href="#conjugadas">Tabela de conjugadas</a></li>
+<li><a href="#espacos">Espaço de dados × espaço de hipóteses</a></li>
+</ol></div>
+
+<h2 id="cont">4.1 Bayes com densidades</h2>
+<p>Se $\theta$ é contínuo, a prior é uma pdf $f(\theta)$. Pense em cada valor $\theta$ como uma "linha da tabela" de largura $d\theta$, com prior $f(\theta)\,d\theta$:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>hipótese</th><th>prior</th><th>likelihood</th><th>numerador de Bayes</th><th>posterior</th></tr></thead>
+<tbody>
+<tr><td>$\theta \pm \frac{d\theta}{2}$</td><td>$f(\theta)\,d\theta$</td><td>$p(x\mid\theta)$</td><td>$p(x\mid\theta)f(\theta)\,d\theta$</td><td>$\dfrac{p(x\mid\theta)f(\theta)\,d\theta}{p(x)}$</td></tr>
+<tr class="total"><td>Total</td><td>$\int f(\theta)\,d\theta=1$</td><td>—</td><td>$p(x)=\int p(x\mid\theta)f(\theta)\,d\theta$</td><td>1</td></tr>
+</tbody></table></div>
+$$f(\theta\mid x) = \frac{p(x\mid\theta)\,f(\theta)}{\int p(x\mid\theta)f(\theta)\,d\theta}\qquad\Longrightarrow\qquad f(\theta\mid x)\ \propto\ p(x\mid\theta)\,f(\theta).$$
+<div class="box tip"><span class="box-title">Truque central: reconhecer a forma</span>
+<p>Quase nunca você precisa calcular a integral do denominador. Multiplique prior × likelihood, <b>ignore constantes que não dependem de $\theta$</b> e reconheça a família (Beta, Normal, Gamma...). A constante de normalização vem de graça da família.</p></div>
+
+<h2 id="beta">4.2 A distribuição Beta</h2>
+<div class="box def"><span class="box-title">Beta$(a,b)$, para $\theta\in[0,1]$, com $a,b\gt 0$</span>
+$$f(\theta) = \frac{(a+b-1)!}{(a-1)!\,(b-1)!}\,\theta^{a-1}(1-\theta)^{b-1}\quad(\text{para } a,b \text{ inteiros}),$$
+<p>em geral a constante é $1/B(a,b)$ com $B(a,b)=\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}$.</p>
+<ul>
+<li>Média: $\dfrac{a}{a+b}$ · Moda (para $a,b\gt 1$): $\dfrac{a-1}{a+b-2}$ · Variância: $\dfrac{ab}{(a+b)^2(a+b+1)}$.</li>
+<li>Beta$(1,1)$ = Uniforme$[0,1]$ (prior "plana").</li>
+<li>$a=b$: simétrica em torno de 0,5. $a\gt b$: puxa para perto de 1.</li>
+<li>Quanto maior $a+b$, mais concentrada (mais "certeza" na prior).</li>
+</ul></div>
+<p>Um jeito útil de ler: Beta$(a,b)$ é como já ter visto <b>$a-1$ sucessos e $b-1$ fracassos</b> "imaginários" partindo de uma prior plana.</p>
+
+<h2 id="betabin">4.3 Beta-Binomial: prior contínua, dados discretos</h2>
+<p>Seja $\theta$ a probabilidade de sucesso. Prior: $\theta\sim\text{Beta}(a,b)$. Dados: $k$ sucessos em $n$ ensaios, com likelihood $p(k\mid\theta)=\binom nk\theta^k(1-\theta)^{n-k}$.</p>
+$$f(\theta\mid k)\ \propto\ \underbrace{\theta^k(1-\theta)^{n-k}}_{\text{likelihood}}\cdot\underbrace{\theta^{a-1}(1-\theta)^{b-1}}_{\text{prior}} = \theta^{a+k-1}(1-\theta)^{b+n-k-1}.$$
+<div class="box def"><span class="box-title">Regra de atualização (conjugada)</span>
+$$\text{Beta}(a,\,b)\ \xrightarrow{\ k \text{ sucessos},\ n-k \text{ fracassos}\ }\ \text{Beta}(a+k,\ b+n-k).$$
+<p>Some os sucessos ao primeiro parâmetro e os fracassos ao segundo. Vale também para dados Bernoulli um a um e para a Geométrica (cada fracasso soma em $b$, o sucesso final soma em $a$).</p></div>
+<div class="example"><span class="box-title">Exemplo 4.1 — taxa de cliques de um anúncio</span>
+<p>Uma equipe acha que a taxa de clique $\theta$ de um anúncio novo está por volta de 30%, com bastante incerteza, e usa a prior Beta$(3,7)$ (média $3/10$). O anúncio é mostrado a 20 visitantes e recebe 6 cliques.</p>
+<ol class="steps">
+<li><b>pmf dos dados dado $\theta$:</b> $K\mid\theta\sim\text{Bin}(20,\theta)$, ou seja, $p(k\mid\theta)=\binom{20}{k}\theta^k(1-\theta)^{20-k}$, $k=0,\dots,20$.</li>
+<li><b>Posterior:</b> Beta$(3+6,\ 7+14)=$ <b>Beta$(9,21)$</b>, isto é, $f(\theta\mid k=6)=\frac{29!}{8!\,20!}\theta^8(1-\theta)^{20}$.</li>
+<li><b>Resumo:</b> média $9/30=0{,}30$; MAP (moda) $=\frac{9-1}{9+21-2}=\frac{8}{28}\approx0{,}286$; MLE (só os dados) $=6/20=0{,}30$.</li>
+<li><b>Pergunta típica:</b> $P(\theta\gt 0{,}4\mid\text{dados})\approx 0{,}119$ (era $0{,}232$ na prior). Os dados reduziram a incerteza.</li>
+</ol></div>
+<div data-widget="beta" data-init="3,7,6,20"></div>
+<p>Mexa no explorador: com prior Beta$(1,1)$ a posterior fica proporcional à likelihood, e o MAP coincide com $k/n$. Com uma prior forte (ex.: Beta$(30,70)$), 20 observações quase não mudam nada.</p>
+
+<h2 id="pred-beta">4.4 Preditivas no modelo Beta</h2>
+<div class="box def"><span class="box-title">Próximo ensaio</span>
+<p>Se $\theta\sim\text{Beta}(A,B)$ (prior <i>ou</i> posterior), a probabilidade de o próximo ensaio ser sucesso é</p>
+$$P(\text{sucesso}) = \int_0^1 \theta\,f(\theta)\,d\theta = E[\theta] = \frac{A}{A+B}.$$</div>
+<p>Para vários ensaios futuros, encadeie: depois de cada sucesso imaginado, $A$ sobe 1; depois de cada fracasso, $B$ sobe 1 (é a regra de atualização aplicada ao futuro).</p>
+<div class="example"><span class="box-title">Exemplo 4.2 — quantos dos próximos 3 visitantes clicam?</span>
+<p>Posterior Beta$(9,21)$. Qual a probabilidade de <b>pelo menos 2</b> dos próximos 3 clicarem?</p>
+<ul>
+<li>$P(3 \text{ cliques}) = \frac{9}{30}\cdot\frac{10}{31}\cdot\frac{11}{32} = \frac{990}{29760}\approx 0{,}0333$.</li>
+<li>$P(\text{clique, clique, não}) = \frac{9}{30}\cdot\frac{10}{31}\cdot\frac{21}{32}=\frac{1890}{29760}$. As 3 ordens possíveis têm a mesma probabilidade, então $P(2 \text{ cliques}) = 3\cdot\frac{1890}{29760}\approx 0{,}1905$.</li>
+<li>$P(K'\ge 2) \approx 0{,}0333+0{,}1905 = 0{,}224$.</li>
+</ul>
+<p>Fórmula fechada equivalente (distribuição Beta-Binomial): $P(K'=j)=\binom mj\frac{B(A+j,\,B+m-j)}{B(A,B)}$.</p>
+<p><b>Atenção:</b> a resposta <i>não</i> é $\binom32 0{,}3^2\,0{,}7+0{,}3^3=0{,}216$. Plugar a média de $\theta$ ignora a incerteza sobre $\theta$; a preditiva certa integra sobre a posterior.</p></div>
+<div class="box tip"><span class="box-title">Curiosidade que ajuda a conferir</span>
+<p>Com prior plana Beta$(1,1)$, a prior predictive do número de sucessos em $n$ ensaios é <b>uniforme</b> em $\{0,1,\dots,n\}$: cada valor tem probabilidade $1/(n+1)$.</p></div>
+
+<h2 id="disc-cont">4.5 Prior discreta, likelihood contínua</h2>
+<p>A tabela é a mesma da seção 2, mas a coluna likelihood usa a <b>densidade</b> $f(x\mid\theta)$ no valor observado. (Formalmente seria $f(x\mid\theta)\,dx$, mas o $dx$ é igual em todas as linhas e se cancela.)</p>
+<div class="example"><span class="box-title">Exemplo 4.3 — vida útil exponencial</span>
+<p>Uma lâmpada vem de um de três fabricantes, igualmente prováveis, cujas vidas úteis (em anos) são Exponencial($\lambda$) com $\lambda=0{,}5;\ 1;\ 2$. A lâmpada durou $x=1{,}2$ ano.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>$\lambda$</th><th class="num">Prior</th><th class="num">Likelihood $\lambda e^{-1{,}2\lambda}$</th><th class="num">Numerador</th><th class="num">Posterior</th></tr></thead>
+<tbody>
+<tr><td>0,5</td><td class="num">1/3</td><td class="num">0,2744</td><td class="num">0,0915</td><td class="num">0,362</td></tr>
+<tr><td>1</td><td class="num">1/3</td><td class="num">0,3012</td><td class="num">0,1004</td><td class="num">0,398</td></tr>
+<tr><td>2</td><td class="num">1/3</td><td class="num">0,1814</td><td class="num">0,0605</td><td class="num">0,240</td></tr>
+<tr class="total"><td>Total</td><td class="num">1</td><td class="num">—</td><td class="num">0,2523</td><td class="num">1</td></tr>
+</tbody></table></div>
+<p>MAP: $\lambda=1$. Preditiva de a próxima lâmpada (mesmo fabricante) durar mais de 1 ano: $\sum e^{-\lambda}P(\lambda\mid x) = 0{,}362e^{-0{,}5}+0{,}398e^{-1}+0{,}240e^{-2}\approx 0{,}399$.</p></div>
+<div class="example"><span class="box-title">Exemplo 4.4 — likelihood que zera: Uniforme</span>
+<p>O tempo de espera por um ônibus é Uniforme$[0,\theta]$ minutos, e você acredita que $\theta\in\{10,20,30\}$ com prior $0{,}2;\ 0{,}5;\ 0{,}3$. Você esperou <b>12 min</b>.</p>
+<p>Likelihood: $f(12\mid\theta)=1/\theta$ se $12\le\theta$, senão $0$.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>$\theta$</th><th class="num">Prior</th><th class="num">Likelihood</th><th class="num">Numerador</th><th class="num">Posterior</th></tr></thead>
+<tbody>
+<tr><td>10</td><td class="num">0,2</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>20</td><td class="num">0,5</td><td class="num">1/20</td><td class="num">0,025</td><td class="num">0,714</td></tr>
+<tr><td>30</td><td class="num">0,3</td><td class="num">1/30</td><td class="num">0,010</td><td class="num">0,286</td></tr>
+<tr class="total"><td>Total</td><td class="num">1</td><td></td><td class="num">0,035</td><td class="num">1</td></tr>
+</tbody></table></div>
+<p>MAP $=20$. Se num outro dia a espera for de 25 min, só $\theta=30$ sobrevive e a posterior vira $P(\theta=30)=1$.</p>
+<p><b>Atenção às unidades:</b> se $\theta$ estiver em horas e o dado em minutos, converta antes (10 min $=1/6$ h). A likelihood $1/\theta$ muda com a unidade, mas a posterior não.</p></div>
+
+<h2 id="normal">4.6 Normal-Normal: prior contínua, likelihood contínua</h2>
+<p>Modelo: medições $x_1,\dots,x_n\mid\theta\sim N(\theta,\sigma^2)$ i.i.d. com $\sigma^2$ <b>conhecido</b> (o erro do instrumento), e prior $\theta\sim N(\mu_{\text{prior}},\sigma^2_{\text{prior}})$.</p>
+<div class="box def"><span class="box-title">Fórmulas de atualização</span>
+$$a = \frac{1}{\sigma^2_{\text{prior}}},\qquad b=\frac{n}{\sigma^2},\qquad \mu_{\text{post}} = \frac{a\,\mu_{\text{prior}} + b\,\bar x}{a+b},\qquad \sigma^2_{\text{post}} = \frac{1}{a+b}.$$
+<ul>
+<li>A posterior é <b>Normal</b>: $\theta\mid x\sim N(\mu_{\text{post}},\sigma^2_{\text{post}})$.</li>
+<li>$a$ e $b$ são <b>precisões</b> (1/variância). Precisões se somam: $\frac1{\sigma^2_{\text{post}}} = \frac1{\sigma^2_{\text{prior}}}+\frac n{\sigma^2}$.</li>
+<li>A média posterior é uma <b>média ponderada</b> entre a prior e $\bar x$; mais dados → mais peso em $\bar x$.</li>
+<li>Só $\bar x$ importa (estatística suficiente). Com $n=1$, $\bar x=x$.</li>
+</ul></div>
+<div class="example"><span class="box-title">Exemplo 4.5 — sensor de temperatura</span>
+<p>A temperatura real $\theta$ de uma sala tem prior $N(20,\ 2^2)$. Um sensor mede com erro $N(0,1)$. Quatro leituras dão média $\bar x=22{,}5$.</p>
+<ol class="steps">
+<li>$a = 1/4 = 0{,}25$; $b = 4/1 = 4$.</li>
+<li>$\mu_{\text{post}}=\dfrac{0{,}25(20)+4(22{,}5)}{4{,}25}=\dfrac{95}{4{,}25}\approx 22{,}35$.</li>
+<li>$\sigma^2_{\text{post}}=1/4{,}25\approx 0{,}235$. Posterior: $N(22{,}35;\ 0{,}235)$.</li>
+<li><b>Quantas leituras</b> para a variância posterior ficar abaixo de $0{,}01$? Precisamos de $\frac{1}{0{,}25+n/1}\lt 0{,}01$, isto é, $0{,}25+n\gt 100$, logo $n\gt 99{,}75$: <b>$n=100$ leituras</b>.</li>
+</ol></div>
+<div class="box recog"><span class="box-title">Reconheça o modelo</span>
+<p>"Instrumento com erro normal de variância conhecida" + "prior normal para o valor real" → Normal-Normal. "Quantas medições para a variância posterior ser menor que $v$?" → resolva $\frac{1}{a+n/\sigma^2}\lt v$ para $n$ e <b>arredonde para cima</b>.</p></div>
+<div data-widget="normal" data-init="20,2,1,4,22.5"></div>
+<details class="sol"><summary>De onde vêm as fórmulas? (completar quadrado)</summary><div>
+<p>$f(\theta\mid x)\propto \exp\!\Big(-\frac{(\theta-\mu_{\text{prior}})^2}{2\sigma^2_{\text{prior}}}\Big)\prod_i\exp\!\Big(-\frac{(x_i-\theta)^2}{2\sigma^2}\Big)$. O expoente é um polinômio de grau 2 em $\theta$ com coeficiente de $\theta^2$ igual a $-\frac12(a+b)$ e de $\theta$ igual a $a\mu_{\text{prior}}+b\bar x$. Completando o quadrado, $-\frac{a+b}{2}\big(\theta-\frac{a\mu_{\text{prior}}+b\bar x}{a+b}\big)^2$ + constante, que é a forma de uma Normal com aquela média e variância $1/(a+b)$.</p>
+</div></details>
+
+<h2 id="conjugadas">4.7 Tabela de conjugadas</h2>
+<p>Uma prior é <b>conjugada</b> a uma likelihood quando a posterior fica na mesma família da prior.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Dados (likelihood)</th><th>Parâmetro</th><th>Prior</th><th>Posterior</th></tr></thead>
+<tbody>
+<tr><td>Bernoulli / Binomial: $k$ sucessos em $n$</td><td>$\theta\in[0,1]$</td><td>Beta$(a,b)$</td><td>Beta$(a+k,\ b+n-k)$</td></tr>
+<tr><td>Geométrica: $x$ tentativas até o 1º sucesso</td><td>$\theta$</td><td>Beta$(a,b)$</td><td>Beta$(a+1,\ b+x-1)$</td></tr>
+<tr><td>Normal, $\sigma^2$ conhecido</td><td>$\mu$</td><td>$N(\mu_0,\sigma_0^2)$</td><td>$N(\mu_{\text{post}},\sigma^2_{\text{post}})$ (fórmulas acima)</td></tr>
+<tr><td>Poisson: contagens $x_1..x_n$</td><td>$\lambda\gt 0$</td><td>Gamma$(\alpha,\beta)$ (taxa $\beta$)</td><td>Gamma$(\alpha+\sum x_i,\ \beta+n)$</td></tr>
+<tr><td>Exponencial: tempos $x_1..x_n$</td><td>$\lambda\gt0$</td><td>Gamma$(\alpha,\beta)$</td><td>Gamma$(\alpha+n,\ \beta+\sum x_i)$</td></tr>
+</tbody></table></div>
+<p>As duas primeiras linhas e a Normal são as cobradas na disciplina; as Gamma são bônus (e saem com o mesmo truque de reconhecer a forma).</p>
+
+<h2 id="espacos">4.8 Espaço de dados × espaço de hipóteses</h2>
+<p>Questão conceitual recorrente: classificar a <b>variável aleatória dos dados</b> e o <b>espaço de hipóteses</b> (os valores possíveis do parâmetro) como discretos ou contínuos. São coisas independentes.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Situação</th><th>Dados</th><th>Hipóteses</th></tr></thead>
+<tbody>
+<tr><td>Contagem de chamadas Poisson$(\lambda)$, $\lambda\gt0$ desconhecido</td><td>discretos</td><td>contínuas</td></tr>
+<tr><td>Medida $X\sim N(\mu,1)$, sabendo que $\mu\in\{0,\ 5\}$</td><td>contínuos</td><td>discretas</td></tr>
+<tr><td>Tempo $X\sim\text{Exp}(\lambda)$, $\lambda\gt 0$</td><td>contínuos</td><td>contínuas</td></tr>
+<tr><td>Roleta com $\theta\in\{5,10,15\}$ setores</td><td>discretos</td><td>discretas</td></tr>
+</tbody></table></div>
+<div class="box tip"><span class="box-title">Regra</span>
+<p>Pergunte separadamente: "que valores o <b>dado</b> pode assumir?" e "que valores o <b>parâmetro</b> pode assumir?". Uma variável discreta (ex.: com valores 0 e 1) pode muito bem ter um parâmetro contínuo.</p></div>
+<p class="source-note">Fontes: MIT 18.05 aulas 13, 14 (e slides 14), 15; Brunton ep. 29–30; Tsun 7.5.</p>

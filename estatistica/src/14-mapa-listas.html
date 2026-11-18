@@ -1,0 +1,84 @@
+<span class="eyebrow">Seção 14 · Plano de estudo</span>
+<h1>Mapa das listas, checklist de prova e fontes</h1>
+<p class="lead">Para cada lista e para a prova antiga: <b>o que estudar antes</b> (com link para a seção do site), sem resolver as questões. Ordem sugerida: L03 → LMLE → L04 → L05 → prova antiga → prática do MIT.</p>
+
+<h2 id="l03">14.1 Lista 3 — inferência bayesiana</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Questão</th><th>Tipo</th><th>Estude</th></tr></thead>
+<tbody>
+<tr><td>Q1</td><td>prior discreta + likelihood discreta (objetos de tipos diferentes, prior em proporção); posterior de uma hipótese; posterior predictive do próximo resultado (inclusive um resultado impossível para algumas hipóteses)</td><td><a href="02-bayes-discreto.html#tabela">2.2</a>, <a href="02-bayes-discreto.html#sequencial">2.4</a>, <a href="03-preditiva-odds.html#post-pred">3.2</a>, <a href="03-preditiva-odds.html#pmf-pred">3.3</a>; treino 1 e 2</td></tr>
+<tr><td>Q2</td><td>prior Beta + dados Binomiais: pmf dos dados, posterior, MAP, posterior predictive de "maioria" numa nova amostra</td><td><a href="04-bayes-continuo.html#betabin">4.3</a>, <a href="04-bayes-continuo.html#pred-beta">4.4</a>, <a href="05-map-priors.html#formulas">5.2</a>; treino 4</td></tr>
+<tr><td>Q3</td><td>prior discreta + likelihood Uniforme contínua; MAP sequencial; cuidado com unidades</td><td><a href="04-bayes-continuo.html#disc-cont">4.5</a> (Exemplo 4.4); treino 6</td></tr>
+<tr><td>Q4</td><td>Normal-Normal; nº de medições para a variância posterior ficar abaixo de um valor</td><td><a href="04-bayes-continuo.html#normal">4.6</a>; treino 7</td></tr>
+</tbody></table></div>
+<div class="box tip"><span class="box-title">Dica para a Q2.3</span><p>"Maioria" em 10 significa 6 ou mais. A preditiva é a soma das probabilidades Beta-Binomial de 6 a 10 (ou 1 menos a soma de 0 a 5). Use a fórmula fechada da seção 4.4.</p></div>
+
+<h2 id="lmle">14.2 Lista MLE</h2>
+<p>Pede o MLE de várias distribuições (inclusive dois casos em que a derivada não ajuda). Estude a <a href="06-mle.html#receita">receita</a>, o <a href="06-mle.html#poisson">exemplo Poisson</a> (modelo para Bernoulli/Exponencial/Geométrica) e o <a href="06-mle.html#uniforme">argumento sem derivada da Uniforme</a> (modelo para as questões de "numeração de 1 a N"). Treino: 9, 10, 11. A tabela de respostas está escondida em <a href="06-mle.html#spoiler">6.10</a>.</p>
+
+<h2 id="l04">14.3 Lista 4 — MIT (PSet 7, PSet 8, prática da Prova 2)</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Item</th><th>Tipo</th><th>Estude</th></tr></thead>
+<tbody>
+<tr><td>PSet 7 prob. 2</td><td>tabela com dados repetidos, prior/posterior predictive, limite com $n\to\infty$, ranking de próximos valores</td><td><a href="02-bayes-discreto.html#sequencial">2.4</a>, <a href="03-preditiva-odds.html">3.1–3.3</a></td></tr>
+<tr><td>PSet 7 prob. 3</td><td>odds prior, odds preditivas, posterior odds com várias hipóteses</td><td><a href="03-preditiva-odds.html#odds">3.4–3.7</a>; treino 3</td></tr>
+<tr><td>PSet 7 prob. 5</td><td>posterior odds com likelihood Poisson e várias observações</td><td><a href="03-preditiva-odds.html#poisson">3.6</a> (Exemplo 3.4)</td></tr>
+<tr><td>PSet 8 prob. 3</td><td>teste z com média de várias medições; limiar para um α; potência; nº de medições para potência 0,9</td><td><a href="08-nhst.html#z-poder">8.6</a>, <a href="08-nhst.html#armadilhas">8.9</a> (taxa de erro entre os rejeitados); treino 15</td></tr>
+<tr><td>MEX2 prob. 19</td><td>leitura dos testes do catálogo (t de duas amostras, χ², ANOVA, F)</td><td><a href="09-testes.html">9</a></td></tr>
+<tr><td>MEX2 prob. 20</td><td>pmf Binomial, MLE com dados agrupados, χ² de aderência com parâmetro estimado</td><td><a href="06-mle.html#agrupados">6.7</a>, <a href="09-testes.html#gof">9.7</a>; treino 11 e 18</td></tr>
+</tbody></table></div>
+<p>As soluções oficiais estão na pasta do Drive (MPS07G, MPS08G, MEX2G). Use-as só para conferir.</p>
+
+<h2 id="l05">14.4 Lista 5 — Pishro-Nik, capítulo 8</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Item</th><th>Tipo</th><th>Estude</th></tr></thead>
+<tbody>
+<tr><td>8.3.4 prob. 2</td><td>IC para a média com variância conhecida</td><td><a href="07-intervalos.html#z">7.3</a>; treino 12</td></tr>
+<tr><td>8.3.4 prob. 3</td><td>tamanho de amostra para proporção</td><td><a href="07-intervalos.html#prop">7.5</a>; treino 13</td></tr>
+<tr><td>8.3.4 prob. 4</td><td>limite da variância para valores em $[a,b]$ + IC</td><td><a href="07-intervalos.html#limitado">7.6</a></td></tr>
+<tr><td>8.3.4 prob. 5</td><td>IC com variância desconhecida, $n$ grande</td><td><a href="07-intervalos.html#grande">7.4</a></td></tr>
+<tr><td>8.3.4 prob. 6a</td><td>IC t para a média (e χ² para a variância)</td><td><a href="07-intervalos.html#t">7.7</a>, <a href="07-intervalos.html#var">7.8</a>; treino 14</td></tr>
+<tr><td>8.4.3 ex. 8.24–8.25</td><td>teste z bilateral e β(μ)</td><td><a href="09-testes.html#z">9.2</a>, <a href="08-nhst.html#beta-mu">8.8</a></td></tr>
+<tr><td>8.4.3 ex. 8.26–8.27</td><td>teste t</td><td><a href="09-testes.html#t">9.3</a>; treino 16</td></tr>
+<tr><td>8.4.6 prob. 1</td><td>teste com distribuição discreta e limiar inteiro</td><td><a href="08-nhst.html#binomial">8.4</a>, <a href="08-nhst.html#exp">8.7</a></td></tr>
+<tr><td>8.4.6 prob. 2, 3, 5</td><td>teste z (β em função de μ e α; $n$ grande; p-valor)</td><td><a href="08-nhst.html">8</a>, <a href="09-testes.html#z">9.2</a></td></tr>
+</tbody></table></div>
+<p>As soluções estão no próprio site do livro (probabilitycourse.com, capítulo 8).</p>
+
+<h2 id="prova">14.5 Prova antiga (P2)</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Questão</th><th>Tipo</th><th>Estude</th></tr></thead>
+<tbody>
+<tr><td>Q1 (3,0)</td><td>tabela bayesiana completa, prior predictive, MAP, posterior predictive</td><td><a href="02-bayes-discreto.html">2</a>, <a href="03-preditiva-odds.html">3</a></td></tr>
+<tr><td>Q2 (2,5)</td><td>teste de razão de verossimilhança generalizado para Binomial: Λ em função de $n$ e $x$, decisão, p-valor</td><td><a href="10-razao-verossimilhanca.html">10</a>; treino 19</td></tr>
+<tr><td>Q3 (2,0)</td><td>t de duas amostras com variâncias iguais: formulação, regiões de aceitação/rejeição</td><td><a href="09-testes.html#t2">9.4</a>; treino 17</td></tr>
+<tr><td>Q4 (2,5)</td><td>conceitos: atualização Beta, espaço de hipóteses, definição de MAP, potência × α, definição de p-valor, MAP × ML</td><td><a href="04-bayes-continuo.html#espacos">4.8</a>, <a href="05-map-priors.html#map-mle">5.5</a>, <a href="08-nhst.html#erros">8.3</a>, <a href="08-nhst.html#pvalor">8.5</a>; treino 20</td></tr>
+</tbody></table></div>
+
+<h2 id="checklist">14.6 Checklist de prova</h2>
+<ul>
+<li>☐ Na tabela bayesiana, a prior soma 1? Converti proporções ($a:b:c$) em probabilidades?</li>
+<li>☐ Hipóteses impossíveis receberam likelihood <b>zero</b>?</li>
+<li>☐ Diferenciei posterior (sobre hipóteses) de preditiva (sobre dados futuros)?</li>
+<li>☐ Nas odds com várias hipóteses, juntei todas as outras no "não $H$"?</li>
+<li>☐ Na Beta-Binomial, somei sucessos em $a$ e <b>fracassos</b> (não $n$) em $b$?</li>
+<li>☐ Na Normal-Normal, usei <b>variâncias</b> (não desvios) em $a$ e $b$? Arredondei $n$ para cima?</li>
+<li>☐ No MLE, tirei o log, conferi o domínio e vi se o suporte depende do parâmetro?</li>
+<li>☐ No IC, usei $z$ ou $t$ corretamente? $\alpha/2$ para bilateral? Dividi por $\sqrt n$?</li>
+<li>☐ No IC da variância, o χ² maior foi para o limite inferior?</li>
+<li>☐ No teste, o que quero provar está em $H_1$? Uni ou bicaudal conforme o enunciado?</li>
+<li>☐ Graus de liberdade: $n-1$ (t uma amostra), $n_X+n_Y-2$ (pooled), $k-1-m$ (aderência), $(r-1)(c-1)$ (contingência)?</li>
+<li>☐ Escrevi a conclusão em palavras e dei o p-valor?</li>
+<li>☐ Lembrei que α menor ⇒ potência menor e que p-valor ≠ $P(H_0\mid\text{dados})$?</li>
+</ul>
+
+<h2 id="fontes">14.7 Fontes usadas</h2>
+<ul>
+<li>J. Orloff, J. Bloom, J. French. <i>18.05 Introduction to Probability and Statistics</i>, MIT OpenCourseWare, Spring 2022: leituras/aulas 10–20, 22–24, 26; Problem Sets 7 e 8; Exam 2 Practice (com tabelas).</li>
+<li>H. Pishro-Nik. <i>Introduction to Probability, Statistics, and Random Processes</i>, capítulos 8 e 9 — <a href="https://www.probabilitycourse.com/chapter8/8_1_0_intro.php">probabilitycourse.com</a>.</li>
+<li>A. Tsun. <i>Probability &amp; Statistics with Applications to Computing</i>, 7.5 Maximum a Posteriori Estimation (slides de MAP).</li>
+<li>S. Brunton. Playlist <i>Introduction to Statistics and Data Analysis</i> (YouTube): ep. 2–14 (amostragem, IC, testes), 15–22 (estimação, MLE, MAP), 24–27 (χ², t, z), 28–30 (Bayes).</li>
+<li>Listas 3, 4, 5 e MLE da disciplina COE241 e prova antiga da P2 (só para mapear os tipos de questão; nenhum exemplo do site é cópia delas).</li>
+</ul>
+<div class="box tip"><span class="box-title">Vídeos do Brunton por tópico</span>
+<p>IC: ep. 7 · Procedimento de teste: ep. 9–10 · Erros e potência: ep. 11 · Bicaudal: ep. 13 · p-hacking: ep. 14 · MLE: ep. 19–21 · MAP: ep. 22 · χ²: ep. 24 · t e z: ep. 25–27 · Bayes: ep. 28 · Beta-Binomial: ep. 29 · Normal-Normal: ep. 30. A playlist <b>não</b> cobre preditiva, odds, GLRT e t pooled: para esses, use as seções 3, 9.4 e 10 deste site.</p></div>

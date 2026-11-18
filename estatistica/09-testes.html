@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Estatística (P2) de Probabilidade e Estatística: inferência bayesiana, MLE, intervalos de confiança e testes de hipótese, com exemplos resolvidos.">
+<title>Catálogo de testes · Probest P2</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23176b87'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>θ</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/site.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/site.js"></script>
+</head>
+<body class="s9">
+<header class="site-header"><a class="brand" href="index.html">Probest P2 · Estatística</a><span class="header-actions"><a class="switch" href="../index.html">↔ Trocar matéria</a><button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">◐ tema</button></span></header>
+<div class="page-wrap">
+<nav class="site-nav" aria-label="Seções"><details ><summary>Seções do site</summary><ol start="0"><li><a href="index.html">Início e roteiro</a></li><li><a href="01-amostras.html">Da probabilidade à estatística</a></li><li><a href="02-bayes-discreto.html">Bayes com hipóteses discretas</a></li><li><a href="03-preditiva-odds.html">Probabilidade preditiva e odds</a></li><li><a href="04-bayes-continuo.html">Priors contínuas e conjugadas</a></li><li><a href="05-map-priors.html">MAP, escolha de priors, MAP × MLE</a></li><li><a href="06-mle.html">Máxima verossimilhança (MLE)</a></li><li><a href="07-intervalos.html">Intervalos de confiança</a></li><li><a href="08-nhst.html">Testes de hipótese: fundamentos</a></li><li><a href="09-testes.html" aria-current="page">Catálogo de testes (z, t, χ², F)</a></li><li><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança</a></li><li><a href="11-freq-bayes-regressao.html">Frequentista × Bayesiano, bootstrap, regressão</a></li><li><a href="12-exercicios.html">Exercícios de treino (com solução)</a></li><li><a href="13-formulario.html">Formulário + tabelas interativas</a></li><li><a href="14-mapa-listas.html">Mapa das listas, checklist e fontes</a></li></ol></details></nav>
+<main class="content">
+<span class="eyebrow">Seção 9 · Testes de hipótese II</span>
+<h1>Catálogo de testes: z, t, duas amostras, χ², F e ANOVA</h1>
+<p class="lead">Todos os testes seguem o mesmo roteiro; o que muda é a <b>estatística</b> e a <b>distribuição nula</b>. Aprenda a escolher pelo tipo de dado e de pergunta (veja o <a href="#resumo">quadro-resumo</a>).</p>
+
+<div class="toc"><strong>Nesta página</strong><ol>
+<li><a href="#roteiro">Roteiro de resolução</a></li>
+<li><a href="#z">Teste z para uma média</a></li>
+<li><a href="#t">Teste t para uma média</a></li>
+<li><a href="#t2">t de duas amostras (variâncias iguais)</a></li>
+<li><a href="#pareado">t pareado e outras variantes</a></li>
+<li><a href="#var">χ² para a variância</a></li>
+<li><a href="#gof">χ² de aderência (goodness of fit)</a></li>
+<li><a href="#contingencia">χ² de homogeneidade/independência</a></li>
+<li><a href="#f">Teste F para variâncias</a></li>
+<li><a href="#anova">ANOVA de um fator</a></li>
+<li><a href="#resumo">Quadro-resumo</a></li>
+</ol></div>
+
+<h2 id="roteiro">9.1 Roteiro de resolução (escreva isso na prova)</h2>
+<ol class="steps">
+<li><b>Hipóteses:</b> $H_0$ e $H_1$ em símbolos e em palavras. Uni ou bicaudal?</li>
+<li><b>Modelo e estatística:</b> que suposições (normalidade, variância conhecida, independência)? Qual estatística e qual a distribuição nula (com graus de liberdade)?</li>
+<li><b>Região de rejeição</b> para o $\alpha$ dado (valor crítico da tabela).</li>
+<li><b>Calcule</b> a estatística com os dados.</li>
+<li><b>Decida</b> e <b>calcule o p-valor</b>. Conclua em palavras, no contexto.</li>
+</ol>
+
+<h2 id="z">9.2 Teste z para uma média</h2>
+<p>Use quando os dados são normais com <b>σ conhecido</b>, ou quando $n$ é <b>grande</b> (aí troque σ por $s$).</p>
+$$Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n}\ \sim\ N(0,1)\ \text{ sob } H_0.$$
+<div class="table-wrap"><table>
+<thead><tr><th>$H_1$</th><th>Rejeita $H_0$ se</th><th>p-valor</th></tr></thead>
+<tbody>
+<tr><td>$\mu\ne\mu_0$</td><td>$|z|\gt z_{\alpha/2}$</td><td>$2(1-\Phi(|z|))$</td></tr>
+<tr><td>$\mu\gt\mu_0$</td><td>$z\gt z_\alpha$</td><td>$1-\Phi(z)$</td></tr>
+<tr><td>$\mu\lt\mu_0$</td><td>$z\lt -z_\alpha$</td><td>$\Phi(z)$</td></tr>
+</tbody></table></div>
+<div class="example"><span class="box-title">Exemplo 9.1 — n grande, σ desconhecido</span>
+<p>Um fabricante diz que o boot de seus notebooks leva 30 s em média. Uma revista suspeita que leva menos (o que seria bom para a marca, mas ela quer conferir a especificação). Com $n=100$ medições: $\bar x=29{,}1$ s e $s=4{,}2$ s. Teste a 5%.</p>
+<ul class="steps">
+<li>$H_0:\mu=30$; $H_1:\mu\lt30$ (unilateral à esquerda).</li>
+<li>$n$ grande → $Z=\frac{\bar X-30}{S/\sqrt n}\approx N(0,1)$.</li>
+<li>Rejeita se $z\lt-1{,}645$.</li>
+<li>$z=\frac{29{,}1-30}{4{,}2/10}=-2{,}14$.</li>
+<li>$-2{,}14\lt-1{,}645$ → <b>rejeita $H_0$</b>. p-valor $=\Phi(-2{,}14)\approx0{,}016$.</li>
+</ul></div>
+
+<h2 id="t">9.3 Teste t para uma média</h2>
+<p>Dados <b>normais</b>, <b>σ desconhecido</b>, $n$ pequeno:</p>
+$$T=\frac{\bar X-\mu_0}{S/\sqrt n}\ \sim\ t_{n-1}\ \text{ sob } H_0.$$
+<p>Mesmas regiões da tabela do z, trocando $z_\alpha$ por $t_{\alpha,\,n-1}$.</p>
+<div class="example"><span class="box-title">Exemplo 9.2</span>
+<p>O tempo de carga de um celular deveria ser 48 min. Seis cargas medidas: $52,\ 47,\ 55,\ 50,\ 49,\ 53$. Há evidência de que a média é diferente de 48 (α = 0,05)?</p>
+<ul class="steps">
+<li>$H_0:\mu=48$; $H_1:\mu\ne48$.</li>
+<li>$\bar x=306/6=51$; desvios $1,-4,4,-1,-2,2$; $\sum(\cdot)^2=42$; $s^2=42/5=8{,}4$; $s=2{,}898$.</li>
+<li>$t=\frac{51-48}{2{,}898/\sqrt6}=\frac{3}{1{,}183}=2{,}54$ com 5 g.l.</li>
+<li>$t_{0,025;\,5}=2{,}571$. Como $|2{,}54|\lt2{,}571$, <b>não rejeita</b> $H_0$ (por pouco). p-valor $=2P(T_5\gt2{,}54)\approx0{,}052$.</li>
+</ul>
+<p>Com teste unilateral ($H_1:\mu\gt48$), o crítico seria $t_{0,05;5}=2{,}015$ e rejeitaríamos. A escolha de uni/bicaudal deve vir <b>do enunciado</b>, antes de ver os dados.</p></div>
+
+<h2 id="t2">9.4 t de duas amostras com variâncias iguais (pooled)</h2>
+<p>Duas amostras independentes, normais, com <b>variâncias desconhecidas mas iguais</b>. Para testar $H_0:\mu_X-\mu_Y=\delta_0$ (geralmente $\delta_0=0$):</p>
+<div class="box def"><span class="box-title">Fórmulas</span>
+$$s_p^2=\frac{(n_X-1)s_X^2+(n_Y-1)s_Y^2}{n_X+n_Y-2},\qquad T=\frac{(\bar X-\bar Y)-\delta_0}{s_p\sqrt{\frac1{n_X}+\frac1{n_Y}}}\ \sim\ t_{n_X+n_Y-2}.$$
+<p>$s_p^2$ é a <b>variância combinada</b>: média das variâncias ponderada pelos graus de liberdade. Se as duas amostras têm a mesma variância amostral $s^2$, então $s_p^2=s^2$.</p></div>
+<div class="example"><span class="box-title">Exemplo 9.3 — o compilador novo é mais rápido?</span>
+<p>Tempos de build (s): compilador antigo, $n_X=12$, $\bar x=31{,}2$, $s_X^2=16$; compilador novo, $n_Y=10$, $\bar y=27{,}5$, $s_Y^2=20$. Suponha normalidade e variâncias iguais. O novo é mais rápido (α = 0,05)?</p>
+<ol class="steps">
+<li><b>Formulação:</b> $H_0:\mu_X=\mu_Y$ (o novo não é mais rápido); $H_1:\mu_X\gt\mu_Y$ (média do antigo maior → novo mais rápido). Unilateral à direita.</li>
+<li>$s_p^2=\dfrac{11(16)+9(20)}{20}=\dfrac{356}{20}=17{,}8$.</li>
+<li>Erro padrão: $s_p\sqrt{\frac1{12}+\frac1{10}}=\sqrt{17{,}8\cdot0{,}1833}=\sqrt{3{,}263}=1{,}806$.</li>
+<li>$t=\dfrac{31{,}2-27{,}5}{1{,}806}=2{,}05$, com $12+10-2=20$ g.l.</li>
+<li><b>Regiões:</b> aceita $H_0$ se $t\le t_{0,05;\,20}=1{,}725$; rejeita se $t\gt1{,}725$. Como $2{,}05\gt1{,}725$, <b>rejeita $H_0$</b>: há evidência de que o novo é mais rápido. p-valor $=P(T_{20}\gt2{,}05)\approx0{,}027$.</li>
+</ol>
+<p>Note: se a pergunta fosse "os tempos <b>diferem</b>?" (bilateral), o crítico seria $t_{0,025;20}=2{,}086$ e <b>não</b> rejeitaríamos. Esse detalhe muda a resposta.</p></div>
+<div class="box warn"><span class="box-title">Erros comuns neste teste</span>
+<ul>
+<li>Somar as variâncias sem dividir pelos tamanhos: o denominador é $s_p\sqrt{1/n_X+1/n_Y}$, não $\sqrt{s_p^2}$.</li>
+<li>Usar $n-1$ graus de liberdade: são $n_X+n_Y-2$.</li>
+<li>Inverter $H_0$ e $H_1$: o que se quer mostrar ("o novo é melhor") vai em $H_1$.</li>
+</ul></div>
+
+<h2 id="pareado">9.5 t pareado e outras variantes</h2>
+<p><b>Pareado:</b> quando cada observação de um grupo tem um "par" natural no outro (mesma máquina antes/depois, mesmo aluno em duas provas), trabalhe com as <b>diferenças</b> $d_i=x_i-y_i$ e faça um t de uma amostra sobre elas.</p>
+<div class="example"><span class="box-title">Exemplo 9.4</span>
+<p>Cinco servidores tiveram a latência medida antes e depois de uma otimização. Diferenças (antes − depois, em ms): $2,4,1,3,5$. $\bar d=3$, $s_d^2=2{,}5$, $s_d=1{,}581$. $t=\frac{3}{1{,}581/\sqrt5}=4{,}24$ com 4 g.l. Bilateral a 5%: $t_{0,025;4}=2{,}776$ → rejeita "sem efeito". p-valor $\approx0{,}013$.</p></div>
+<ul>
+<li><b>z de duas amostras</b> (σ's conhecidos ou $n$'s grandes): $Z=\dfrac{\bar X-\bar Y-\delta_0}{\sqrt{\sigma_X^2/n_X+\sigma_Y^2/n_Y}}$.</li>
+<li><b>Welch</b> (variâncias desconhecidas e diferentes): $T=\dfrac{\bar X-\bar Y}{\sqrt{s_X^2/n_X+s_Y^2/n_Y}}$, com g.l. aproximados (fórmula de Welch). Mencionado no MIT; a disciplina cobra o pooled.</li>
+</ul>
+
+<h2 id="var">9.6 χ² para a variância (amostra normal)</h2>
+$$X^2=\frac{(n-1)S^2}{\sigma_0^2}\ \sim\ \chi^2_{n-1}\ \text{ sob } H_0:\sigma^2=\sigma_0^2.$$
+<div class="example"><span class="box-title">Exemplo 9.5</span>
+<p>Uma máquina de corte deve ter desvio padrão de no máximo 0,5 mm. Em 15 peças, $s^2=0{,}42$ mm². A variabilidade está acima do permitido (α = 0,05)?</p>
+<p>$H_0:\sigma^2=0{,}25$; $H_1:\sigma^2\gt0{,}25$. $X^2=\frac{14(0{,}42)}{0{,}25}=23{,}52$. Crítico $\chi^2_{0,05;14}=23{,}68$. Como $23{,}52\lt23{,}68$, <b>não rejeita</b> (p-valor $\approx0{,}052$).</p></div>
+
+<h2 id="gof">9.7 χ² de aderência (goodness of fit)</h2>
+<p>Pergunta: "os dados seguem a distribuição $X$?". Divida os valores em $k$ categorias (bins), compare contagens observadas $O_i$ com esperadas $E_i=n\,p_i$ sob $H_0$:</p>
+<div class="box def"><span class="box-title">Estatísticas e graus de liberdade</span>
+$$X^2=\sum_{i=1}^k\frac{(O_i-E_i)^2}{E_i}\qquad\text{ou}\qquad G=2\sum_{i=1}^k O_i\ln\frac{O_i}{E_i}.$$
+<p>As duas são aproximadamente $\chi^2$ com</p>
+$$\text{g.l.}=k-1-(\text{nº de parâmetros estimados a partir dos dados}).$$
+<p>Rejeite $H_0$ (o modelo não adere) se a estatística for <b>grande</b>: teste sempre unilateral à direita. Regra prática: junte categorias para ter $E_i\ge5$.</p></div>
+<div class="example"><span class="box-title">Exemplo 9.6 — o dado é honesto? (sem parâmetro estimado)</span>
+<p>120 lançamentos: faces 1 a 6 saíram $25,17,15,23,24,16$ vezes. Sob $H_0$ (honesto), $E_i=20$.</p>
+<p>$X^2=\frac{25+9+25+9+16+16}{20}=\frac{100}{20}=5{,}0$; g.l. $=6-1=5$; $\chi^2_{0,05;5}=11{,}07$. Não rejeita; p-valor $\approx0{,}42$.</p></div>
+<div class="example"><span class="box-title">Exemplo 9.7 — Poisson se ajusta aos defeitos? (1 parâmetro estimado)</span>
+<p>Dados do <a href="06-mle.html#agrupados">Exemplo 6.5</a>: 50 placas, $\hat\lambda=1{,}4$ (MLE). Probabilidades Poisson(1,4): $P(0)=0{,}247$, $P(1)=0{,}345$, $P(2)=0{,}242$, $P(\ge3)=0{,}167$. Juntamos "3" e "4" em "≥3" para ter $E\ge5$.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>defeitos</th><th class="num">$O$</th><th class="num">$E=50p$</th><th class="num">$(O-E)^2/E$</th></tr></thead>
+<tbody>
+<tr><td>0</td><td class="num">12</td><td class="num">12,33</td><td class="num">0,009</td></tr>
+<tr><td>1</td><td class="num">18</td><td class="num">17,26</td><td class="num">0,032</td></tr>
+<tr><td>2</td><td class="num">11</td><td class="num">12,08</td><td class="num">0,097</td></tr>
+<tr><td>≥3</td><td class="num">9</td><td class="num">8,33</td><td class="num">0,054</td></tr>
+<tr class="total"><td>Total</td><td class="num">50</td><td class="num">50</td><td class="num">$X^2\approx0{,}19$</td></tr>
+</tbody></table></div>
+<p>g.l. $=4-1-1=2$ (um parâmetro, λ, foi estimado). $\chi^2_{0,05;2}=5{,}99$. Não rejeita: o modelo Poisson é compatível com os dados (p-valor $\approx0{,}91$).</p>
+<p><b>Atenção:</b> a última categoria tem que ser "≥3", e não só "=3", para as probabilidades somarem 1.</p></div>
+<div class="box recog"><span class="box-title">Reconheça o modelo</span>
+<p>"Teste se a probabilidade de sucesso é a mesma em todos os centros/grupos" com uma tabela de contagens → ajuste a Binomial com o $\hat\theta$ do MLE e faça χ² de aderência, descontando 1 g.l. pelo parâmetro estimado.</p></div>
+
+<h2 id="contingencia">9.8 χ² de homogeneidade / independência (tabela de contingência)</h2>
+<p>Tabela com $r$ linhas e $c$ colunas. Sob $H_0$ (mesma distribuição em todas as linhas / independência):</p>
+$$E_{ij}=\frac{(\text{total da linha } i)(\text{total da coluna } j)}{\text{total geral}},\qquad X^2=\sum_{i,j}\frac{(O_{ij}-E_{ij})^2}{E_{ij}},\qquad\text{g.l.}=(r-1)(c-1).$$
+<div class="example"><span class="box-title">Exemplo 9.8</span>
+<p>Duas versões de uma loja online, 100 visitantes cada; resultado da visita:</p>
+<table><thead><tr><th></th><th class="num">comprou</th><th class="num">abandonou carrinho</th><th class="num">saiu</th></tr></thead>
+<tbody><tr><td>Versão A</td><td class="num">60</td><td class="num">25</td><td class="num">15</td></tr><tr><td>Versão B</td><td class="num">45</td><td class="num">30</td><td class="num">25</td></tr></tbody></table>
+<p>Totais das colunas: 105, 55, 40. Esperados (iguais nas duas linhas): $52{,}5;\ 27{,}5;\ 20$. $X^2\approx5{,}10$, g.l. $=2$, crítico $5{,}99$: não rejeita a 5% (p-valor $\approx0{,}078$).</p></div>
+
+<h2 id="f">9.9 Teste F para igualdade de variâncias</h2>
+$$F=\frac{S_X^2}{S_Y^2}\ \sim\ F(n_X-1,\ n_Y-1)\ \text{ sob } H_0:\sigma_X^2=\sigma_Y^2\ (\text{dados normais}).$$
+<p>Útil para checar a suposição do t pooled. No Exemplo 9.3: $F=16/20=0{,}8$ com $(11,9)$ g.l.; os críticos bilaterais a 5% são $0{,}279$ e $3{,}91$, então não há evidência contra variâncias iguais (p-valor $\approx0{,}72$).</p>
+
+<h2 id="anova">9.10 ANOVA de um fator</h2>
+<p>Compara as médias de $k$ grupos normais com a mesma variância. $H_0$: todas as médias iguais.</p>
+$$F=\frac{\text{MS}_B}{\text{MS}_W}=\frac{\frac{1}{k-1}\sum_i n_i(\bar x_i-\bar x)^2}{\frac{1}{N-k}\sum_i\sum_j(x_{ij}-\bar x_i)^2}\ \sim\ F(k-1,\ N-k).$$
+<div class="example"><span class="box-title">Exemplo 9.9</span>
+<p>Três algoritmos, 4 execuções cada (tempo em s): A: 12,14,11,13; B: 15,17,16,16; C: 13,12,14,13. Médias $12{,}5;\ 16;\ 13$; média geral $13{,}83$.</p>
+<p>$SS_B=4[(12{,}5-13{,}83)^2+(16-13{,}83)^2+(13-13{,}83)^2]=28{,}67$; $SS_W=5+2+2=9$. $F=\frac{28{,}67/2}{9/9}=14{,}3$, com $(2,9)$ g.l.; crítico $4{,}26$ → rejeita: pelo menos uma média difere (p-valor $\approx0{,}002$).</p></div>
+
+<h2 id="resumo">9.11 Quadro-resumo: qual teste usar?</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Pergunta</th><th>Suposições</th><th>Estatística</th><th>Distribuição nula</th></tr></thead>
+<tbody>
+<tr><td>Média = $\mu_0$?</td><td>normal com σ conhecido, ou $n$ grande</td><td>$\frac{\bar x-\mu_0}{\sigma/\sqrt n}$</td><td>$N(0,1)$</td></tr>
+<tr><td>Média = $\mu_0$?</td><td>normal, σ desconhecido</td><td>$\frac{\bar x-\mu_0}{s/\sqrt n}$</td><td>$t_{n-1}$</td></tr>
+<tr><td>Proporção = $p_0$?</td><td>$n$ grande</td><td>$\frac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}}$</td><td>$N(0,1)$</td></tr>
+<tr><td>Duas médias iguais?</td><td>normais, var. iguais desconhecidas</td><td>$\frac{\bar x-\bar y}{s_p\sqrt{1/n_X+1/n_Y}}$</td><td>$t_{n_X+n_Y-2}$</td></tr>
+<tr><td>Antes = depois?</td><td>pares, diferenças normais</td><td>$\frac{\bar d}{s_d/\sqrt n}$</td><td>$t_{n-1}$</td></tr>
+<tr><td>Variância = $\sigma_0^2$?</td><td>normal</td><td>$\frac{(n-1)s^2}{\sigma_0^2}$</td><td>$\chi^2_{n-1}$</td></tr>
+<tr><td>Dados seguem o modelo?</td><td>contagens, $E_i\ge5$</td><td>$\sum\frac{(O-E)^2}{E}$ ou $G$</td><td>$\chi^2_{k-1-m}$</td></tr>
+<tr><td>Linhas da tabela têm mesma distribuição?</td><td>contagens</td><td>$\sum\frac{(O-E)^2}{E}$</td><td>$\chi^2_{(r-1)(c-1)}$</td></tr>
+<tr><td>Duas variâncias iguais?</td><td>normais</td><td>$s_X^2/s_Y^2$</td><td>$F(n_X-1,n_Y-1)$</td></tr>
+<tr><td>$k$ médias iguais?</td><td>normais, var. iguais</td><td>$\text{MS}_B/\text{MS}_W$</td><td>$F(k-1,N-k)$</td></tr>
+<tr><td>Modelo simples × complexo?</td><td>$n$ grande</td><td>$-2\ln\Lambda$</td><td>$\chi^2$ (<a href="10-razao-verossimilhanca.html">seção 10</a>)</td></tr>
+</tbody></table></div>
+<div data-widget="tables"></div>
+<p class="source-note">Fontes: MIT 18.05 aula 19 (NHST III: catálogo de testes, inclusive two-sample t, χ², F, ANOVA); Pishro-Nik 8.4.3–8.4.4; Brunton ep. 24–27.</p>
+
+<div class="pager"><a href="08-nhst.html">← Testes de hipótese: fundamentos</a><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança →</a></div>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<span class="eyebrow">Seção 3 · Inferência bayesiana II</span>
+<h1>Probabilidade preditiva e odds</h1>
+<p class="lead">Depois da tabela, a prova pergunta "qual a probabilidade do <b>próximo</b> resultado ser X?" (preditiva) ou fala em "chances de 1 para 10" (odds). As duas usam a tabela que você já sabe montar.</p>
+
+<div class="toc"><strong>Nesta página</strong><ol>
+<li><a href="#prior-pred">Prior predictive</a></li>
+<li><a href="#post-pred">Posterior predictive</a></li>
+<li><a href="#pmf-pred">A pmf preditiva completa</a></li>
+<li><a href="#odds">Odds</a></li>
+<li><a href="#bf">Fator de Bayes e posterior odds</a></li>
+<li><a href="#poisson">Odds com likelihood Poisson</a></li>
+<li><a href="#pred-odds">Odds preditivas</a></li>
+</ol></div>
+
+<h2 id="prior-pred">3.1 Prior predictive</h2>
+<div class="box def"><span class="box-title">Definição</span>
+<p>A <b>prior predictive probability</b> de um resultado $x$ é a probabilidade de observá-lo <b>antes</b> de ver qualquer dado, considerando a incerteza sobre a hipótese:</p>
+$$P(x) = \sum_i P(x\mid H_i)\,P(H_i).$$
+<p>É a lei da probabilidade total. Na tabela bayesiana, é exatamente o <b>total da coluna do numerador</b>.</p></div>
+<div class="example"><span class="box-title">Exemplo 3.1 — roletas (continuação do Exemplo 2.2)</span>
+<p>Roletas de 5, 10 e 15 setores na proporção $1:3:2$. Antes de girar, a probabilidade de sair 4 é</p>
+$$P(x_1=4) = \tfrac16\cdot\tfrac15+\tfrac36\cdot\tfrac1{10}+\tfrac26\cdot\tfrac1{15} = \tfrac{19}{180}\approx 0{,}106.$$
+<p>E a probabilidade de sair 12 (só a roleta de 15 consegue): $P(x_1=12)=\frac26\cdot\frac1{15}=\frac1{45}$.</p></div>
+
+<h2 id="post-pred">3.2 Posterior predictive</h2>
+<div class="box def"><span class="box-title">Definição</span>
+<p>Depois de observar $D$, a probabilidade do próximo resultado $x_{\text{novo}}$ é a mesma soma, mas ponderada pela <b>posterior</b>:</p>
+$$P(x_{\text{novo}}\mid D) = \sum_i P(x_{\text{novo}}\mid H_i)\,P(H_i\mid D).$$
+<p>(Supõe que, dada a hipótese, o novo resultado é independente dos anteriores, como em lançamentos repetidos do mesmo objeto.)</p></div>
+<ol class="steps">
+<li>Faça a tabela bayesiana e obtenha a coluna posterior.</li>
+<li>Acrescente uma coluna com $P(x_{\text{novo}}\mid H_i)$.</li>
+<li>Multiplique as duas colunas linha a linha e some.</li>
+</ol>
+<div class="example"><span class="box-title">Exemplo 3.2 — próximo giro depois de ver 4</span>
+<p>Posterior após $x_1=4$: $6/19,\ 9/19,\ 4/19$ para $\theta=5,10,15$.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>$\theta$</th><th class="num">Posterior</th><th class="num">$P(x_2=3\mid\theta)$</th><th class="num">produto</th><th class="num">$P(x_2=12\mid\theta)$</th><th class="num">produto</th></tr></thead>
+<tbody>
+<tr><td>5</td><td class="num">6/19</td><td class="num">1/5</td><td class="num">6/95</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>10</td><td class="num">9/19</td><td class="num">1/10</td><td class="num">9/190</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>15</td><td class="num">4/19</td><td class="num">1/15</td><td class="num">4/285</td><td class="num">1/15</td><td class="num">4/285</td></tr>
+<tr class="total"><td>Soma</td><td></td><td></td><td class="num">71/570 ≈ 0,125</td><td></td><td class="num">4/285 ≈ 0,014</td></tr>
+</tbody></table></div>
+<p>Compare com as prior predictive: $P(x=3)$ era $19/180\approx 0{,}106$ e subiu para $0{,}125$ (as roletas pequenas ganharam peso); $P(x=12)$ era $1/45\approx0{,}022$ e caiu para $0{,}014$.</p></div>
+
+<h2 id="pmf-pred">3.3 A pmf preditiva completa</h2>
+<p>Muitas vezes os valores se agrupam. Depois dos giros 4 e 8 (posterior $0,\ 27/35,\ 8/35$, ver <a href="02-bayes-discreto.html#sequencial">2.4</a>):</p>
+<table>
+<thead><tr><th>Próximo valor</th><th>Quem consegue gerar</th><th class="num">$P(x_3\mid 4,8)$</th></tr></thead>
+<tbody>
+<tr><td>1 a 10</td><td>$\theta=10$ e $\theta=15$</td><td class="num">$\frac{27}{35}\cdot\frac1{10}+\frac8{35}\cdot\frac1{15}=\frac{97}{1050}\approx0{,}092$</td></tr>
+<tr><td>11 a 15</td><td>só $\theta=15$</td><td class="num">$\frac{8}{35}\cdot\frac1{15}=\frac{16}{1050}\approx0{,}015$</td></tr>
+<tr><td>16 ou mais</td><td>ninguém</td><td class="num">0</td></tr>
+</tbody></table>
+<p>Conferência: $10\cdot97+5\cdot16 = 1050$, ou seja, soma 1. ✔</p>
+<div class="box tip"><span class="box-title">Perguntas de ranking</span>
+<p>"Ordene os próximos valores do mais provável ao menos provável" não precisa de conta: valores que <b>mais hipóteses</b> conseguem gerar (e hipóteses com mais posterior e menos faces) ficam no topo; valores que nenhuma hipótese gera têm probabilidade 0. Com muitos dados, a preditiva converge para a distribuição da hipótese verdadeira.</p></div>
+
+<h2 id="odds">3.4 Odds</h2>
+<div class="box def"><span class="box-title">Definição</span>
+$$O(E) = \frac{P(E)}{P(E^c)} = \frac{p}{1-p}\qquad\Longleftrightarrow\qquad p = \frac{O}{1+O}.$$
+<p>"Odds de 1 para 4" ($1:4$) significa $O=1/4$ e $p=1/5$. "Odds de 3 para 1" é $O=3$, $p=3/4$.</p></div>
+<table>
+<thead><tr><th>$p$</th><th>0,1</th><th>0,2</th><th>0,25</th><th>0,5</th><th>0,75</th><th>0,9</th></tr></thead>
+<tbody><tr><td>$O$</td><td>1/9</td><td>1/4</td><td>1/3</td><td>1</td><td>3</td><td>9</td></tr></tbody></table>
+<div class="box warn"><span class="box-title">Cuidado com mais de duas hipóteses</span>
+<p>As odds de $H_1$ são $P(H_1)/P(\text{não } H_1)$, e "não $H_1$" junta <b>todas</b> as outras hipóteses. Com hipóteses 0,2 / 0,6 / 0,2, as odds da primeira são $0{,}2/0{,}8=1/4$, não $0{,}2/0{,}6$.</p></div>
+
+<h2 id="bf">3.5 Fator de Bayes e posterior odds</h2>
+<p>Dividindo o Teorema de Bayes para $H$ pelo de $H^c$, o denominador $P(D)$ some:</p>
+$$\underbrace{\frac{P(H\mid D)}{P(H^c\mid D)}}_{\text{posterior odds}} = \underbrace{\frac{P(D\mid H)}{P(D\mid H^c)}}_{\text{fator de Bayes (BF)}}\times\underbrace{\frac{P(H)}{P(H^c)}}_{\text{prior odds}}.$$
+<ul>
+<li>$BF\gt 1$: os dados são evidência <b>a favor</b> de $H$. $BF\lt 1$: contra. $BF=1$: os dados não dizem nada.</li>
+<li>Com dados independentes (dado $H$), os fatores se <b>multiplicam</b>: $O_{\text{post}} = BF_1\cdot BF_2\cdots BF_n\cdot O_{\text{prior}}$. Em log: $\ln O_{\text{post}} = \ln O_{\text{prior}} + \sum \ln BF_i$.</li>
+<li>Se "não $H$" junta várias hipóteses, $P(D\mid H^c) = \frac{\sum_{j\ne i} P(D\mid H_j)P(H_j)}{\sum_{j\ne i}P(H_j)}$ (média ponderada).</li>
+</ul>
+<div class="example"><span class="box-title">Exemplo 3.3 — filtro de spam ingênuo</span>
+<p>25% dos e-mails são spam: prior odds $= 0{,}25/0{,}75 = 1:3$. A palavra "grátis" aparece em 40% dos spams e em 5% dos legítimos.</p>
+<ul class="steps">
+<li>$BF_1 = 0{,}40/0{,}05 = 8$. Posterior odds $= 8\cdot\frac13 = \frac83$, logo $P(\text{spam}\mid\text{grátis}) = \frac{8/3}{1+8/3}=\frac8{11}\approx 0{,}73$.</li>
+<li>O mesmo e-mail tem um link "clique aqui", presente em 30% dos spams e 10% dos legítimos (suponha independência condicional). $BF_2=3$.</li>
+<li>Odds finais $=3\cdot\frac83 = 8$, isto é, $8:1$, e $P(\text{spam})=8/9\approx0{,}89$.</li>
+</ul></div>
+
+<h2 id="poisson">3.6 Odds com likelihood Poisson</h2>
+<div class="example"><span class="box-title">Exemplo 3.4 — o servidor está sob ataque?</span>
+<p>Em operação normal, um servidor recebe requisições à taxa de $\lambda_0=4$ por segundo (Poisson). Durante um ataque, a taxa sobe para $\lambda_1=9$. O time de segurança acha que as odds de haver um ataque agora são $1:9$. Em 3 segundos consecutivos foram contadas $7,\ 9,\ 6$ requisições. Quais as posterior odds de ataque?</p>
+<p><b>Likelihood de cada hipótese</b> (segundos independentes):</p>
+$$P(D\mid\lambda) = \prod_{i=1}^3 \frac{\lambda^{x_i}e^{-\lambda}}{x_i!} = \frac{\lambda^{\sum x_i}\,e^{-3\lambda}}{7!\,9!\,6!}.$$
+<p><b>Fator de Bayes</b> (os fatoriais se cancelam; $\sum x_i = 22$):</p>
+$$BF = \frac{9^{22}e^{-27}}{4^{22}e^{-12}} = \left(\tfrac94\right)^{22}e^{-15}\approx 17{,}1.$$
+<p><b>Posterior odds</b> $= 17{,}1\times\frac19\approx 1{,}90$, então $P(\text{ataque}\mid D)=\frac{1{,}90}{2{,}90}\approx 0{,}66$.</p>
+<p><b>Dica de conta:</b> calcule em log: $\ln BF = 22\ln 2{,}25 - 15 = 22(0{,}8109)-15 = 2{,}84$, e $e^{2{,}84}\approx 17{,}1$.</p></div>
+
+<h2 id="pred-odds">3.7 Odds preditivas</h2>
+<p>As <b>odds preditivas</b> de um evento futuro são só a probabilidade preditiva (prior ou posterior) convertida em odds.</p>
+<div class="example"><span class="box-title">Exemplo 3.5 — o próximo chip é defeituoso? (continuação do Exemplo 2.3)</span>
+<p>Fornecedores com $\theta=0{,}01,\ 0{,}05,\ 0{,}10$ e prior $0{,}5,\ 0{,}3,\ 0{,}2$.</p>
+<ul>
+<li><b>Prior predictive</b> de defeito: $0{,}5(0{,}01)+0{,}3(0{,}05)+0{,}2(0{,}10)=0{,}04$; odds $=0{,}04/0{,}96 = 1:24$.</li>
+<li>Depois de ver 2 defeitos em 20 (posterior $0{,}065;\ 0{,}466;\ 0{,}469$): $P(\text{defeito})=0{,}065(0{,}01)+0{,}466(0{,}05)+0{,}469(0{,}10)\approx 0{,}071$; odds $\approx 0{,}076\approx 1:13$.</li>
+</ul></div>
+<div class="box warn"><span class="box-title">Não confunda</span>
+<p><b>Posterior odds</b> são sobre <b>hipóteses</b> ("é o fornecedor C?"). <b>Odds preditivas</b> são sobre <b>dados futuros</b> ("o próximo chip falha?").</p></div>
+<p class="source-note">Fontes: MIT 18.05 aula 12 (Probabilistic Prediction; Odds) e aula 13; Problem Set 7.</p>

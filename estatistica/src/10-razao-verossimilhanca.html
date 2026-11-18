@@ -1,0 +1,85 @@
+<span class="eyebrow">Seção 10 · Testes de hipótese III</span>
+<h1>Teste da razão de verossimilhança (GLRT)</h1>
+<p class="lead">Caiu na prova antiga valendo 2,5 pontos e nenhuma lista cobra. A ideia une MLE e testes: compare <b>o melhor que $H_0$ consegue explicar os dados</b> com <b>o melhor que o modelo completo consegue</b>.</p>
+
+<div class="toc"><strong>Nesta página</strong><ol>
+<li><a href="#np">Hipóteses simples: Neyman-Pearson</a></li>
+<li><a href="#glrt">A estatística Λ (GLRT)</a></li>
+<li><a href="#wilks">Teorema de Wilks: −2 ln Λ ≈ χ²</a></li>
+<li><a href="#receita">Receita em 6 passos</a></li>
+<li><a href="#poisson">Exemplo completo: Poisson</a></li>
+<li><a href="#normal">Exemplo: Normal (GLRT = teste z)</a></li>
+<li><a href="#g">Ligação com a estatística G</a></li>
+</ol></div>
+
+<h2 id="np">10.1 Hipóteses simples: o lema de Neyman-Pearson</h2>
+<p>Quando $H_0:\theta=\theta_0$ e $H_1:\theta=\theta_1$ são ambas <b>simples</b>, o teste mais poderoso de nível $\alpha$ rejeita $H_0$ quando a <b>razão de verossimilhança</b> é pequena:</p>
+$$\frac{L(\theta_0)}{L(\theta_1)}\le c,\qquad c\text{ escolhido para que } P(\text{rejeitar}\mid H_0)=\alpha.$$
+<p>Intuição: rejeite $H_0$ quando os dados forem bem mais prováveis sob $H_1$ do que sob $H_0$. (Repare a semelhança com o <a href="03-preditiva-odds.html#bf">fator de Bayes</a>; a diferença é que aqui o corte é escolhido por α, não por uma prior.)</p>
+<div class="example"><span class="box-title">Exemplo 10.1</span>
+<p>Chegadas de pedidos por minuto: Poisson($\lambda$). $H_0:\lambda=2$ × $H_1:\lambda=4$, com $n=5$ minutos observados e $S=\sum x_i$.</p>
+$$\frac{L(2)}{L(4)}=\frac{2^{S}e^{-10}}{4^{S}e^{-20}}=\Big(\frac12\Big)^{S}e^{10}.$$
+<p>A razão <b>diminui</b> quando $S$ aumenta, então "razão pequena" ⇔ "$S$ grande": rejeite se $S\ge c$. Sob $H_0$, $S\sim$ Poisson$(10)$: $P(S\ge16)=0{,}049$ e $P(S\ge15)=0{,}083$. Para $\alpha=0{,}05$, use $c=16$. A potência é $P(S\ge16\mid S\sim\text{Poisson}(20))=0{,}84$.</p>
+<p><b>Lição:</b> muitas vezes a razão é uma função monótona de uma estatística simples ($S$, $\bar x$), e o teste vira "rejeite se a estatística passar de um valor".</p></div>
+
+<h2 id="glrt">10.2 A estatística Λ (teste de razão de verossimilhança generalizado)</h2>
+<p>Agora $H_0:\theta\in\Theta_0$ e $H_1:\theta\notin\Theta_0$, podendo ser compostas (ex.: $H_0:p=1/2$ × $H_1:p\ne1/2$).</p>
+<div class="box def"><span class="box-title">Definição</span>
+$$\Lambda(x)=\frac{\displaystyle\max_{\theta\in\Theta_0}L(\theta)}{\displaystyle\max_{\theta\in\Theta}L(\theta)}=\frac{L(\hat\theta_0)}{L(\hat\theta)},$$
+<p>onde $\hat\theta$ é o <b>MLE sem restrição</b> e $\hat\theta_0$ é o MLE <b>restrito a $H_0$</b> (se $H_0$ é simples, $\hat\theta_0=\theta_0$).</p>
+<ul>
+<li>Sempre $0\le\Lambda\le1$ (o denominador maximiza sobre um conjunto maior).</li>
+<li>$\Lambda\approx1$: $H_0$ explica os dados quase tão bem quanto o melhor modelo → não rejeite.</li>
+<li>$\Lambda$ pequeno: $H_0$ explica mal → <b>rejeite se $\Lambda\le c$</b>.</li>
+</ul></div>
+
+<h2 id="wilks">10.3 Teorema de Wilks: −2 ln Λ ≈ χ²</h2>
+<p>Raramente sabemos a distribuição exata de Λ. Para $n$ grande, sob $H_0$:</p>
+$$-2\ln\Lambda\ \approx\ \chi^2_d,\qquad d=\dim\Theta-\dim\Theta_0=\text{(nº de parâmetros livres no modelo completo)}-\text{(nº de parâmetros livres sob }H_0).$$
+<p>Ex.: $H_0:p=1/2$ (0 parâmetros livres) × $p$ qualquer (1 livre): $d=1$. Então rejeite $H_0$ ao nível α se $-2\ln\Lambda\gt\chi^2_{\alpha,d}$, e o p-valor é $P(\chi^2_d\ge-2\ln\Lambda_{\text{obs}})$.</p>
+<table>
+<thead><tr><th>α</th><th>0,10</th><th>0,05</th><th>0,01</th></tr></thead>
+<tbody><tr><td>$\chi^2_{\alpha,1}$</td><td>2,71</td><td>3,84</td><td>6,63</td></tr></tbody></table>
+<div class="box tip"><span class="box-title">Por que −2 ln?</span>
+<p>Transforma "Λ pequeno" em "estatística grande" e, pelo resultado de Wilks, dá uma distribuição conhecida. Também: $-2\ln\Lambda=2[\ell(\hat\theta)-\ell(\hat\theta_0)]$, ou seja, <b>duas vezes o ganho de log-verossimilhança</b> ao liberar o parâmetro.</p></div>
+
+<h2 id="receita">10.4 Receita em 6 passos</h2>
+<ol class="steps">
+<li>Escreva $H_0$ e $H_1$ e a likelihood $L(\theta)$ dos dados (produto de pmfs/pdfs).</li>
+<li>Ache o MLE irrestrito $\hat\theta$ (seção 6).</li>
+<li>Ache o MLE sob $H_0$ ($=\theta_0$ se $H_0$ é simples).</li>
+<li>Escreva $\Lambda=L(\hat\theta_0)/L(\hat\theta)$ e <b>simplifique</b> em função dos dados ($n$, $\sum x_i$, $x$...). Constantes como $\binom nx$ ou $\prod x_i!$ se cancelam.</li>
+<li>Calcule $-2\ln\Lambda$ e compare com $\chi^2_{\alpha,d}$.</li>
+<li>Conclua e dê o p-valor $P(\chi^2_d\ge-2\ln\Lambda)$.</li>
+</ol>
+<div class="box warn"><span class="box-title">Caso especial</span>
+<p>Se o MLE irrestrito cai exatamente em $\theta_0$ (ex.: a proporção observada é igual à de $H_0$), então $\Lambda=1$, $-2\ln\Lambda=0$ e o p-valor é 1: os dados não poderiam ser mais compatíveis com $H_0$.</p></div>
+
+<h2 id="poisson">10.5 Exemplo completo: taxa Poisson</h2>
+<div class="example"><span class="box-title">Exemplo 10.2</span>
+<p>Um link costuma ter 4 quedas por hora (Poisson). Após uma mudança de roteador, em $n=10$ horas houve $\sum x_i=52$ quedas. Use o GLRT para testar $H_0:\lambda=4$ × $H_1:\lambda\ne4$ com $\alpha=0{,}05$.</p>
+<ol class="steps">
+<li>$L(\lambda)=\prod\frac{\lambda^{x_i}e^{-\lambda}}{x_i!}=\frac{\lambda^{S}e^{-n\lambda}}{\prod x_i!}$, com $S=\sum x_i$.</li>
+<li>MLE irrestrito: $\hat\lambda=\bar x=S/n=5{,}2$ (Exemplo 6.1).</li>
+<li>Sob $H_0$: $\hat\lambda_0=4$.</li>
+<li>Estatística (o $\prod x_i!$ cancela):
+$$\Lambda=\frac{4^{S}e^{-4n}}{\bar x^{S}e^{-n\bar x}}=\Big(\frac{4}{\bar x}\Big)^{S}e^{\,n(\bar x-4)}.$$
+Em geral, $\Lambda=(\lambda_0/\bar x)^{n\bar x}\,e^{n(\bar x-\lambda_0)}$.</li>
+<li>$-2\ln\Lambda=2\big[S\ln(\bar x/4)-n(\bar x-4)\big]=2[52\ln1{,}3-12]=2[13{,}643-12]=3{,}29$.</li>
+<li>$d=1-0=1$; $\chi^2_{0,05;1}=3{,}84$. Como $3{,}29\lt3{,}84$, <b>não rejeita $H_0$</b>. p-valor $=P(\chi^2_1\ge3{,}29)\approx0{,}070$. ($\Lambda=e^{-3{,}29/2}\approx0{,}19$.)</li>
+</ol></div>
+
+<h2 id="normal">10.6 Exemplo: Normal com σ conhecido (o GLRT vira o teste z)</h2>
+<div class="example"><span class="box-title">Exemplo 10.3</span>
+<p>$X_i\sim N(\mu,\sigma^2)$, σ conhecido; $H_0:\mu=\mu_0$ × $H_1:\mu\ne\mu_0$. O MLE irrestrito é $\bar x$, e</p>
+$$-2\ln\Lambda=\frac{1}{\sigma^2}\Big[\sum(x_i-\mu_0)^2-\sum(x_i-\bar x)^2\Big]=\frac{n(\bar x-\mu_0)^2}{\sigma^2}=z^2.$$
+<p>Rejeitar quando $z^2\gt\chi^2_{\alpha,1}$ é o mesmo que $|z|\gt z_{\alpha/2}$ (pois $\chi^2_1$ é o quadrado de uma normal; $1{,}96^2=3{,}84$). <b>O teste z bilateral é um GLRT.</b></p>
+<p>Números: $\sigma=2$, $n=25$, $\mu_0=10$, $\bar x=10{,}9$: $z=0{,}9/0{,}4=2{,}25$, $-2\ln\Lambda=5{,}06\gt3{,}84$ → rejeita; p-valor $=0{,}024$ pelos dois caminhos.</p></div>
+
+<h2 id="g">10.7 Ligação com a estatística G e o χ² de aderência</h2>
+<p>Para contagens $O_1,\dots,O_k$ (multinomial) com $H_0$ especificando as probabilidades $p_i$ (esperados $E_i=np_i$), o MLE irrestrito é $\hat p_i=O_i/n$ e</p>
+$$-2\ln\Lambda=2\sum_{i=1}^k O_i\ln\frac{O_i}{E_i}=G,$$
+<p>que é a estatística G da <a href="09-testes.html#gof">seção 9.7</a>, com $k-1$ g.l. (menos 1 por parâmetro estimado em $H_0$). No dado do Exemplo 9.6: $G\approx5{,}04$, muito próximo de $X^2=5{,}0$. O χ² de Pearson é uma aproximação da G.</p>
+<div class="box recog"><span class="box-title">Reconheça o modelo</span>
+<p>"Use o <i>generalized likelihood ratio test</i>", "defina a estatística Λ em função de $n$ e $x$" → aplique a receita: o denominador usa o MLE (ex.: $x/n$ para Binomial), o numerador usa o valor de $H_0$, simplifique e use Wilks com 1 g.l. Para praticar com a Binomial, veja o <a href="12-exercicios.html#ex-glrt">exercício de treino</a>.</p></div>
+<p class="source-note">Fontes: Pishro-Nik 8.4.5 (Likelihood Ratio Tests); MIT 18.05 aula 19 seção 4.5 (estatística G); prova antiga P2 (tipo de questão).</p>

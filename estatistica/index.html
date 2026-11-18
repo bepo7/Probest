@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Estatística (P2) de Probabilidade e Estatística: inferência bayesiana, MLE, intervalos de confiança e testes de hipótese, com exemplos resolvidos.">
+<title>Início · Probest P2</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23176b87'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>θ</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/site.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/site.js"></script>
+</head>
+<body class="s1">
+<header class="site-header"><a class="brand" href="index.html">Probest P2 · Estatística</a><span class="header-actions"><a class="switch" href="../index.html">↔ Trocar matéria</a><button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">◐ tema</button></span></header>
+<div class="page-wrap">
+<nav class="site-nav" aria-label="Seções"><details open><summary>Seções do site</summary><ol start="0"><li><a href="index.html" aria-current="page">Início e roteiro</a></li><li><a href="01-amostras.html">Da probabilidade à estatística</a></li><li><a href="02-bayes-discreto.html">Bayes com hipóteses discretas</a></li><li><a href="03-preditiva-odds.html">Probabilidade preditiva e odds</a></li><li><a href="04-bayes-continuo.html">Priors contínuas e conjugadas</a></li><li><a href="05-map-priors.html">MAP, escolha de priors, MAP × MLE</a></li><li><a href="06-mle.html">Máxima verossimilhança (MLE)</a></li><li><a href="07-intervalos.html">Intervalos de confiança</a></li><li><a href="08-nhst.html">Testes de hipótese: fundamentos</a></li><li><a href="09-testes.html">Catálogo de testes (z, t, χ², F)</a></li><li><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança</a></li><li><a href="11-freq-bayes-regressao.html">Frequentista × Bayesiano, bootstrap, regressão</a></li><li><a href="12-exercicios.html">Exercícios de treino (com solução)</a></li><li><a href="13-formulario.html">Formulário + tabelas interativas</a></li><li><a href="14-mapa-listas.html">Mapa das listas, checklist e fontes</a></li></ol></details></nav>
+<main class="content">
+<span class="eyebrow">COE241 · Estatística e Modelos Probabilísticos · Parte 2</span>
+<h1>Estatística para a P2: do zero às listas</h1>
+<p class="lead">Este site cobre toda a matéria depois da Prova 1: <b>inferência bayesiana</b> (tabelas, preditivas, odds, Beta, Normal, MAP), <b>máxima verossimilhança</b>, <b>intervalos de confiança</b> e <b>testes de hipótese</b> (z, t, duas amostras, χ², razão de verossimilhança). Cada tópico tem definição, intuição, exemplos resolvidos <b>diferentes dos das listas</b>, armadilhas comuns e calculadoras interativas.</p>
+
+<div class="box tip"><span class="box-title">Como usar</span>
+<ol>
+<li>Siga as seções na ordem; cada uma depende das anteriores.</li>
+<li>Leia os exemplos tentando resolver antes de ler a solução.</li>
+<li>No fim de cada bloco, faça os <a href="12-exercicios.html">exercícios de treino</a> e depois a lista correspondente (veja o <a href="14-mapa-listas.html">mapa das listas</a>).</li>
+<li>Na véspera: <a href="13-formulario.html">formulário</a> + <a href="14-mapa-listas.html#checklist">checklist</a>.</li>
+</ol></div>
+
+<h2 id="roteiro">Roteiro</h2>
+<div class="grid2">
+<div class="card"><h3>0 · Base</h3><p><a href="01-amostras.html">Da probabilidade à estatística</a>: amostras, estimadores, $\bar X$, $S^2$, TCL, distribuições $t$ e $\chi^2$, notação de valores críticos.</p></div>
+<div class="card"><h3>1 · Inferência bayesiana → Lista 3</h3><p><a href="02-bayes-discreto.html">Tabela bayesiana</a> · <a href="03-preditiva-odds.html">Preditiva e odds</a> · <a href="04-bayes-continuo.html">Beta-Binomial e Normal-Normal</a> · <a href="05-map-priors.html">MAP e priors</a></p></div>
+<div class="card"><h3>2 · Estimação → Lista MLE</h3><p><a href="06-mle.html">Máxima verossimilhança</a>: receita, casos sem derivada, dados agrupados, propriedades.</p></div>
+<div class="card"><h3>3 · Intervalos → Lista 5 (8.3)</h3><p><a href="07-intervalos.html">Intervalos de confiança</a>: z, t, χ², proporção, tamanho de amostra.</p></div>
+<div class="card"><h3>4 · Testes → Listas 4 e 5 (8.4)</h3><p><a href="08-nhst.html">Fundamentos: erros, potência, p-valor</a> · <a href="09-testes.html">Catálogo de testes</a> · <a href="10-razao-verossimilhanca.html">Razão de verossimilhança</a></p></div>
+<div class="card"><h3>5 · Fechamento</h3><p><a href="11-freq-bayes-regressao.html">Frequentista × Bayesiano, bootstrap, regressão</a> · <a href="12-exercicios.html">Treino</a> · <a href="13-formulario.html">Formulário</a> · <a href="14-mapa-listas.html">Mapa das listas</a></p></div>
+</div>
+
+<h2 id="ferramentas">Ferramentas interativas</h2>
+<ul>
+<li><a href="02-bayes-discreto.html#calc">Calculadora de tabela bayesiana</a> (aceita frações e atualização sequencial).</li>
+<li><a href="04-bayes-continuo.html#betabin">Explorador Beta-Binomial</a> e <a href="04-bayes-continuo.html#normal">Normal-Normal</a> com gráficos de prior, likelihood e posterior.</li>
+<li><a href="06-mle.html#poisson">Gráfico da log-verossimilhança</a> para seus próprios dados.</li>
+<li><a href="07-intervalos.html#resumo">Calculadora de intervalos de confiança</a>.</li>
+<li><a href="08-nhst.html#z-poder">Visualizador de α, β e potência</a>.</li>
+<li><a href="13-formulario.html#tabelas">Tabelas z, t e χ² sob demanda</a>.</li>
+</ul>
+
+<h2 id="mapa">Qual seção para qual pergunta?</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>O enunciado diz…</th><th>Vá para</th></tr></thead>
+<tbody>
+<tr><td>"prior", "posterior", "tabela de inferência bayesiana", "numerador de Bayes"</td><td><a href="02-bayes-discreto.html">§2</a></td></tr>
+<tr><td>"prior/posterior predictive", "próximo lançamento", "odds", "fator de Bayes"</td><td><a href="03-preditiva-odds.html">§3</a></td></tr>
+<tr><td>"prior Beta", "Normal com variância conhecida", "quantas medições"</td><td><a href="04-bayes-continuo.html">§4</a></td></tr>
+<tr><td>"MAP", "maximum a posteriori", "MAP × ML"</td><td><a href="05-map-priors.html">§5</a></td></tr>
+<tr><td>"maximum likelihood", "MLE", "verossimilhança"</td><td><a href="06-mle.html">§6</a></td></tr>
+<tr><td>"intervalo de confiança", "margem de erro", "tamanho da amostra"</td><td><a href="07-intervalos.html">§7</a></td></tr>
+<tr><td>"erro tipo I/II", "potência", "nível de significância", "p-valor"</td><td><a href="08-nhst.html">§8</a></td></tr>
+<tr><td>"teste t", "duas amostras", "variâncias iguais", "goodness of fit", "χ²"</td><td><a href="09-testes.html">§9</a></td></tr>
+<tr><td>"likelihood ratio", "estatística Λ"</td><td><a href="10-razao-verossimilhanca.html">§10</a></td></tr>
+</tbody></table></div>
+<p class="source-note">Baseado no material do MIT 18.05 (Spring 2022) da pasta da disciplina, no livro <i>Introduction to Probability, Statistics, and Random Processes</i> (Pishro-Nik, probabilitycourse.com), nos slides de MAP (Tsun) e nas listas e prova antiga (usadas só para saber o que é cobrado). Fontes completas na <a href="14-mapa-listas.html#fontes">seção 14</a>.</p>
+
+<div class="pager"><span></span><a href="01-amostras.html">Da probabilidade à estatística →</a></div>
+</main>
+</div>
+</body>
+</html>

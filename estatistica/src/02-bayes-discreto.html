@@ -1,0 +1,116 @@
+<span class="eyebrow">Seção 2 · Inferência bayesiana I</span>
+<h1>Atualização bayesiana com hipóteses discretas</h1>
+<p class="lead">É o tipo de questão mais certo na prova: montar a <b>tabela bayesiana</b> (hipótese, prior, likelihood, numerador de Bayes, posterior). Se você dominar esta página, metade da parte bayesiana está garantida.</p>
+
+<div class="toc"><strong>Nesta página</strong><ol>
+<li><a href="#vocab">Vocabulário: prior, likelihood, posterior</a></li>
+<li><a href="#tabela">A tabela bayesiana passo a passo</a></li>
+<li><a href="#roletas">Exemplo completo: roletas</a></li>
+<li><a href="#sequencial">Atualização sequencial = em lote</a></li>
+<li><a href="#binomial">Likelihood com vários dados (Binomial)</a></li>
+<li><a href="#calc">Calculadora interativa</a></li>
+<li><a href="#map">MAP discreto</a></li>
+<li><a href="#cuidados">Erros clássicos</a></li>
+</ol></div>
+
+<h2 id="vocab">2.1 Vocabulário</h2>
+<p>O Teorema de Bayes, com $H$ = hipótese e $D$ = dados:</p>
+$$\underbrace{P(H\mid D)}_{\text{posterior}} \;=\; \frac{\overbrace{P(D\mid H)}^{\text{likelihood}}\;\overbrace{P(H)}^{\text{prior}}}{\underbrace{P(D)}_{\text{total / evidência}}},\qquad P(D)=\sum_{i} P(D\mid H_i)\,P(H_i).$$
+<div class="box def"><span class="box-title">Cada termo</span>
+<ul>
+<li><b>Hipóteses</b> $H_1,\dots,H_k$: as explicações possíveis, mutuamente exclusivas e exaustivas (ex.: "o dado tem 6 faces"). Quando a hipótese é um valor de um parâmetro, escrevemos $\theta$.</li>
+<li><b>Prior</b> $P(H)$: crença antes dos dados. Soma 1 sobre as hipóteses.</li>
+<li><b>Likelihood</b> $P(D\mid H)$: probabilidade dos dados observados <i>se</i> a hipótese for verdadeira. É uma função de $H$ com $D$ fixo e <b>não precisa somar 1</b> sobre as hipóteses.</li>
+<li><b>Numerador de Bayes</b> $P(D\mid H)P(H)$: o produto, linha a linha.</li>
+<li><b>Total</b> $P(D)$: soma dos numeradores. É a <a href="03-preditiva-odds.html#prior-pred">prior predictive</a> dos dados observados.</li>
+<li><b>Posterior</b> $P(H\mid D)$ = numerador / total. Soma 1.</li>
+</ul></div>
+<div class="box tip"><span class="box-title">Frase para guardar</span>
+<p><b>posterior ∝ likelihood × prior.</b> Como o denominador é igual para todas as linhas, ele serve só para normalizar.</p></div>
+
+<div class="example"><span class="box-title">Exemplo 2.1 — aquecimento: teste com taxa-base baixa</span>
+<p>Um teste automático aponta falha em placas. Só 2% das placas são defeituosas. O teste acusa 95% das defeituosas e dá falso alarme em 10% das boas. Uma placa foi acusada. Qual a chance de ser defeituosa?</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Hipótese</th><th class="num">Prior</th><th class="num">Likelihood $P(\text{acusa}\mid H)$</th><th class="num">Numerador</th><th class="num">Posterior</th></tr></thead>
+<tbody>
+<tr><td>defeituosa</td><td class="num">0,02</td><td class="num">0,95</td><td class="num">0,019</td><td class="num">0,162</td></tr>
+<tr><td>boa</td><td class="num">0,98</td><td class="num">0,10</td><td class="num">0,098</td><td class="num">0,838</td></tr>
+<tr class="total"><td>Total</td><td class="num">1</td><td class="num">—</td><td class="num">0,117</td><td class="num">1</td></tr>
+</tbody></table></div>
+<p>Só 16% de chance, porque a prior (taxa-base) é muito baixa. Repare que a coluna likelihood soma 1,05: ela não é uma distribuição.</p></div>
+
+<h2 id="tabela">2.2 A tabela bayesiana passo a passo</h2>
+<ol class="steps">
+<li><b>Liste as hipóteses</b> (uma por linha). Diga explicitamente o que é $\theta$.</li>
+<li><b>Prior</b>: transforme proporções em probabilidades. Ex.: proporção $1:3:2$ vira $1/6,\ 3/6,\ 2/6$.</li>
+<li><b>Likelihood</b>: para cada hipótese, a probabilidade <i>exata</i> dos dados observados. Se os dados forem impossíveis sob a hipótese, a likelihood é 0.</li>
+<li><b>Numerador</b> = prior × likelihood.</li>
+<li><b>Total</b> = soma dos numeradores.</li>
+<li><b>Posterior</b> = numerador / total. Confira: soma 1.</li>
+</ol>
+<div class="box recog"><span class="box-title">Reconheça o modelo</span>
+<p>"Você escolhe um objeto ao acaso entre vários tipos (dados, moedas, urnas, máquinas, fornecedores) e observa resultados; qual a probabilidade de ser o tipo X?" → <b>tabela bayesiana discreta</b>. Se a questão pede "mostre como calculou cada valor", escreva a fórmula de cada coluna.</p></div>
+
+<h2 id="roletas">2.3 Exemplo completo: roletas numeradas</h2>
+<div class="example"><span class="box-title">Exemplo 2.2</span>
+<p>Uma gaveta tem roletas justas de três tipos: numeradas de 1 a 5, de 1 a 10 e de 1 a 15, na proporção $1:3:2$. Uma roleta é sorteada e girada; sai o número <b>4</b>. Seja $\theta\in\{5,10,15\}$ o número de setores.</p>
+<p><b>Likelihood:</b> uma roleta de $\theta$ setores dá cada número de 1 a $\theta$ com probabilidade $1/\theta$. Como $4\le\theta$ em todas, $P(x=4\mid\theta)=1/\theta$.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>$\theta$</th><th class="num">Prior</th><th class="num">Likelihood $P(x=4\mid\theta)$</th><th class="num">Numerador</th><th class="num">Posterior</th></tr></thead>
+<tbody>
+<tr><td>5</td><td class="num">1/6</td><td class="num">1/5</td><td class="num">1/30</td><td class="num">6/19 ≈ 0,316</td></tr>
+<tr><td>10</td><td class="num">3/6</td><td class="num">1/10</td><td class="num">1/20</td><td class="num">9/19 ≈ 0,474</td></tr>
+<tr><td>15</td><td class="num">2/6</td><td class="num">1/15</td><td class="num">1/45</td><td class="num">4/19 ≈ 0,211</td></tr>
+<tr class="total"><td>Total</td><td class="num">1</td><td class="num">—</td><td class="num">19/180</td><td class="num">1</td></tr>
+</tbody></table></div>
+<p><b>Como somar frações:</b> mmc$(30,20,45)=180$: $\frac{6}{180}+\frac{9}{180}+\frac{4}{180}=\frac{19}{180}$. Os numeradores sobre 180 (6, 9, 4) já dão a posterior: $6/19$, $9/19$, $4/19$.</p>
+<p><b>Leitura:</b> a roleta de 5 tinha só 1/6 de prior, mas subiu para 0,316 porque explica melhor um número pequeno. Por outro lado, a de 10 continua a mais provável (MAP), puxada pela prior.</p></div>
+
+<h2 id="sequencial">2.4 Atualização sequencial = atualização em lote</h2>
+<p>A mesma roleta é girada de novo e sai <b>8</b>. Agora $\theta=5$ é <b>impossível</b> (likelihood 0). A posterior de antes vira a nova prior:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>$\theta$</th><th class="num">Prior (= posterior anterior)</th><th class="num">$P(x_2=8\mid\theta)$</th><th class="num">Numerador</th><th class="num">Posterior</th></tr></thead>
+<tbody>
+<tr><td>5</td><td class="num">6/19</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>10</td><td class="num">9/19</td><td class="num">1/10</td><td class="num">9/190</td><td class="num">27/35 ≈ 0,771</td></tr>
+<tr><td>15</td><td class="num">4/19</td><td class="num">1/15</td><td class="num">4/285</td><td class="num">8/35 ≈ 0,229</td></tr>
+<tr class="total"><td>Total</td><td class="num">1</td><td class="num">—</td><td class="num">7/114</td><td class="num">1</td></tr>
+</tbody></table></div>
+<p><b>Em lote:</b> usando a prior original e a likelihood dos dois giros juntos, $P(4,8\mid\theta) = (1/\theta)^2$ se $\theta\ge 8$, os numeradores ficam $0$, $\frac36\cdot\frac1{100}=\frac1{200}$ e $\frac26\cdot\frac1{225}=\frac1{675}$, e a posterior é a mesma: $27/35$ e $8/35$. <b>A ordem e o agrupamento dos dados não mudam a posterior</b> (desde que os dados sejam independentes dado $\theta$).</p>
+<div class="box tip"><span class="box-title">Por que isso importa</span>
+<p>Se a questão pede várias observações, você pode (a) fazer uma tabela com o produto das likelihoods ou (b) encadear tabelas. Escolha a que der menos conta. Para dados repetidos idênticos (ex.: "saiu 4 nas duas vezes"), a likelihood é $(1/\theta)^2$.</p></div>
+
+<h2 id="binomial">2.5 Likelihood com vários dados: modelo Binomial</h2>
+<div class="example"><span class="box-title">Exemplo 2.3 — de qual fornecedor é o lote?</span>
+<p>Uma empresa recebe chips de três fornecedores com taxas de defeito $\theta = 1\%,\ 5\%,\ 10\%$, que respondem por 50%, 30% e 20% dos lotes. De um lote, testam-se 20 chips e 2 são defeituosos.</p>
+<p><b>Likelihood:</b> $P(2 \text{ defeitos em } 20\mid\theta) = \binom{20}{2}\theta^2(1-\theta)^{18}$.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>$\theta$</th><th class="num">Prior</th><th class="num">Likelihood</th><th class="num">Numerador</th><th class="num">Posterior</th></tr></thead>
+<tbody>
+<tr><td>0,01</td><td class="num">0,5</td><td class="num">0,01586</td><td class="num">0,00793</td><td class="num">0,065</td></tr>
+<tr><td>0,05</td><td class="num">0,3</td><td class="num">0,18868</td><td class="num">0,05660</td><td class="num">0,466</td></tr>
+<tr><td>0,10</td><td class="num">0,2</td><td class="num">0,28518</td><td class="num">0,05704</td><td class="num">0,469</td></tr>
+<tr class="total"><td>Total</td><td class="num">1</td><td class="num">—</td><td class="num">0,12157</td><td class="num">1</td></tr>
+</tbody></table></div>
+<p><b>Atalho:</b> o fator $\binom{20}{2}$ aparece em todas as linhas e se cancela na posterior. Você pode usar só $\theta^2(1-\theta)^{18}$ como "likelihood proporcional". <b>Mas</b> o total (a prior predictive dos dados) só sai certo com o coeficiente.</p>
+<p>Os dados quase empataram os fornecedores de 5% e 10%, apesar da prior favorecer o de 5%.</p></div>
+
+<h2 id="calc">2.6 Calculadora interativa</h2>
+<p>Use para conferir suas tabelas. Os valores iniciais são os do Exemplo 2.2; aperte "usar posterior como nova prior" e troque a likelihood para refazer a seção 2.4.</p>
+<div data-widget="bayes-table" data-rows="θ=5;1/6;1/5|θ=10;3/6;1/10|θ=15;2/6;1/15"></div>
+
+<h2 id="map">2.7 MAP no caso discreto</h2>
+<div class="box def"><span class="box-title">Definição</span>
+<p>O <b>máximo a posteriori</b> é a hipótese de maior posterior: $\hat\theta_{\text{MAP}} = \arg\max_\theta P(\theta\mid D)$. Como o total não depende de $\theta$, basta olhar a <b>coluna do numerador</b>.</p></div>
+<p>No Exemplo 2.2, o MAP é $\theta=10$ (numerador 1/20). Se a prior fosse uniforme, o MAP seria a hipótese de maior likelihood ($\theta=5$), ou seja, o MLE. Mais sobre isso na <a href="05-map-priors.html">seção 5</a>.</p>
+
+<h2 id="cuidados">2.8 Erros clássicos</h2>
+<div class="box warn"><span class="box-title">Cuidado</span>
+<ul>
+<li><b>Confundir $P(D\mid H)$ com $P(H\mid D)$.</b> "O teste acerta 95%" é a likelihood, não a posterior. (Esse erro tem nome: <i>falácia do promotor</i>.)</li>
+<li><b>Esquecer a prior não uniforme.</b> Proporções como $2:5:1$ precisam virar probabilidades (dividir pela soma, 8).</li>
+<li><b>Likelihood de um resultado impossível</b> não é "pequena", é <b>zero</b>, e a hipótese sai da tabela.</li>
+<li><b>Somar a coluna de likelihood</b> esperando 1. Não precisa somar.</li>
+<li><b>Arredondar cedo.</b> Trabalhe com frações até o final; a prova costuma aceitar a fração.</li>
+</ul></div>
+<p class="source-note">Fontes: MIT 18.05 leitura/aula 11 (Bayesian Updating with Discrete Priors), Problem Set 7; Brunton ep. 28.</p>

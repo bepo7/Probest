@@ -1,0 +1,117 @@
+<span class="eyebrow">Seção 7 · Incerteza frequentista</span>
+<h1>Intervalos de confiança</h1>
+<p class="lead">Uma estimativa pontual sozinha não diz o quanto confiar nela. O intervalo de confiança dá uma faixa construída de modo que, <b>repetindo o experimento</b>, ela capture o parâmetro verdadeiro numa fração $1-\alpha$ das vezes.</p>
+
+<div class="toc"><strong>Nesta página</strong><ol>
+<li><a href="#conceito">Conceito e interpretação</a></li>
+<li><a href="#pivo">Método do pivô</a></li>
+<li><a href="#z">Média com σ conhecido (z)</a></li>
+<li><a href="#grande">Média, n grande, σ desconhecido</a></li>
+<li><a href="#prop">Proporção e tamanho de amostra</a></li>
+<li><a href="#limitado">Valores num intervalo conhecido</a></li>
+<li><a href="#t">Média, amostra normal pequena (t)</a></li>
+<li><a href="#var">Variância (χ²)</a></li>
+<li><a href="#resumo">Resumo: qual fórmula usar</a></li>
+<li><a href="#visoes">Três visões e ligação com testes</a></li>
+</ol></div>
+
+<h2 id="conceito">7.1 Conceito e interpretação</h2>
+<div class="box def"><span class="box-title">Definição</span>
+<p>Um intervalo de confiança de nível $(1-\alpha)100\%$ para $\theta$ é um intervalo aleatório $[\hat\Theta_L,\hat\Theta_U]$, calculado a partir da amostra, tal que</p>
+$$P\big(\hat\Theta_L\le\theta\le\hat\Theta_U\big)\ \ge\ 1-\alpha\quad\text{para todo }\theta.$$</div>
+<div class="box warn"><span class="box-title">Interpretação certa × errada</span>
+<p><b>Certo:</b> "Se eu repetir o experimento muitas vezes e calcular o intervalo a cada vez, cerca de 95% desses intervalos vão conter $\theta$."</p>
+<p><b>Errado (no paradigma frequentista):</b> "Há 95% de probabilidade de $\theta$ estar em $[77{,}4;\ 85{,}2]$." Depois de calculado, o intervalo é fixo e $\theta$ também é fixo: ou contém, ou não. Quem dá probabilidade para $\theta$ é a posterior bayesiana (<a href="11-freq-bayes-regressao.html#credivel">intervalo de credibilidade</a>).</p></div>
+
+<h2 id="pivo">7.2 Método do pivô</h2>
+<p>Um <b>pivô</b> é uma função $Q(X_1,\dots,X_n,\theta)$ cuja distribuição é conhecida e <b>não depende de $\theta$</b>. Receita:</p>
+<ol class="steps">
+<li>Ache o pivô. Ex.: $Z=\frac{\bar X-\mu}{\sigma/\sqrt n}\sim N(0,1)$.</li>
+<li>Ache $q_1,q_2$ com $P(q_1\le Q\le q_2)=1-\alpha$. Ex.: $P(-z_{\alpha/2}\le Z\le z_{\alpha/2})=1-\alpha$.</li>
+<li>Isole $\theta$ nas desigualdades. Ex.: $\bar X - z_{\alpha/2}\frac{\sigma}{\sqrt n}\le\mu\le\bar X+z_{\alpha/2}\frac{\sigma}{\sqrt n}$.</li>
+</ol>
+
+<h2 id="z">7.3 Média com σ conhecido (z)</h2>
+<div class="box def"><span class="box-title">Fórmula</span>
+$$\bar x \pm z_{\alpha/2}\,\frac{\sigma}{\sqrt n}.$$
+<p>Exata se os dados são normais; aproximada (pelo TCL) se $n$ é grande.</p></div>
+<div class="example"><span class="box-title">Exemplo 7.1</span>
+<p>Um equipamento mede tempos de resposta com desvio padrão conhecido $\sigma=12$ ms. Em $n=36$ medições, $\bar x=81{,}3$ ms. IC de 95% para a média?</p>
+<p>$z_{0,025}=1{,}96$; margem $=1{,}96\cdot\frac{12}{6}=3{,}92$. IC: $[77{,}38;\ 85{,}22]$ ms.</p></div>
+<div class="box tip"><span class="box-title">Tamanho de amostra para uma margem $e$</span>
+$$z_{\alpha/2}\frac{\sigma}{\sqrt n}\le e\quad\Longleftrightarrow\quad n\ge\Big(\frac{z_{\alpha/2}\,\sigma}{e}\Big)^2\quad(\text{arredonde para cima}).$$
+<p>No Exemplo 7.1, para margem de 2 ms: $n\ge(1{,}96\cdot12/2)^2=138{,}3$, ou seja, $n=139$.</p></div>
+
+<h2 id="grande">7.4 Média, n grande, σ desconhecido</h2>
+<p>Com $n$ grande, troque $\sigma$ por $S$ (que é uma boa estimativa) e continue usando $z$:</p>
+$$\bar x\pm z_{\alpha/2}\,\frac{s}{\sqrt n}.$$
+<div class="example"><span class="box-title">Exemplo 7.2</span>
+<p>$n=64$ chamadas de suporte, duração média $\bar x=12{,}4$ min, variância amostral $s^2=9$. IC de 90%?</p>
+<p>$z_{0,05}=1{,}645$; margem $=1{,}645\cdot\frac38\approx0{,}617$. IC: $[11{,}78;\ 13{,}02]$ min.</p></div>
+
+<h2 id="prop">7.5 Proporção e tamanho de amostra</h2>
+<p>Se $X_i\sim$ Bernoulli$(\theta)$, então $\bar X=\hat p$ (proporção amostral) e $\sigma=\sqrt{\theta(1-\theta)}$, que depende do próprio $\theta$. Duas saídas:</p>
+<ul>
+<li><b>Plug-in:</b> $\hat p\pm z_{\alpha/2}\sqrt{\frac{\hat p(1-\hat p)}{n}}$.</li>
+<li><b>Conservador:</b> como $\theta(1-\theta)\le\frac14$ (máximo em $\theta=\frac12$), $\sigma\le\frac12$ e $\hat p\pm\frac{z_{\alpha/2}}{2\sqrt n}$ tem nível de pelo menos $1-\alpha$.</li>
+</ul>
+<div class="example"><span class="box-title">Exemplo 7.3 — quantas pessoas entrevistar?</span>
+<p>Uma pesquisa quer estimar a fração de usuários que usam modo escuro, com margem de erro de 2 pontos percentuais e 95% de confiança. Sem ideia prévia de $\theta$, use o caso conservador:</p>
+$$\frac{1{,}96}{2\sqrt n}\le0{,}02\ \Longleftrightarrow\ \sqrt n\ge\frac{1{,}96}{0{,}04}=49\ \Longleftrightarrow\ n\ge 2401.$$
+<p>Com 99% de confiança: $n\ge(2{,}576/0{,}04)^2=4147{,}4$, ou seja, $4148$. Mais confiança custa mais amostra.</p></div>
+
+<h2 id="limitado">7.6 Valores num intervalo conhecido $[a,b]$</h2>
+<p>Se você só sabe que $a\le X\le b$, ainda dá para limitar o desvio:</p>
+$$\text{Var}(X)\le E\Big[\Big(X-\tfrac{a+b}{2}\Big)^2\Big]\le\Big(\frac{b-a}{2}\Big)^2\ \Longrightarrow\ \sigma\le\sigma_{\max}=\frac{b-a}{2}.$$
+<p>(A primeira desigualdade vale porque a média é o ponto que minimiza $E[(X-c)^2]$; a segunda porque $|X-\frac{a+b}2|\le\frac{b-a}2$.) Com $n$ grande, $\bar x\pm z_{\alpha/2}\frac{\sigma_{\max}}{\sqrt n}$ é um IC de nível pelo menos $1-\alpha$.</p>
+<div class="example"><span class="box-title">Exemplo 7.4</span>
+<p>Notas de avaliação de um app vão de 0 a 10. Com $n=400$ avaliações e $\bar x=6{,}1$: $\sigma_{\max}=5$, margem $=1{,}96\cdot5/20=0{,}49$. IC 95% (conservador): $[5{,}61;\ 6{,}59]$. A proporção (seção 7.5) é o caso particular $[a,b]=[0,1]$.</p></div>
+
+<h2 id="t">7.7 Média, amostra normal pequena, σ desconhecido (t)</h2>
+<div class="box def"><span class="box-title">Fórmula</span>
+$$\bar x\pm t_{\alpha/2,\,n-1}\,\frac{s}{\sqrt n},\qquad\text{pois } T=\frac{\bar X-\mu}{S/\sqrt n}\sim t_{n-1}.$$</div>
+<div class="example"><span class="box-title">Exemplo 7.5</span>
+<p>Dez pesagens de um lote de café (supostas normais) dão $\bar x=4{,}8$ kg e $s=0{,}9$ kg. IC de 95% para a média?</p>
+<p>$t_{0,025;\,9}=2{,}262$ (tabela $t$, 9 g.l., cauda 0,025). Margem $=2{,}262\cdot\frac{0{,}9}{\sqrt{10}}=0{,}644$. IC: $[4{,}16;\ 5{,}44]$ kg.</p>
+<p>Com $z$ (errado aqui), a margem seria $0{,}558$: menor, porque ignoraria a incerteza em $s$.</p></div>
+
+<h2 id="var">7.8 Variância de uma amostra normal (χ²)</h2>
+<div class="box def"><span class="box-title">Fórmula</span>
+<p>Como $\frac{(n-1)S^2}{\sigma^2}\sim\chi^2_{n-1}$:</p>
+$$\left[\frac{(n-1)s^2}{\chi^2_{\alpha/2,\,n-1}},\ \frac{(n-1)s^2}{\chi^2_{1-\alpha/2,\,n-1}}\right]$$
+<p>(o valor crítico <b>maior</b> vai no denominador do limite <b>inferior</b>). Para $\sigma$, tire a raiz dos dois extremos.</p></div>
+<div class="example"><span class="box-title">Exemplo 7.6 — mesma amostra do 7.5</span>
+<p>$n=10$, $s^2=0{,}81$. Tabela $\chi^2$ com 9 g.l.: $\chi^2_{0,025;9}=19{,}02$ e $\chi^2_{0,975;9}=2{,}70$.</p>
+$$\sigma^2\in\left[\frac{9(0{,}81)}{19{,}02},\ \frac{9(0{,}81)}{2{,}70}\right]=[0{,}383;\ 2{,}70],\qquad \sigma\in[0{,}62;\ 1{,}64].$$
+<p>O intervalo <b>não é simétrico</b> em torno de $s^2$, porque a $\chi^2$ é assimétrica.</p></div>
+<div class="box tip"><span class="box-title">Outros pivôs</span>
+<p>Para amostras Exponencial$(\theta)$: $\theta\sum X_i\sim$ Gamma$(n,1)$, o que dá um IC exato para a taxa. A ideia é sempre a mesma: ache uma quantidade com distribuição conhecida e isole o parâmetro.</p></div>
+
+<h2 id="resumo">7.9 Resumo: qual fórmula usar</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Situação</th><th>Parâmetro</th><th>Intervalo</th></tr></thead>
+<tbody>
+<tr><td>Normal (ou $n$ grande), $\sigma$ conhecido</td><td>$\mu$</td><td>$\bar x\pm z_{\alpha/2}\,\sigma/\sqrt n$</td></tr>
+<tr><td>$n$ grande, $\sigma$ desconhecido</td><td>$\mu$</td><td>$\bar x\pm z_{\alpha/2}\,s/\sqrt n$</td></tr>
+<tr><td>$n$ grande, só sei que $X\in[a,b]$</td><td>$\mu$</td><td>$\bar x\pm z_{\alpha/2}\,\frac{b-a}{2\sqrt n}$</td></tr>
+<tr><td>Bernoulli, $n$ grande</td><td>$\theta$</td><td>$\hat p\pm z_{\alpha/2}\sqrt{\hat p(1-\hat p)/n}$ ou conservador $\hat p\pm\frac{z_{\alpha/2}}{2\sqrt n}$</td></tr>
+<tr><td>Normal, $\sigma$ desconhecido, qualquer $n$</td><td>$\mu$</td><td>$\bar x\pm t_{\alpha/2,n-1}\,s/\sqrt n$</td></tr>
+<tr><td>Normal, $\mu$ desconhecido</td><td>$\sigma^2$</td><td>$\big[\frac{(n-1)s^2}{\chi^2_{\alpha/2,n-1}},\frac{(n-1)s^2}{\chi^2_{1-\alpha/2,n-1}}\big]$</td></tr>
+</tbody></table></div>
+<div data-widget="ci"></div>
+<div class="box recog"><span class="box-title">Fatores que mudam a largura</span>
+<ul>
+<li>Mais confiança ($1-\alpha$ maior) → intervalo <b>mais largo</b>.</li>
+<li>Mais dados ($n$ maior) → <b>mais estreito</b> (como $1/\sqrt n$).</li>
+<li>Mais variabilidade ($\sigma$ maior) → <b>mais largo</b>.</li>
+</ul></div>
+
+<h2 id="visoes">7.10 Três visões e ligação com testes</h2>
+<ol>
+<li><b>Visão construtiva:</b> a fórmula $\bar x\pm$ margem.</li>
+<li><b>Visão "estimativa ± erro":</b> estimativa pontual mais ou menos (valor crítico × erro padrão).</li>
+<li><b>Visão por testes:</b> o IC de nível $1-\alpha$ é o conjunto de todos os valores $\mu_0$ que um <b>teste bilateral</b> de nível $\alpha$ <b>não</b> rejeitaria. Logo: rejeitar $H_0:\mu=\mu_0$ (bilateral, nível $\alpha$) ⇔ $\mu_0$ está fora do IC de $1-\alpha$.</li>
+</ol>
+<p>Intervalos unilaterais seguem a mesma lógica com $z_\alpha$ (ou $t_\alpha$) e um só lado: ex.: limite inferior de 95% $=\bar x-1{,}645\,\sigma/\sqrt n$.</p>
+<p>Quando nenhuma fórmula serve (estatística complicada, distribuição desconhecida), dá para usar o <a href="11-freq-bayes-regressao.html#bootstrap">bootstrap</a>.</p>
+<p class="source-note">Fontes: MIT 18.05 aulas 22 e 23; Pishro-Nik 8.3 (8.3.1–8.3.3); Brunton ep. 7, 25, 27.</p>

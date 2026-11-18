@@ -89,3 +89,8 @@ math[display="block"] { overflow-x: auto; padding: .5rem 0; }
 }
 @media (max-width: 450px) { .site-nav ol { grid-template-columns: 1fr; } body { font-size: 15px; } }
 @media print { body { background: white; } .site-header, .site-nav { display: none; } .page-wrap { width: 100%; margin: 0; } .content { padding: 0; border: 0; box-shadow: none; } }
+
+/* Link para a página de escolha de matéria */
+.site-header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.switch { color: white; font-size: .82rem; font-weight: 700; text-decoration: none; padding: .25rem .8rem; border: 1px solid rgba(255,255,255,.45); border-radius: 999px; white-space: nowrap; }
+.switch:hover, .switch:focus { background: rgba(255,255,255,.12); }

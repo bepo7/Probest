@@ -1,0 +1,76 @@
+<span class="eyebrow">Seção 11 · Visão geral e extras</span>
+<h1>Frequentista × Bayesiano, bootstrap e regressão linear</h1>
+<p class="lead">Esta seção amarra as duas escolas (questões conceituais costumam vir daqui) e cobre dois tópicos do material do MIT que aparecem na pasta: <b>bootstrap</b> e <b>regressão linear</b>.</p>
+
+<div class="toc"><strong>Nesta página</strong><ol>
+<li><a href="#comparacao">As duas escolas lado a lado</a></li>
+<li><a href="#credivel">Intervalo de confiança × de credibilidade</a></li>
+<li><a href="#pvalor-post">p-valor × probabilidade posterior</a></li>
+<li><a href="#bootstrap">Bootstrap</a></li>
+<li><a href="#regressao">Regressão linear</a></li>
+</ol></div>
+
+<h2 id="comparacao">11.1 As duas escolas lado a lado</h2>
+<div class="table-wrap"><table>
+<thead><tr><th></th><th>Bayesiana</th><th>Frequentista</th></tr></thead>
+<tbody>
+<tr><td>O que é aleatório?</td><td>Parâmetro <b>e</b> dados</td><td>Só os dados; $\theta$ é fixo</td></tr>
+<tr><td>Probabilidade significa</td><td>grau de crença</td><td>frequência em repetições</td></tr>
+<tr><td>Ingredientes</td><td>prior + likelihood</td><td>só likelihood (modelo dos dados)</td></tr>
+<tr><td>Saída</td><td>posterior $f(\theta\mid x)$</td><td>estimativas, ICs, p-valores</td></tr>
+<tr><td>Estimativa pontual</td><td>MAP, média posterior</td><td>MLE</td></tr>
+<tr><td>Incerteza</td><td>intervalo de credibilidade</td><td>intervalo de confiança</td></tr>
+<tr><td>Decisão sobre hipótese</td><td>$P(H\mid\text{dados})$, odds, fator de Bayes</td><td>NHST: rejeitar ou não, α, p-valor</td></tr>
+<tr><td>Ponto forte</td><td>responde a pergunta que interessa ("qual a chance de $H$?"); usa conhecimento prévio; lida bem com poucos dados</td><td>objetivo (não precisa de prior); procedimentos padronizados; garantias de longo prazo (α)</td></tr>
+<tr><td>Crítica</td><td>prior subjetiva; contas podem ser difíceis</td><td>p-valor é fácil de interpretar mal; depende do plano experimental (quando parar); não dá $P(H)$</td></tr>
+</tbody></table></div>
+<p>Na prática, com muitos dados e priors razoáveis, as duas abordagens tendem a concordar: a posterior fica concentrada perto do MLE.</p>
+
+<h2 id="credivel">11.2 Intervalo de confiança × intervalo de credibilidade</h2>
+<div class="grid2">
+<div class="card"><h3>Confiança (frequentista)</h3><p>$[L,U]$ é aleatório; $\theta$ é fixo. "95%" é a taxa de acerto <b>do procedimento</b> em repetições. Não dá para dizer "$P(\theta\in[L,U])=0{,}95$" depois de calcular.</p></div>
+<div class="card"><h3>Credibilidade (bayesiano)</h3><p>Um intervalo $[a,b]$ com $P(a\le\theta\le b\mid\text{dados})=0{,}95$ <b>pela posterior</b>. Aqui a frase "há 95% de probabilidade de $\theta$ estar em $[a,b]$" é correta (dada a prior).</p></div>
+</div>
+<div class="example"><span class="box-title">Exemplo 11.1</span>
+<p>Posterior Beta$(9,21)$ do <a href="04-bayes-continuo.html#betabin">Exemplo 4.1</a>. O intervalo de credibilidade de 90% "central" vai do quantil 5% ao 95%: $[0{,}172;\ 0{,}443]$ (calcule com o explorador Beta da seção 4).</p></div>
+
+<h2 id="pvalor-post">11.3 p-valor × probabilidade posterior</h2>
+<p>O p-valor mede $P(\text{dados tão extremos}\mid H_0)$; a posterior mede $P(H_0\mid\text{dados})$. São números diferentes e podem discordar bastante. Para obter a segunda, você precisa de uma prior e de uma alternativa específica:</p>
+$$P(H_0\mid D)=\frac{P(D\mid H_0)P(H_0)}{P(D\mid H_0)P(H_0)+P(D\mid H_1)P(H_1)}.$$
+<p>Um p-valor de 0,04 <b>não</b> quer dizer "4% de chance de $H_0$ ser verdadeira". Se $H_0$ era muito plausível a priori, ela pode continuar provável mesmo com p = 0,04.</p>
+
+<h2 id="bootstrap">11.4 Bootstrap</h2>
+<p>Ideia: quando não sabemos a distribuição da estatística, usamos a <b>própria amostra</b> como substituta da população. A distribuição empírica $\hat F$ (cada dado com peso $1/n$) faz o papel de $F$.</p>
+<ol class="steps">
+<li>Da amostra original $x_1,\dots,x_n$ (estatística $\hat\theta$, ex.: $\bar x$), sorteie <b>com reposição</b> $n$ valores: uma <b>amostra bootstrap</b>.</li>
+<li>Calcule a estatística nela: $\hat\theta^*$. Repita muitas vezes (ex.: 10 000).</li>
+<li>Calcule as diferenças $\delta^*=\hat\theta^*-\hat\theta$; ache seus quantis $\delta^*_{0,05}$ e $\delta^*_{0,95}$ (para 90%).</li>
+<li><b>IC bootstrap empírico</b>: $[\hat\theta-\delta^*_{0,95},\ \hat\theta-\delta^*_{0,05}]$. (Repare a inversão: o quantil de cima vai no limite de baixo.)</li>
+</ol>
+<div class="example"><span class="box-title">Exemplo 11.2</span>
+<p>Dez tempos de entrega (min): $30,37,36,43,42,43,43,46,41,42$, com $\bar x=40{,}3$. Numa simulação com 20 000 reamostragens, os quantis de $\delta^*=\bar x^*-40{,}3$ foram $\delta^*_{0,05}=-2{,}4$ e $\delta^*_{0,95}=2{,}2$.</p>
+<p>IC 90% bootstrap empírico: $[40{,}3-2{,}2;\ 40{,}3+2{,}4]=[38{,}1;\ 42{,}7]$.</p>
+<p>O <b>bootstrap percentil</b> (usar direto os quantis de $\bar x^*$, aqui $[37{,}9;\ 42{,}5]$) é mais simples, mas o MIT recomenda o empírico, que corrige o viés da distribuição.</p></div>
+<div class="box tip"><span class="box-title">Bootstrap paramétrico</span>
+<p>Se você confia num modelo (ex.: Exponencial), estime o parâmetro (MLE), gere amostras <b>do modelo ajustado</b> em vez de reamostrar os dados, e siga os mesmos passos.</p></div>
+
+<h2 id="regressao">11.5 Regressão linear (mínimos quadrados)</h2>
+<p>Modelo: $y_i=a+b\,x_i+\varepsilon_i$, com erros $\varepsilon_i$ independentes de média 0. Escolhemos $a,b$ que minimizam a soma dos quadrados dos resíduos $\sum(y_i-a-bx_i)^2$:</p>
+<div class="box def"><span class="box-title">Fórmulas</span>
+$$\hat b=\frac{S_{xy}}{S_{xx}}=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^2},\qquad \hat a=\bar y-\hat b\,\bar x.$$
+<p>A reta passa por $(\bar x,\bar y)$. Se os erros forem $N(0,\sigma^2)$, mínimos quadrados = <b>MLE</b> (maximizar a likelihood normal é minimizar $\sum$ resíduos²). $R^2=r^2$ = fração da variância de $y$ explicada pela reta.</p></div>
+<div class="example"><span class="box-title">Exemplo 11.3</span>
+<p>Carga do servidor ($x$, mil usuários) e uso de CPU ($y$, %): $(1;2{,}1),(2;3{,}9),(3;6{,}2),(4;7{,}8),(5;10{,}0)$.</p>
+<ul class="steps">
+<li>$\bar x=3$, $\bar y=6$. $S_{xx}=4+1+0+1+4=10$.</li>
+<li>$S_{xy}=(-2)(-3{,}9)+(-1)(-2{,}1)+0+(1)(1{,}8)+(2)(4{,}0)=7{,}8+2{,}1+1{,}8+8{,}0=19{,}7$.</li>
+<li>$\hat b=1{,}97$, $\hat a=6-1{,}97(3)=0{,}09$. Reta: $\hat y=0{,}09+1{,}97x$.</li>
+<li>Previsão para 6 mil usuários: $0{,}09+1{,}97(6)\approx11{,}9\%$. $R^2\approx0{,}998$.</li>
+</ul></div>
+<div class="box warn"><span class="box-title">Cuidados</span>
+<ul>
+<li>"Linear" é nos <b>parâmetros</b>: $y=a+bx+cx^2$ também é regressão linear (mesmo método, mais colunas).</li>
+<li>Correlação não é causalidade; extrapolar para longe dos dados é arriscado.</li>
+<li>Olhe o gráfico dos resíduos: padrões indicam que o modelo está errado.</li>
+</ul></div>
+<p class="source-note">Fontes: MIT 18.05 aulas 20 (Comparison of frequentist and Bayesian inference), 24 (Bootstrap confidence intervals) e 26 (Linear regression).</p>

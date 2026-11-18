@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Estatística (P2) de Probabilidade e Estatística: inferência bayesiana, MLE, intervalos de confiança e testes de hipótese, com exemplos resolvidos.">
+<title>MAP e priors · Probest P2</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23176b87'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>θ</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/site.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/site.js"></script>
+</head>
+<body class="s5">
+<header class="site-header"><a class="brand" href="index.html">Probest P2 · Estatística</a><span class="header-actions"><a class="switch" href="../index.html">↔ Trocar matéria</a><button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">◐ tema</button></span></header>
+<div class="page-wrap">
+<nav class="site-nav" aria-label="Seções"><details ><summary>Seções do site</summary><ol start="0"><li><a href="index.html">Início e roteiro</a></li><li><a href="01-amostras.html">Da probabilidade à estatística</a></li><li><a href="02-bayes-discreto.html">Bayes com hipóteses discretas</a></li><li><a href="03-preditiva-odds.html">Probabilidade preditiva e odds</a></li><li><a href="04-bayes-continuo.html">Priors contínuas e conjugadas</a></li><li><a href="05-map-priors.html" aria-current="page">MAP, escolha de priors, MAP × MLE</a></li><li><a href="06-mle.html">Máxima verossimilhança (MLE)</a></li><li><a href="07-intervalos.html">Intervalos de confiança</a></li><li><a href="08-nhst.html">Testes de hipótese: fundamentos</a></li><li><a href="09-testes.html">Catálogo de testes (z, t, χ², F)</a></li><li><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança</a></li><li><a href="11-freq-bayes-regressao.html">Frequentista × Bayesiano, bootstrap, regressão</a></li><li><a href="12-exercicios.html">Exercícios de treino (com solução)</a></li><li><a href="13-formulario.html">Formulário + tabelas interativas</a></li><li><a href="14-mapa-listas.html">Mapa das listas, checklist e fontes</a></li></ol></details></nav>
+<main class="content">
+<span class="eyebrow">Seção 5 · Inferência bayesiana IV</span>
+<h1>MAP, escolha de priors e MAP × MLE</h1>
+<p class="lead">A posterior é uma distribuição inteira. Quando a questão pede <b>um número</b>, o mais cobrado é o máximo a posteriori (MAP). Aqui você aprende a calculá-lo em qualquer caso e a compará-lo com o MLE.</p>
+
+<div class="toc"><strong>Nesta página</strong><ol>
+<li><a href="#def">Definição e receita</a></li>
+<li><a href="#formulas">MAP das conjugadas</a></li>
+<li><a href="#pseudo">Prior como "dados imaginários"</a></li>
+<li><a href="#nao-conj">MAP sem conjugada</a></li>
+<li><a href="#map-mle">MAP = MLE com prior uniforme</a></li>
+<li><a href="#pontuais">MAP, média e mediana da posterior</a></li>
+<li><a href="#priors">Como escolher a prior</a></li>
+<li><a href="#quiz">Teste conceitual</a></li>
+</ol></div>
+
+<h2 id="def">5.1 Definição e receita</h2>
+<div class="box def"><span class="box-title">Máximo a posteriori</span>
+$$\hat\theta_{\text{MAP}} = \arg\max_\theta f(\theta\mid x) = \arg\max_\theta\ p(x\mid\theta)\,f(\theta) = \arg\max_\theta\ \big[\ln p(x\mid\theta)+\ln f(\theta)\big].$$
+<p>É a <b>moda</b> da posterior. O denominador $p(x)$ não depende de $\theta$, então não atrapalha a maximização.</p></div>
+<ol class="steps">
+<li>Escreva o <b>numerador</b> $p(x\mid\theta)f(\theta)$ (pode jogar fora constantes).</li>
+<li>Se a forma for conhecida (Beta, Normal...), use a fórmula da moda.</li>
+<li>Senão, tire o log, derive em $\theta$, iguale a zero e resolva. Confira que é máximo e que está no domínio.</li>
+<li>Caso discreto: escolha a linha de maior numerador na tabela.</li>
+<li>Se a derivada não zera dentro do domínio, o máximo está na <b>borda</b>.</li>
+</ol>
+
+<h2 id="formulas">5.2 MAP das conjugadas</h2>
+<table>
+<thead><tr><th>Posterior</th><th>MAP (moda)</th><th>Média posterior</th></tr></thead>
+<tbody>
+<tr><td>Beta$(A,B)$, $A,B\gt1$</td><td>$\dfrac{A-1}{A+B-2}$</td><td>$\dfrac{A}{A+B}$</td></tr>
+<tr><td>Beta com $A\le1$ ou $B\le 1$</td><td>borda: 0 ou 1 (desenhe a curva)</td><td>$\dfrac{A}{A+B}$</td></tr>
+<tr><td>$N(\mu_{\text{post}},\sigma^2_{\text{post}})$</td><td>$\mu_{\text{post}}$</td><td>$\mu_{\text{post}}$</td></tr>
+<tr><td>Gamma$(\alpha,\beta)$, $\alpha\ge1$</td><td>$\dfrac{\alpha-1}{\beta}$</td><td>$\dfrac{\alpha}{\beta}$</td></tr>
+</tbody></table>
+<div class="example"><span class="box-title">Exemplo 5.1</span>
+<p>Prior Beta$(4,4)$ para a probabilidade $\theta$ de um robô completar uma tarefa. Em 10 tentativas, completa 9.</p>
+<p>Posterior Beta$(13,5)$. MAP $=\frac{12}{16}=0{,}75$. MLE $=0{,}9$. Média $=13/18\approx0{,}72$. A prior simétrica em 0,5 "puxa" o MAP para o centro.</p></div>
+
+<h2 id="pseudo">5.3 Prior como "dados imaginários"</h2>
+<p>Com prior Beta$(a,b)$ e $k$ sucessos em $n$:</p>
+$$\hat\theta_{\text{MAP}}=\frac{k+(a-1)}{n+(a-1)+(b-1)}\qquad\text{vs}\qquad \hat\theta_{\text{MLE}}=\frac kn.$$
+<p>A prior age como se você já tivesse visto <b>$a-1$ sucessos e $b-1$ fracassos</b> extras. É por isso que o MAP é útil com poucos dados.</p>
+<div class="example"><span class="box-title">Exemplo 5.2 — três caras em três jogadas</span>
+<p>Uma moeda dá cara nas 3 primeiras jogadas. O MLE diz $\hat\theta=3/3=1$: "a moeda nunca dá coroa", o que é absurdo. Com uma prior Beta$(11,11)$ (10 caras e 10 coroas imaginárias, refletindo que moedas costumam ser quase justas), $\hat\theta_{\text{MAP}}=\frac{3+10}{3+20}=\frac{13}{23}\approx0{,}57$.</p>
+<p>Com 3000 caras em 3000 jogadas, o MAP seria $3010/3020\approx0{,}997$: com muitos dados, <b>os dados dominam a prior</b>.</p></div>
+
+<h2 id="nao-conj">5.4 MAP sem conjugada: derive o log</h2>
+<div class="example"><span class="box-title">Exemplo 5.3 — prior triangular</span>
+<p>Prior $f(\theta)=2\theta$ em $[0,1]$. Em 4 ensaios Bernoulli há 1 sucesso.</p>
+<p>Numerador: $\theta(1-\theta)^3\cdot 2\theta \propto \theta^2(1-\theta)^3$. Log: $2\ln\theta+3\ln(1-\theta)$. Derivada: $\frac2\theta-\frac{3}{1-\theta}=0\Rightarrow 2(1-\theta)=3\theta\Rightarrow \hat\theta_{\text{MAP}}=\frac25$.</p>
+<p>(Faz sentido: $2\theta=$ Beta$(2,1)$, e a posterior é Beta$(3,4)$, com moda $2/5$.)</p></div>
+<div class="example"><span class="box-title">Exemplo 5.4 — taxa Poisson com prior exponencial</span>
+<p>Prior $f(\lambda)=e^{-\lambda}$, $\lambda\gt0$. Contagens observadas: $2,0,3,1$ ($n=4$, $\sum x_i=6$).</p>
+<p>Numerador $\propto \lambda^{6}e^{-4\lambda}\cdot e^{-\lambda}=\lambda^6e^{-5\lambda}$. Log: $6\ln\lambda-5\lambda$; derivada $\frac6\lambda-5=0\Rightarrow\hat\lambda_{\text{MAP}}=\frac65=1{,}2$.</p>
+<p>Sem a prior (MLE), $\hat\lambda=\bar x = 6/4=1{,}5$. A prior exponencial favorece valores pequenos e puxa a estimativa para baixo. Em geral, $\hat\lambda_{\text{MAP}}=\frac{\sum x_i}{n+1}$.</p></div>
+
+<h2 id="map-mle">5.5 MAP = MLE quando a prior é uniforme</h2>
+<div class="box def"><span class="box-title">Resultado</span>
+<p>Se $f(\theta)$ é <b>constante</b> (prior uniforme/plana) numa região que contém o MLE, então</p>
+$$\arg\max_\theta p(x\mid\theta)f(\theta) = \arg\max_\theta c\cdot p(x\mid\theta) = \hat\theta_{\text{MLE}}.$$
+<p>Multiplicar por constante não muda onde está o máximo. Logo a afirmação "MAP e MLE são iguais se a prior for uniforme" é <b>verdadeira</b>.</p></div>
+<div class="box warn"><span class="box-title">Detalhes que a prova pode explorar</span>
+<ul>
+<li>A likelihood <b>não</b> depende da prior, mas a <b>posterior</b> depende das duas. Por isso MAP e MLE em geral diferem, e coincidem justamente quando a prior não favorece nenhum valor.</li>
+<li>Se a uniforme for em um intervalo que <b>não</b> contém o MLE (ex.: prior Uniforme$[0;0{,}5]$ e $\hat\theta_{\text{MLE}}=0{,}8$), o MAP fica na borda (0,5).</li>
+<li>A <b>média</b> da posterior com prior uniforme <b>não</b> é igual ao MLE em geral: com Beta$(1,1)$ e $k$ de $n$, média $=\frac{k+1}{n+2}\ne\frac kn$.</li>
+</ul></div>
+
+<h2 id="pontuais">5.6 MAP, média e mediana da posterior</h2>
+<table>
+<thead><tr><th>Estimador</th><th>O que é</th><th>Quando é "o melhor"</th></tr></thead>
+<tbody>
+<tr><td>MAP</td><td>moda da posterior</td><td>minimiza a probabilidade de errar o valor exato (caso discreto)</td></tr>
+<tr><td>Média posterior (MMSE)</td><td>$E[\theta\mid x]$</td><td>minimiza o erro quadrático médio</td></tr>
+<tr><td>Mediana posterior</td><td>valor com 50% de posterior de cada lado</td><td>minimiza o erro absoluto médio</td></tr>
+</tbody></table>
+<p>Para posteriores simétricas (Normal), as três coincidem. Para Beta$(3,4)$: MAP $=0{,}40$, média $=3/7\approx0{,}429$, mediana $\approx0{,}421$.</p>
+
+<h2 id="priors">5.7 Como escolher a prior</h2>
+<ul>
+<li><b>Informativa:</b> resume conhecimento prévio real (dados antigos, física do problema). Ex.: moedas reais são quase justas → Beta concentrada em 0,5.</li>
+<li><b>Plana / não informativa:</b> Uniforme quando não se sabe nada. Cuidado: "plana" depende da parametrização (plana em $\theta$ não é plana em $\theta^2$).</li>
+<li><b>Conjugada:</b> escolhida por conveniência de conta. Ajuste $a,b$ (ou $\mu_0,\sigma_0$) para casar média e incerteza que você acredita.</li>
+<li><b>Nunca dê probabilidade zero</b> a algo possível: se $f(\theta_0)=0$, nenhum dado faz a posterior de $\theta_0$ deixar de ser zero (o produto continua 0).</li>
+<li><b>Muitos dados → a prior importa pouco.</b> Duas pessoas com priors razoáveis diferentes chegam a posteriores parecidas. Com poucos dados, teste a sensibilidade: refaça com outra prior e veja se a conclusão muda.</li>
+</ul>
+<p>A crítica frequentista é justamente a subjetividade da prior; a resposta bayesiana é que ela é explícita e pode ser discutida. Ver <a href="11-freq-bayes-regressao.html#comparacao">seção 11</a>.</p>
+
+<h2 id="quiz">5.8 Teste conceitual (V ou F, justifique)</h2>
+<div class="exercise"><p>1. Se a posterior é Normal, o MAP e a média posterior são iguais.</p>
+<details class="sol"><summary>Resposta</summary><div><p><b>V.</b> A Normal é simétrica e unimodal; a moda é a média.</p></div></details></div>
+<div class="exercise"><p>2. A prior Beta$(1,1)$ dá um MAP igual a $k/n$.</p>
+<details class="sol"><summary>Resposta</summary><div><p><b>V.</b> Posterior Beta$(1+k,1+n-k)$, moda $\frac{k}{n}$. É o caso "prior uniforme ⇒ MAP = MLE".</p></div></details></div>
+<div class="exercise"><p>3. A likelihood $p(x\mid\theta)$, vista como função de $\theta$, integra 1.</p>
+<details class="sol"><summary>Resposta</summary><div><p><b>F.</b> Ela é uma distribuição em $x$ (para $\theta$ fixo), não em $\theta$. Ex.: $\theta^3$ (3 caras em 3) integra $1/4$ em $[0,1]$.</p></div></details></div>
+<div class="exercise"><p>4. Com prior Beta$(2,8)$ e dados com 5 sucessos e 5 fracassos, a posterior é Beta$(7,13)$.</p>
+<details class="sol"><summary>Resposta</summary><div><p><b>V.</b> $a+k=2+5=7$, $b+(n-k)=8+5=13$.</p></div></details></div>
+<div class="exercise"><p>5. Quanto mais dados, mais a média posterior se aproxima da média da prior.</p>
+<details class="sol"><summary>Resposta</summary><div><p><b>F.</b> É o contrário: ela se aproxima do MLE (ex.: $\bar x$), porque o peso $b=n/\sigma^2$ dos dados cresce.</p></div></details></div>
+<p class="source-note">Fontes: MIT 18.05 aulas 15 (Conjugate Priors) e 16 (Choosing Priors); slides de MAP (Tsun 7.5); Brunton ep. 22.</p>
+
+<div class="pager"><a href="04-bayes-continuo.html">← Priors contínuas e conjugadas</a><a href="06-mle.html">Máxima verossimilhança (MLE) →</a></div>
+</main>
+</div>
+</body>
+</html>
