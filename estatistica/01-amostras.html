@@ -15,7 +15,7 @@
 <body class="s1">
 <header class="site-header"><a class="brand" href="index.html">Probest P2 · Estatística</a><span class="header-actions"><a class="switch" href="../index.html">↔ Trocar matéria</a><button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">◐ tema</button></span></header>
 <div class="page-wrap">
-<nav class="site-nav" aria-label="Seções"><details ><summary>Seções do site</summary><ol start="0"><li><a href="index.html">Início e roteiro</a></li><li><a href="01-amostras.html" aria-current="page">Da probabilidade à estatística</a></li><li><a href="02-bayes-discreto.html">Bayes com hipóteses discretas</a></li><li><a href="03-preditiva-odds.html">Probabilidade preditiva e odds</a></li><li><a href="04-bayes-continuo.html">Priors contínuas e conjugadas</a></li><li><a href="05-map-priors.html">MAP, escolha de priors, MAP × MLE</a></li><li><a href="06-mle.html">Máxima verossimilhança (MLE)</a></li><li><a href="07-intervalos.html">Intervalos de confiança</a></li><li><a href="08-nhst.html">Testes de hipótese: fundamentos</a></li><li><a href="09-testes.html">Catálogo de testes (z, t, χ², F)</a></li><li><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança</a></li><li><a href="11-freq-bayes-regressao.html">Frequentista × Bayesiano, bootstrap, regressão</a></li><li><a href="12-exercicios.html">Exercícios de treino (com solução)</a></li><li><a href="13-formulario.html">Formulário + tabelas interativas</a></li><li><a href="14-mapa-listas.html">Mapa das listas, checklist e fontes</a></li></ol></details></nav>
+<nav class="site-nav" aria-label="Seções"><details ><summary>Seções do site</summary><ol start="0"><li><a href="index.html">Início e roteiro</a></li><li><a href="01-amostras.html" aria-current="page">Da probabilidade à estatística</a></li><li><a href="02-bayes-discreto.html">Bayes com hipóteses discretas</a></li><li><a href="03-preditiva-odds.html">Probabilidade preditiva e odds</a></li><li><a href="04-bayes-continuo.html">Priors contínuas e conjugadas</a></li><li><a href="05-map-priors.html">MAP, escolha de priors, MAP × MLE</a></li><li><a href="06-mle.html">Máxima verossimilhança (MLE)</a></li><li><a href="07-intervalos.html">Intervalos de confiança</a></li><li><a href="08-nhst.html">Testes de hipótese: fundamentos</a></li><li><a href="09-testes.html">Catálogo de testes (z, t, χ², F)</a></li><li><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança</a></li><li><a href="11-freq-bayes-regressao.html">Frequentista × Bayesiano, bootstrap, regressão</a></li><li><a href="12-exercicios.html">Exercícios de treino (com solução)</a></li><li><a href="13-formulario.html">Formulário + tabelas interativas</a></li><li><a href="14-mapa-listas.html">Mapa das listas, checklist e fontes</a></li><li><a href="15-materiais-mit.html">Materiais: resumos das aulas do MIT</a></li></ol></details></nav>
 <main class="content">
 <span class="eyebrow">Seção 1 · Base de tudo</span>
 <h1>Da probabilidade à estatística</h1>
@@ -72,6 +72,7 @@ $$\bar X = \frac1n\sum_{i=1}^n X_i,\qquad E[\bar X]=\mu,\qquad \text{Var}(\bar X
 <p>Para $n$ grande (regra prática $n\ge 30$), qualquer que seja a distribuição de $X_i$ (com variância finita),
 $$Z=\frac{\bar X-\mu}{\sigma/\sqrt n}\ \approx\ N(0,1).$$
 Se os $X_i$ já são normais, isso é <b>exato</b> para qualquer $n$.</p></div>
+<div class="box def"><span class="box-title">Revise da P1</span><p><a href="../probabilidade/secao-4.html#teorema-central-do-limite">Teorema Central do Limite</a> · <a href="../probabilidade/secao-4.html#lei-dos-grandes-números">Lei dos Grandes Números</a> · <a href="../probabilidade/secao-4.html#normalgaussiana">Normal</a> · <a href="../probabilidade/secao-4.html#qui-quadrado">Qui-quadrado</a></p></div>
 <div class="box warn"><span class="box-title">Cuidado</span>
 <p>Var$(\bar X)$ divide por $n$; o desvio padrão divide por $\sqrt n$. Para reduzir pela metade a margem de erro, você precisa de <b>4 vezes</b> mais dados.</p></div>
 
@@ -125,6 +126,7 @@ $$S^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2 = \frac{1}{n-1}\Big(\sum X_i^2 
 <p>A comparação detalhada está na <a href="11-freq-bayes-regressao.html">seção 11</a>.</p>
 <p class="source-note">Fontes: MIT 18.05 (leitura 10), Pishro-Nik cap. 8.1–8.2, Brunton ep. 2–6.</p>
 
+<div class="mit-links"><span>PDFs desta página (Drive):</span><a href="https://drive.google.com/file/d/1KlxN6zAnv-MLnhpaTUvTBKVZ5aame8yM/view" target="_blank" rel="noopener" title="MIT 10 · Intro to Statistics, MLE">M10</a><a href="https://drive.google.com/file/d/1pZSuin7ng6X41yMcv-liQ2mc1IaEPoUr/view" target="_blank" rel="noopener" title="MIT 19 · NHST III">M19</a><a href="15-materiais-mit.html">resumos das aulas →</a></div>
 <div class="pager"><a href="index.html">← Início e roteiro</a><a href="02-bayes-discreto.html">Bayes com hipóteses discretas →</a></div>
 </main>
 </div>

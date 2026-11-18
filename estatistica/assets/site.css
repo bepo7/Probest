@@ -148,6 +148,25 @@ details.sol > div { padding: .2rem 1rem .9rem; }
 .legend { display: flex; flex-wrap: wrap; gap: .3rem 1rem; font-size: .82rem; color: var(--muted); }
 .legend span::before { content: ""; display: inline-block; width: .9rem; height: .25rem; margin-right: .35rem; vertical-align: middle; background: currentColor; border-radius: 2px; }
 
+.ans { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .6rem 0; padding: .5rem .7rem; border: 1px dashed var(--line); border-radius: 10px; font-size: .9rem; }
+.ans label { display: flex; gap: .4rem; align-items: center; font-weight: 700; color: var(--muted); }
+.ans input { width: 9rem; padding: .3rem .5rem; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.ans button, .vf-bar button { padding: .3rem .8rem; font: inherit; font-size: .85rem; font-weight: 700; color: var(--base); background: transparent; border: 1px solid var(--base); border-radius: 8px; cursor: pointer; }
+.ans.ok { border-color: var(--ok); background: var(--ok-soft); } .ans.ok .ans-msg { color: var(--ok); font-weight: 700; }
+.ans.bad { border-color: var(--bad); background: var(--bad-soft); } .ans.bad .ans-msg { color: var(--bad); font-weight: 700; }
+.vf { margin: 1rem 0; padding: .9rem 1.1rem; border: 1px solid var(--line); border-radius: 12px; }
+.vf > p { margin-top: 0; }
+.vf-bar { display: flex; gap: .5rem; }
+.vf .fb { margin-top: .7rem; padding: .6rem .8rem; border-radius: 8px; background: var(--surface); }
+.vf.ok { border-color: var(--ok); } .vf.ok .verdict { color: var(--ok); }
+.vf.bad { border-color: var(--bad); } .vf.bad .verdict { color: var(--bad); }
+.mit-links { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; font-size: .85rem; }
+.mit-links span { color: var(--muted); font-weight: 700; margin-right: .2rem; }
+.mit-links a { padding: .1rem .6rem; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; }
+.mit-links a:hover { border-color: var(--base); }
+.mit-card { margin: 1.4rem 0; padding: 1rem 1.25rem; border: 1px solid var(--line); border-left: 5px solid var(--base); border-radius: 12px; }
+.mit-card h3 { margin: 0 0 .3rem; }
+.mit-card .meta { color: var(--muted); font-size: .88rem; margin-bottom: .5rem; }
 .pager { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); font-weight: 700; }
 .pager a { text-decoration: none; }
 .source-note { margin-top: 1.5rem; color: var(--muted); font-size: .86rem; }

@@ -15,7 +15,7 @@
 <body class="s11">
 <header class="site-header"><a class="brand" href="index.html">Probest P2 · Estatística</a><span class="header-actions"><a class="switch" href="../index.html">↔ Trocar matéria</a><button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">◐ tema</button></span></header>
 <div class="page-wrap">
-<nav class="site-nav" aria-label="Seções"><details ><summary>Seções do site</summary><ol start="0"><li><a href="index.html">Início e roteiro</a></li><li><a href="01-amostras.html">Da probabilidade à estatística</a></li><li><a href="02-bayes-discreto.html">Bayes com hipóteses discretas</a></li><li><a href="03-preditiva-odds.html">Probabilidade preditiva e odds</a></li><li><a href="04-bayes-continuo.html">Priors contínuas e conjugadas</a></li><li><a href="05-map-priors.html">MAP, escolha de priors, MAP × MLE</a></li><li><a href="06-mle.html">Máxima verossimilhança (MLE)</a></li><li><a href="07-intervalos.html">Intervalos de confiança</a></li><li><a href="08-nhst.html">Testes de hipótese: fundamentos</a></li><li><a href="09-testes.html">Catálogo de testes (z, t, χ², F)</a></li><li><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança</a></li><li><a href="11-freq-bayes-regressao.html" aria-current="page">Frequentista × Bayesiano, bootstrap, regressão</a></li><li><a href="12-exercicios.html">Exercícios de treino (com solução)</a></li><li><a href="13-formulario.html">Formulário + tabelas interativas</a></li><li><a href="14-mapa-listas.html">Mapa das listas, checklist e fontes</a></li></ol></details></nav>
+<nav class="site-nav" aria-label="Seções"><details ><summary>Seções do site</summary><ol start="0"><li><a href="index.html">Início e roteiro</a></li><li><a href="01-amostras.html">Da probabilidade à estatística</a></li><li><a href="02-bayes-discreto.html">Bayes com hipóteses discretas</a></li><li><a href="03-preditiva-odds.html">Probabilidade preditiva e odds</a></li><li><a href="04-bayes-continuo.html">Priors contínuas e conjugadas</a></li><li><a href="05-map-priors.html">MAP, escolha de priors, MAP × MLE</a></li><li><a href="06-mle.html">Máxima verossimilhança (MLE)</a></li><li><a href="07-intervalos.html">Intervalos de confiança</a></li><li><a href="08-nhst.html">Testes de hipótese: fundamentos</a></li><li><a href="09-testes.html">Catálogo de testes (z, t, χ², F)</a></li><li><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança</a></li><li><a href="11-freq-bayes-regressao.html" aria-current="page">Frequentista × Bayesiano, bootstrap, regressão</a></li><li><a href="12-exercicios.html">Exercícios de treino (com solução)</a></li><li><a href="13-formulario.html">Formulário + tabelas interativas</a></li><li><a href="14-mapa-listas.html">Mapa das listas, checklist e fontes</a></li><li><a href="15-materiais-mit.html">Materiais: resumos das aulas do MIT</a></li></ol></details></nav>
 <main class="content">
 <span class="eyebrow">Seção 11 · Visão geral e extras</span>
 <h1>Frequentista × Bayesiano, bootstrap e regressão linear</h1>
@@ -25,6 +25,7 @@
 <li><a href="#comparacao">As duas escolas lado a lado</a></li>
 <li><a href="#credivel">Intervalo de confiança × de credibilidade</a></li>
 <li><a href="#pvalor-post">p-valor × probabilidade posterior</a></li>
+<li><a href="#parada">Regras de parada e princípio da verossimilhança</a></li>
 <li><a href="#bootstrap">Bootstrap</a></li>
 <li><a href="#regressao">Regressão linear</a></li>
 </ol></div>
@@ -58,7 +59,19 @@
 $$P(H_0\mid D)=\frac{P(D\mid H_0)P(H_0)}{P(D\mid H_0)P(H_0)+P(D\mid H_1)P(H_1)}.$$
 <p>Um p-valor de 0,04 <b>não</b> quer dizer "4% de chance de $H_0$ ser verdadeira". Se $H_0$ era muito plausível a priori, ela pode continuar provável mesmo com p = 0,04.</p>
 
-<h2 id="bootstrap">11.4 Bootstrap</h2>
+<h2 id="parada">11.4 Regras de parada e o princípio da verossimilhança</h2>
+<p>Duas pessoas observam exatamente os mesmos dados de uma moeda: 9 caras e 3 coroas. Querem testar $H_0:\theta=0{,}5$ × $H_1:\theta\gt0{,}5$.</p>
+<ul>
+<li><b>Pessoa A</b> decidiu antes jogar <b>12 vezes</b>. Para ela, o número de caras é Bin$(12;\ 0{,}5)$ e o p-valor é $P(X\ge9)=0{,}073$: não rejeita a 5%.</li>
+<li><b>Pessoa B</b> decidiu jogar <b>até sair a 3ª coroa</b>, e isso aconteceu na 12ª jogada. Para ela, o número de caras antes da 3ª coroa é Binomial Negativa, e o p-valor é $P(\text{9 ou mais caras antes da 3ª coroa})=0{,}033$: rejeita a 5%.</li>
+</ul>
+<p>Mesmos dados, conclusões diferentes: o p-valor depende da <b>regra de parada</b> (do que poderia ter acontecido e não aconteceu). Já as duas likelihoods são proporcionais a $\theta^9(1-\theta)^3$, então qualquer análise bayesiana (e o MLE $9/12$) dá o mesmo resultado para A e B.</p>
+<div class="box def"><span class="box-title">Princípio da verossimilhança</span>
+<p>Se duas experiências produzem likelihoods proporcionais para $\theta$, a evidência sobre $\theta$ é a mesma. A inferência bayesiana respeita esse princípio; o NHST não, porque olha para resultados "tão ou mais extremos" que dependem do plano do experimento.</p></div>
+<div class="box warn"><span class="box-title">Consequência prática</span>
+<p>No NHST, o plano (tamanho da amostra, quando parar, quantos testes fazer) tem que ser decidido <b>antes</b> de ver os dados. "Olhar os dados e continuar coletando até dar significativo" infla o erro tipo I.</p></div>
+
+<h2 id="bootstrap">11.5 Bootstrap</h2>
 <p>Ideia: quando não sabemos a distribuição da estatística, usamos a <b>própria amostra</b> como substituta da população. A distribuição empírica $\hat F$ (cada dado com peso $1/n$) faz o papel de $F$.</p>
 <ol class="steps">
 <li>Da amostra original $x_1,\dots,x_n$ (estatística $\hat\theta$, ex.: $\bar x$), sorteie <b>com reposição</b> $n$ valores: uma <b>amostra bootstrap</b>.</li>
@@ -73,7 +86,7 @@ $$P(H_0\mid D)=\frac{P(D\mid H_0)P(H_0)}{P(D\mid H_0)P(H_0)+P(D\mid H_1)P(H_1)}.
 <div class="box tip"><span class="box-title">Bootstrap paramétrico</span>
 <p>Se você confia num modelo (ex.: Exponencial), estime o parâmetro (MLE), gere amostras <b>do modelo ajustado</b> em vez de reamostrar os dados, e siga os mesmos passos.</p></div>
 
-<h2 id="regressao">11.5 Regressão linear (mínimos quadrados)</h2>
+<h2 id="regressao">11.6 Regressão linear (mínimos quadrados)</h2>
 <p>Modelo: $y_i=a+b\,x_i+\varepsilon_i$, com erros $\varepsilon_i$ independentes de média 0. Escolhemos $a,b$ que minimizam a soma dos quadrados dos resíduos $\sum(y_i-a-bx_i)^2$:</p>
 <div class="box def"><span class="box-title">Fórmulas</span>
 $$\hat b=\frac{S_{xy}}{S_{xx}}=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^2},\qquad \hat a=\bar y-\hat b\,\bar x.$$
@@ -91,9 +104,12 @@ $$\hat b=\frac{S_{xy}}{S_{xx}}=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar
 <li>"Linear" é nos <b>parâmetros</b>: $y=a+bx+cx^2$ também é regressão linear (mesmo método, mais colunas).</li>
 <li>Correlação não é causalidade; extrapolar para longe dos dados é arriscado.</li>
 <li>Olhe o gráfico dos resíduos: padrões indicam que o modelo está errado.</li>
+<li><b>Regressão à média:</b> se a correlação entre duas medidas não é perfeita, quem foi extremo na primeira tende a ficar mais perto da média na segunda (ex.: os piores alunos na P1 melhoram um pouco na P2 mesmo sem mudar nada). Atribuir essa melhora a uma "intervenção" é um erro clássico.</li>
+<li><b>Overfitting:</b> um polinômio de grau alto passa por todos os pontos, mas prevê mal dados novos.</li>
 </ul></div>
-<p class="source-note">Fontes: MIT 18.05 aulas 20 (Comparison of frequentist and Bayesian inference), 24 (Bootstrap confidence intervals) e 26 (Linear regression).</p>
+<p class="source-note">Fontes: MIT 18.05 aulas 20 (Comparison of frequentist and Bayesian inference: críticas, regras de parada, princípio da verossimilhança), 24 (Bootstrap confidence intervals) e 26 (Linear regression).</p>
 
+<div class="mit-links"><span>PDFs desta página (Drive):</span><a href="https://drive.google.com/file/d/15m6yYFBPkBm6RgtTouncJiMI_mbj-eba/view" target="_blank" rel="noopener" title="MIT 20 · Frequentist vs Bayesian">M20</a><a href="https://drive.google.com/file/d/1W9Aq6PtByO_wQ1g_5xPbiRcVc5BJHLS9/view" target="_blank" rel="noopener" title="MIT 24 · Bootstrap Confidence Intervals">M24</a><a href="https://drive.google.com/file/d/1DRbcuGVnKbMtEJHFqJg9MvLV9RC7RBmq/view" target="_blank" rel="noopener" title="MIT 26 · Linear Regression">M26</a><a href="15-materiais-mit.html">resumos das aulas →</a></div>
 <div class="pager"><a href="10-razao-verossimilhanca.html">← Teste da razão de verossimilhança</a><a href="12-exercicios.html">Exercícios de treino (com solução) →</a></div>
 </main>
 </div>

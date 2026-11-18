@@ -12,6 +12,7 @@
 <li><a href="#exp">Teste com uma única observação</a></li>
 <li><a href="#beta-mu">β como função do parâmetro</a></li>
 <li><a href="#armadilhas">Armadilhas de interpretação</a></li>
+<li><a href="#quiz">Teste conceitual</a></li>
 </ol></div>
 
 <h2 id="ingredientes">8.1 Ingredientes de um teste</h2>
@@ -130,4 +131,12 @@ $$\beta(\mu)=P\big(\text{aceitar}\mid\mu\big)=\Phi\Big(z_{\alpha/2}-\frac{\mu-\m
 <li><b>Múltiplos testes (p-hacking):</b> fazendo 20 testes independentes a 5% com todas as $H_0$ verdadeiras, $P(\text{pelo menos um falso positivo})=1-0{,}95^{20}\approx0{,}64$. Escolher o teste depois de olhar os dados invalida o α.</li>
 <li><b>Taxa de alarmes falsos entre os rejeitados</b> ("das pessoas multadas, quantas não estavam correndo?") <b>não</b> é α: depende de quantos casos são realmente $H_0$, ou seja, de uma prior (Bayes!).</li>
 </ul>
+<h2 id="quiz">8.10 Teste conceitual (clique e veja a explicação)</h2>
+<div class="vf" data-ans="F"><p>1. A potência do teste aumenta quando o nível de significância α diminui (com $n$ fixo).</p><div class="fb">Com α menor, a região de rejeição encolhe; fica mais difícil rejeitar $H_0$ mesmo quando $H_1$ é verdadeira, então a potência cai.</div></div>
+<div class="vf" data-ans="V"><p>2. O p-valor é a probabilidade, sob $H_0$, de a estatística de teste ser tão ou mais extrema que a observada.</p><div class="fb">É a definição. A palavra-chave é "sob $H_0$".</div></div>
+<div class="vf" data-ans="F"><p>3. $\alpha+\beta=1$.</p><div class="fb">α é calculado sob $H_0$ e β sob $H_1$; não há relação de soma. Ex.: no Exemplo 8.2, α = 0,05 e β = 0,36.</div></div>
+<div class="vf" data-ans="F"><p>4. Não rejeitar $H_0$ prova que $H_0$ é verdadeira.</p><div class="fb">Só indica falta de evidência contra $H_0$; com potência baixa, isso é comum mesmo quando $H_1$ vale.</div></div>
+<div class="vf" data-ans="V"><p>5. Para o mesmo α, um teste bilateral exige um valor de $|z|$ maior para rejeitar do que um unilateral na direção certa.</p><div class="fb">Bilateral usa $z_{\alpha/2}$ (1,96 a 5%); unilateral usa $z_\alpha$ (1,645).</div></div>
+<div class="vf" data-ans="V"><p>6. "Hipótese composta" é uma hipótese que não fixa completamente a distribuição dos dados.</p><div class="fb">Ex.: $\mu\gt40$, ou $\mu=40$ com σ desconhecido.</div></div>
+
 <p class="source-note">Fontes: MIT 18.05 aulas 17 e 18 (NHST I e II), Problem Set 8; Pishro-Nik 8.4.1–8.4.3; Brunton ep. 8–14.</p>

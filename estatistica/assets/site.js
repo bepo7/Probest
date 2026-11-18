@@ -343,9 +343,89 @@
     w.addEventListener("input", draw); w.addEventListener("change", draw); w._redraw = draw; draw();
   }
 
-  var registry = { "bayes-table": bayesTable, beta: betaWidget, normal: normalWidget, ci: ciWidget, power: powerWidget, tables: tablesWidget, mle: mleWidget };
+
+  /* ---------- Quadrado de Bayes (áreas) ---------- */
+  function squareWidget(w) {
+    var rows = (w.getAttribute("data-rows") || "H1;0.5;0.8|H2;0.5;0.2").split("|").map(function (r) { var a = r.split(";"); return { n: a[0], p: num({ value: a[1] }), l: num({ value: a[2] }) }; });
+    var title = w.getAttribute("data-title") || "Quadrado de Bayes";
+    function draw() {
+      var W = 640, H = 300, S = 240, X0 = 20, Y0 = 30, BX = 330, BW = 60;
+      var cols = [cssVar("--c1"), cssVar("--c2"), cssVar("--c3"), cssVar("--c4")], ink = cssVar("--muted"), line = cssVar("--line");
+      var tot = rows.reduce(function (a, r) { return a + r.p * r.l; }, 0), s = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="quadrado de Bayes">';
+      s += '<rect x="' + X0 + '" y="' + Y0 + '" width="' + S + '" height="' + S + '" fill="none" stroke="' + ink + '"/>';
+      var x = X0, y = Y0 + S;
+      rows.forEach(function (r, i) {
+        var wd = r.p * S, ht = r.l * S, c = cols[i % 4];
+        s += '<rect x="' + x + '" y="' + (Y0) + '" width="' + wd + '" height="' + S + '" fill="' + c + '" fill-opacity="0.08" stroke="' + line + '"/>';
+        s += '<rect x="' + x + '" y="' + (Y0 + S - ht) + '" width="' + wd + '" height="' + ht + '" fill="' + c + '" fill-opacity="0.75"/>';
+        if (wd > 26) s += '<text x="' + (x + wd / 2) + '" y="' + (Y0 - 8) + '" font-size="11" text-anchor="middle" fill="' + ink + '">' + r.n + "</text>";
+        else s += '<text x="' + x + '" y="' + (Y0 - 8) + '" font-size="11" text-anchor="start" fill="' + c + '">↓ ' + r.n + "</text>";
+        x += wd;
+      });
+      s += '<text x="' + X0 + '" y="' + (Y0 + S + 18) + '" font-size="11" fill="' + ink + '">largura = prior · altura pintada = likelihood · área pintada = numerador</text>';
+      var yy = Y0;
+      s += '<text x="' + BX + '" y="' + (Y0 - 8) + '" font-size="11" fill="' + ink + '">só a área pintada, empilhada = posterior</text>';
+      rows.forEach(function (r, i) {
+        var h = (r.p * r.l / tot) * S, c = cols[i % 4];
+        s += '<rect x="' + BX + '" y="' + yy + '" width="' + BW + '" height="' + h + '" fill="' + c + '" fill-opacity="0.75"/>';
+        if (h > 12) s += '<text x="' + (BX + BW + 8) + '" y="' + (yy + h / 2 + 4) + '" font-size="12" fill="' + ink + '">' + r.n + ": " + fmt(r.p * r.l / tot, 3) + "</text>";
+        yy += h;
+      });
+      s += "</svg>";
+      w.innerHTML = "<h4>" + title + "</h4>" + s + '<div class="out">P(D) = área pintada total = <b>' + fmt(tot, 4) + "</b>. " +
+        rows.map(function (r) { return r.n + ": " + fmt(r.p, 3) + " × " + fmt(r.l, 3) + " = " + fmt(r.p * r.l, 4); }).join(" · ") + "</div>";
+    }
+    w._redraw = draw; draw();
+  }
+
+  /* ---------- Resposta conferível: <span class="ans" data-answer="37/60" data-tol="0.002"> ---------- */
+  function parseAns(v) {
+    v = String(v).trim().replace(/\s/g, "").replace(",", ".");
+    if (/^-?[\d.]+\/[\d.]+$/.test(v)) { var p = v.split("/"); return parseFloat(p[0]) / parseFloat(p[1]); }
+    if (/%$/.test(v)) return parseFloat(v) / 100;
+    return parseFloat(v);
+  }
+  function setupAns(el) {
+    var target = parseAns(el.getAttribute("data-answer")), tol = parseFloat(el.getAttribute("data-tol") || "0");
+    if (!tol) tol = Math.max(Math.abs(target) * 0.01, 1e-3);
+    var lab = el.getAttribute("data-label") || "Sua resposta";
+    el.innerHTML = '<label>' + lab + ' <input type="text" inputmode="decimal" placeholder="ex.: 0,25 ou 1/4"></label><button type="button">Conferir</button><span class="ans-msg" aria-live="polite"></span>';
+    var inp = el.querySelector("input"), msg = el.querySelector(".ans-msg");
+    function check() {
+      var v = parseAns(inp.value);
+      if (!isFinite(v)) { msg.textContent = "Digite um número."; el.className = "ans"; return; }
+      if (Math.abs(v - target) <= tol) { msg.textContent = "✔ Correto"; el.className = "ans ok"; }
+      else { msg.textContent = "✘ Ainda não. Revise a conta (ou abra a solução)."; el.className = "ans bad"; }
+    }
+    el.querySelector("button").onclick = check;
+    inp.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
+  }
+
+  /* ---------- Verdadeiro/Falso: <div class="vf" data-ans="V"><p>afirmação</p><div class="fb">explicação</div></div> ---------- */
+  function setupVF(el) {
+    var ans = el.getAttribute("data-ans"), fb = el.querySelector(".fb");
+    var bar = el2("div", "vf-bar");
+    ["V", "F"].forEach(function (k) {
+      var b = el2("button", ""); b.type = "button"; b.textContent = k === "V" ? "Verdadeiro" : "Falso";
+      b.onclick = function () {
+        el.classList.remove("ok", "bad"); el.classList.add(k === ans ? "ok" : "bad");
+        fb.hidden = false;
+        fb.querySelector(".verdict") && fb.removeChild(fb.querySelector(".verdict"));
+        var v = el2("b", "verdict"); v.textContent = (k === ans ? "✔ Isso. " : "✘ Não: é " + (ans === "V" ? "verdadeiro" : "falso") + ". ");
+        fb.insertBefore(v, fb.firstChild);
+      };
+      bar.appendChild(b);
+    });
+    fb.hidden = true;
+    el.insertBefore(bar, fb);
+  }
+  function el2(t, c) { var e = document.createElement(t); if (c) e.className = c; return e; }
+
+  var registry = { square: squareWidget,  "bayes-table": bayesTable, beta: betaWidget, normal: normalWidget, ci: ciWidget, power: powerWidget, tables: tablesWidget, mle: mleWidget };
   function boot() {
     document.querySelectorAll("[data-widget]").forEach(function (w) { var f = registry[w.getAttribute("data-widget")]; w.classList.add("widget"); if (f) try { f(w); } catch (e) { w.textContent = "Erro no widget: " + e.message; } });
+    document.querySelectorAll(".ans[data-answer]").forEach(setupAns);
+    document.querySelectorAll(".vf[data-ans]").forEach(setupVF);
     if (window.renderMathInElement) {
       renderMathInElement(document.body, { delimiters: [{ left: "$$", right: "$$", display: true }, { left: "$", right: "$", display: false }, { left: "\\(", right: "\\)", display: false }], throwOnError: false, ignoredClasses: ["widget"] });
     }

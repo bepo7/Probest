@@ -88,15 +88,21 @@ $$\arg\max_\theta p(x\mid\theta)f(\theta) = \arg\max_\theta c\cdot p(x\mid\theta
 </ul>
 <p>A crítica frequentista é justamente a subjetividade da prior; a resposta bayesiana é que ela é explícita e pode ser discutida. Ver <a href="11-freq-bayes-regressao.html#comparacao">seção 11</a>.</p>
 
-<h2 id="quiz">5.8 Teste conceitual (V ou F, justifique)</h2>
-<div class="exercise"><p>1. Se a posterior é Normal, o MAP e a média posterior são iguais.</p>
-<details class="sol"><summary>Resposta</summary><div><p><b>V.</b> A Normal é simétrica e unimodal; a moda é a média.</p></div></details></div>
-<div class="exercise"><p>2. A prior Beta$(1,1)$ dá um MAP igual a $k/n$.</p>
-<details class="sol"><summary>Resposta</summary><div><p><b>V.</b> Posterior Beta$(1+k,1+n-k)$, moda $\frac{k}{n}$. É o caso "prior uniforme ⇒ MAP = MLE".</p></div></details></div>
-<div class="exercise"><p>3. A likelihood $p(x\mid\theta)$, vista como função de $\theta$, integra 1.</p>
-<details class="sol"><summary>Resposta</summary><div><p><b>F.</b> Ela é uma distribuição em $x$ (para $\theta$ fixo), não em $\theta$. Ex.: $\theta^3$ (3 caras em 3) integra $1/4$ em $[0,1]$.</p></div></details></div>
-<div class="exercise"><p>4. Com prior Beta$(2,8)$ e dados com 5 sucessos e 5 fracassos, a posterior é Beta$(7,13)$.</p>
-<details class="sol"><summary>Resposta</summary><div><p><b>V.</b> $a+k=2+5=7$, $b+(n-k)=8+5=13$.</p></div></details></div>
-<div class="exercise"><p>5. Quanto mais dados, mais a média posterior se aproxima da média da prior.</p>
-<details class="sol"><summary>Resposta</summary><div><p><b>F.</b> É o contrário: ela se aproxima do MLE (ex.: $\bar x$), porque o peso $b=n/\sigma^2$ dos dados cresce.</p></div></details></div>
+<h2 id="intervalos-prob">5.8 Intervalos de probabilidade e priors rígidas</h2>
+<div class="box def"><span class="box-title">Intervalo de probabilidade (credibilidade)</span>
+<p>Um intervalo $[a,b]$ com $P(a\le\theta\le b)=p$ <b>segundo a distribuição</b> (prior ou posterior). O mais usado é o central: do quantil $\frac{1-p}{2}$ ao quantil $\frac{1+p}{2}$. Ex.: para Beta$(9,21)$, o intervalo de 90% vai do quantil 5% ao 95%: $[0{,}172;\ 0{,}443]$.</p></div>
+<ul>
+<li><b>Resumir crenças:</b> "acredito com 90% que $\theta$ está entre 0,17 e 0,44" é uma frase legítima no mundo bayesiano.</li>
+<li><b>Construir uma prior:</b> pergunte-se "com 50% de certeza, $\theta$ está entre quanto e quanto? E com 90%?" e escolha a Beta (ou Normal) cujos quantis batem com essas respostas. É a forma prática de transformar opinião em prior.</li>
+<li><b>Priors rígidas:</b> uma prior que dá probabilidade zero (ou quase zero) a valores possíveis nunca se corrige: se o valor verdadeiro estiver fora do suporte da prior, a posterior nunca chegará nele. Deixe sempre alguma probabilidade para o que é possível, mesmo que improvável.</li>
+</ul>
+
+<h2 id="quiz">5.9 Teste conceitual (clique e veja a explicação)</h2>
+<div class="vf" data-ans="V"><p>1. Se a posterior é Normal, o MAP e a média posterior são iguais.</p><div class="fb">A Normal é simétrica e unimodal; a moda é a média.</div></div>
+<div class="vf" data-ans="V"><p>2. A prior Beta$(1,1)$ dá um MAP igual a $k/n$.</p><div class="fb">Posterior Beta$(1+k,1+n-k)$, moda $\frac{k}{n}$. É o caso "prior uniforme ⇒ MAP = MLE".</div></div>
+<div class="vf" data-ans="F"><p>3. A likelihood $p(x\mid\theta)$, vista como função de $\theta$, integra 1.</p><div class="fb">Ela é uma distribuição em $x$ (para $\theta$ fixo), não em $\theta$. Ex.: $\theta^3$ (3 caras em 3) integra $1/4$ em $[0,1]$.</div></div>
+<div class="vf" data-ans="V"><p>4. Com prior Beta$(2,8)$ e dados com 5 sucessos e 5 fracassos, a posterior é Beta$(7,13)$.</p><div class="fb">$a+k=2+5=7$, $b+(n-k)=8+5=13$.</div></div>
+<div class="vf" data-ans="F"><p>5. Quanto mais dados, mais a média posterior se aproxima da média da prior.</p><div class="fb">É o contrário: ela se aproxima do MLE (ex.: $\bar x$), porque o peso $b=n/\sigma^2$ dos dados cresce.</div></div>
+<div class="vf" data-ans="F"><p>6. Se a prior dá probabilidade zero a $\theta=0{,}9$, dados suficientes podem fazer a posterior de $\theta=0{,}9$ ficar positiva.</p><div class="fb">Posterior ∝ likelihood × prior; se a prior é 0, o produto é 0 para sempre (prior rígida).</div></div>
+<div class="vf" data-ans="F"><p>7. O MAP de uma posterior Beta$(A,B)$ é sempre $\frac{A}{A+B}$.</p><div class="fb">Essa é a <b>média</b>. A moda (MAP) é $\frac{A-1}{A+B-2}$ quando $A,B\gt1$.</div></div>
 <p class="source-note">Fontes: MIT 18.05 aulas 15 (Conjugate Priors) e 16 (Choosing Priors); slides de MAP (Tsun 7.5); Brunton ep. 22.</p>

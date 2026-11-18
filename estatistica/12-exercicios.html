@@ -15,11 +15,11 @@
 <body class="s12">
 <header class="site-header"><a class="brand" href="index.html">Probest P2 · Estatística</a><span class="header-actions"><a class="switch" href="../index.html">↔ Trocar matéria</a><button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">◐ tema</button></span></header>
 <div class="page-wrap">
-<nav class="site-nav" aria-label="Seções"><details ><summary>Seções do site</summary><ol start="0"><li><a href="index.html">Início e roteiro</a></li><li><a href="01-amostras.html">Da probabilidade à estatística</a></li><li><a href="02-bayes-discreto.html">Bayes com hipóteses discretas</a></li><li><a href="03-preditiva-odds.html">Probabilidade preditiva e odds</a></li><li><a href="04-bayes-continuo.html">Priors contínuas e conjugadas</a></li><li><a href="05-map-priors.html">MAP, escolha de priors, MAP × MLE</a></li><li><a href="06-mle.html">Máxima verossimilhança (MLE)</a></li><li><a href="07-intervalos.html">Intervalos de confiança</a></li><li><a href="08-nhst.html">Testes de hipótese: fundamentos</a></li><li><a href="09-testes.html">Catálogo de testes (z, t, χ², F)</a></li><li><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança</a></li><li><a href="11-freq-bayes-regressao.html">Frequentista × Bayesiano, bootstrap, regressão</a></li><li><a href="12-exercicios.html" aria-current="page">Exercícios de treino (com solução)</a></li><li><a href="13-formulario.html">Formulário + tabelas interativas</a></li><li><a href="14-mapa-listas.html">Mapa das listas, checklist e fontes</a></li></ol></details></nav>
+<nav class="site-nav" aria-label="Seções"><details ><summary>Seções do site</summary><ol start="0"><li><a href="index.html">Início e roteiro</a></li><li><a href="01-amostras.html">Da probabilidade à estatística</a></li><li><a href="02-bayes-discreto.html">Bayes com hipóteses discretas</a></li><li><a href="03-preditiva-odds.html">Probabilidade preditiva e odds</a></li><li><a href="04-bayes-continuo.html">Priors contínuas e conjugadas</a></li><li><a href="05-map-priors.html">MAP, escolha de priors, MAP × MLE</a></li><li><a href="06-mle.html">Máxima verossimilhança (MLE)</a></li><li><a href="07-intervalos.html">Intervalos de confiança</a></li><li><a href="08-nhst.html">Testes de hipótese: fundamentos</a></li><li><a href="09-testes.html">Catálogo de testes (z, t, χ², F)</a></li><li><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança</a></li><li><a href="11-freq-bayes-regressao.html">Frequentista × Bayesiano, bootstrap, regressão</a></li><li><a href="12-exercicios.html" aria-current="page">Exercícios de treino (com solução)</a></li><li><a href="13-formulario.html">Formulário + tabelas interativas</a></li><li><a href="14-mapa-listas.html">Mapa das listas, checklist e fontes</a></li><li><a href="15-materiais-mit.html">Materiais: resumos das aulas do MIT</a></li></ol></details></nav>
 <main class="content">
 <span class="eyebrow">Seção 12 · Treino</span>
 <h1>Exercícios de treino com solução</h1>
-<p class="lead">Exercícios <b>novos</b>, no estilo das listas e da prova, mas com enunciados e números diferentes. Tente cada um antes de abrir a solução. Depois de terminar um bloco, faça a lista correspondente (o <a href="14-mapa-listas.html">mapa das listas</a> diz qual).</p>
+<p class="lead">Exercícios <b>novos</b>, no estilo das listas e da prova, mas com enunciados e números diferentes. Tente cada um, digite o resultado no campo "Sua resposta" para conferir (aceita fração, como 3/5, ou decimal com vírgula) e só então abra a solução. Depois de terminar um bloco, faça a lista correspondente (o <a href="14-mapa-listas.html">mapa das listas</a> diz qual).</p>
 
 <div class="toc"><strong>Blocos</strong><ol>
 <li><a href="#b-bayes">Bayes discreto, preditiva e odds (1–3)</a></li>
@@ -35,6 +35,7 @@
 <div class="exercise"><span class="tag">tabela</span><span class="tag">preditiva</span>
 <p><b>1.</b> Há três urnas: A (3 brancas, 1 preta), B (2 brancas, 2 pretas) e C (1 branca, 3 pretas). Uma urna é escolhida com probabilidades $\frac14,\frac14,\frac12$. Retiram-se 2 bolas <b>com reposição</b> e ambas são brancas.</p>
 <p>(a) Monte a tabela bayesiana. (b) Qual a prior predictive de tirar uma branca na primeira retirada? (c) Qual a posterior predictive de a terceira bola ser branca?</p>
+<span class="ans" data-label="(a) P(urna A | dados)" data-answer="3/5" data-tol="0.002"></span><span class="ans" data-label="(b) prior predictive de branca" data-answer="7/16" data-tol="0.002"></span><span class="ans" data-label="(c) posterior predictive de branca" data-answer="37/60" data-tol="0.002"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>(a) Likelihood $=w^2$, com $w$ = fração de brancas.</p>
 <table><thead><tr><th>Urna</th><th class="num">Prior</th><th class="num">Likelihood</th><th class="num">Numerador</th><th class="num">Posterior</th></tr></thead><tbody>
@@ -49,6 +50,7 @@
 <div class="exercise"><span class="tag">tabela</span><span class="tag">MAP</span><span class="tag">preditiva</span>
 <p><b>2.</b> Um saco tem dados de 6 e de 10 faces na proporção $3:1$. Um dado é sorteado e lançado duas vezes, dando 3 e 6. Seja $\theta$ o número de faces.</p>
 <p>(a) Calcule a posterior de $\theta$ e o MAP. (b) Qual era a prior predictive de o primeiro lançamento dar 3? (c) Posterior predictive de o próximo lançamento dar 8? E de dar 2?</p>
+<span class="ans" data-label="(a) P(θ=6 | dados)" data-answer="25/28" data-tol="0.002"></span><span class="ans" data-label="(b) prior predictive de 3" data-answer="3/20" data-tol="0.001"></span><span class="ans" data-label="(c) P(próximo = 8)" data-answer="3/280" data-tol="0.0005"></span><span class="ans" data-label="(c) P(próximo = 2)" data-answer="67/420" data-tol="0.001"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>(a) Likelihood $(1/\theta)^2$ (ambos os resultados são possíveis nos dois dados). Numeradores: $\frac34\cdot\frac1{36}=\frac1{48}$ e $\frac14\cdot\frac1{100}=\frac1{400}$; total $\frac7{300}$. Posterior: $P(6)=\frac{25}{28}\approx0{,}893$, $P(10)=\frac{3}{28}\approx0{,}107$. MAP $=6$.</p>
 <p>(b) $\frac34\cdot\frac16+\frac14\cdot\frac1{10}=\frac18+\frac1{40}=\frac{3}{20}$.</p>
@@ -58,6 +60,7 @@
 <div class="exercise"><span class="tag">odds</span><span class="tag">fator de Bayes</span>
 <p><b>3.</b> Uma moeda é justa ou viciada (cara com prob. 0,75). As prior odds de ser viciada são $1:4$. Em 5 lançamentos sai C C K C C (K = coroa).</p>
 <p>(a) Fator de Bayes a favor de "viciada". (b) Posterior odds e posterior. (c) Odds preditivas de cara no 6º lançamento.</p>
+<span class="ans" data-label="(a) fator de Bayes" data-answer="2.53" data-tol="0.01"></span><span class="ans" data-label="(b) P(viciada | dados)" data-answer="0.388" data-tol="0.003"></span><span class="ans" data-label="(c) odds preditivas de cara" data-answer="1.48" data-tol="0.02"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>(a) $BF=\frac{0{,}75^4\cdot0{,}25}{0{,}5^5}=\frac{0{,}0791}{0{,}03125}\approx2{,}53$.</p>
 <p>(b) Posterior odds $=2{,}53\cdot\frac14\approx0{,}633$; $P(\text{viciada})=\frac{0{,}633}{1{,}633}\approx0{,}388$.</p>
@@ -69,6 +72,7 @@
 <div class="exercise"><span class="tag">Beta-Binomial</span>
 <p><b>4.</b> A probabilidade $\theta$ de um teste automatizado falhar tem prior Beta$(2,3)$. Em 12 execuções, houve 3 falhas.</p>
 <p>(a) Qual a pmf do número de falhas $X$ dado $\theta$? (b) Posterior, MAP e média. (c) Probabilidade de as duas próximas execuções falharem.</p>
+<span class="ans" data-label="(b) MAP" data-answer="4/15" data-tol="0.002"></span><span class="ans" data-label="(c) P(duas falhas)" data-answer="5/51" data-tol="0.002"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>(a) $p(x\mid\theta)=\binom{12}{x}\theta^x(1-\theta)^{12-x}$, $x=0,\dots,12$.</p>
 <p>(b) Beta$(2+3,\ 3+9)=$ Beta$(5,12)$. MAP $=\frac{4}{15}\approx0{,}267$; média $=\frac{5}{17}\approx0{,}294$.</p>
@@ -77,12 +81,14 @@
 
 <div class="exercise"><span class="tag">prior plana</span>
 <p><b>5.</b> Com prior Uniforme$[0,1]$ para $\theta$ e 4 ensaios Bernoulli$(\theta)$, qual a prior predictive de obter 4 sucessos? E de obter exatamente 2?</p>
+<span class="ans" data-label="P(4 sucessos)" data-answer="1/5" data-tol="0.001"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>$P(K=k)=\int_0^1\binom4k\theta^k(1-\theta)^{4-k}d\theta=\binom4k\frac{k!(4-k)!}{5!}=\frac15$ para todo $k$. Logo as duas respostas são $1/5$.</p>
 </div></details></div>
 
 <div class="exercise"><span class="tag">prior discreta</span><span class="tag">likelihood contínua</span>
 <p><b>6.</b> O tempo de resposta $X$ (s) de uma API é Uniforme$[0,\theta]$, com $\theta\in\{0{,}5;\ 1;\ 2\}$ e prior $\frac12,\frac13,\frac16$. (a) Observou-se 0,8 s. Posterior e MAP? (b) Depois, 1,5 s. Novo MAP?</p>
+<span class="ans" data-label="(a) P(θ=1 | 0,8 s)" data-answer="4/5" data-tol="0.002"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>(a) Likelihoods: 0 (pois 0,8 &gt; 0,5), $1$, $\frac12$. Numeradores $0,\ \frac13,\ \frac1{12}$; total $\frac5{12}$. Posterior $0;\ \frac45;\ \frac15$. MAP $=1$.</p>
 <p>(b) Agora só $\theta=2$ comporta 1,5 s: posterior $P(\theta=2)=1$, MAP $=2$.</p>
@@ -90,6 +96,7 @@
 
 <div class="exercise"><span class="tag">Normal-Normal</span>
 <p><b>7.</b> O peso real $\theta$ de uma peça tem prior $N(50,\ 4)$ (variância 4). Uma balança tem erro $N(0,1)$. (a) Uma pesagem dá 52. Posterior? (b) Quantas pesagens são necessárias para a variância posterior ficar abaixo de 0,05?</p>
+<span class="ans" data-label="(a) média posterior" data-answer="51.6" data-tol="0.01"></span><span class="ans" data-label="(a) variância posterior" data-answer="0.8" data-tol="0.005"></span><span class="ans" data-label="(b) nº de pesagens" data-answer="20" data-tol="0.0001"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>(a) $a=1/4$, $b=1$. $\mu_{\text{post}}=\frac{0{,}25(50)+52}{1{,}25}=51{,}6$; $\sigma^2_{\text{post}}=\frac1{1{,}25}=0{,}8$. Posterior $N(51{,}6;\ 0{,}8)$.</p>
 <p>(b) $\frac1{0{,}25+n}\lt0{,}05\Leftrightarrow n\gt19{,}75$: <b>20 pesagens</b>.</p>
@@ -97,6 +104,7 @@
 
 <div class="exercise"><span class="tag">MAP</span><span class="tag">MLE</span>
 <p><b>8.</b> Prior $f(\theta)=3\theta^2$ em $[0,1]$. Em 6 ensaios Bernoulli, 2 sucessos. Ache o MAP e compare com o MLE.</p>
+<span class="ans" data-label="MAP" data-answer="0.5" data-tol="0.002"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>Numerador $\propto\theta^2(1-\theta)^4\cdot\theta^2=\theta^4(1-\theta)^4$ (Beta(5,5)). Derivando o log: $\frac4\theta=\frac4{1-\theta}\Rightarrow\hat\theta_{\text{MAP}}=\frac12$. MLE $=\frac26=\frac13$. A prior favorece $\theta$ grande e puxa a estimativa para cima.</p>
 </div></details></div>
@@ -105,18 +113,21 @@
 
 <div class="exercise"><span class="tag">derivada do log</span>
 <p><b>9.</b> Distâncias de erro de um GPS seguem Rayleigh: $f(x\mid\sigma^2)=\frac{x}{\sigma^2}e^{-x^2/(2\sigma^2)}$, $x\ge0$. Ache o MLE de $\sigma^2$ e calcule para os dados $1,2,2,3$.</p>
+<span class="ans" data-label="σ̂² com os dados" data-answer="2.25" data-tol="0.005"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>$\ell=\sum\ln x_i-n\ln\sigma^2-\frac{\sum x_i^2}{2\sigma^2}$. Derivando em $\sigma^2$: $-\frac n{\sigma^2}+\frac{\sum x_i^2}{2\sigma^4}=0\Rightarrow\hat\sigma^2=\frac{\sum x_i^2}{2n}$. Dados: $\sum x_i^2=18$, $\hat\sigma^2=18/8=2{,}25$.</p>
 </div></details></div>
 
 <div class="exercise"><span class="tag">sem derivada</span>
 <p><b>10.</b> $f(x\mid\theta)=e^{-(x-\theta)}$ para $x\ge\theta$ (exponencial deslocada: há um atraso mínimo $\theta$). Dados: $3{,}1;\ 2{,}4;\ 5{,}0;\ 2{,}9$. Ache o MLE de $\theta$.</p>
+<span class="ans" data-label="θ̂" data-answer="2.4" data-tol="0.001"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>$L(\theta)=e^{-\sum x_i+n\theta}$ se $\theta\le\min x_i$, senão 0. Para $\theta\le\min x_i$, $L$ é <b>crescente</b> em $\theta$, então o máximo é na borda: $\hat\theta=\min x_i=2{,}4$.</p>
 </div></details></div>
 
 <div class="exercise"><span class="tag">dados agrupados</span>
 <p><b>11.</b> 40 lotes de 5 peças foram inspecionados; o número de defeituosas por lote foi: 0 em 22 lotes, 1 em 12, 2 em 5, 3 em 1. Supondo a mesma probabilidade $\theta$ de defeito para todas as peças, escreva a likelihood e ache o MLE.</p>
+<span class="ans" data-label="θ̂" data-answer="0.125" data-tol="0.001"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>Cada lote: Bin$(5,\theta)$. $L(\theta)=\prod_{\text{lotes}}\binom5{x_j}\theta^{x_j}(1-\theta)^{5-x_j}\propto\theta^{\sum x_j}(1-\theta)^{200-\sum x_j}$. $\sum x_j=12+10+3=25$. $\hat\theta=\frac{25}{200}=0{,}125$ (total de defeitos / total de peças; equivale a $\bar x/5$).</p>
 </div></details></div>
@@ -125,14 +136,17 @@
 
 <div class="exercise"><span class="tag">z</span>
 <p><b>12.</b> $n=50$, $\sigma=6$ (conhecido), $\bar x=72$. IC de 99% para $\mu$.</p>
+<span class="ans" data-label="limite inferior" data-answer="69.81" data-tol="0.02"></span><span class="ans" data-label="limite superior" data-answer="74.19" data-tol="0.02"></span>
 <details class="sol"><summary>Solução</summary><div><p>$z_{0,005}=2{,}576$; margem $=2{,}576\cdot6/\sqrt{50}=2{,}19$. IC: $[69{,}81;\ 74{,}19]$.</p></div></details></div>
 
 <div class="exercise"><span class="tag">tamanho de amostra</span>
 <p><b>13.</b> Quantas pessoas entrevistar para estimar uma proporção com margem de erro de 4% e 98% de confiança, sem informação prévia?</p>
+<span class="ans" data-label="n mínimo" data-answer="846" data-tol="0.0001"></span>
 <details class="sol"><summary>Solução</summary><div><p>Conservador: $\frac{z_{0,01}}{2\sqrt n}\le0{,}04$, com $z_{0,01}=2{,}326$: $n\ge(2{,}326/0{,}08)^2=845{,}4$ → <b>846</b>.</p></div></details></div>
 
 <div class="exercise"><span class="tag">t</span><span class="tag">χ²</span>
 <p><b>14.</b> Amostra normal com $n=8$, $\bar x=20{,}4$ e $s^2=2{,}25$. IC de 95% para $\mu$ e para $\sigma^2$.</p>
+<span class="ans" data-label="limite superior do IC de μ" data-answer="21.65" data-tol="0.02"></span><span class="ans" data-label="limite superior do IC de σ²" data-answer="9.32" data-tol="0.03"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>$t_{0,025;7}=2{,}365$; margem $=2{,}365\cdot1{,}5/\sqrt8=1{,}254$; $\mu\in[19{,}15;\ 21{,}65]$.</p>
 <p>$\chi^2_{0,025;7}=16{,}01$, $\chi^2_{0,975;7}=1{,}69$: $\sigma^2\in\left[\frac{7(2{,}25)}{16{,}01},\frac{7(2{,}25)}{1{,}69}\right]=[0{,}98;\ 9{,}32]$.</p>
@@ -142,6 +156,7 @@
 
 <div class="exercise"><span class="tag">z bilateral</span><span class="tag">potência</span>
 <p><b>15.</b> Pontuações de um teste padronizado: $\sigma=15$. $H_0:\mu=100$ × $H_1:\mu\ne100$, $n=36$, $\alpha=0{,}05$. (a) Com $\bar x=105{,}2$, decida e dê o p-valor. (b) Calcule $\beta$ se $\mu=106$. (c) Que $n$ dá potência 0,8 contra $\mu=106$?</p>
+<span class="ans" data-label="(a) z" data-answer="2.08" data-tol="0.01"></span><span class="ans" data-label="(b) β" data-answer="0.33" data-tol="0.01"></span><span class="ans" data-label="(c) n" data-answer="50" data-tol="0.0001"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>(a) $z=\frac{5{,}2}{15/6}=2{,}08\gt1{,}96$ → rejeita. p-valor $=2(1-\Phi(2{,}08))\approx0{,}038$.</p>
 <p>(b) $\beta=\Phi(1{,}96-2{,}4)-\Phi(-1{,}96-2{,}4)\approx\Phi(-0{,}44)\approx0{,}33$ (o desvio padronizado é $6/2{,}5=2{,}4$).</p>
@@ -150,12 +165,14 @@
 
 <div class="exercise"><span class="tag">t unilateral</span>
 <p><b>16.</b> Uma bateria deveria aguentar no mínimo 10 h. Cinco testes: $10{,}8;\ 11{,}5;\ 9{,}9;\ 12{,}1;\ 11{,}2$. Há evidência de que a média é maior que 10 h (α = 0,05, dados normais)?</p>
+<span class="ans" data-label="t" data-answer="2.99" data-tol="0.02"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>$H_0:\mu=10$, $H_1:\mu\gt10$. $\bar x=11{,}1$, $s^2=0{,}675$, $s=0{,}822$. $t=\frac{1{,}1}{0{,}822/\sqrt5}=2{,}99$; $t_{0,05;4}=2{,}132$ → rejeita. p-valor $\approx0{,}020$.</p>
 </div></details></div>
 
 <div class="exercise"><span class="tag">duas amostras</span>
 <p><b>17.</b> Latência de duas configurações de rede (ms), 8 medições cada: config. 1: $\bar x=42$; config. 2: $\bar y=37$; as duas variâncias amostrais deram 25 e supõe-se variâncias populacionais iguais. (a) Formule um teste para "a config. 2 é mais rápida". (b) Decida com α = 0,05. (c) E se a pergunta fosse "as latências diferem"?</p>
+<span class="ans" data-label="(b) t" data-answer="2.0" data-tol="0.005"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>(a) $H_0:\mu_1=\mu_2$; $H_1:\mu_1\gt\mu_2$. Estatística t pooled com $8+8-2=14$ g.l.</p>
 <p>(b) $s_p^2=25$; erro padrão $=5\sqrt{\frac18+\frac18}=2{,}5$; $t=\frac{42-37}{2{,}5}=2{,}0$. Região de rejeição: $t\gt t_{0,05;14}=1{,}761$. Rejeita $H_0$ (p-valor $\approx0{,}033$).</p>
@@ -164,12 +181,14 @@
 
 <div class="exercise"><span class="tag">χ² aderência</span>
 <p><b>18.</b> Um sistema deveria distribuir 120 tarefas igualmente entre 4 servidores. Contagens observadas: $30,22,28,40$. Teste a 5%.</p>
+<span class="ans" data-label="X²" data-answer="5.6" data-tol="0.01"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>$E_i=30$. $X^2=\frac{0+64+4+100}{30}=5{,}6$; g.l. $=3$; $\chi^2_{0,05;3}=7{,}81$ → não rejeita (p-valor $\approx0{,}13$).</p>
 </div></details></div>
 
 <div class="exercise" id="ex-glrt"><span class="tag">GLRT</span>
 <p><b>19.</b> Em $n$ tentativas de transmissão houve $x$ sucessos (Binomial). Queremos testar $H_0:p=0{,}3$ × $H_1:p\ne0{,}3$ por razão de verossimilhança generalizada. (a) Escreva $\Lambda$ em função de $n$ e $x$. (b) Com $n=50$, $x=21$, decida a 5% e dê o p-valor.</p>
+<span class="ans" data-label="−2 ln Λ" data-answer="3.22" data-tol="0.02"></span>
 <details class="sol"><summary>Solução</summary><div>
 <p>(a) MLE irrestrito $\hat p=x/n$. O $\binom nx$ cancela:</p>
 $$\Lambda=\frac{0{,}3^x\,0{,}7^{n-x}}{\hat p^{\,x}(1-\hat p)^{n-x}}=\Big(\frac{0{,}3\,n}{x}\Big)^{x}\Big(\frac{0{,}7\,n}{n-x}\Big)^{n-x}.$$
@@ -178,30 +197,19 @@ $$\Lambda=\frac{0{,}3^x\,0{,}7^{n-x}}{\hat p^{\,x}(1-\hat p)^{n-x}}=\Big(\frac{0
 
 <div class="exercise"><span class="tag">erros</span>
 <p><b>19b.</b> Um número $X$ é gerado de Uniforme$[0,\theta]$. Testa-se $H_0:\theta=1$ × $H_1:\theta\gt1$ rejeitando se $X\gt0{,}95$. Calcule α e β para $\theta=2$.</p>
+<span class="ans" data-label="α" data-answer="0.05" data-tol="0.001"></span><span class="ans" data-label="β" data-answer="0.475" data-tol="0.002"></span>
 <details class="sol"><summary>Solução</summary><div><p>$\alpha=P(X\gt0{,}95\mid\theta=1)=0{,}05$. $\beta=P(X\le0{,}95\mid\theta=2)=0{,}95/2=0{,}475$.</p></div></details></div>
 
 <h2 id="b-conc">Bloco F — Conceituais</h2>
-<div class="exercise"><span class="tag">V/F justificado</span>
-<p><b>20.</b> Julgue e justifique:</p>
-<ol type="a">
-<li>Aumentar o tamanho da amostra, mantendo α, aumenta a potência.</li>
-<li>Se o p-valor é 0,03, a probabilidade de $H_0$ ser verdadeira é 3%.</li>
-<li>Se $X\sim$ Poisson$(\lambda)$ com $\lambda$ desconhecido, o espaço de hipóteses é discreto.</li>
-<li>Um IC de 95% para $\mu$ que não contém $\mu_0$ implica rejeitar $H_0:\mu=\mu_0$ num teste bilateral a 5%.</li>
-<li>Com prior Beta$(1,1)$, a média posterior é igual ao MLE.</li>
-<li>Diminuir α de 0,05 para 0,01 diminui a probabilidade de erro tipo II.</li>
-</ol>
-<details class="sol"><summary>Respostas</summary><div>
-<ol type="a">
-<li><b>V.</b> O erro padrão cai, as distribuições sob $H_0$ e $H_1$ se separam.</li>
-<li><b>F.</b> p-valor é $P(\text{dados tão extremos}\mid H_0)$, não $P(H_0\mid\text{dados})$.</li>
-<li><b>F.</b> Os <i>dados</i> são discretos, mas $\lambda\in(0,\infty)$: hipóteses contínuas.</li>
-<li><b>V.</b> Dualidade IC–teste (seção 7.10).</li>
-<li><b>F.</b> Média $=\frac{k+1}{n+2}$; quem é igual ao MLE é o <b>MAP</b>.</li>
-<li><b>F.</b> Aumenta β (diminui a potência).</li>
-</ol>
-</div></details></div>
+<p>Julgue cada afirmação e veja a explicação.</p>
+<div class="vf" data-ans="V"><p>a) Aumentar o tamanho da amostra, mantendo α, aumenta a potência.</p><div class="fb">O erro padrão cai, e as distribuições sob $H_0$ e $H_1$ se separam.</div></div>
+<div class="vf" data-ans="F"><p>b) Se o p-valor é 0,03, a probabilidade de $H_0$ ser verdadeira é 3%.</p><div class="fb">p-valor é $P(\text{dados tão extremos}\mid H_0)$, não $P(H_0\mid\text{dados})$.</div></div>
+<div class="vf" data-ans="F"><p>c) Se $X\sim$ Poisson$(\lambda)$ com $\lambda$ desconhecido, o espaço de hipóteses é discreto.</p><div class="fb">Os <i>dados</i> são discretos, mas $\lambda\in(0,\infty)$: hipóteses contínuas.</div></div>
+<div class="vf" data-ans="V"><p>d) Um IC de 95% para $\mu$ que não contém $\mu_0$ implica rejeitar $H_0:\mu=\mu_0$ num teste bilateral a 5%.</p><div class="fb">Dualidade IC–teste (seção 7.10).</div></div>
+<div class="vf" data-ans="F"><p>e) Com prior Beta$(1,1)$, a média posterior é igual ao MLE.</p><div class="fb">Média $=\frac{k+1}{n+2}$; quem é igual ao MLE é o <b>MAP</b>.</div></div>
+<div class="vf" data-ans="F"><p>f) Diminuir α de 0,05 para 0,01 diminui a probabilidade de erro tipo II.</p><div class="fb">Aumenta β (diminui a potência), com $n$ fixo.</div></div>
 
+<div class="mit-links"><span>PDFs desta página (Drive):</span><a href="https://drive.google.com/file/d/1GrVVl5QZtlKpjc1ZMferBVI-sTk3rwMA/view" target="_blank" rel="noopener" title="MIT · Prática da Prova 2 (com tabelas)">MEX2</a><a href="https://drive.google.com/file/d/19VDReHw4M21CBDhMrngrIIvf_fiGKai0/view" target="_blank" rel="noopener" title="MIT · Problem Set 7">MPS07</a><a href="https://drive.google.com/file/d/1yNr5VOHwgkVbtbKLts3g1KILiA0iKNZs/view" target="_blank" rel="noopener" title="MIT · Problem Set 8">MPS08</a><a href="15-materiais-mit.html">resumos das aulas →</a></div>
 <div class="pager"><a href="11-freq-bayes-regressao.html">← Frequentista × Bayesiano, bootstrap, regressão</a><a href="13-formulario.html">Formulário + tabelas interativas →</a></div>
 </main>
 </div>
