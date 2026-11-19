@@ -7,7 +7,7 @@
 <li><a href="#tabela">A tabela bayesiana passo a passo</a></li>
 <li><a href="#roletas">Exemplo completo: roletas</a></li>
 <li><a href="#sequencial">Atualização sequencial = em lote</a></li>
-<li><a href="#binomial">Likelihood com vários dados (Binomial)</a></li>
+<li><a href="#binomial">Likelihood com vários dados (Binomial e vários indicadores)</a></li>
 <li><a href="#calc">Calculadora interativa</a></li>
 <li><a href="#map">MAP discreto</a></li>
 <li><a href="#cuidados">Erros clássicos</a></li>
@@ -101,6 +101,20 @@ $$\underbrace{P(H\mid D)}_{\text{posterior}} \;=\; \frac{\overbrace{P(D\mid H)}^
 </tbody></table></div>
 <p><b>Atalho:</b> o fator $\binom{20}{2}$ aparece em todas as linhas e se cancela na posterior. Você pode usar só $\theta^2(1-\theta)^{18}$ como "likelihood proporcional". <b>Mas</b> o total (a prior predictive dos dados) só sai certo com o coeficiente.</p>
 <p>Os dados quase empataram os fornecedores de 5% e 10%, apesar da prior favorecer o de 5%.</p></div>
+
+<div class="example" id="rede"><span class="box-title">Exemplo 2.4 — monitoramento de rede com dois indicadores</span>
+<p>Uma rede pode estar <b>Normal</b>, <b>Congestionada</b> ou em <b>Falha</b>, com prior $0{,}85;\ 0{,}10;\ 0{,}05$. O sistema de monitoramento tem dois indicadores binários: <b>Alerta</b> (dispara com probabilidade $0{,}05;\ 0{,}60;\ 0{,}90$ em cada estado) e <b>Timeout</b> ($0{,}02;\ 0{,}30;\ 0{,}95$). <b>Dado o estado</b>, os indicadores são independentes. Agora: Alerta disparou e Timeout <b>não</b>.</p>
+<p><b>Likelihood</b> com independência condicional: $P(A=1,T=0\mid H)=P(A=1\mid H)\,\big(1-P(T=1\mid H)\big)$.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Estado</th><th class="num">Prior</th><th class="num">Likelihood</th><th class="num">Numerador</th><th class="num">Posterior</th></tr></thead>
+<tbody>
+<tr><td>Normal</td><td class="num">0,85</td><td class="num">$0{,}05\cdot0{,}98=0{,}049$</td><td class="num">0,04165</td><td class="num">0,485</td></tr>
+<tr><td>Congestionada</td><td class="num">0,10</td><td class="num">$0{,}60\cdot0{,}70=0{,}420$</td><td class="num">0,04200</td><td class="num">0,489</td></tr>
+<tr><td>Falha</td><td class="num">0,05</td><td class="num">$0{,}90\cdot0{,}05=0{,}045$</td><td class="num">0,00225</td><td class="num">0,026</td></tr>
+<tr class="total"><td>Total</td><td class="num">1</td><td></td><td class="num">0,0859</td><td class="num">1</td></tr>
+</tbody></table></div>
+<p><b>Leitura:</b> o <b>Timeout ausente</b> quase descarta a Falha (likelihood 0,05 de não haver timeout numa falha), e Normal e Congestionada ficam empatadas. Se os dois indicadores tivessem disparado, a posterior seria $0{,}014;\ 0{,}292;\ 0{,}694$: a Falha passa a ser a mais provável.</p>
+<div class="box warn"><span class="box-title">Cuidado</span><p>"Não disparou" também é dado: entra na likelihood como $1-P(\text{disparar}\mid H)$. E a independência é <b>condicional</b> ao estado: sem saber o estado, Alerta e Timeout são correlacionados (os dois sobem quando a rede vai mal).</p></div></div>
 
 <h2 id="calc">2.6 Calculadora interativa</h2>
 <p>Use para conferir suas tabelas. Os valores iniciais são os do Exemplo 2.2; aperte "usar posterior como nova prior" e troque a likelihood para refazer a seção 2.4.</p>

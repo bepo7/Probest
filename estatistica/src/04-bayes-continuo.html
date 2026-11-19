@@ -16,6 +16,8 @@
 <li><a href="#pred-beta">Preditivas no modelo Beta</a></li>
 <li><a href="#disc-cont">Prior discreta, likelihood contínua</a></li>
 <li><a href="#normal">Normal-Normal</a></li>
+<li><a href="#gama">Gama-Poisson</a></li>
+<li><a href="#discretizar">Prior discretizada</a></li>
 <li><a href="#conjugadas">Tabela de conjugadas</a></li>
 <li><a href="#espacos">Espaço de dados × espaço de hipóteses</a></li>
 </ol></div>
@@ -107,6 +109,15 @@ $$P(\text{sucesso}) = \int_0^1 \theta\,f(\theta)\,d\theta = E[\theta] = \frac{A}
 <p>MAP $=20$. Se num outro dia a espera for de 25 min, só $\theta=30$ sobrevive e a posterior vira $P(\theta=30)=1$.</p>
 <p><b>Atenção às unidades:</b> se $\theta$ estiver em horas e o dado em minutos, converta antes (10 min $=1/6$ h). A likelihood $1/\theta$ muda com a unidade, mas a posterior não.</p></div>
 
+<div class="example" id="unif-cont"><span class="box-title">Exemplo 4.4b — a mesma ideia com prior contínua</span>
+<p>Agora o atraso máximo $\theta$ de um colega (em horas) tem prior <b>Uniforme$[0,2]$</b>, e o atraso de hoje, Uniforme$[0,\theta]$, foi de $x=0{,}5$ h.</p>
+<ul class="steps">
+<li>Numerador: $f(x\mid\theta)f(\theta)=\frac1\theta\cdot\frac12$ para $0{,}5\le\theta\le2$, e <b>zero para $\theta\lt0{,}5$</b> (o dado corta essa parte do suporte da prior).</li>
+<li>Normalização: $\int_{0{,}5}^{2}\frac{d\theta}{\theta}=\ln4$, então $f(\theta\mid x)=\dfrac{1}{\theta\,\ln 4}$ em $[0{,}5;\ 2]$.</li>
+<li>MAP $=0{,}5$ (a densidade $1/\theta$ é decrescente: o máximo fica na borda). Média posterior $=\frac{1{,}5}{\ln4}\approx1{,}08$ h.</li>
+<li>$P(\theta\gt1\mid x)=\frac{\ln(2/1)}{\ln4}=0{,}5$.</li>
+</ul></div>
+
 <h2 id="normal">4.6 Normal-Normal: prior contínua, likelihood contínua</h2>
 <p>Modelo: medições $x_1,\dots,x_n\mid\theta\sim N(\theta,\sigma^2)$ i.i.d. com $\sigma^2$ <b>conhecido</b> (o erro do instrumento), e prior $\theta\sim N(\mu_{\text{prior}},\sigma^2_{\text{prior}})$.</p>
 <div class="box def"><span class="box-title">Fórmulas de atualização</span>
@@ -128,11 +139,30 @@ $$a = \frac{1}{\sigma^2_{\text{prior}}},\qquad b=\frac{n}{\sigma^2},\qquad \mu_{
 <div class="box recog"><span class="box-title">Reconheça o modelo</span>
 <p>"Instrumento com erro normal de variância conhecida" + "prior normal para o valor real" → Normal-Normal. "Quantas medições para a variância posterior ser menor que $v$?" → resolva $\frac{1}{a+n/\sigma^2}\lt v$ para $n$ e <b>arredonde para cima</b>.</p></div>
 <div data-widget="normal" data-init="20,2,1,4,22.5"></div>
+<div class="box def" id="pred-normal"><span class="box-title">Prevendo uma nova medição</span>
+<p>Depois da atualização, uma <b>nova</b> medição é $X_{\text{novo}}=\theta+\varepsilon$, soma de duas normais independentes: a incerteza sobre $\theta$ (posterior) e o erro do instrumento. Logo</p>
+$$X_{\text{novo}}\mid\text{dados}\ \sim\ N\big(\mu_{\text{post}},\ \sigma^2_{\text{post}}+\sigma^2\big).$$
+<p>No Exemplo 4.5: $X_{\text{novo}}\sim N(22{,}35;\ 0{,}235+1)$, e $P(X_{\text{novo}}\gt23)=P\big(Z\gt\frac{23-22{,}35}{1{,}111}\big)\approx0{,}28$. Repare que a variância preditiva nunca fica menor que $\sigma^2$: mesmo sabendo $\theta$ com exatidão, o instrumento continua errando.</p></div>
 <details class="sol"><summary>De onde vêm as fórmulas? (completar quadrado)</summary><div>
 <p>$f(\theta\mid x)\propto \exp\!\Big(-\frac{(\theta-\mu_{\text{prior}})^2}{2\sigma^2_{\text{prior}}}\Big)\prod_i\exp\!\Big(-\frac{(x_i-\theta)^2}{2\sigma^2}\Big)$. O expoente é um polinômio de grau 2 em $\theta$ com coeficiente de $\theta^2$ igual a $-\frac12(a+b)$ e de $\theta$ igual a $a\mu_{\text{prior}}+b\bar x$. Completando o quadrado, $-\frac{a+b}{2}\big(\theta-\frac{a\mu_{\text{prior}}+b\bar x}{a+b}\big)^2$ + constante, que é a forma de uma Normal com aquela média e variância $1/(a+b)$.</p>
 </div></details>
 
-<h2 id="conjugadas">4.7 Tabela de conjugadas</h2>
+<h2 id="gama">4.7 Gama-Poisson: taxa de chegadas</h2>
+<p>Para uma <b>taxa</b> $\lambda\gt0$ (requisições por segundo, chamadas por hora), a prior natural é a <b>Gama</b>$(\alpha,\beta)$, com densidade $\propto\lambda^{\alpha-1}e^{-\beta\lambda}$, média $\alpha/\beta$ e moda $(\alpha-1)/\beta$. A Exponencial$(\beta)$ é a Gama$(1,\beta)$.</p>
+$$\underbrace{\lambda^{\sum x_i}e^{-n\lambda}}_{\text{likelihood Poisson}}\cdot\underbrace{\lambda^{\alpha-1}e^{-\beta\lambda}}_{\text{prior Gama}}=\lambda^{\alpha+\sum x_i-1}e^{-(\beta+n)\lambda}\quad\Longrightarrow\quad \text{Gama}\Big(\alpha+\sum x_i,\ \beta+n\Big).$$
+<div class="example"><span class="box-title">Exemplo 4.6 — requisições num servidor</span>
+<p>A taxa $\lambda$ (requisições por segundo) tem prior Gama$(2,1)$ (média 2). Em 4 segundos chegaram $4,6,3,5$ requisições ($\sum x_i=18$).</p>
+<ul class="steps">
+<li>Posterior: Gama$(2+18,\ 1+4)=$ <b>Gama$(20,5)$</b>.</li>
+<li>Média posterior $=20/5=4{,}0$; MAP $=19/5=3{,}8$; MLE (só os dados) $=\bar x=4{,}5$. A prior (média 2) puxa as estimativas bayesianas para baixo.</li>
+<li>Intervalo de probabilidade de 90%: $[2{,}65;\ 5{,}58]$.</li>
+<li><b>Preditiva</b> de nenhum pedido no próximo segundo: $\int e^{-\lambda}f(\lambda\mid x)\,d\lambda=\big(\frac{\beta'}{\beta'+1}\big)^{\alpha'}=(5/6)^{20}\approx0{,}026$.</li>
+</ul></div>
+
+<h2 id="discretizar">4.8 Prior discretizada (aproximando o contínuo por uma tabela)</h2>
+<p>Quando a integral é difícil, troque o intervalo de $\theta$ por uma grade (ex.: $\theta=0{,}05;\ 0{,}15;\ \dots;\ 0{,}95$), dê a cada ponto a prior $\propto f(\theta)$ e use a <a href="02-bayes-discreto.html#calc">tabela bayesiana comum</a>. Com grade fina, a posterior discreta se aproxima da contínua; o MAP e a média saem da tabela. É uma boa forma de conferir uma conta contínua na prova.</p>
+
+<h2 id="conjugadas">4.9 Tabela de conjugadas</h2>
 <p>Uma prior é <b>conjugada</b> a uma likelihood quando a posterior fica na mesma família da prior.</p>
 <div class="table-wrap"><table>
 <thead><tr><th>Dados (likelihood)</th><th>Parâmetro</th><th>Prior</th><th>Posterior</th></tr></thead>
@@ -143,9 +173,9 @@ $$a = \frac{1}{\sigma^2_{\text{prior}}},\qquad b=\frac{n}{\sigma^2},\qquad \mu_{
 <tr><td>Poisson: contagens $x_1..x_n$</td><td>$\lambda\gt 0$</td><td>Gamma$(\alpha,\beta)$ (taxa $\beta$)</td><td>Gamma$(\alpha+\sum x_i,\ \beta+n)$</td></tr>
 <tr><td>Exponencial: tempos $x_1..x_n$</td><td>$\lambda\gt0$</td><td>Gamma$(\alpha,\beta)$</td><td>Gamma$(\alpha+n,\ \beta+\sum x_i)$</td></tr>
 </tbody></table></div>
-<p>As duas primeiras linhas e a Normal são as cobradas na disciplina; as Gamma são bônus (e saem com o mesmo truque de reconhecer a forma).</p>
+<p>As duas primeiras linhas, a Normal e a Gama-Poisson (seção 4.7) apareceram nas aulas; a Gama-Exponencial sai com o mesmo truque de reconhecer a forma.</p>
 
-<h2 id="espacos">4.8 Espaço de dados × espaço de hipóteses</h2>
+<h2 id="espacos">4.10 Espaço de dados × espaço de hipóteses</h2>
 <p>Questão conceitual recorrente: classificar a <b>variável aleatória dos dados</b> e o <b>espaço de hipóteses</b> (os valores possíveis do parâmetro) como discretos ou contínuos. São coisas independentes.</p>
 <div class="table-wrap"><table>
 <thead><tr><th>Situação</th><th>Dados</th><th>Hipóteses</th></tr></thead>

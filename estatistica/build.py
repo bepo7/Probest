@@ -12,13 +12,13 @@ SRC = ROOT / "src"
 PAGES = [
     ("index.html", "Início e roteiro", "Início", "s1", []),
     ("01-amostras.html", "Da probabilidade à estatística", "Amostras e estimadores", "s1", ["M10", "M19"]),
-    ("02-bayes-discreto.html", "Bayes com hipóteses discretas", "Bayes discreto", "s2", ["M11", "MPS07"]),
+    ("02-bayes-discreto.html", "Bayes com hipóteses discretas", "Bayes discreto", "s2", ["M11", "MPS07", "GB1", "A0610"]),
     ("03-preditiva-odds.html", "Probabilidade preditiva e odds", "Preditiva e odds", "s3", ["M12", "MPS07"]),
-    ("04-bayes-continuo.html", "Priors contínuas e conjugadas", "Bayes contínuo", "s4", ["M13", "M14", "M14S", "M15"]),
+    ("04-bayes-continuo.html", "Priors contínuas e conjugadas", "Bayes contínuo", "s4", ["M13", "M14", "M14S", "M15", "GB2", "GB3"]),
     ("05-map-priors.html", "MAP, escolha de priors, MAP × MLE", "MAP e priors", "s5", ["M15", "M16", "S1", "B2"]),
     ("06-mle.html", "Máxima verossimilhança (MLE)", "MLE", "s6", ["M10", "MEX2"]),
-    ("07-intervalos.html", "Intervalos de confiança", "Intervalos de confiança", "s7", ["M22", "M23"]),
-    ("08-nhst.html", "Testes de hipótese: fundamentos", "NHST: fundamentos", "s8", ["M17", "M18", "MPS08"]),
+    ("07-intervalos.html", "Intervalos de confiança", "Intervalos de confiança", "s7", ["M22", "M23", "GIC"]),
+    ("08-nhst.html", "Testes de hipótese: fundamentos", "NHST: fundamentos", "s8", ["M17", "M18", "MPS08", "GT1"]),
     ("09-testes.html", "Catálogo de testes (z, t, χ², F)", "Catálogo de testes", "s9", ["M18", "M19", "MEX2"]),
     ("10-razao-verossimilhanca.html", "Teste da razão de verossimilhança", "Razão de verossimilhança", "s10", ["M19", "B1"]),
     ("11-freq-bayes-regressao.html", "Frequentista × Bayesiano, bootstrap, regressão", "Comparações e extras", "s11", ["M20", "M24", "M26"]),
@@ -63,7 +63,21 @@ DRIVE = {
     "LMLE": ("17yRyo--qjCsMfsi2MPj322gUagn193bd", "Lista MLE"),
     "LMLEG": ("1ZyJsivcY8yYgSM0Ull_rAWnWQEcg6D7X", "Lista MLE — gabarito"),
     "P2": ("1UC2kRa6K_6zXryQe7irAKbvfMTQh12um", "Prova 2 antiga"),
+    # Pasta de aulas gravadas e guias de estudo
+    "GB1": ("18tSIEvea1O8pnrNkhgDWIn_JoINg8G3K", "Guia de Estudos: Inferência Bayesiana"),
+    "GB2": ("1Cg_QI8f1BcLLbx0O1IKFIdQvo_n4q5gV", "Guia de Estudos: Inferência Bayesiana (Parte 2)"),
+    "GB3": ("1uC8uOaVvmc_wZ3qBxjjapfmgrfLGeDhH", "Guia de Estudos: Inferência Bayesiana (Parte 3)"),
+    "GIC": ("1909PPwha1sPFzoWbM7qGxAuAWj3oscwt", "Resumo de Inferência Estatística e Intervalos de Confiança"),
+    "GT1": ("1lF8EHbqIQN5LfBxX3JNFIgsb0eLjCVsS", "Resumo de Testes de Hipóteses e Inferência"),
+    "GT2": ("1yhOxWODeei_i4oj516MwIYorgY8Zr0Kg", "Resumo de Testes de Hipóteses e Inferência (outra versão)"),
+    "A0610": ("1fFjY7fEaR4Fr2_vj5r5mkHBfN2KSSYsz", "Gravação da aula de 06/10"),
+    "A1310": ("1SCKkA3E2riPnD99_Je82rV4D4z6KyEh6", "Gravação da aula de 13/10"),
+    "A1510": ("1oGnsKq5a-AdneuCAxkRh5Ob8bBmp_FQf", "Gravação da aula de 15/10"),
+    "A2010": ("18Tk45Lj_2sqFcz95NjljXKJtaQWTsOSW", "Gravação da aula de 20/10"),
+    "A2710": ("1zywzZnwJomXzvR366YpAdYcFvv4hpjPG", "Gravação da aula de 27/10"),
+    "A2910": ("130_U1Gy9A0J0epZnjja3elzb2tFZqVQG", "Gravação da aula de 29/10"),
 }
+DRIVE_FOLDER_AULAS = "https://drive.google.com/drive/folders/1aHPftdRk7cT9nLovNcnw9wIZE1utM4AM"
 
 
 def drive_url(code):
@@ -73,7 +87,14 @@ def drive_url(code):
 def mit_links(codes):
     if not codes:
         return ""
-    items = "".join(f'<a href="{drive_url(c)}" target="_blank" rel="noopener" title="{DRIVE[c][1]}">{c}</a>' for c in codes)
+    def label(c):
+        if c.startswith("A") and c[1:].isdigit():
+            return f"gravação {c[1:3]}/{c[3:5]}"
+        if c in ("GB1", "GB2", "GB3", "GIC", "GT1", "GT2"):
+            return {"GB1": "guia Bayes 1", "GB2": "guia Bayes 2", "GB3": "guia Bayes 3",
+                    "GIC": "resumo IC", "GT1": "resumo testes", "GT2": "resumo testes (v2)"}[c]
+        return c
+    items = "".join(f'<a href="{drive_url(c)}" target="_blank" rel="noopener" title="{DRIVE[c][1]}">{label(c)}</a>' for c in codes)
     return f'<div class="mit-links"><span>PDFs desta página (Drive):</span>{items}<a href="15-materiais-mit.html">resumos das aulas →</a></div>'
 
 KATEX = "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist"
@@ -110,7 +131,7 @@ TEMPLATE = """<!DOCTYPE html>
 def main():
     for i, (fname, short, tab, cls, codes) in enumerate(PAGES):
         body = (SRC / fname).read_text(encoding="utf-8")
-        body = body.replace("{{DRIVE_FOLDER}}", DRIVE_FOLDER)
+        body = body.replace("{{DRIVE_FOLDER}}", DRIVE_FOLDER).replace("{{DRIVE_FOLDER_AULAS}}", DRIVE_FOLDER_AULAS)
         for c in DRIVE:
             body = body.replace("{{" + c + "}}", drive_url(c))
         nav = "".join(

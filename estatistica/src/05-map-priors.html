@@ -38,6 +38,14 @@ $$\hat\theta_{\text{MAP}} = \arg\max_\theta f(\theta\mid x) = \arg\max_\theta\ p
 <p>Prior Beta$(4,4)$ para a probabilidade $\theta$ de um robô completar uma tarefa. Em 10 tentativas, completa 9.</p>
 <p>Posterior Beta$(13,5)$. MAP $=\frac{12}{16}=0{,}75$. MLE $=0{,}9$. Média $=13/18\approx0{,}72$. A prior simétrica em 0,5 "puxa" o MAP para o centro.</p></div>
 
+<div class="example" id="falhas"><span class="box-title">Exemplo 5.1b — falhas de um serviço web novo</span>
+<p>Pelo histórico de serviços parecidos, a taxa de falha $\theta$ por requisição tem prior Beta$(2,20)$ (média $\approx0{,}09$). Num teste rápido, 3 de 10 requisições falharam.</p>
+<ul>
+<li>MLE: $3/10=0{,}30$, baseado só nos 10 dados.</li>
+<li>Posterior Beta$(5,27)$: MAP $=\frac{4}{30}\approx0{,}133$; média $=\frac{5}{32}\approx0{,}156$.</li>
+</ul>
+<p>Com tão poucos dados, a prior pesa muito: o MAP fica bem mais perto de 0,09 do que de 0,30. Se as 10 requisições fossem 1000 (300 falhas), o MAP seria $\frac{301}{1020}\approx0{,}295$, quase o MLE.</p></div>
+
 <h2 id="pseudo">5.3 Prior como "dados imaginários"</h2>
 <p>Com prior Beta$(a,b)$ e $k$ sucessos em $n$:</p>
 $$\hat\theta_{\text{MAP}}=\frac{k+(a-1)}{n+(a-1)+(b-1)}\qquad\text{vs}\qquad \hat\theta_{\text{MLE}}=\frac kn.$$

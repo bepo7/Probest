@@ -32,6 +32,7 @@
 <li><a href="#contingencia">χ² de homogeneidade/independência</a></li>
 <li><a href="#f">Teste F para variâncias</a></li>
 <li><a href="#anova">ANOVA de um fator</a></li>
+<li><a href="#mann-whitney">Mann-Whitney (não paramétrico)</a></li>
 <li><a href="#resumo">Quadro-resumo</a></li>
 </ol></div>
 
@@ -161,7 +162,19 @@ $$F=\frac{\text{MS}_B}{\text{MS}_W}=\frac{\frac{1}{k-1}\sum_i n_i(\bar x_i-\bar 
 <p>Três algoritmos, 4 execuções cada (tempo em s): A: 12,14,11,13; B: 15,17,16,16; C: 13,12,14,13. Médias $12{,}5;\ 16;\ 13$; média geral $13{,}83$.</p>
 <p>$SS_B=4[(12{,}5-13{,}83)^2+(16-13{,}83)^2+(13-13{,}83)^2]=28{,}67$; $SS_W=5+2+2=9$. $F=\frac{28{,}67/2}{9/9}=14{,}3$, com $(2,9)$ g.l.; crítico $4{,}26$ → rejeita: pelo menos uma média difere (p-valor $\approx0{,}002$).</p></div>
 
-<h2 id="resumo">9.11 Quadro-resumo: qual teste usar?</h2>
+<h2 id="mann-whitney">9.11 Teste não paramétrico de Mann-Whitney (Wilcoxon da soma de postos)</h2>
+<p>Quando não dá para supor normalidade (amostras pequenas e assimétricas, dados ordinais), compare dois grupos independentes pelos <b>postos</b> (posições na ordenação) em vez dos valores.</p>
+<ol class="steps">
+<li>Junte as duas amostras e ordene; dê posto 1 ao menor (empates recebem a média dos postos).</li>
+<li>Some os postos do grupo 1: $R_1$. Calcule $U_1=R_1-\frac{n_1(n_1+1)}{2}$ (e $U_2=n_1n_2-U_1$).</li>
+<li>Sob $H_0$ (mesma distribuição nos dois grupos), $U$ fica perto de $n_1n_2/2$. Valores muito pequenos ou muito grandes levam a rejeitar. Use a tabela do teste ou, para amostras maiores ($n_1,n_2\gtrsim10$), a aproximação normal com média $\frac{n_1n_2}{2}$ e variância $\frac{n_1n_2(n_1+n_2+1)}{12}$.</li>
+</ol>
+<div class="example"><span class="box-title">Exemplo 9.10</span>
+<p>Tempos de resposta (ms) de dois servidores: A: $12,15,11,18,14$; B: $19,16,22,17,21$. Ordenando os 10 valores, os postos de A são $1,2,3,4,7$ (valores 11, 12, 14, 15, 18), então $R_A=17$ e $U_A=17-15=2$.</p>
+<p>Para $n_1=n_2=5$, o valor crítico bilateral a 5% é $U\le2$, então <b>rejeita</b> "mesma distribuição" (p-valor exato $\approx0{,}032$). O teste não usou média nem variância, só a ordem.</p></div>
+<div class="box tip"><span class="box-title">Quando usar</span><p>Paramétrico (t) é mais potente se as suposições valem; não paramétrico é mais seguro quando elas são duvidosas. Na prova, se o enunciado diz "variâncias iguais" e "normal", use o t.</p></div>
+
+<h2 id="resumo">9.12 Quadro-resumo: qual teste usar?</h2>
 <div class="table-wrap"><table>
 <thead><tr><th>Pergunta</th><th>Suposições</th><th>Estatística</th><th>Distribuição nula</th></tr></thead>
 <tbody>
@@ -175,6 +188,7 @@ $$F=\frac{\text{MS}_B}{\text{MS}_W}=\frac{\frac{1}{k-1}\sum_i n_i(\bar x_i-\bar 
 <tr><td>Linhas da tabela têm mesma distribuição?</td><td>contagens</td><td>$\sum\frac{(O-E)^2}{E}$</td><td>$\chi^2_{(r-1)(c-1)}$</td></tr>
 <tr><td>Duas variâncias iguais?</td><td>normais</td><td>$s_X^2/s_Y^2$</td><td>$F(n_X-1,n_Y-1)$</td></tr>
 <tr><td>$k$ médias iguais?</td><td>normais, var. iguais</td><td>$\text{MS}_B/\text{MS}_W$</td><td>$F(k-1,N-k)$</td></tr>
+<tr><td>Dois grupos, sem supor normalidade?</td><td>independentes</td><td>soma de postos → $U$</td><td>tabela de $U$ / normal aproximada</td></tr>
 <tr><td>Modelo simples × complexo?</td><td>$n$ grande</td><td>$-2\ln\Lambda$</td><td>$\chi^2$ (<a href="10-razao-verossimilhanca.html">seção 10</a>)</td></tr>
 </tbody></table></div>
 <div data-widget="tables"></div>
