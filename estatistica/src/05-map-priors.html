@@ -99,6 +99,8 @@ $$\arg\max_\theta p(x\mid\theta)f(\theta) = \arg\max_\theta c\cdot p(x\mid\theta
 <h2 id="intervalos-prob">5.8 Intervalos de probabilidade e priors rígidas</h2>
 <div class="box def"><span class="box-title">Intervalo de probabilidade (credibilidade)</span>
 <p>Um intervalo $[a,b]$ com $P(a\le\theta\le b)=p$ <b>segundo a distribuição</b> (prior ou posterior). O mais usado é o central: do quantil $\frac{1-p}{2}$ ao quantil $\frac{1+p}{2}$. Ex.: para Beta$(9,21)$, o intervalo de 90% vai do quantil 5% ao 95%: $[0{,}172;\ 0{,}443]$.</p></div>
+<p><b>Posterior Normal:</b> o intervalo de 95% é $\mu_{\text{post}}\pm1{,}96\,\sigma_{\text{post}}$ (é só "despadronizar" os quantis $\pm1{,}96$ da $N(0,1)$). Ex.: posterior $N(22{,}35;\ 0{,}235)$ do Exemplo 4.5 dá $22{,}35\pm1{,}96(0{,}485)=[21{,}40;\ 23{,}30]$.</p>
+<div class="box tip"><span class="box-title">Por que o intervalo importa mais que o MAP</span><p>Com mais dados, o MAP muitas vezes quase não muda (ex.: 40 de 100 e depois 120 de 300 dão MAP perto de 0,4 nos dois casos), mas a posterior fica muito mais estreita. Quem mostra esse ganho de certeza é o intervalo (ou probabilidades como $P(0{,}35\le\theta\le0{,}45)$), não a estimativa pontual.</p></div>
 <ul>
 <li><b>Resumir crenças:</b> "acredito com 90% que $\theta$ está entre 0,17 e 0,44" é uma frase legítima no mundo bayesiano.</li>
 <li><b>Construir uma prior:</b> pergunte-se "com 50% de certeza, $\theta$ está entre quanto e quanto? E com 90%?" e escolha a Beta (ou Normal) cujos quantis batem com essas respostas. É a forma prática de transformar opinião em prior.</li>
