@@ -91,6 +91,22 @@
 <li>Se a pessoa acertar 14: não rejeitamos $H_0$ ao nível 0,05. O p-valor é $P(X\ge14\mid H_0)=0{,}0577$.</li>
 </ul></div>
 
+<div class="example" id="beta-p"><span class="box-title">Exemplo 8.1b — taxa de defeitos: β(p) e o efeito de aumentar a amostra</span>
+<p>Um lote de chips deveria ter no máximo 4% de defeituosos. Testamos $H_0:p=0{,}04$ × $H_1:p\gt0{,}04$ inspecionando $n=100$ chips; $X\sim$ Bin$(100,p)$ é o número de defeituosos, e rejeitamos $H_0$ se $X\ge8$.</p>
+<ul class="steps">
+<li><b>Erro tipo I:</b> $\alpha=P_{0,04}(X\ge8)\approx0{,}048$.</li>
+<li><b>Erro tipo II:</b> não rejeitar $H_0$ quando a alternativa é verdadeira. Como $H_1$ contém muitos valores de $p$, o erro depende de qual é a taxa real, por isso escrevemos $\beta(p)=P_p(\text{não rejeitar }H_0)=P_p(X\le7)$. Ex.: $\beta(0{,}08)\approx0{,}447$ e $\beta(0{,}10)\approx0{,}206$.</li>
+<li><b>Poder:</b> $\pi(p)=P_p(\text{rejeitar }H_0)=1-\beta(p)$. Para $p=0{,}10$, $\pi=0{,}79$; para $p=0{,}08$, só $0{,}55$. O poder deve ser informado para um valor específico do parâmetro, ou por uma curva de poder.</li>
+<li><b>Aumentando a amostra</b> para $n=200$ com a regra $X\ge14$:</li>
+</ul>
+<div class="table-wrap"><table>
+<thead><tr><th class="num">$n$</th><th class="num">rejeita se</th><th class="num">$\alpha$</th><th class="num">$\beta(0{,}08)$</th><th class="num">$\beta(0{,}10)$</th></tr></thead>
+<tbody>
+<tr><td class="num">100</td><td class="num">$X\ge8$</td><td class="num">0,048</td><td class="num">0,447</td><td class="num">0,206</td></tr>
+<tr><td class="num">200</td><td class="num">$X\ge14$</td><td class="num">0,031</td><td class="num">0,264</td><td class="num">0,057</td></tr>
+</tbody></table></div>
+<p>Com $n$ fixo, mudar o limite só troca um erro pelo outro (com $n=100$ e $X\ge7$: $\alpha=0{,}106$ e $\beta(0{,}08)=0{,}303$). Aumentando $n$, os <b>dois erros diminuem</b> juntos.</p></div>
+
 <h2 id="pvalor">8.5 p-valor</h2>
 <div class="box def"><span class="box-title">Definição</span>
 <p>O p-valor é a probabilidade, <b>supondo $H_0$ verdadeira</b>, de a estatística de teste ser <b>tão extrema ou mais</b> que o valor observado (na direção de $H_1$):</p>

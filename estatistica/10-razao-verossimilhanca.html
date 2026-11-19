@@ -29,6 +29,9 @@
 <li><a href="#poisson">Exemplo completo: Poisson</a></li>
 <li><a href="#normal">Exemplo: Normal (GLRT = teste z)</a></li>
 <li><a href="#g">Ligação com a estatística G</a></li>
+<li><a href="#multinomial">Multinomial: G × Pearson passo a passo</a></li>
+<li><a href="#duas-taxas">Duas taxas Poisson iguais?</a></li>
+<li><a href="#qual">Qual teste de aderência usar?</a></li>
 </ol></div>
 
 <h2 id="np">10.1 Hipóteses simples: o lema de Neyman-Pearson</h2>
@@ -101,7 +104,61 @@ $$-2\ln\Lambda=2\sum_{i=1}^k O_i\ln\frac{O_i}{E_i}=G,$$
 <p>que é a estatística G da <a href="09-testes.html#gof">seção 9.7</a>, com $k-1$ g.l. (menos 1 por parâmetro estimado em $H_0$). No dado do Exemplo 9.6: $G\approx5{,}04$, muito próximo de $X^2=5{,}0$. O χ² de Pearson é uma aproximação da G.</p>
 <div class="box recog"><span class="box-title">Reconheça o modelo</span>
 <p>"Use o <i>generalized likelihood ratio test</i>", "defina a estatística Λ em função de $n$ e $x$" → aplique a receita: o denominador usa o MLE (ex.: $x/n$ para Binomial), o numerador usa o valor de $H_0$, simplifique e use Wilks com 1 g.l. Para praticar com a Binomial, veja o <a href="12-exercicios.html#ex-glrt">exercício de treino</a>.</p></div>
-<p class="source-note">Fontes: Pishro-Nik 8.4.5 (Likelihood Ratio Tests); MIT 18.05 aula 19 seção 4.5 (estatística G); prova antiga P2 (tipo de questão).</p>
+<h2 id="multinomial">10.8 A distribuição multinomial e o teste G × Pearson passo a passo</h2>
+<div class="box def"><span class="box-title">Multinomial$(n;\ p_1,\dots,p_k)$</span>
+<p>Em $n$ ensaios independentes, cada resultado cai em uma de $k$ categorias, com probabilidades constantes $p_1,\dots,p_k$. As contagens $(O_1,\dots,O_k)$ têm pmf</p>
+$$P(O=o\mid p)=\frac{n!}{o_1!\cdots o_k!}\prod_{i=1}^k p_i^{\,o_i},\qquad o_i\in\{0,\dots,n\},\ \sum_i o_i=n,\quad 0\le p_i\le1,\ \sum_i p_i=1.$$
+<ul>
+<li>Há $k-1$ probabilidades livres: a última é determinada pelas outras.</li>
+<li>Para $k=2$ é a Binomial.</li>
+<li>Vista como função de $p$ com as contagens fixas, essa pmf é a <b>verossimilhança</b> dos testes abaixo. O MLE (com a restrição $\sum p_i=1$) é $\hat p_i=O_i/n$.</li>
+</ul>
+<p>Ex.: $n=6$, $p=(0{,}5;\ 0{,}3;\ 0{,}2)$, contagens $(3,2,1)$: $\frac{6!}{3!\,2!\,1!}(0{,}5)^3(0{,}3)^2(0{,}2)=60\cdot0{,}00225=0{,}135$.</p></div>
+<div class="example"><span class="box-title">Exemplo 10.4 — o tráfego segue as proporções propostas?</span>
+<p>Um modelo de rede diz que os pacotes são 70% TCP, 20% UDP e 10% outros. Em $n=200$ pacotes observados: 128 TCP, 48 UDP, 24 outros. Teste $H_0:p=(0{,}7;\ 0{,}2;\ 0{,}1)$ × $H_1$: pelo menos uma probabilidade difere, com $\alpha=0{,}05$.</p>
+<ol class="steps">
+<li><b>Esperados sob $H_0$:</b> $E_i=np_{0i}=140,\ 40,\ 20$. As diferenças $O-E$ são $-12,\ 8,\ 4$: compatíveis com a variação amostral?</li>
+<li><b>Comparar os dois ajustes (GLRT):</b> $\ell(p)=C+128\ln p_1+48\ln p_2+24\ln p_3$, com $C$ sem $p$. Modelo restrito: $p_0$ fixado. Modelo completo: $\hat p=(0{,}64;\ 0{,}24;\ 0{,}12)$. A constante $C$ cancela e, como $\hat p_i/p_{0i}=O_i/E_i$,
+$$G=2[\ell(\hat p)-\ell(p_0)]=2\sum_i O_i\ln\frac{O_i}{E_i}=2\Big[128\ln\tfrac{128}{140}+48\ln\tfrac{48}{40}+24\ln\tfrac{24}{20}\Big]$$
+$$=2[-11{,}470+8{,}751+4{,}376]=2(1{,}657)\approx3{,}31.$$
+Termos individuais podem ser negativos, mas $G\ge0$ sempre.</li>
+<li><b>Pearson:</b> $X^2=\sum\frac{(O_i-E_i)^2}{E_i}=\frac{144}{140}+\frac{64}{40}+\frac{16}{20}=1{,}029+1{,}6+0{,}8\approx3{,}43$. Soma os desvios quadráticos, cada um dividido pela contagem esperada.</li>
+<li><b>p-valores:</b> todos os $E_i\ge5$, então vale a aproximação χ². Nenhum parâmetro foi estimado sob $H_0$: g.l. $=k-1=2$. Com 2 g.l. a cauda é exata e simples: $P(\chi^2_2\ge x)=e^{-x/2}$.
+$$p_G=e^{-3{,}31/2}\approx0{,}19,\qquad p_{\text{Pearson}}=e^{-3{,}43/2}\approx0{,}18.$$</li>
+<li><b>Decisão a 5%:</b> os dois p-valores são maiores que 0,05 (e as estatísticas ficam abaixo de $\chi^2_{0,05;2}=5{,}99$): <b>não rejeitamos $H_0$</b>. Não há evidência contra as proporções propostas, o que não prova que sejam as verdadeiras.</li>
+</ol>
+<p>$G$ e $X^2$ quase sempre dão valores próximos: $X^2$ é a aproximação de segunda ordem de $G$ quando $O_i\approx E_i$.</p></div>
+<div class="box tip"><span class="box-title">Leitura do p-valor</span>
+<p>p-valor alto → os dados são compatíveis com $H_0$ (não rejeitamos); p-valor $\le\alpha$ → rejeitamos. "Aceitar $H_0$" na fala da aula quer dizer "não rejeitar": é ausência de evidência contra, não prova.</p></div>
+
+<h2 id="duas-taxas">10.9 GLRT com dois parâmetros: duas taxas Poisson são iguais?</h2>
+<div class="example"><span class="box-title">Exemplo 10.5 — dois servidores têm a mesma taxa de erros?</span>
+<p>Erros por hora no servidor A: $x_1,\dots,x_n$ i.i.d. Poisson$(\lambda_A)$; no servidor B: $y_1,\dots,y_n$ i.i.d. Poisson$(\lambda_B)$, independentes. Em $n=8$ horas de cada: $S_A=\sum x_i=24$ e $S_B=\sum y_i=44$ erros. Teste $H_0:\lambda_A=\lambda_B$ × $H_1:\lambda_A\ne\lambda_B$ a 5%.</p>
+<ol class="steps">
+<li><b>Verossimilhança</b> (pela independência, multiplica tudo):
+$$L(\lambda_A,\lambda_B)=\prod_{i=1}^n\frac{e^{-\lambda_A}\lambda_A^{x_i}}{x_i!}\prod_{i=1}^n\frac{e^{-\lambda_B}\lambda_B^{y_i}}{y_i!}=\frac{e^{-n(\lambda_A+\lambda_B)}\lambda_A^{S_A}\lambda_B^{S_B}}{\prod x_i!\prod y_i!},$$
+$$\ell(\lambda_A,\lambda_B)=C-n\lambda_A-n\lambda_B+S_A\ln\lambda_A+S_B\ln\lambda_B.$$
+$C$ depende dos dados, não das taxas, e cancela na comparação.</li>
+<li><b>Modelo completo (MLE de cada taxa):</b> $\hat\lambda_A=S_A/n=3$, $\hat\lambda_B=S_B/n=5{,}5$ erros/hora.</li>
+<li><b>Sob $H_0$</b> ($\lambda_A=\lambda_B=\lambda$): $\ell_0(\lambda)=C-2n\lambda+(S_A+S_B)\ln\lambda$; $\frac{d\ell_0}{d\lambda}=-2n+\frac{S_A+S_B}{\lambda}=0$ dá
+$$\hat\lambda_0=\frac{S_A+S_B}{2n}=\frac{68}{16}=4{,}25,$$
+e $\frac{d^2\ell_0}{d\lambda^2}=-\frac{S_A+S_B}{\lambda^2}\lt0$ confirma o máximo. Se as taxas forem iguais, o melhor ajuste junta os 68 erros observados em 16 horas.</li>
+<li><b>Estatística:</b> $\Lambda=\dfrac{L(\hat\lambda_0,\hat\lambda_0)}{L(\hat\lambda_A,\hat\lambda_B)}$. Os termos $-n\lambda$ se cancelam ($-8\cdot8{,}5=-16\cdot4{,}25$), sobrando
+$$-2\ln\Lambda=2\Big[S_A\ln\frac{\hat\lambda_A}{\hat\lambda_0}+S_B\ln\frac{\hat\lambda_B}{\hat\lambda_0}\Big]=2[24\ln0{,}706+44\ln1{,}294]=2[-8{,}359+11{,}344]\approx5{,}97.$$</li>
+<li><b>Graus de liberdade:</b> 2 parâmetros livres no modelo completo, 1 sob $H_0$: $d=1$. Como $5{,}97\gt3{,}84$, <b>rejeita $H_0$</b>: há evidência de que as taxas diferem. p-valor $=P(\chi^2_1\ge5{,}97)\approx0{,}015$.</li>
+</ol></div>
+
+<h2 id="qual">10.10 Qual teste de aderência usar?</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Teste</th><th>Compara</th><th>Estatística</th><th>Pergunta típica</th></tr></thead>
+<tbody>
+<tr><td>K-S uma amostra (<a href="09-testes.html#ks">9.12</a>)</td><td>CDF empírica × CDF teórica</td><td>$\sup_x|F_n-F_0|$</td><td>Os tempos entre chegadas seguem a Exponencial proposta?</td></tr>
+<tr><td>K-S duas amostras</td><td>duas CDFs empíricas</td><td>$\sup_x|F_n-G_m|$</td><td>Duas versões do sistema produzem a mesma distribuição de latência? (sem escolher família)</td></tr>
+<tr><td>Pearson / G (<a href="09-testes.html#gof">9.7</a>, 10.8)</td><td>contagens observadas × esperadas</td><td>$\sum\frac{(O-E)^2}{E}$ ou $2\sum O\ln\frac OE$</td><td>As proporções de TCP, UDP e outros são 70%, 20% e 10%?</td></tr>
+<tr><td>GLRT (10.2–10.9)</td><td>melhor ajuste restrito × completo</td><td>$-2\ln\Lambda$</td><td>Dois servidores Poisson têm a mesma taxa, ou cada um tem a sua?</td></tr>
+</tbody></table></div>
+<p>O teste G é um caso particular do GLRT para contagens multinomiais. Todos rejeitam $H_0$ quando a estatística é <b>grande</b>.</p>
+<p class="source-note">Fontes: aula de 12/11 da disciplina (multinomial, G × Pearson, GLRT de duas taxas); Pishro-Nik 8.4.5 (Likelihood Ratio Tests); MIT 18.05 aula 19 seção 4.5 (estatística G); prova antiga P2 (tipo de questão).</p>
 
 <div class="mit-links"><span>PDFs desta página (Drive):</span><a href="https://drive.google.com/file/d/1pZSuin7ng6X41yMcv-liQ2mc1IaEPoUr/view" target="_blank" rel="noopener" title="MIT 19 · NHST III">M19</a><a href="https://drive.google.com/file/d/1LckrMd55JUUzbXDYaRsfCMuZDrY65Va1/view" target="_blank" rel="noopener" title="Livro Pishro-Nik (PDF completo)">B1</a><a href="15-materiais-mit.html">resumos das aulas →</a></div>
 <div class="pager"><a href="09-testes.html">← Catálogo de testes (z, t, χ², F)</a><a href="11-freq-bayes-regressao.html">Frequentista × Bayesiano, bootstrap, regressão →</a></div>

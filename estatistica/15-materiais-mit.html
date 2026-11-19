@@ -30,7 +30,7 @@
 </ol></div>
 
 <div class="toc"><strong>Aulas</strong><ol>
-<li><a href="#aulas">Aulas gravadas da professora</a></li>
+<li><a href="#aulas">Aulas da professora (gravações e anotações)</a></li>
 <li><a href="#m10">MIT 10 · Estatística e MLE</a></li>
 <li><a href="#m11">MIT 11 · Prior discreta</a></li>
 <li><a href="#m12">MIT 12 · Preditiva e odds</a></li>
@@ -51,6 +51,17 @@
 
 <h2 id="aulas">Aulas gravadas e guias de estudo da disciplina</h2>
 <p>A <a href="https://drive.google.com/drive/folders/1aHPftdRk7cT9nLovNcnw9wIZE1utM4AM" target="_blank" rel="noopener">segunda pasta do Drive</a> tem as gravações das aulas de outubro e guias de estudo curtos feitos a partir delas. Abaixo, o que cada aula cobre, com o <b>minuto aproximado</b> de cada trecho na gravação, e onde o assunto está neste site. Os exemplos da professora seguem de perto os do MIT; o site usa exemplos com outros números.</p>
+
+<div class="mit-card" id="aula-2909"><h3>29/09 · MLE e introdução à inferência bayesiana</h3>
+<div class="meta">Sem gravação na pasta; resumo feito a partir das anotações e dos slides da aula · No site: <a href="06-mle.html">§6</a>, <a href="06-mle.html#varios">§6.8</a>, <a href="04-bayes-continuo.html#cont">§4.1</a>, <a href="05-map-priors.html#priors">§5.7</a></div>
+<ul>
+<li><b>MLE:</b> $\hat\theta\in\arg\max_{\theta\in\Theta}L(\theta;x)$, com $L$ = probabilidade conjunta (discreto) ou densidade conjunta (contínuo) dos dados observados.</li>
+<li><b>Perda de pacotes:</b> Bernoulli com 3 perdas em 20 → $\hat p=3/20$; previsão de nenhuma perda nos próximos 5 trocando $p$ por $\hat p$: $(17/20)^5\approx0{,}44$.</li>
+<li><b>Detecção de spam com MLE:</b> três parâmetros ($\pi$, $p_S$, $p_H$), log-verossimilhança em três parcelas maximizadas separadamente; depois Bayes com os parâmetros estimados e decisão MAP.</li>
+<li><b>Inferência bayesiana:</b> prior → verossimilhança → posterior; a evidência $m(D)=\int L(\theta;D)\pi(\theta)\,d\theta$ garante que a posterior integra 1.</li>
+<li><b>Tipos de prior:</b> informativa, fracamente informativa e análise de sensibilidade; no método bayesiano a prior é obrigatória.</li>
+<li><b>MLE × Bayes:</b> estimativa pontual × distribuição; resumos da posterior (média, mediana, MAP); bootstrap como alternativa frequentista para a incerteza; Dirichlet para vetores de probabilidades.</li>
+</ul></div>
 
 <div class="mit-card" id="aula-0610"><h3>06/10 · Inferência bayesiana com hipóteses discretas</h3>
 <div class="meta"><a href="https://drive.google.com/file/d/1fFjY7fEaR4Fr2_vj5r5mkHBfN2KSSYsz/view" target="_blank" rel="noopener">gravação (87 min)</a> · <a href="https://drive.google.com/file/d/18tSIEvea1O8pnrNkhgDWIn_JoINg8G3K/view" target="_blank" rel="noopener">guia de estudos</a> · No site: <a href="02-bayes-discreto.html">§2</a>, <a href="03-preditiva-odds.html">§3</a>, <a href="05-map-priors.html">§5</a></div>
@@ -109,6 +120,20 @@
 <li><b>0–20 min:</b> p-valor (soma para estatística discreta, área para contínua) e cuidados de interpretação: p-valor grande não prova $H_0$, e pode ser só amostra pequena (teste de baixa potência).</li>
 <li><b>23–40 min:</b> t de duas amostras com variâncias iguais e diferentes, comparando duas versões de um sistema.</li>
 <li><b>41–61 min:</b> teste de Wilcoxon / Mann-Whitney: postos, soma $W$, distribuição exata por contagem de combinações, aproximação normal, empates; compara distribuições, não médias.</li>
+</ul></div>
+
+<div class="mit-card" id="aula-1211"><h3>12/11 · Testes de aderência: K-S, multinomial, Pearson, G e GLRT</h3>
+<div class="meta">Sem gravação na pasta; resumo feito a partir das anotações e dos slides da aula · No site: <a href="09-testes.html#ks">§9.12</a>, <a href="10-razao-verossimilhanca.html#multinomial">§10.8–10.10</a></div>
+<ul>
+<li><b>Por que testar uma distribuição:</b> avaliar se os dados são compatíveis com um modelo; permite investigar diferenças de localização, dispersão e forma.</li>
+<li><b>K-S:</b> CDF empírica $F_n(x)=\#\{i:x_i\le x\}/n$; $D_n=\sup|F_n-F_0|$ (uma amostra) e $D_{n,m}=\sup|F_n-G_m|$ (duas); cálculo por $D^+$ (depois do salto) e $D^-$ (antes do salto).</li>
+<li><b>Condições:</b> amostra i.i.d., $F_0$ contínua e especificada, parâmetros especificados. Rejeita $H_0$ se $D_n\gt D_{\alpha,n}$; não rejeitar não prova o modelo.</li>
+<li><b>p-valor:</b> $P_{H_0}(D_n\ge D_{\text{obs}})$; para $n$ grande, $p\approx Q_{KS}(\sqrt n D_{\text{obs}})$ e, com duas amostras, $Q_{KS}(\sqrt{nm/(n+m)}\,D_{\text{obs}})$.</li>
+<li><b>Exemplo da aula:</b> 10 latências contra uma Exponencial com taxa estimada ($\hat\lambda=1/5{,}92$); $D^-=0{,}4463$ logo antes do primeiro dado: o modelo prevê 44,6% dos valores abaixo de 3,5 ms e a amostra não tem nenhum. Com taxa estimada, o teste precisa ser recalibrado.</li>
+<li><b>Limites:</b> pouco sensível nas caudas; Anderson-Darling dá mais peso a elas.</li>
+<li><b>Multinomial:</b> pmf $\frac{n!}{o_1!\cdots o_k!}\prod p_i^{o_i}$ (é a função de verossimilhança); exemplo do dado com seis faces.</li>
+<li><b>G × Pearson</b> com $n=100$ e $p_0=(0{,}40;\ 0{,}35;\ 0{,}25)$: $G\approx1{,}09$, $X^2\approx1{,}10$, 2 g.l., p-valores ≈ 0,58: não rejeita.</li>
+<li><b>Qual teste usar</b> (K-S uma/duas amostras, Pearson/G, GLRT) e <b>GLRT para duas taxas Poisson</b>: $\hat\lambda_0=(S_A+S_B)/2n$ sob $H_0$, $\Lambda=L(\hat\lambda_0,\hat\lambda_0)/L(\hat\lambda_A,\hat\lambda_B)$.</li>
 </ul></div>
 
 <h2 id="bayes">Parte bayesiana</h2>

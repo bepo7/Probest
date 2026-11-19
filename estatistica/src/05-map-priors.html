@@ -89,10 +89,12 @@ $$\arg\max_\theta p(x\mid\theta)f(\theta) = \arg\max_\theta c\cdot p(x\mid\theta
 <h2 id="priors">5.7 Como escolher a prior</h2>
 <ul>
 <li><b>Informativa:</b> resume conhecimento prévio real (dados antigos, física do problema). Ex.: moedas reais são quase justas → Beta concentrada em 0,5.</li>
+<li><b>Fracamente informativa:</b> admite uma faixa ampla de valores, só descartando o absurdo. Ex.: Uniforme$(0{,}5;\ 0{,}8)$ concentra a massa numa faixa (informativa); Uniforme$(0,1)$ não filtra nada; uma Beta$(2,2)$ só diz que valores muito perto de 0 ou de 1 são menos plausíveis.</li>
 <li><b>Plana / não informativa:</b> Uniforme quando não se sabe nada. Cuidado: "plana" depende da parametrização (plana em $\theta$ não é plana em $\theta^2$).</li>
 <li><b>Conjugada:</b> escolhida por conveniência de conta. Ajuste $a,b$ (ou $\mu_0,\sigma_0$) para casar média e incerteza que você acredita.</li>
 <li><b>Nunca dê probabilidade zero</b> a algo possível: se $f(\theta_0)=0$, nenhum dado faz a posterior de $\theta_0$ deixar de ser zero (o produto continua 0).</li>
-<li><b>Muitos dados → a prior importa pouco.</b> Duas pessoas com priors razoáveis diferentes chegam a posteriores parecidas. Com poucos dados, teste a sensibilidade: refaça com outra prior e veja se a conclusão muda.</li>
+<li><b>Muitos dados → a prior importa pouco.</b> Duas pessoas com priors razoáveis diferentes chegam a posteriores parecidas. Com poucos dados, faça uma <b>análise de sensibilidade</b>: refaça com outras priors razoáveis e veja quanto a conclusão muda. Uma prior muito concentrada domina uma amostra pequena.</li>
+<li>No método bayesiano a prior é <b>obrigatória</b>: sem ela não há posterior. É por isso que a escolha precisa ser justificada.</li>
 </ul>
 <p>A crítica frequentista é justamente a subjetividade da prior; a resposta bayesiana é que ela é explícita e pode ser discutida. Ver <a href="11-freq-bayes-regressao.html#comparacao">seção 11</a>.</p>
 

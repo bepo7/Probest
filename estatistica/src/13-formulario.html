@@ -15,6 +15,7 @@
 <tr><th>Beta$(a,b)$</th><td>$f\propto\theta^{a-1}(1-\theta)^{b-1}$, constante $\frac{(a+b-1)!}{(a-1)!(b-1)!}$ · média $\frac a{a+b}$ · moda $\frac{a-1}{a+b-2}$</td><td><a href="04-bayes-continuo.html#beta">§4.2</a></td></tr>
 <tr><th>Beta-Binomial</th><td>Beta$(a,b)$ + $k$ sucessos em $n$ → Beta$(a+k,\ b+n-k)$ · $P(\text{próximo sucesso})=\frac{A}{A+B}$</td><td><a href="04-bayes-continuo.html#betabin">§4.3</a></td></tr>
 <tr><th>Normal-Normal</th><td>$a=\frac1{\sigma^2_{\text{prior}}}$, $b=\frac n{\sigma^2}$ · $\mu_{\text{post}}=\frac{a\mu_{\text{prior}}+b\bar x}{a+b}$ · $\sigma^2_{\text{post}}=\frac1{a+b}$</td><td><a href="04-bayes-continuo.html#normal">§4.6</a></td></tr>
+<tr><th>Dirichlet</th><td>$\theta=(\theta_1..\theta_K)\sim$ Dir$(\alpha_1..\alpha_K)$ · $E[\theta_i]=\alpha_i/\alpha_0$ · + contagens $o_i$ → Dir$(\alpha_i+o_i)$ · $K=2$: Beta</td><td><a href="04-bayes-continuo.html#dirichlet">§4.9</a></td></tr>
 <tr><th>MAP</th><td>$\arg\max_\theta p(x\mid\theta)f(\theta)$ · prior uniforme ⇒ MAP = MLE</td><td><a href="05-map-priors.html">§5</a></td></tr>
 </tbody></table></div>
 
@@ -44,7 +45,9 @@
 <tr><th>χ² variância</th><td>$\frac{(n-1)s^2}{\sigma_0^2}\sim\chi^2_{n-1}$</td><td><a href="09-testes.html#var">§9.6</a></td></tr>
 <tr><th>χ² aderência</th><td>$\sum\frac{(O-E)^2}{E}$ ou $G=2\sum O\ln\frac OE$ · g.l. $=k-1-\#$parâmetros estimados</td><td><a href="09-testes.html#gof">§9.7</a></td></tr>
 <tr><th>Contingência</th><td>$E_{ij}=\frac{\text{linha}\cdot\text{coluna}}{\text{total}}$ · g.l. $=(r-1)(c-1)$</td><td><a href="09-testes.html#contingencia">§9.8</a></td></tr>
-<tr><th>GLRT</th><td>$\Lambda=\frac{L(\hat\theta_0)}{L(\hat\theta)}$ · $-2\ln\Lambda\approx\chi^2_d$ · rejeita se $\Lambda$ pequeno</td><td><a href="10-razao-verossimilhanca.html">§10</a></td></tr>
+<tr><th>Multinomial</th><td>$P(O=o)=\frac{n!}{o_1!\cdots o_k!}\prod p_i^{o_i}$ · MLE $\hat p_i=O_i/n$ · $P(\chi^2_2\ge x)=e^{-x/2}$</td><td><a href="10-razao-verossimilhanca.html#multinomial">§10.8</a></td></tr>
+<tr><th>K-S</th><td>$D^+=\max\{\frac in-F_0(x_{(i)})\}$ · $D^-=\max\{F_0(x_{(i)})-\frac{i-1}n\}$ · $D_n=\max(D^+,D^-)$ · rejeita se $D_n\gt D_{\alpha,n}$ · $n$ grande: $p\approx Q_{KS}(\sqrt n D)$, crítico 5% $\approx1{,}36/\sqrt n$ · duas amostras: $\sqrt{nm/(n+m)}\,D$</td><td><a href="09-testes.html#ks">§9.12</a></td></tr>
+<tr><th>GLRT</th><td>$\Lambda=\frac{L(\hat\theta_0)}{L(\hat\theta)}$ · $-2\ln\Lambda\approx\chi^2_d$ · rejeita se $\Lambda$ pequeno · duas Poisson: $\hat\lambda_0=\frac{S_A+S_B}{2n}$, $-2\ln\Lambda=2\sum S\ln\frac{\hat\lambda}{\hat\lambda_0}$</td><td><a href="10-razao-verossimilhanca.html">§10</a></td></tr>
 </tbody></table></div>
 
 <h2 id="tabelas">13.4 Valores críticos mais usados</h2>

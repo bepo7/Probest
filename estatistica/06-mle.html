@@ -29,6 +29,7 @@
 <li><a href="#uniforme">Quando a derivada não serve: Uniforme</a></li>
 <li><a href="#pareto">Exemplo: Pareto</a></li>
 <li><a href="#agrupados">Dados agrupados em tabela</a></li>
+<li><a href="#varios">Vários parâmetros e previsão com o MLE</a></li>
 <li><a href="#propriedades">Propriedades do MLE</a></li>
 <li><a href="#momentos">Método dos momentos</a></li>
 <li><a href="#spoiler">Resultados das distribuições da Lista MLE</a></li>
@@ -111,7 +112,32 @@ $$\bar x=\frac{0\cdot12+1\cdot18+2\cdot11+3\cdot6+4\cdot3}{50}=\frac{70}{50}=1{,
 <div class="box recog"><span class="box-title">Reconheça o modelo</span>
 <p>"Cada um dos $m$ grupos fez $k$ ensaios e contou sucessos" → cada grupo é uma Binomial$(k,\theta)$, e a likelihood total é o produto das $m$ binomiais. O MLE junta tudo: total de sucessos sobre total de ensaios.</p></div>
 
-<h2 id="propriedades">6.8 Propriedades do MLE</h2>
+<h2 id="varios">6.8 Vários parâmetros que se separam e previsão com o MLE</h2>
+<p>Com dados Bernoulli, a log-verossimilhança de cada parâmetro tem sempre a forma</p>
+$$g(q)=k\ln q+(n-k)\ln(1-q),\qquad g'(q)=\frac kq-\frac{n-k}{1-q}=0\ \Rightarrow\ \hat q=\frac kn,\qquad g''(q)=-\frac{k}{q^2}-\frac{n-k}{(1-q)^2}\lt0.$$
+<p>Quando a log-verossimilhança é uma <b>soma de parcelas, cada uma com um único parâmetro</b>, maximize cada parcela separadamente. E, pela <a href="#propriedades">invariância</a>, qualquer probabilidade calculada a partir do parâmetro é estimada trocando $\theta$ por $\hat\theta$ ("plug-in").</p>
+<div class="example"><span class="box-title">Exemplo 6.7 — perda de pacotes e previsão</span>
+<p>Cada pacote enviado num enlace é perdido ($X_i=1$) ou chega ($X_i=0$), com $X_i$ i.i.d. Bernoulli$(p)$. De 50 pacotes, 4 se perderam. (a) MLE de $p$. (b) Probabilidade de nenhuma perda nos próximos 10 pacotes.</p>
+<ul class="steps">
+<li>(a) $L(p)=p^4(1-p)^{46}$, $\ell(p)=4\ln p+46\ln(1-p)$, $\ell'(p)=\frac4p-\frac{46}{1-p}=0$ → $\hat p=4/50=0{,}08$; $\ell''\lt0$, então é máximo. O mesmo resultado sai da pmf da Binomial do total $Y=\sum X_i$: o $\binom{50}{4}$ não depende de $p$.</li>
+<li>(b) $P(\text{nenhuma perda em }10)=(1-p)^{10}$; trocando $p$ por $\hat p$: $(0{,}92)^{10}\approx0{,}434$.</li>
+</ul></div>
+<div class="example"><span class="box-title">Exemplo 6.8 — classificador de phishing com MLE</span>
+<p>Um filtro observa uma característica binária $F$ ($F=1$: o e-mail tem a frase "verifique sua conta"). A classe $C$ é Phishing ($P$) ou Legítimo ($L$). Modelo: $P(C=P)=\pi$; $F\mid C=P\sim$ Bernoulli$(p_P)$; $F\mid C=L\sim$ Bernoulli$(p_L)$. Dados de treino:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Classe</th><th class="num">$F=1$</th><th class="num">$F=0$</th><th class="num">Total</th></tr></thead>
+<tbody><tr><td>Phishing</td><td class="num">12</td><td class="num">4</td><td class="num">16</td></tr><tr><td>Legítimo</td><td class="num">3</td><td class="num">21</td><td class="num">24</td></tr><tr class="total"><td>Total</td><td class="num">15</td><td class="num">25</td><td class="num">40</td></tr></tbody></table></div>
+<ul class="steps">
+<li><b>Log-verossimilhança completa</b> (para $0\lt\pi,p_P,p_L\lt1$):
+$$\ell(\pi,p_P,p_L)=\underbrace{16\ln\pi+24\ln(1-\pi)}_{\text{só }\pi}+\underbrace{12\ln p_P+4\ln(1-p_P)}_{\text{só }p_P}+\underbrace{3\ln p_L+21\ln(1-p_L)}_{\text{só }p_L}.$$</li>
+<li>Cada parcela tem a forma $g(q)$: $\hat\pi=16/40=0{,}4$, $\hat p_P=12/16=0{,}75$, $\hat p_L=3/24=0{,}125$. Cada $g''\lt0$, então é o máximo.</li>
+<li><b>Novo e-mail com $F=1$</b>, usando Bayes com os parâmetros estimados:
+$$P(P\mid F=1)=\frac{0{,}4\cdot0{,}75}{0{,}4\cdot0{,}75+0{,}6\cdot0{,}125}=\frac{0{,}30}{0{,}375}=0{,}8.$$</li>
+<li><b>Decisão MAP:</b> escolha a classe de maior posterior → <b>Phishing</b> (0,8 contra 0,2).</li>
+</ul>
+<p>Aqui o MLE estima os parâmetros, e o Bayes discreto da <a href="02-bayes-discreto.html">seção 2</a> faz a classificação. É o "Naive Bayes" com uma característica; com várias, multiplica-se uma verossimilhança por característica (como no <a href="03-preditiva-odds.html#bf">filtro de spam com fatores de Bayes</a>).</p></div>
+
+<h2 id="propriedades">6.9 Propriedades do MLE</h2>
 <ul>
 <li><b>Invariância:</b> o MLE de $g(\theta)$ é $g(\hat\theta)$. Ex.: o MLE do desvio padrão é $\sqrt{\hat\sigma^2}$; o MLE de $P(X=0)=e^{-\lambda}$ é $e^{-\bar x}$.</li>
 <li><b>Consistente:</b> $\hat\theta\to\theta$ quando $n\to\infty$.</li>
@@ -120,12 +146,12 @@ $$\bar x=\frac{0\cdot12+1\cdot18+2\cdot11+3\cdot6+4\cdot3}{50}=\frac{70}{50}=1{,
 <li>MLE = MAP com prior uniforme (<a href="05-map-priors.html#map-mle">seção 5.5</a>).</li>
 </ul>
 
-<h2 id="momentos">6.9 Método dos momentos (alternativa simples)</h2>
+<h2 id="momentos">6.10 Método dos momentos (alternativa simples)</h2>
 <p>Iguale momentos teóricos aos amostrais e resolva: $E[X]=\bar x$, $E[X^2]=\frac1n\sum x_i^2$, ...</p>
 <div class="example"><span class="box-title">Exemplo 6.6</span>
 <p>Uniforme$[0,\theta]$: $E[X]=\theta/2=\bar x\Rightarrow\hat\theta_{\text{MM}}=2\bar x$. Com os dados do Exemplo 6.3, $\bar x=2{,}025$ e $\hat\theta_{\text{MM}}=4{,}05$ (o MLE deu 3,4). Os dois métodos podem discordar; o MLE costuma ter menor erro quadrático.</p></div>
 
-<h2 id="spoiler">6.10 Resultados das distribuições cobradas na Lista MLE</h2>
+<h2 id="spoiler">6.11 Resultados das distribuições cobradas na Lista MLE</h2>
 <div class="box warn"><span class="box-title">Só abra depois de tentar a lista</span>
 <p>A Lista MLE pede o MLE de algumas distribuições específicas. Os exemplos acima ensinam todas as técnicas necessárias (derivada do log, produto de pmfs, análise sem derivada). Tente sozinho primeiro.</p></div>
 <details class="sol"><summary>Mostrar tabela de resultados (spoiler)</summary><div>

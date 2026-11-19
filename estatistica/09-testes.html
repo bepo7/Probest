@@ -33,6 +33,7 @@
 <li><a href="#f">Teste F para variâncias</a></li>
 <li><a href="#anova">ANOVA de um fator</a></li>
 <li><a href="#mann-whitney">Wilcoxon / Mann-Whitney (não paramétrico)</a></li>
+<li><a href="#ks">Kolmogorov-Smirnov (K-S)</a></li>
 <li><a href="#resumo">Quadro-resumo</a></li>
 </ol></div>
 
@@ -181,7 +182,80 @@ $$P(W=w)=\frac{\#\{\text{conjuntos de postos com soma } w\}}{\binom{n_1+n_2}{n_2
 </ul></div>
 <div class="box tip"><span class="box-title">Quando usar</span><p>Antes de qualquer teste, faça gráficos (boxplot, QQ plot) para ver se a suposição de normalidade é razoável. Paramétrico (t) é mais potente se as suposições valem; não paramétrico é mais seguro quando elas são duvidosas. Na prova, se o enunciado diz "normal" e "variâncias iguais", use o t.</p></div>
 
-<h2 id="resumo">9.12 Quadro-resumo: qual teste usar?</h2>
+<h2 id="ks">9.12 Teste de Kolmogorov-Smirnov (K-S): os dados seguem esta distribuição?</h2>
+<p>O χ² de aderência (9.7) obriga a agrupar valores contínuos em categorias. O K-S compara <b>funções de distribuição acumulada (CDFs)</b> diretamente, sem agrupar. Testar uma distribuição serve para ver se os dados são compatíveis com um modelo (ex.: "os tempos entre chegadas são Exponenciais?") e, com duas amostras, para detectar diferenças de <b>localização, dispersão e forma</b> ao mesmo tempo.</p>
+<div class="box def"><span class="box-title">Distribuição empírica e estatística K-S</span>
+<p>A <b>CDF empírica</b> de uma amostra $x_1,\dots,x_n$ é a fração dos dados até $x$ (uma escada que sobe $1/n$ em cada observação):</p>
+$$F_n(x)=\frac{\#\{i:\ x_i\le x\}}{n}.$$
+<ul>
+<li><b>Uma amostra</b> (dados × modelo teórico $F_0$): $\ D_n=\sup_x\,|F_n(x)-F_0(x)|$.</li>
+<li><b>Duas amostras</b> (dados × dados, tamanhos $n$ e $m$): $\ D_{n,m}=\sup_x\,|F_n(x)-G_m(x)|$.</li>
+</ul>
+<p>$D$ é a <b>maior distância vertical</b> entre as duas CDFs. $H_0$: os dados vêm de $F_0$ (ou: as duas amostras vêm da mesma distribuição). Rejeita-se $H_0$ quando $D$ é <b>grande</b>: $D_n\gt D_{\alpha,n}$ (teste sempre unilateral à direita na estatística).</p></div>
+<h3>Como calcular $D_n$ corretamente</h3>
+<p>Como $F_n$ é uma escada e $F_0$ é contínua, a maior distância ocorre <b>logo antes ou logo depois de um degrau</b>. Ordene os dados $x_{(1)}\le\dots\le x_{(n)}$ e calcule</p>
+$$D_n^+=\max_{1\le i\le n}\Big\{\frac{i}{n}-F_0(x_{(i)})\Big\},\qquad D_n^-=\max_{1\le i\le n}\Big\{F_0(x_{(i)})-\frac{i-1}{n}\Big\},\qquad D_n=\max(D_n^+,D_n^-).$$
+<p>$D^+$ usa o topo da escada <b>depois</b> do salto ($i/n$); $D^-$ usa o patamar <b>antes</b> do salto ($(i-1)/n$). Esquecer o $D^-$ é o erro mais comum: só olhar $|i/n-F_0|$ subestima a distância.</p>
+<div class="box warn"><span class="box-title">Condições do teste K-S clássico</span>
+<ul>
+<li>Amostra <b>i.i.d.</b></li>
+<li>$F_0$ <b>contínua</b> e <b>totalmente especificada</b>: os parâmetros de $F_0$ são dados no enunciado, não estimados dos mesmos dados.</li>
+<li>Se os parâmetros forem estimados da própria amostra (ex.: $\hat\lambda=1/\bar x$), o modelo fica "colado" nos dados, $D$ tende a sair menor e a tabela clássica deixa de valer (o teste fica conservador). A calibração precisa considerar a estimação (é o que faz o teste de Lilliefors, ou uma simulação).</li>
+<li><b>Não rejeitar não prova que o modelo é verdadeiro</b>: só diz que os dados não contradizem $F_0$.</li>
+</ul></div>
+<h3>p-valor e valores críticos</h3>
+<p>O p-valor é a chance, sob $H_0$, de observar uma distância tão grande ou maior: $p=P_{H_0}(D_n\ge D_{\text{obs}})$. A distribuição de $D_n$ sob $H_0$ <b>não depende de $F_0$</b> (desde que contínua), por isso existe uma tabela única.</p>
+<ul>
+<li><b>Amostra pequena:</b> use a tabela de $D_{\alpha,n}$. Para $\alpha=0{,}05$: $n=5$: 0,563 · $n=8$: 0,454 · $n=10$: 0,409 · $n=15$: 0,338 · $n=20$: 0,294 · $n=30$: 0,242.</li>
+<li><b>Amostra grande</b> (com continuidade e independência): $\sqrt n\,D_n$ tem aproximadamente a distribuição de Kolmogorov. Calcule $z_{\text{obs}}=\sqrt n\,D_{\text{obs}}$ e
+$$p\approx Q_{KS}(z_{\text{obs}})=2\sum_{k=1}^{\infty}(-1)^{k-1}e^{-2k^2z_{\text{obs}}^2}.$$
+Valores úteis: $Q_{KS}(1{,}22)=0{,}10$, $Q_{KS}(1{,}36)=0{,}05$, $Q_{KS}(1{,}63)=0{,}01$. Ou seja, a 5% o crítico é $D_{0,05;n}\approx1{,}36/\sqrt n$.</li>
+<li><b>Duas amostras:</b> o mesmo, com o tamanho "efetivo": $p\approx Q_{KS}\!\Big(\sqrt{\tfrac{nm}{n+m}}\,D_{\text{obs}}\Big)$.</li>
+</ul>
+<div class="example"><span class="box-title">Exemplo 9.11 — tempos entre requisições seguem Exponencial de média 2 s?</span>
+<p>Oito tempos entre requisições (s), já ordenados: $0{,}4;\ 0{,}7;\ 1{,}1;\ 1{,}3;\ 1{,}8;\ 2{,}9;\ 3{,}5;\ 6{,}2$. O fornecedor afirma que eles são Exponenciais com média <b>2 s</b> (parâmetro dado, não estimado). Teste a 5%.</p>
+<p>$H_0$: $F_0(x)=1-e^{-x/2}$. Tabela:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>$i$</th><th class="num">$x_{(i)}$</th><th class="num">$F_0(x_{(i)})$</th><th class="num">$i/n-F_0$ (depois do salto)</th><th class="num">$F_0-(i-1)/n$ (antes do salto)</th></tr></thead>
+<tbody>
+<tr><td>1</td><td class="num">0,4</td><td class="num">0,1813</td><td class="num">−0,0563</td><td class="num"><b>0,1813</b></td></tr>
+<tr><td>2</td><td class="num">0,7</td><td class="num">0,2953</td><td class="num">−0,0453</td><td class="num">0,1703</td></tr>
+<tr><td>3</td><td class="num">1,1</td><td class="num">0,4231</td><td class="num">−0,0481</td><td class="num">0,1731</td></tr>
+<tr><td>4</td><td class="num">1,3</td><td class="num">0,4780</td><td class="num">0,0220</td><td class="num">0,1030</td></tr>
+<tr><td>5</td><td class="num">1,8</td><td class="num">0,5934</td><td class="num">0,0316</td><td class="num">0,0934</td></tr>
+<tr><td>6</td><td class="num">2,9</td><td class="num">0,7654</td><td class="num">−0,0154</td><td class="num">0,1404</td></tr>
+<tr><td>7</td><td class="num">3,5</td><td class="num">0,8262</td><td class="num"><b>0,0488</b></td><td class="num">0,0762</td></tr>
+<tr><td>8</td><td class="num">6,2</td><td class="num">0,9550</td><td class="num">0,0450</td><td class="num">0,0800</td></tr>
+</tbody></table></div>
+<ul class="steps">
+<li>$D^+=0{,}0488$, $D^-=0{,}1813$ → $D_{\text{obs}}=0{,}1813$, logo antes do primeiro degrau: o modelo prevê 18% dos tempos abaixo de 0,4 s e a amostra não tem nenhum.</li>
+<li>Crítico: $D_{0,05;8}=0{,}454$. Como $0{,}181\lt0{,}454$, <b>não rejeita $H_0$</b>. p-valor exato $\approx0{,}92$ (a aproximação assintótica, $Q_{KS}(\sqrt8\cdot0{,}181)=Q_{KS}(0{,}51)\approx0{,}96$, já é grosseira com $n=8$).</li>
+<li>Conclusão: os dados são compatíveis com a Exponencial de média 2 s, o que não prova que ela seja o modelo certo (com só 8 pontos o teste tem pouca potência).</li>
+</ul>
+<p><b>E se a taxa fosse estimada?</b> Com $\hat\lambda=1/\bar x$ calculado dessa mesma amostra, a conta de $D$ é a mesma, mas comparar com 0,454 deixa de ser válido: é preciso recalibrar o teste (tabela de Lilliefors ou simulação).</p></div>
+<div class="example"><span class="box-title">Exemplo 9.12 — amostra grande</span>
+<p>Com $n=150$ tempos de resposta e $D_{\text{obs}}=0{,}12$ contra um modelo especificado: $z_{\text{obs}}=\sqrt{150}\cdot0{,}12=1{,}47$ e $p\approx Q_{KS}(1{,}47)\approx0{,}027\lt0{,}05$: <b>rejeita</b> o modelo. Pelo crítico: $1{,}36/\sqrt{150}=0{,}111\lt0{,}12$, mesma conclusão.</p></div>
+<div class="example"><span class="box-title">Exemplo 9.13 — K-S de duas amostras</span>
+<p>Latência (ms) de duas versões de um serviço: A: $3{,}1;\ 3{,}8;\ 4{,}2;\ 5{,}0;\ 6{,}3$ · B: $4{,}6;\ 5{,}4;\ 6{,}1;\ 7{,}2;\ 8{,}0$. Percorra os 10 valores em ordem e acompanhe as duas escadas:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>valor</th><th class="num">3,1</th><th class="num">3,8</th><th class="num">4,2</th><th class="num">4,6</th><th class="num">5,0</th><th class="num">5,4</th><th class="num">6,1</th><th class="num">6,3</th><th class="num">7,2</th><th class="num">8,0</th></tr></thead>
+<tbody>
+<tr><td>$F_A$</td><td class="num">0,2</td><td class="num">0,4</td><td class="num">0,6</td><td class="num">0,6</td><td class="num">0,8</td><td class="num">0,8</td><td class="num">0,8</td><td class="num">1</td><td class="num">1</td><td class="num">1</td></tr>
+<tr><td>$G_B$</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0,2</td><td class="num">0,2</td><td class="num">0,4</td><td class="num">0,6</td><td class="num">0,6</td><td class="num">0,8</td><td class="num">1</td></tr>
+<tr><td>$|F_A-G_B|$</td><td class="num">0,2</td><td class="num">0,4</td><td class="num"><b>0,6</b></td><td class="num">0,4</td><td class="num"><b>0,6</b></td><td class="num">0,4</td><td class="num">0,2</td><td class="num">0,4</td><td class="num">0,2</td><td class="num">0</td></tr>
+</tbody></table></div>
+<p>$D_{5,5}=0{,}6$. Aproximação: $\sqrt{25/10}\cdot0{,}6=0{,}95$, $p\approx Q_{KS}(0{,}95)\approx0{,}33$; o p-valor exato é 0,36. Não rejeita a 5%. Com $n=m=5$, só $D=1$ (separação total) daria $p\lt0{,}05$; amostras tão pequenas quase nunca rejeitam.</p></div>
+<div class="box tip"><span class="box-title">K-S: vantagens, limites e alternativas</span>
+<ul>
+<li><b>Vantagens:</b> não agrupa os dados; compara localização, dispersão e forma; o gráfico das duas CDFs mostra onde está a discrepância.</li>
+<li><b>Limites:</b> é pouco sensível nas <b>caudas</b> (lá as duas CDFs estão perto de 0 ou de 1); $D$ resume tudo numa distância só, então olhe o gráfico e o ponto do máximo; exige $F_0$ contínua e especificada.</li>
+<li><b>Anderson-Darling:</b> teste de aderência que também compara a CDF empírica com a teórica, mas dá <b>mais peso às diferenças nas caudas</b>. Útil quando valores extremos importam (latências altas, falhas raras).</li>
+<li><b>Aplicações:</b> validar simulações, comparar distribuições de latência ou vazão, checar tempos entre chegadas, detectar mudanças no tráfego.</li>
+</ul></div>
+<div class="box recog"><span class="box-title">Reconheça o modelo</span>
+<p>"Os dados seguem a distribuição X?" com <b>valores contínuos</b> e o modelo dado por completo → K-S de uma amostra. "As duas versões produzem a mesma distribuição?" sem escolher uma família → K-S de duas amostras. Com <b>contagens por categoria</b> → Pearson/G (9.7 e <a href="10-razao-verossimilhanca.html#multinomial">10.8</a>).</p></div>
+
+<h2 id="resumo">9.13 Quadro-resumo: qual teste usar?</h2>
 <div class="table-wrap"><table>
 <thead><tr><th>Pergunta</th><th>Suposições</th><th>Estatística</th><th>Distribuição nula</th></tr></thead>
 <tbody>
@@ -196,10 +270,12 @@ $$P(W=w)=\frac{\#\{\text{conjuntos de postos com soma } w\}}{\binom{n_1+n_2}{n_2
 <tr><td>Duas variâncias iguais?</td><td>normais</td><td>$s_X^2/s_Y^2$</td><td>$F(n_X-1,n_Y-1)$</td></tr>
 <tr><td>$k$ médias iguais?</td><td>normais, var. iguais</td><td>$\text{MS}_B/\text{MS}_W$</td><td>$F(k-1,N-k)$</td></tr>
 <tr><td>Dois grupos, sem supor normalidade?</td><td>independentes</td><td>soma dos postos $W$</td><td>exata (contagem) / normal aproximada</td></tr>
+<tr><td>Dados contínuos seguem $F_0$?</td><td>i.i.d., $F_0$ contínua e especificada</td><td>$D_n=\sup|F_n-F_0|$</td><td>tabela K-S / $Q_{KS}(\sqrt n D)$</td></tr>
+<tr><td>Duas amostras com a mesma distribuição?</td><td>independentes, contínuas</td><td>$D_{n,m}=\sup|F_n-G_m|$</td><td>$Q_{KS}(\sqrt{nm/(n+m)}\,D)$</td></tr>
 <tr><td>Modelo simples × complexo?</td><td>$n$ grande</td><td>$-2\ln\Lambda$</td><td>$\chi^2$ (<a href="10-razao-verossimilhanca.html">seção 10</a>)</td></tr>
 </tbody></table></div>
 <div data-widget="tables"></div>
-<p class="source-note">Fontes: MIT 18.05 aula 19 (NHST III: catálogo de testes, inclusive two-sample t, χ², F, ANOVA); Pishro-Nik 8.4.3–8.4.4; Brunton ep. 24–27.</p>
+<p class="source-note">Fontes: MIT 18.05 aula 19 (NHST III: catálogo de testes, inclusive two-sample t, χ², F, ANOVA); aula de 12/11 da disciplina (K-S, Anderson-Darling); Pishro-Nik 8.4.3–8.4.4; Brunton ep. 24–27.</p>
 
 <div class="mit-links"><span>PDFs desta página (Drive):</span><a href="https://drive.google.com/file/d/1mXl05vSel9G9xbanlrAEYH4t8nTTnihO/view" target="_blank" rel="noopener" title="MIT 18 · NHST II">M18</a><a href="https://drive.google.com/file/d/1pZSuin7ng6X41yMcv-liQ2mc1IaEPoUr/view" target="_blank" rel="noopener" title="MIT 19 · NHST III">M19</a><a href="https://drive.google.com/file/d/1GrVVl5QZtlKpjc1ZMferBVI-sTk3rwMA/view" target="_blank" rel="noopener" title="MIT · Prática da Prova 2 (com tabelas)">MEX2</a><a href="15-materiais-mit.html">resumos das aulas →</a></div>
 <div class="pager"><a href="08-nhst.html">← Testes de hipótese: fundamentos</a><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança →</a></div>

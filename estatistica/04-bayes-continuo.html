@@ -58,7 +58,7 @@ $$f(\theta\mid x) = \frac{p(x\mid\theta)\,f(\theta)}{\int p(x\mid\theta)f(\theta
 <h2 id="beta">4.2 A distribuição Beta</h2>
 <div class="box def"><span class="box-title">Beta$(a,b)$, para $\theta\in[0,1]$, com $a,b\gt 0$</span>
 $$f(\theta) = \frac{(a+b-1)!}{(a-1)!\,(b-1)!}\,\theta^{a-1}(1-\theta)^{b-1}\quad(\text{para } a,b \text{ inteiros}),$$
-<p>em geral a constante é $1/B(a,b)$ com $B(a,b)=\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}$.</p>
+<p>em geral a constante é $1/B(a,b)$ com $B(a,b)=\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}$. Para $m$ inteiro, $\Gamma(m)=(m-1)!$, e as duas formas coincidem: Beta$(11,9)$ tem constante $\frac{\Gamma(20)}{\Gamma(11)\Gamma(9)}=\frac{19!}{10!\,8!}$.</p>
 <ul>
 <li>Média: $\dfrac{a}{a+b}$ · Moda (para $a,b\gt 1$): $\dfrac{a-1}{a+b-2}$ · Variância: $\dfrac{ab}{(a+b)^2(a+b+1)}$.</li>
 <li>Beta$(1,1)$ = Uniforme$[0,1]$ (prior "plana").</li>
@@ -196,6 +196,10 @@ $$\underbrace{\lambda^{\sum x_i}e^{-n\lambda}}_{\text{likelihood Poisson}}\cdot\
 <tr><td>Poisson: contagens $x_1..x_n$</td><td>$\lambda\gt 0$</td><td>Gamma$(\alpha,\beta)$ (taxa $\beta$)</td><td>Gamma$(\alpha+\sum x_i,\ \beta+n)$</td></tr>
 <tr><td>Exponencial: tempos $x_1..x_n$</td><td>$\lambda\gt0$</td><td>Gamma$(\alpha,\beta)$</td><td>Gamma$(\alpha+n,\ \beta+\sum x_i)$</td></tr>
 </tbody></table></div>
+<div class="box def" id="dirichlet"><span class="box-title">Dirichlet: a Beta para mais de duas categorias</span>
+<p>Quando o parâmetro é um <b>vetor de probabilidades</b> $\theta=(\theta_1,\dots,\theta_K)$, com $\theta_i\ge0$ e $\sum_i\theta_i=1$ (ex.: proporções de TCP, UDP e outros), a incerteza sobre ele é modelada pela Dirichlet:</p>
+$$\theta\sim\text{Dirichlet}(\alpha_1,\dots,\alpha_K),\quad \alpha_i\gt0,\qquad f(\theta)\propto\prod_{i=1}^K\theta_i^{\alpha_i-1},\qquad E[\theta_i]=\frac{\alpha_i}{\alpha_0},\ \ \alpha_0=\sum_j\alpha_j.$$
+<p>Com $K=2$ é a Beta$(\alpha_1,\alpha_2)$. É conjugada da <a href="10-razao-verossimilhanca.html#multinomial">multinomial</a>: observando contagens $o_1,\dots,o_K$, a posterior é Dirichlet$(\alpha_1+o_1,\dots,\alpha_K+o_K)$, o mesmo "some as contagens" da Beta-Binomial. Ex.: prior Dirichlet$(1,1,1)$ e contagens $(6,3,1)$ dão Dirichlet$(7,4,2)$, com médias $7/13,\ 4/13,\ 2/13$.</p></div>
 <p>As duas primeiras linhas, a Normal e a Gama-Poisson (seção 4.7) apareceram nas aulas; a Gama-Exponencial sai com o mesmo truque de reconhecer a forma.</p>
 
 <h2 id="espacos">4.10 Espaço de dados × espaço de hipóteses</h2>
