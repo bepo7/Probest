@@ -46,6 +46,9 @@ $$f(\theta) = \frac{(a+b-1)!}{(a-1)!\,(b-1)!}\,\theta^{a-1}(1-\theta)^{b-1}\quad
 <li>$a=b$: simétrica em torno de 0,5. $a\gt b$: puxa para perto de 1.</li>
 <li>Quanto maior $a+b$, mais concentrada (mais "certeza" na prior).</li>
 </ul></div>
+<div class="box tip" id="integrais"><span class="box-title">Duas integrais que resolvem quase toda normalização</span>
+$$\int_0^1\theta^{a}(1-\theta)^{b}\,d\theta=\frac{a!\,b!}{(a+b+1)!},\qquad\qquad \int_0^\infty\lambda^{k}e^{-c\lambda}\,d\lambda=\frac{k!}{c^{k+1}}\quad(a,b,k\text{ inteiros}\ge0,\ c\gt0).$$
+<p>Com elas, a constante de normalização, a média posterior e as preditivas saem sem integrar por partes. Ex.: prior $2(1-\theta)$ e 1 sucesso em 3 ensaios dá numerador $\propto\theta(1-\theta)^3$, com integral $\frac{1!\,3!}{5!}=\frac1{20}$; a posterior é $20\,\theta(1-\theta)^3$. Ex. 2: numerador $\lambda^3e^{-4\lambda}$ tem integral $\frac{3!}{4^4}=\frac{6}{256}$.</p></div>
 <p>Um jeito útil de ler: Beta$(a,b)$ é como já ter visto <b>$a-1$ sucessos e $b-1$ fracassos</b> "imaginários" partindo de uma prior plana.</p>
 
 <h2 id="betabin">4.3 Beta-Binomial: prior contínua, dados discretos</h2>
@@ -134,6 +137,7 @@ $$a = \frac{1}{\sigma^2_{\text{prior}}},\qquad b=\frac{n}{\sigma^2},\qquad \mu_{
 <li>$a = 1/4 = 0{,}25$; $b = 4/1 = 4$.</li>
 <li>$\mu_{\text{post}}=\dfrac{0{,}25(20)+4(22{,}5)}{4{,}25}=\dfrac{95}{4{,}25}\approx 22{,}35$.</li>
 <li>$\sigma^2_{\text{post}}=1/4{,}25\approx 0{,}235$. Posterior: $N(22{,}35;\ 0{,}235)$.</li>
+<li><b>Probabilidade de um valor:</b> $P(\theta\gt22\mid\text{dados})=P\big(Z\gt\frac{22-22{,}35}{0{,}485}\big)=P(Z\gt-0{,}73)\approx0{,}77$. É assim que se responde "qual a chance de a atualização ter aumentado a latência?" quando $\theta$ é uma diferença antes/depois: calcule $P(\theta\gt0\mid\text{dados})$ pela posterior normal.</li>
 <li><b>Quantas leituras</b> para a variância posterior ficar abaixo de $0{,}01$? Precisamos de $\frac{1}{0{,}25+n/1}\lt 0{,}01$, isto é, $0{,}25+n\gt 100$, logo $n\gt 99{,}75$: <b>$n=100$ leituras</b>.</li>
 </ol></div>
 <div class="box recog"><span class="box-title">Reconheça o modelo</span>

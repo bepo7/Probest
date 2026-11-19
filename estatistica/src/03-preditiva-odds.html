@@ -101,6 +101,11 @@ $$BF = \frac{9^{22}e^{-27}}{4^{22}e^{-12}} = \left(\tfrac94\right)^{22}e^{-15}\a
 <li><b>Prior predictive</b> de defeito: $0{,}5(0{,}01)+0{,}3(0{,}05)+0{,}2(0{,}10)=0{,}04$; odds $=0{,}04/0{,}96 = 1:24$.</li>
 <li>Depois de ver 2 defeitos em 20 (posterior $0{,}065;\ 0{,}466;\ 0{,}469$): $P(\text{defeito})=0{,}065(0{,}01)+0{,}466(0{,}05)+0{,}469(0{,}10)\approx 0{,}071$; odds $\approx 0{,}076\approx 1:13$.</li>
 </ul></div>
+<div class="example" id="duas"><span class="box-title">Exemplo 3.6 — e se forem os dois próximos chips?</span>
+<p>Mesmo lote do Exemplo 3.5 (posterior $0{,}065;\ 0{,}466;\ 0{,}469$ para $\theta=0{,}01;\ 0{,}05;\ 0{,}10$). Qual a probabilidade de os <b>dois</b> próximos chips serem defeituosos?</p>
+<p>Dado $\theta$, os dois chips são independentes, então $P(\text{dois defeitos}\mid\theta)=\theta^2$. Pondere isso pela posterior:</p>
+$$P(\text{dois}\mid D)=\sum_\theta \theta^2\,P(\theta\mid D)=0{,}065(0{,}0001)+0{,}466(0{,}0025)+0{,}469(0{,}01)\approx0{,}00586.$$
+<p><b>Não</b> é $(0{,}0709)^2\approx0{,}00502$. Os dois chips <b>não</b> são independentes antes de saber $\theta$: se o primeiro falha, isso aumenta a chance de o lote ser o pior, e o segundo fica mais provável de falhar. A independência é só <b>condicional</b> à hipótese.</p></div>
 <div class="box warn"><span class="box-title">Não confunda</span>
 <p><b>Posterior odds</b> são sobre <b>hipóteses</b> ("é o fornecedor C?"). <b>Odds preditivas</b> são sobre <b>dados futuros</b> ("o próximo chip falha?").</p></div>
 <p class="source-note">Fontes: MIT 18.05 aula 12 (Probabilistic Prediction; Odds) e aula 13; Problem Set 7.</p>
