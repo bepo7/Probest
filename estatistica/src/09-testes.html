@@ -13,7 +13,7 @@
 <li><a href="#contingencia">χ² de homogeneidade/independência</a></li>
 <li><a href="#f">Teste F para variâncias</a></li>
 <li><a href="#anova">ANOVA de um fator</a></li>
-<li><a href="#mann-whitney">Mann-Whitney (não paramétrico)</a></li>
+<li><a href="#mann-whitney">Wilcoxon / Mann-Whitney (não paramétrico)</a></li>
 <li><a href="#resumo">Quadro-resumo</a></li>
 </ol></div>
 
@@ -143,17 +143,24 @@ $$F=\frac{\text{MS}_B}{\text{MS}_W}=\frac{\frac{1}{k-1}\sum_i n_i(\bar x_i-\bar 
 <p>Três algoritmos, 4 execuções cada (tempo em s): A: 12,14,11,13; B: 15,17,16,16; C: 13,12,14,13. Médias $12{,}5;\ 16;\ 13$; média geral $13{,}83$.</p>
 <p>$SS_B=4[(12{,}5-13{,}83)^2+(16-13{,}83)^2+(13-13{,}83)^2]=28{,}67$; $SS_W=5+2+2=9$. $F=\frac{28{,}67/2}{9/9}=14{,}3$, com $(2,9)$ g.l.; crítico $4{,}26$ → rejeita: pelo menos uma média difere (p-valor $\approx0{,}002$).</p></div>
 
-<h2 id="mann-whitney">9.11 Teste não paramétrico de Mann-Whitney (Wilcoxon da soma de postos)</h2>
-<p>Quando não dá para supor normalidade (amostras pequenas e assimétricas, dados ordinais), compare dois grupos independentes pelos <b>postos</b> (posições na ordenação) em vez dos valores.</p>
+<h2 id="mann-whitney">9.11 Teste não paramétrico de Wilcoxon / Mann-Whitney (soma dos postos)</h2>
+<p>Quando não dá para supor nada sobre as populações (nem normalidade, nem variância), compare dois grupos independentes pelos <b>postos</b> (posições na ordenação) em vez dos valores. As hipóteses são sobre as <b>distribuições</b>: $H_0$: os dois grupos têm a mesma distribuição; $H_1$: uma está deslocada em relação à outra. O teste <b>não</b> compara médias.</p>
 <ol class="steps">
-<li>Junte as duas amostras e ordene; dê posto 1 ao menor (empates recebem a média dos postos).</li>
-<li>Some os postos do grupo 1: $R_1$. Calcule $U_1=R_1-\frac{n_1(n_1+1)}{2}$ (e $U_2=n_1n_2-U_1$).</li>
-<li>Sob $H_0$ (mesma distribuição nos dois grupos), $U$ fica perto de $n_1n_2/2$. Valores muito pequenos ou muito grandes levam a rejeitar. Use a tabela do teste ou, para amostras maiores ($n_1,n_2\gtrsim10$), a aproximação normal com média $\frac{n_1n_2}{2}$ e variância $\frac{n_1n_2(n_1+n_2+1)}{12}$.</li>
+<li>Junte as duas amostras e ordene; dê posto 1 ao menor. Empates recebem a <b>média</b> dos postos que ocupariam.</li>
+<li>Estatística de Wilcoxon: $W$ = soma dos postos de um dos grupos (tamanho $n_2$). Se $H_1$ diz que esse grupo tende a ter valores maiores, a região crítica é $W$ grande (e vice-versa).</li>
+<li><b>Distribuição exata</b> (amostras pequenas): sob $H_0$, todos os $\binom{n_1+n_2}{n_2}$ conjuntos de postos possíveis para o grupo são igualmente prováveis, então
+$$P(W=w)=\frac{\#\{\text{conjuntos de postos com soma } w\}}{\binom{n_1+n_2}{n_2}}.$$</li>
+<li><b>Aproximação normal</b> ($n_1,n_2\gtrsim10$): $E[W]=\frac{n_2(n_1+n_2+1)}{2}$, $\text{Var}(W)=\frac{n_1n_2(n_1+n_2+1)}{12}$, e $Z=\frac{W-E[W]}{\sqrt{\text{Var}(W)}}\approx N(0,1)$.</li>
 </ol>
+<p>A forma "Mann-Whitney" usa $U=W-\frac{n_2(n_2+1)}{2}$; é o mesmo teste deslocado por uma constante.</p>
 <div class="example"><span class="box-title">Exemplo 9.10</span>
-<p>Tempos de resposta (ms) de dois servidores: A: $12,15,11,18,14$; B: $19,16,22,17,21$. Ordenando os 10 valores, os postos de A são $1,2,3,4,7$ (valores 11, 12, 14, 15, 18), então $R_A=17$ e $U_A=17-15=2$.</p>
-<p>Para $n_1=n_2=5$, o valor crítico bilateral a 5% é $U\le2$, então <b>rejeita</b> "mesma distribuição" (p-valor exato $\approx0{,}032$). O teste não usou média nem variância, só a ordem.</p></div>
-<div class="box tip"><span class="box-title">Quando usar</span><p>Paramétrico (t) é mais potente se as suposições valem; não paramétrico é mais seguro quando elas são duvidosas. Na prova, se o enunciado diz "variâncias iguais" e "normal", use o t.</p></div>
+<p>Tempos de resposta (ms) de dois servidores: A: $12,15,11,18,14$; B: $19,16,22,17,21$. Teste a 5% (bilateral) se as distribuições são iguais.</p>
+<ul class="steps">
+<li>Ordenando os 10 valores, A fica com os postos $1,2,3,4,7$ (valores 11, 12, 14, 15, 18). $W_A=17$.</li>
+<li><b>Exato:</b> há $\binom{10}{5}=252$ conjuntos de 5 postos. Os com soma $\le17$ são só 4: $\{1,2,3,4,5\}$ (15), $\{1,2,3,4,6\}$ (16), $\{1,2,3,4,7\}$ e $\{1,2,3,5,6\}$ (17). Então $P(W_A\le17)=4/252=0{,}016$ e o p-valor bilateral é $0{,}032\lt0{,}05$: <b>rejeita</b> $H_0$.</li>
+<li><b>Aproximado:</b> $E[W]=\frac{5\cdot11}{2}=27{,}5$, $\text{Var}=\frac{25\cdot11}{12}=22{,}9$, $z=\frac{17-27{,}5}{4{,}79}=-2{,}19$, p-valor $\approx0{,}028$. Com amostras tão pequenas a aproximação é grosseira, mas a conclusão é a mesma.</li>
+</ul></div>
+<div class="box tip"><span class="box-title">Quando usar</span><p>Antes de qualquer teste, faça gráficos (boxplot, QQ plot) para ver se a suposição de normalidade é razoável. Paramétrico (t) é mais potente se as suposições valem; não paramétrico é mais seguro quando elas são duvidosas. Na prova, se o enunciado diz "normal" e "variâncias iguais", use o t.</p></div>
 
 <h2 id="resumo">9.12 Quadro-resumo: qual teste usar?</h2>
 <div class="table-wrap"><table>
@@ -169,7 +176,7 @@ $$F=\frac{\text{MS}_B}{\text{MS}_W}=\frac{\frac{1}{k-1}\sum_i n_i(\bar x_i-\bar 
 <tr><td>Linhas da tabela têm mesma distribuição?</td><td>contagens</td><td>$\sum\frac{(O-E)^2}{E}$</td><td>$\chi^2_{(r-1)(c-1)}$</td></tr>
 <tr><td>Duas variâncias iguais?</td><td>normais</td><td>$s_X^2/s_Y^2$</td><td>$F(n_X-1,n_Y-1)$</td></tr>
 <tr><td>$k$ médias iguais?</td><td>normais, var. iguais</td><td>$\text{MS}_B/\text{MS}_W$</td><td>$F(k-1,N-k)$</td></tr>
-<tr><td>Dois grupos, sem supor normalidade?</td><td>independentes</td><td>soma de postos → $U$</td><td>tabela de $U$ / normal aproximada</td></tr>
+<tr><td>Dois grupos, sem supor normalidade?</td><td>independentes</td><td>soma dos postos $W$</td><td>exata (contagem) / normal aproximada</td></tr>
 <tr><td>Modelo simples × complexo?</td><td>$n$ grande</td><td>$-2\ln\Lambda$</td><td>$\chi^2$ (<a href="10-razao-verossimilhanca.html">seção 10</a>)</td></tr>
 </tbody></table></div>
 <div data-widget="tables"></div>

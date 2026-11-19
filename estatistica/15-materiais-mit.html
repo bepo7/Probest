@@ -30,6 +30,7 @@
 </ol></div>
 
 <div class="toc"><strong>Aulas</strong><ol>
+<li><a href="#aulas">Aulas gravadas da professora</a></li>
 <li><a href="#m10">MIT 10 · Estatística e MLE</a></li>
 <li><a href="#m11">MIT 11 · Prior discreta</a></li>
 <li><a href="#m12">MIT 12 · Preditiva e odds</a></li>
@@ -47,6 +48,68 @@
 <li><a href="#m26">MIT 26 · Regressão</a></li>
 <li><a href="#pratica">Prática, listas e outros</a></li>
 </ol></div>
+
+<h2 id="aulas">Aulas gravadas e guias de estudo da disciplina</h2>
+<p>A <a href="https://drive.google.com/drive/folders/1aHPftdRk7cT9nLovNcnw9wIZE1utM4AM" target="_blank" rel="noopener">segunda pasta do Drive</a> tem as gravações das aulas de outubro e guias de estudo curtos feitos a partir delas. Abaixo, o que cada aula cobre, com o <b>minuto aproximado</b> de cada trecho na gravação, e onde o assunto está neste site. Os exemplos da professora seguem de perto os do MIT; o site usa exemplos com outros números.</p>
+
+<div class="mit-card" id="aula-0610"><h3>06/10 · Inferência bayesiana com hipóteses discretas</h3>
+<div class="meta"><a href="https://drive.google.com/file/d/1fFjY7fEaR4Fr2_vj5r5mkHBfN2KSSYsz/view" target="_blank" rel="noopener">gravação (87 min)</a> · <a href="https://drive.google.com/file/d/18tSIEvea1O8pnrNkhgDWIn_JoINg8G3K/view" target="_blank" rel="noopener">guia de estudos</a> · No site: <a href="02-bayes-discreto.html">§2</a>, <a href="03-preditiva-odds.html">§3</a>, <a href="05-map-priors.html">§5</a></div>
+<ul>
+<li><b>0–9 min:</b> objetivo da inferência bayesiana (aprender com os dados); teste de doença rara resolvido por árvore e por tabela.</li>
+<li><b>9–17 min:</b> vocabulário (hipóteses, prior, verossimilhança, numerador de Bayes, constante de normalização, posterior) e a tabela.</li>
+<li><b>17–40 min:</b> dados de vários tipos com prior uniforme; resultados que eliminam hipóteses; atualização sequencial (a ordem dos dados não importa).</li>
+<li><b>46 min:</b> o roteiro em 4 passos: hipóteses e prior → verossimilhança → produto → normalizar.</li>
+<li><b>47–66 min:</b> monitoramento de rede (Normal, Congestionada, Falha) com os indicadores Alerta e Timeout, independentes <b>dado o estado</b>; atualização em dois passos e em um passo só.</li>
+<li><b>70–85 min:</b> falhas em requisições com três valores possíveis de $p$: MAP ≠ MLE quando a prior não é uniforme; previsão da próxima falha e de duas falhas seguidas (pondera $p^2$); nova atualização após um sucesso.</li>
+</ul></div>
+
+<div class="mit-card" id="aula-1310"><h3>13/10 · Preditiva e prior contínua</h3>
+<div class="meta"><a href="https://drive.google.com/file/d/1SCKkA3E2riPnD99_Je82rV4D4z6KyEh6/view" target="_blank" rel="noopener">gravação (92 min)</a> · <a href="https://drive.google.com/file/d/1Cg_QI8f1BcLLbx0O1IKFIdQvo_n4q5gV/view" target="_blank" rel="noopener">guia de estudos (parte 2)</a> · No site: <a href="03-preditiva-odds.html">§3</a>, <a href="04-bayes-continuo.html">§4.1–4.4</a>, <a href="04-bayes-continuo.html#gama">§4.7</a></div>
+<ul>
+<li><b>0–10 min:</b> prior predictive e posterior predictive com moedas de vários tipos.</li>
+<li><b>11–34 min:</b> moeda com $\theta$ contínuo: pdf, soma vira integral, constante de normalização.</li>
+<li><b>36–40 min:</b> exercício em sala com prior $2(1-\theta)$ e uma falha em quatro requisições (a média preditiva de falha passa de 1/3 para 2/7).</li>
+<li><b>47–60 min:</b> distribuição Beta; Beta(1,1) é a Uniforme; atualização somando sucessos e fracassos.</li>
+<li><b>69–90 min:</b> servidor com chegadas Poisson e prior Exponencial: a posterior é Gama; média posterior × MLE.</li>
+</ul></div>
+
+<div class="mit-card" id="aula-1510"><h3>15/10 · Dados contínuos e conjugadas</h3>
+<div class="meta"><a href="https://drive.google.com/file/d/1oGnsKq5a-AdneuCAxkRh5Ob8bBmp_FQf/view" target="_blank" rel="noopener">gravação (61 min)</a> · <a href="https://drive.google.com/file/d/1uC8uOaVvmc_wZ3qBxjjapfmgrfLGeDhH/view" target="_blank" rel="noopener">guia de estudos (parte 3)</a> · No site: <a href="04-bayes-continuo.html#unif-cont">§4.5</a>, <a href="04-bayes-continuo.html#normal">§4.6</a>, <a href="04-bayes-continuo.html#conjugadas">§4.9</a></div>
+<ul>
+<li><b>0–30 min:</b> prior contínua com dado contínuo; atraso Uniforme$[0,\theta]$ ("Romeu e Julieta"): o dado corta o suporte da prior e a normalização sai com logaritmo.</li>
+<li><b>32–50 min:</b> Normal-Normal com a diferença de latência antes e depois de uma atualização; fórmulas prontas de média e variância posterior.</li>
+<li><b>46–52 min:</b> probabilidade de o efeito ser positivo e previsão de um novo teste (soma de normais).</li>
+<li><b>53–61 min:</b> tabela de famílias conjugadas.</li>
+</ul></div>
+
+<div class="mit-card" id="aula-2010"><h3>20/10 · Estimadores bayesianos, intervalos de credibilidade e de confiança</h3>
+<div class="meta"><a href="https://drive.google.com/file/d/18Tk45Lj_2sqFcz95NjljXKJtaQWTsOSW/view" target="_blank" rel="noopener">gravação (89 min)</a> · <a href="https://drive.google.com/file/d/1909PPwha1sPFzoWbM7qGxAuAWj3oscwt/view" target="_blank" rel="noopener">resumo</a> · No site: <a href="05-map-priors.html#pontuais">§5.6</a>, <a href="05-map-priors.html#intervalos-prob">§5.8</a>, <a href="07-intervalos.html">§7</a></div>
+<ul>
+<li><b>0–36 min:</b> média posterior × MAP; com posterior Normal, os dois coincidem.</li>
+<li><b>38–50 min:</b> filtro de spam com Beta-Binomial em duas coletas: o MAP quase não muda, mas a variância da posterior cai muito.</li>
+<li><b>50–52 min:</b> MAP × MLE e o cuidado de usar uma prior que reflita informação real.</li>
+<li><b>52–70 min:</b> intervalos de credibilidade (Beta e Normal).</li>
+<li><b>65 min:</b> <b>aviso sobre a prova</b>: não precisa decorar valores; o que precisar de log ou tabela vem no formulário, e respostas em fração são aceitas.</li>
+<li><b>70–89 min:</b> intervalo de confiança pelo TCL e por que reportá-lo em todo experimento.</li>
+</ul></div>
+
+<div class="mit-card" id="aula-2710"><h3>27/10 · Intervalo t e introdução aos testes de hipótese</h3>
+<div class="meta"><a href="https://drive.google.com/file/d/1zywzZnwJomXzvR366YpAdYcFvv4hpjPG/view" target="_blank" rel="noopener">gravação (98 min)</a> · <a href="https://drive.google.com/file/d/1lF8EHbqIQN5LfBxX3JNFIgsb0eLjCVsS/view" target="_blank" rel="noopener">resumo</a> · No site: <a href="07-intervalos.html#t">§7.7</a>, <a href="08-nhst.html">§8</a>, <a href="09-testes.html">§9</a></div>
+<ul>
+<li><b>0–27 min:</b> fim do intervalo de confiança; t de Student para poucas amostras.</li>
+<li><b>28–32 min:</b> $H_0$ (estado atual) × $H_1$ (o que se quer mostrar); um teste dá evidência, nunca prova.</li>
+<li><b>32–62 min:</b> teste binomial de uma taxa de defeitos: valor crítico, erros tipo I e II, como α e β mudam com o corte e com $n$.</li>
+<li><b>66–90 min:</b> teste z para a média nas três versões (direita, esquerda, bilateral).</li>
+<li><b>89–98 min:</b> teste t com poucos graus de liberdade e região crítica bilateral.</li>
+</ul></div>
+
+<div class="mit-card" id="aula-2910"><h3>29/10 · p-valor, duas amostras e teste de postos</h3>
+<div class="meta"><a href="https://drive.google.com/file/d/130_U1Gy9A0J0epZnjja3elzb2tFZqVQG/view" target="_blank" rel="noopener">gravação (62 min)</a> · <a href="https://drive.google.com/file/d/1yhOxWODeei_i4oj516MwIYorgY8Zr0Kg/view" target="_blank" rel="noopener">resumo</a> · No site: <a href="08-nhst.html#pvalor">§8.5</a>, <a href="09-testes.html#t2">§9.4</a>, <a href="09-testes.html#mann-whitney">§9.11</a></div>
+<ul>
+<li><b>0–20 min:</b> p-valor (soma para estatística discreta, área para contínua) e cuidados de interpretação: p-valor grande não prova $H_0$, e pode ser só amostra pequena (teste de baixa potência).</li>
+<li><b>23–40 min:</b> t de duas amostras com variâncias iguais e diferentes, comparando duas versões de um sistema.</li>
+<li><b>41–61 min:</b> teste de Wilcoxon / Mann-Whitney: postos, soma $W$, distribuição exata por contagem de combinações, aproximação normal, empates; compara distribuições, não médias.</li>
+</ul></div>
 
 <h2 id="bayes">Parte bayesiana</h2>
 
