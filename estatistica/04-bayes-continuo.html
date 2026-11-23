@@ -146,13 +146,29 @@ $$P(\text{sucesso}) = \int_0^1 \theta\,f(\theta)\,d\theta = E[\theta] = \frac{A}
 <p><b>Atenção às unidades:</b> se $\theta$ estiver em horas e o dado em minutos, converta antes (10 min $=1/6$ h). A likelihood $1/\theta$ muda com a unidade, mas a posterior não.</p></div>
 
 <div class="example" id="unif-cont"><span class="box-title">Exemplo 4.4b — a mesma ideia com prior contínua</span>
-<p>Agora o atraso máximo $\theta$ de um colega (em horas) tem prior <b>Uniforme$[0,2]$</b>, e o atraso de hoje, Uniforme$[0,\theta]$, foi de $x=0{,}5$ h.</p>
-<ul class="steps">
-<li>Numerador: $f(x\mid\theta)f(\theta)=\frac1\theta\cdot\frac12$ para $0{,}5\le\theta\le2$, e <b>zero para $\theta\lt0{,}5$</b> (o dado corta essa parte do suporte da prior).</li>
-<li>Normalização: $\int_{0{,}5}^{2}\frac{d\theta}{\theta}=\ln4$, então $f(\theta\mid x)=\dfrac{1}{\theta\,\ln 4}$ em $[0{,}5;\ 2]$.</li>
-<li>MAP $=0{,}5$ (a densidade $1/\theta$ é decrescente: o máximo fica na borda). Média posterior $=\frac{1{,}5}{\ln4}\approx1{,}08$ h.</li>
-<li>$P(\theta\gt1\mid x)=\frac{\ln(2/1)}{\ln4}=0{,}5$.</li>
-</ul></div>
+<p>Um colega se atrasa todo dia um tempo entre 0 e $\theta$ horas, sorteado de forma uniforme; $\theta$ é o <b>atraso máximo</b> dele, que não conhecemos. Só sabemos que $\theta$ está entre 0 e 2 horas. Hoje ele atrasou $x=0{,}5$ h. O que isso diz sobre $\theta$?</p>
+<p><b>Ingredientes:</b></p>
+<ul>
+<li><b>Prior:</b> $\theta\sim$ Uniforme$[0,2]$. A densidade de uma Uniforme$[a,b]$ é a constante $\frac{1}{b-a}$ (é a altura do retângulo de base $b-a$ e área 1), então $f(\theta)=\frac12$ para $0\le\theta\le2$.</li>
+<li><b>Likelihood:</b> o atraso de hoje é Uniforme$[0,\theta]$, então $f(x\mid\theta)=\frac1\theta$ se $0\le x\le\theta$, e $0$ se $x\gt\theta$.</li>
+</ul>
+<ol class="steps">
+<li><b>Numerador = likelihood × prior:</b>
+$$f(x\mid\theta)\,f(\theta)=\frac1\theta\cdot\frac12=\frac{1}{2\theta},\qquad 0{,}5\le\theta\le2.$$
+Para $\theta\lt0{,}5$ o numerador é <b>zero</b>: se o atraso máximo fosse, por exemplo, $0{,}3$ h, seria impossível ter atrasado $0{,}5$ h hoje. O dado <b>corta</b> esse pedaço da prior; só sobram $\theta$ entre $0{,}5$ e $2$.</li>
+<li><b>Normalizar (fazer a área dar 1):</b> a área total sob o numerador é
+$$\int_{0{,}5}^{2}\frac{1}{2\theta}\,d\theta=\frac12\big[\ln\theta\big]_{0{,}5}^{2}=\frac12\big(\ln2-\ln0{,}5\big)=\frac12\ln\frac{2}{0{,}5}=\frac12\ln4,$$
+usando $\int\frac{d\theta}{\theta}=\ln\theta$ e $\ln a-\ln b=\ln\frac ab$. Dividindo o numerador por essa área:
+$$f(\theta\mid x)=\frac{\frac{1}{2\theta}}{\frac12\ln4}=\frac{1}{\theta\,\ln4},\qquad 0{,}5\le\theta\le2.$$
+(O $\frac12$ da prior aparece em cima e embaixo e se cancela.)</li>
+<li><b>MAP:</b> a posterior $\frac{1}{\theta\ln4}$ é <b>decrescente</b> em $\theta$, então o ponto mais alto fica no <b>menor $\theta$ permitido</b>: $\hat\theta_{\text{MAP}}=0{,}5$. Intuição: $0{,}5$ é o menor atraso máximo compatível com o que se viu, e é o que torna o dado mais provável (likelihood $\frac{1}{0{,}5}=2$, a maior possível).</li>
+<li><b>Média posterior:</b> o $\theta$ do integrando cancela com o do denominador, e sobra a largura do intervalo:
+$$E[\theta\mid x]=\int_{0{,}5}^{2}\theta\cdot\frac{1}{\theta\ln4}\,d\theta=\frac{1}{\ln4}\int_{0{,}5}^{2}d\theta=\frac{2-0{,}5}{\ln4}=\frac{1{,}5}{1{,}386}\approx1{,}08\text{ h}.$$</li>
+<li><b>Probabilidade de $\theta\gt1$:</b> é a área da posterior entre 1 e 2:
+$$P(\theta\gt1\mid x)=\int_{1}^{2}\frac{1}{\theta\ln4}\,d\theta=\frac{\ln2-\ln1}{\ln4}=\frac{\ln2}{2\ln2}=0{,}5,$$
+usando $\ln1=0$ e $\ln4=2\ln2$. Depois de ver meia hora de atraso, é tão provável que o atraso máximo passe de 1 h quanto não passe.</li>
+</ol>
+<p><b>Resumo:</b> o dado <b>elimina</b> os valores de $\theta$ que o tornariam impossível ($\theta\lt0{,}5$) e, entre os que sobram, <b>favorece os menores</b>, porque $\frac1\theta$ é maior para $\theta$ pequeno.</p></div>
 
 <h2 id="normal">4.6 Normal-Normal: prior contínua, likelihood contínua</h2>
 <p>Modelo: medições $x_1,\dots,x_n\mid\theta\sim N(\theta,\sigma^2)$ i.i.d. com $\sigma^2$ <b>conhecido</b> (o erro do instrumento), e prior $\theta\sim N(\mu_{\text{prior}},\sigma^2_{\text{prior}})$.</p>
