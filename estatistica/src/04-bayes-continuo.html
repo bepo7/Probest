@@ -182,16 +182,43 @@ $$X_{\text{novo}}\mid\text{dados}\ \sim\ N\big(\mu_{\text{post}},\ \sigma^2_{\te
 </div></details>
 
 <h2 id="gama">4.7 Gama-Poisson: taxa de chegadas</h2>
-<p>Para uma <b>taxa</b> $\lambda\gt0$ (requisições por segundo, chamadas por hora), a prior natural é a <b>Gama</b>$(\alpha,\beta)$, com densidade $\propto\lambda^{\alpha-1}e^{-\beta\lambda}$, média $\alpha/\beta$ e moda $(\alpha-1)/\beta$. A Exponencial$(\beta)$ é a Gama$(1,\beta)$.</p>
-$$\underbrace{\lambda^{\sum x_i}e^{-n\lambda}}_{\text{likelihood Poisson}}\cdot\underbrace{\lambda^{\alpha-1}e^{-\beta\lambda}}_{\text{prior Gama}}=\lambda^{\alpha+\sum x_i-1}e^{-(\beta+n)\lambda}\quad\Longrightarrow\quad \text{Gama}\Big(\alpha+\sum x_i,\ \beta+n\Big).$$
-<div class="example"><span class="box-title">Exemplo 4.6 — requisições num servidor</span>
-<p>A taxa $\lambda$ (requisições por segundo) tem prior Gama$(2,1)$ (média 2). Em 4 segundos chegaram $4,6,3,5$ requisições ($\sum x_i=18$).</p>
-<ul class="steps">
-<li>Posterior: Gama$(2+18,\ 1+4)=$ <b>Gama$(20,5)$</b>.</li>
-<li>Média posterior $=20/5=4{,}0$; MAP $=19/5=3{,}8$; MLE (só os dados) $=\bar x=4{,}5$. A prior (média 2) puxa as estimativas bayesianas para baixo.</li>
-<li>Intervalo de probabilidade de 90%: $[2{,}65;\ 5{,}58]$.</li>
-<li><b>Preditiva</b> de nenhum pedido no próximo segundo: $\int e^{-\lambda}f(\lambda\mid x)\,d\lambda=\big(\frac{\beta'}{\beta'+1}\big)^{\alpha'}=(5/6)^{20}\approx0{,}026$.</li>
+<p>Para uma <b>taxa</b> $\lambda\gt0$ (requisições por segundo, chamadas por hora), a prior natural é a <b>Gama</b>.</p>
+<div class="box def"><span class="box-title">Fórmulas para ter à mão</span>
+<ul>
+<li><b>Poisson$(\lambda)$</b>, número de eventos num intervalo: $P(X=k\mid\lambda)=\dfrac{\lambda^k e^{-\lambda}}{k!}$, $k=0,1,2,\dots$ Em particular, $P(X=0\mid\lambda)=e^{-\lambda}$.</li>
+<li><b>Gama$(\alpha,\beta)$</b> ($\alpha$ = forma, $\beta$ = taxa), para $\lambda\gt0$:
+$$f(\lambda)=\frac{\beta^{\alpha}}{(\alpha-1)!}\,\lambda^{\alpha-1}e^{-\beta\lambda}\quad(\alpha\text{ inteiro; em geral troque }(\alpha-1)!\text{ por }\Gamma(\alpha)).$$</li>
+<li>Média $=\dfrac{\alpha}{\beta}$ · Moda (MAP) $=\dfrac{\alpha-1}{\beta}$ (para $\alpha\ge1$) · Variância $=\dfrac{\alpha}{\beta^2}$.</li>
+<li>A Exponencial$(\beta)$ é a Gama$(1,\beta)$: $f(\lambda)=\beta e^{-\beta\lambda}$.</li>
+<li>Integral útil (seção 4.2): $\displaystyle\int_0^\infty\lambda^{k}e^{-c\lambda}\,d\lambda=\frac{k!}{c^{k+1}}$. É ela que garante a constante $\frac{\beta^\alpha}{(\alpha-1)!}$ acima.</li>
 </ul></div>
+<p><b>Atualização:</b> multiplicando a likelihood de $n$ contagens Poisson pela prior Gama e jogando fora constantes,</p>
+$$\underbrace{\lambda^{\sum x_i}e^{-n\lambda}}_{\text{likelihood Poisson}}\cdot\underbrace{\lambda^{\alpha-1}e^{-\beta\lambda}}_{\text{prior Gama}}=\lambda^{\alpha+\sum x_i-1}e^{-(\beta+n)\lambda}\quad\Longrightarrow\quad \text{Gama}\Big(\alpha+\sum x_i,\ \beta+n\Big).$$
+<p>Regra para guardar: <b>some o total de eventos em $\alpha$ e o número de intervalos observados em $\beta$</b>.</p>
+<div class="example"><span class="box-title">Exemplo 4.6 — requisições num servidor</span>
+<p>A taxa $\lambda$ (requisições por segundo) tem prior Gama$(2,1)$, com média $\frac21=2$. Em 4 segundos chegaram $4,6,3,5$ requisições ($n=4$, $\sum x_i=18$).</p>
+<ol class="steps">
+<li><b>Posterior:</b> pela regra, $\alpha'=\alpha+\sum x_i=2+18=20$ e $\beta'=\beta+n=1+4=5$: <b>Gama$(20,5)$</b>, com densidade
+$$f(\lambda\mid x)=\frac{5^{20}}{19!}\,\lambda^{19}e^{-5\lambda},\qquad\lambda\gt0.$$</li>
+<li><b>Média, MAP e MLE:</b>
+<ul>
+<li>Média posterior $=\frac{\alpha'}{\beta'}=\frac{20}{5}=4{,}0$.</li>
+<li>MAP: o ponto mais alto de $\lambda^{19}e^{-5\lambda}$. Tirando o log, $19\ln\lambda-5\lambda$; derivando, $\frac{19}{\lambda}-5=0\Rightarrow\hat\lambda_{\text{MAP}}=\frac{19}{5}=3{,}8$. É a fórmula da moda, $\frac{\alpha'-1}{\beta'}$.</li>
+<li>MLE (só os dados) $=\bar x=\frac{18}{4}=4{,}5$.</li>
+</ul>
+A prior (média 2) puxa as estimativas bayesianas para baixo do MLE.</li>
+<li><b>Intervalo de probabilidade de 90%:</b> é o intervalo $[a,b]$ que deixa 5% da posterior em cada ponta, $P(\lambda\lt a\mid x)=0{,}05$ e $P(\lambda\gt b\mid x)=0{,}05$. Ou seja, $a$ e $b$ são os quantis 5% e 95% da Gama$(20,5)$, que saem de software ou tabela: $[2{,}65;\ 5{,}58]$.
+<p>Conferência de cabeça com a aproximação Normal: média $4$, variância $\frac{\alpha'}{\beta'^2}=\frac{20}{25}=0{,}8$, desvio $\approx0{,}894$, e $4\pm1{,}645(0{,}894)=[2{,}53;\ 5{,}47]$. Fica perto do exato; a diferença vem de a Gama ser um pouco assimétrica para a direita.</p></li>
+<li><b>Preditiva de nenhum pedido no próximo segundo:</b>
+<ul>
+<li>Se soubéssemos $\lambda$: pela Poisson, $P(X=0\mid\lambda)=e^{-\lambda}$.</li>
+<li>Como não sabemos, pondere $e^{-\lambda}$ pela posterior (a soma da posterior predictive vira integral):
+$$P(X_{\text{novo}}=0\mid x)=\int_0^\infty e^{-\lambda}\,f(\lambda\mid x)\,d\lambda=\frac{5^{20}}{19!}\int_0^\infty\lambda^{19}e^{-6\lambda}\,d\lambda,$$
+porque $e^{-\lambda}\cdot e^{-5\lambda}=e^{-6\lambda}$.</li>
+<li>Pela integral útil com $k=19$ e $c=6$: $\dfrac{5^{20}}{19!}\cdot\dfrac{19!}{6^{20}}=\Big(\dfrac56\Big)^{20}\approx0{,}026$. Em geral, $\big(\frac{\beta'}{\beta'+1}\big)^{\alpha'}$.</li>
+<li>Plugar a média, $e^{-4}\approx0{,}018$, daria um valor menor: a preditiva certa também considera os valores pequenos de $\lambda$ que a posterior ainda admite, para os quais zero pedidos é bem mais provável.</li>
+</ul></li>
+</ol></div>
 
 <h2 id="discretizar">4.8 Prior discretizada (aproximando o contínuo por uma tabela)</h2>
 <p>Quando a integral é difícil, troque o intervalo de $\theta$ por uma grade (ex.: $\theta=0{,}05;\ 0{,}15;\ \dots;\ 0{,}95$), dê a cada ponto a prior $\propto f(\theta)$ e use a <a href="02-bayes-discreto.html#calc">tabela bayesiana comum</a>. Com grade fina, a posterior discreta se aproxima da contínua; o MAP e a média saem da tabela. É uma boa forma de conferir uma conta contínua na prova.</p>
