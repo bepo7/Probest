@@ -60,10 +60,24 @@ $$\text{Beta}(a,\,b)\ \xrightarrow{\ k \text{ sucessos},\ n-k \text{ fracassos}\
 <div class="example"><span class="box-title">Exemplo 4.1 — taxa de cliques de um anúncio</span>
 <p>Uma equipe acha que a taxa de clique $\theta$ de um anúncio novo está por volta de 30%, com bastante incerteza, e usa a prior Beta$(3,7)$ (média $3/10$). O anúncio é mostrado a 20 visitantes e recebe 6 cliques.</p>
 <ol class="steps">
-<li><b>pmf dos dados dado $\theta$:</b> $K\mid\theta\sim\text{Bin}(20,\theta)$, ou seja, $p(k\mid\theta)=\binom{20}{k}\theta^k(1-\theta)^{20-k}$, $k=0,\dots,20$.</li>
-<li><b>Posterior:</b> Beta$(3+6,\ 7+14)=$ <b>Beta$(9,21)$</b>, isto é, $f(\theta\mid k=6)=\frac{29!}{8!\,20!}\theta^8(1-\theta)^{20}$.</li>
-<li><b>Resumo:</b> média $9/30=0{,}30$; MAP (moda) $=\frac{9-1}{9+21-2}=\frac{8}{28}\approx0{,}286$; MLE (só os dados) $=6/20=0{,}30$.</li>
-<li><b>Pergunta típica:</b> $P(\theta\gt 0{,}4\mid\text{dados})\approx 0{,}119$ (era $0{,}232$ na prior). Os dados reduziram a incerteza.</li>
+<li><b>pmf dos dados dado $\theta$:</b> cada um dos 20 visitantes clica (sucesso) ou não, com a mesma probabilidade $\theta$ e de forma independente; o número de cliques $K$ é então Binomial: $K\mid\theta\sim\text{Bin}(20,\theta)$, ou seja, $p(k\mid\theta)=\binom{20}{k}\theta^k(1-\theta)^{20-k}$ para $k=0,\dots,20.$</li>
+<li><b>Posterior:</b> Beta$(3+6,\ 7+14)=$ <b>Beta$(9,21)$</b>, isto é, $f(\theta\mid k=6)=\frac{29!}{8!\,20!}\theta^8(1-\theta)^{20}.$</li>
+<li><b>Resumo em um número:</b> a posterior é uma curva inteira; quando se quer um único valor para $\theta$, há três candidatos.
+<div class="table-wrap"><table>
+<thead><tr><th>Estimativa</th><th>O que é</th><th>Fórmula</th><th>Conta</th></tr></thead>
+<tbody>
+<tr><td><b>Média posterior</b></td><td>o "centro de massa" da curva</td><td>$\dfrac{A}{A+B}$</td><td>$\dfrac{9}{9+21}=\dfrac{9}{30}=0{,}30$</td></tr>
+<tr><td><b>MAP (moda)</b></td><td>o ponto mais alto da curva</td><td>$\dfrac{A-1}{A+B-2}$</td><td>$\dfrac{8}{28}\approx0{,}286$</td></tr>
+<tr><td><b>MLE</b></td><td>só os dados, sem prior</td><td>$\dfrac{k}{n}$</td><td>$\dfrac{6}{20}=0{,}30$</td></tr>
+</tbody></table></div>
+<p>Média e MAP diferem porque a Beta não é simétrica (o pico fica um pouco à esquerda da média). A média posterior coincidiu com o MLE por acaso: a prior tinha média 0,3 e os dados também deram 0,3. Com 12 cliques, o MLE seria $0{,}6$, mas a média posterior seria $\frac{3+12}{30}=0{,}5$, puxada para baixo pela prior.</p></li>
+<li><b>Pergunta típica: "qual a chance de a taxa de clique passar de 40%?"</b> Como a posterior é uma distribuição para $\theta$, a resposta é a <b>área sob a curva da posterior</b> no intervalo pedido.
+<p>Fórmula geral, para posterior Beta$(A,B)$ e um valor $c$:</p>
+$$P(\theta\gt c\mid\text{dados})=\int_{c}^{1}f(\theta\mid\text{dados})\,d\theta=\int_{c}^{1}\frac{(A+B-1)!}{(A-1)!\,(B-1)!}\,\theta^{A-1}(1-\theta)^{B-1}\,d\theta.$$
+<p>Com $A=9$, $B=21$ e $c=0{,}4$:</p>
+$$P(\theta\gt0{,}4\mid\text{dados})=\int_{0{,}4}^{1}\frac{29!}{8!\,20!}\,\theta^{8}(1-\theta)^{20}\,d\theta\approx0{,}119.$$
+<p>A mesma área sob a <b>prior</b> Beta$(3,7)$ dá $0{,}232$: antes dos dados, a equipe achava 23% provável que a taxa passasse de 40%; depois de ver 6 cliques em 20, essa chance caiu para 12%. A prior era larga (bastante área acima de 0,4); os dados estreitaram a curva em volta de 0,3, e sobrou pouca área acima de 0,4. É isso que significa "os dados reduziram a incerteza".</p>
+<p class="kbd-hint">Essa integral é trabalhosa à mão (seria preciso expandir $(1-\theta)^{20}$); na prática ela sai de tabela, software ou do formulário. Numa prova, espere números pequenos (como Beta$(2,2)$, em que a integral é um polinômio simples) ou a função já dada. O que importa é a ideia: <b>probabilidade de $\theta$ num intervalo = área da posterior nesse intervalo</b>.</p></li>
 </ol></div>
 <div data-widget="beta" data-init="3,7,6,20"></div>
 <p>Mexa no explorador: com prior Beta$(1,1)$ a posterior fica proporcional à likelihood, e o MAP coincide com $k/n$. Com uma prior forte (ex.: Beta$(30,70)$), 20 observações quase não mudam nada.</p>
