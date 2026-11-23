@@ -133,7 +133,9 @@ $$\ell(\pi,p_P,p_L)=\underbrace{16\ln\pi+24\ln(1-\pi)}_{\text{só }\pi}+\underbr
 <li>Cada parcela tem a forma $g(q)$: $\hat\pi=16/40=0{,}4$, $\hat p_P=12/16=0{,}75$, $\hat p_L=3/24=0{,}125$. Cada $g''\lt0$, então é o máximo.</li>
 <li><b>Novo e-mail com $F=1$</b>, usando Bayes com os parâmetros estimados:
 $$P(P\mid F=1)=\frac{0{,}4\cdot0{,}75}{0{,}4\cdot0{,}75+0{,}6\cdot0{,}125}=\frac{0{,}30}{0{,}375}=0{,}8.$$</li>
-<li><b>Decisão MAP:</b> escolha a classe de maior posterior → <b>Phishing</b> (0,8 contra 0,2).</li>
+<li><b>Decisão MAP:</b> escolha a classe de maior posterior. Como o denominador (0,375) é o mesmo para as duas, basta comparar os numeradores $\hat\pi\,\hat p_P$ e $(1-\hat\pi)\,\hat p_L$:
+$$\underbrace{0{,}4\cdot0{,}75}_{\text{Phishing}}=0{,}30\quad\text{contra}\quad\underbrace{0{,}6\cdot0{,}125}_{\text{Legítimo}}=0{,}075\qquad\Longrightarrow\qquad P(P\mid F=1)=0{,}8,\ \ P(L\mid F=1)=\frac{0{,}075}{0{,}375}=0{,}2.$$
+Decisão: <b>Phishing</b>. Se phishing fosse raro ($\pi=0{,}05$), os numeradores seriam $0{,}05\cdot0{,}75=0{,}0375$ contra $0{,}95\cdot0{,}125\approx0{,}119$, e a decisão MAP passaria a ser Legítimo: a prior pesa.</li>
 </ul>
 <p>Aqui o MLE estima os parâmetros, e o Bayes discreto da <a href="02-bayes-discreto.html">seção 2</a> faz a classificação. É o "Naive Bayes" com uma característica; com várias, multiplica-se uma verossimilhança por característica (como no <a href="03-preditiva-odds.html#bf">filtro de spam com fatores de Bayes</a>).</p></div>
 
