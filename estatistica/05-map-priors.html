@@ -55,7 +55,19 @@ $$\hat\theta_{\text{MAP}} = \arg\max_\theta f(\theta\mid x) = \arg\max_\theta\ p
 </tbody></table>
 <div class="example"><span class="box-title">Exemplo 5.1</span>
 <p>Prior Beta$(4,4)$ para a probabilidade $\theta$ de um robô completar uma tarefa. Em 10 tentativas, completa 9.</p>
-<p>Posterior Beta$(13,5)$. MAP $=\frac{12}{16}=0{,}75$. MLE $=0{,}9$. Média $=13/18\approx0{,}72$. A prior simétrica em 0,5 "puxa" o MAP para o centro.</p></div>
+<ol class="steps">
+<li><b>Regra da Beta-Binomial:</b> Beta$(a,b)$ + $k$ sucessos em $n$ ⟹ Beta$(a+k,\ b+n-k)$. Aqui $a=b=4$, $k=9$ sucessos e $n-k=1$ fracasso: posterior <b>Beta$(4+9,\ 4+1)=$ Beta$(13,5)$</b>.</li>
+<li><b>De onde vem a regra</b> (likelihood × prior, sem constantes):
+$$\underbrace{\theta^{9}(1-\theta)^{1}}_{\text{likelihood: 9 sucessos, 1 fracasso}}\cdot\underbrace{\theta^{3}(1-\theta)^{3}}_{\text{prior Beta}(4,4)}=\theta^{12}(1-\theta)^{4}.$$
+A Beta$(A,B)$ tem a forma $\theta^{A-1}(1-\theta)^{B-1}$, então $A-1=12$ e $B-1=4$: $A=13$, $B=5$.</li>
+<li><b>Estimativas</b>, com as fórmulas da Beta$(A,B)$:
+<ul>
+<li>MAP $=\frac{A-1}{A+B-2}=\frac{12}{16}=0{,}75$.</li>
+<li>Média $=\frac{A}{A+B}=\frac{13}{18}\approx0{,}72$.</li>
+<li>MLE $=\frac{k}{n}=\frac{9}{10}=0{,}9$ (só os dados).</li>
+</ul></li>
+</ol>
+<p>A prior Beta$(4,4)$ é simétrica em 0,5 e funciona como "3 sucessos e 3 fracassos imaginários" (seção 5.3). Por isso o MAP ($0{,}75$) fica entre 0,5 e o MLE ($0{,}9$): a prior "puxa" a estimativa para o centro.</p></div>
 
 <div class="example" id="falhas"><span class="box-title">Exemplo 5.1b — falhas de um serviço web novo</span>
 <p>Pelo histórico de serviços parecidos, a taxa de falha $\theta$ por requisição tem prior Beta$(2,20)$ (média $\approx0{,}09$). Num teste rápido, 3 de 10 requisições falharam.</p>
