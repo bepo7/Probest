@@ -122,10 +122,12 @@ Decisão: <b>Phishing</b>. Se phishing fosse raro ($\pi=0{,}05$), os numeradores
 
 <h2 id="propriedades">6.9 Propriedades do MLE</h2>
 <ul>
-<li><b>Invariância:</b> o MLE de $g(\theta)$ é $g(\hat\theta)$. Ex.: o MLE do desvio padrão é $\sqrt{\hat\sigma^2}$; o MLE de $P(X=0)=e^{-\lambda}$ é $e^{-\bar x}$.</li>
-<li><b>Consistente:</b> $\hat\theta\to\theta$ quando $n\to\infty$.</li>
-<li><b>Assintoticamente normal e eficiente:</b> para $n$ grande, $\hat\theta\approx N\big(\theta,\ 1/(n I(\theta))\big)$, onde $I(\theta)$ é a informação de Fisher. É isso que justifica intervalos e testes "z" baseados no MLE.</li>
-<li><b>Pode ser viesado</b> em amostras pequenas (ex.: $\hat\sigma^2$, máximo da Uniforme).</li>
+<li><b>Invariância:</b> o MLE de uma função de $\theta$ é a função aplicada ao MLE, $\widehat{g(\theta)}=g(\hat\theta)$; não precisa maximizar de novo. Ex.: Poisson com $\hat\lambda=4$ ⇒ MLE de $P(X=0)=e^{-\lambda}$ é $e^{-4}\approx0{,}018$; Normal com $\hat\sigma^2=0{,}412$ ⇒ MLE do desvio padrão é $\sqrt{0{,}412}\approx0{,}642$.</li>
+<li><b>Consistente:</b> com mais dados, o MLE se aproxima do valor verdadeiro ($\hat\theta\to\theta$ quando $n\to\infty$), porque sua variância vai a zero. Ex.: moeda com $\theta=0{,}3$: com 10 lançamentos $k/10$ pode sair 0,2 ou 0,5; com 10 000, fica perto de 0,30 (variância $\frac{\theta(1-\theta)}{n}$).</li>
+<li><b>Assintoticamente normal e eficiente:</b> repetindo o experimento muitas vezes, os valores de $\hat\theta$ formam, para $n$ grande, uma Normal centrada no valor verdadeiro:
+$$\hat\theta\approx N\Big(\theta,\ \frac{1}{n\,I(\theta)}\Big),\qquad I(\theta)=-E\Big[\tfrac{d^2}{d\theta^2}\ln f(X\mid\theta)\Big].$$
+A <b>informação de Fisher</b> $I(\theta)$ mede quanta informação uma observação traz sobre $\theta$ (quão "pontudo" é o pico da log-verossimilhança). Ex.: Bernoulli, $I=\frac{1}{\theta(1-\theta)}$ ⇒ $\hat\theta\approx N\big(\theta,\frac{\theta(1-\theta)}{n}\big)$, que é o IC de proporção $\hat p\pm1{,}96\sqrt{\hat p(1-\hat p)/n}$ da <a href="07-intervalos.html#prop">seção 7.5</a>; Poisson, $I=\frac1\lambda$ ⇒ variância $\frac{\lambda}{n}$. "Eficiente": para $n$ grande, nenhum estimador não viesado tem variância menor.</li>
+<li><b>Pode ser viesado</b> em amostras pequenas, isto é, errar na média para um lado ($E[\hat\theta]\ne\theta$). Ex.: $E[\hat\sigma^2]=\frac{n-1}{n}\sigma^2$ (subestima; por isso o $S^2$ usa $n-1$); o máximo da Uniforme nunca passa de $\theta$ e vale em média $\frac{n}{n+1}\theta$. O viés some quando $n$ cresce, e viesado não quer dizer pior (<a href="01-amostras.html#estimador">Exemplo 1.1</a>).</li>
 <li>MLE = MAP com prior uniforme (<a href="05-map-priors.html#map-mle">seção 5.5</a>).</li>
 </ul>
 
