@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Estatística (P2) de Probabilidade e Estatística: inferência bayesiana, MLE, intervalos de confiança e testes de hipótese, com exemplos resolvidos.">
+<title>Formulário MLE · Probest P2</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23176b87'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>θ</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/site.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/site.js"></script>
+</head>
+<body class="s6">
+<header class="site-header"><a class="brand" href="index.html">Probest P2 · Estatística</a><span class="header-actions"><a class="switch" href="../index.html">↔ Trocar matéria</a><button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">◐ tema</button></span></header>
+<div class="page-wrap">
+<nav class="site-nav" aria-label="Seções"><details ><summary>Seções do site</summary><ol start="0"><li><a href="index.html">Início e roteiro</a></li><li><a href="01-amostras.html">Da probabilidade à estatística</a></li><li><a href="02-bayes-discreto.html">Bayes com hipóteses discretas</a></li><li><a href="03-preditiva-odds.html">Probabilidade preditiva e odds</a></li><li><a href="04-bayes-continuo.html">Priors contínuas e conjugadas</a></li><li><a href="05-map-priors.html">MAP, escolha de priors, MAP × MLE</a></li><li><a href="06-mle.html">Máxima verossimilhança (MLE)</a></li><li><a href="07-intervalos.html">Intervalos de confiança</a></li><li><a href="08-nhst.html">Testes de hipótese: fundamentos</a></li><li><a href="09-testes.html">Catálogo de testes (z, t, χ², F)</a></li><li><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança</a></li><li><a href="11-freq-bayes-regressao.html">Frequentista × Bayesiano, bootstrap, regressão</a></li><li><a href="12-exercicios.html">Exercícios de treino (com solução)</a></li><li><a href="13-formulario.html">Formulário + tabelas interativas</a></li><li><a href="14-mapa-listas.html">Mapa das listas, checklist e fontes</a></li><li><a href="15-materiais-mit.html">Materiais: resumos das aulas do MIT</a></li><li><a href="16-formulario-mle.html" aria-current="page">Formulário da Lista MLE (consulta rápida)</a></li></ol></details></nav>
+<main class="content">
+<span class="eyebrow">Extra · Consulta rápida</span>
+<h1>Formulário da Lista MLE</h1>
+<p class="lead">Só o necessário para montar e maximizar uma likelihood. Os resultados prontos não estão aqui de propósito; a explicação completa está na <a href="06-mle.html">seção 6</a>.</p>
+
+<h2 id="receita">Receita</h2>
+<ol class="steps">
+<li>$L(\theta)=\prod_{i=1}^n f(x_i\mid\theta)$ (dados i.i.d.).</li>
+<li>$\ell(\theta)=\ln L(\theta)=\sum_{i=1}^n\ln f(x_i\mid\theta)$. Simplifique.</li>
+<li>$\ell'(\theta)=0$ e isole $\theta$.</li>
+<li>Confira: $\ell''\lt0$ (máximo) e $\hat\theta$ dentro do domínio.</li>
+<li>Se o <b>suporte depende de $\theta$</b> (ex.: $x\le\theta$), não derive: veja a seção <a href="#sem-derivada">sem derivada</a>.</li>
+</ol>
+
+<h2 id="algebra">Álgebra que resolve 90% das contas</h2>
+<div class="grid2">
+<div class="card"><h3>Produtos</h3>
+<p>$\prod_{i} a^{x_i}=a^{\sum x_i}$<br>$\prod_{i} c=c^n$<br>$\prod_i e^{-c\,x_i}=e^{-c\sum x_i}$<br>$\prod_i\frac1\theta=\theta^{-n}$</p>
+<p>$\sum_i(x_i-1)=\sum x_i-n$<br>$\sum_i x_i=n\bar x$</p></div>
+<div class="card"><h3>Log</h3>
+<p>$\ln(ab)=\ln a+\ln b$<br>$\ln(a^k)=k\ln a$<br>$\ln e^{u}=u$<br>$\ln\frac1\theta=-\ln\theta$</p>
+<p>Termos sem $\theta$ (ex.: $\ln x_i!$, $\ln\binom{n}{k}$) somem na derivada.</p></div>
+<div class="card"><h3>Derivadas em $\theta$</h3>
+<p>$(\ln\theta)'=\frac1\theta$<br>$(\ln(1-\theta))'=-\frac{1}{1-\theta}$<br>$(c\,\theta)'=c$<br>$(\theta^{-n})'=-n\theta^{-n-1}$</p></div>
+<div class="card"><h3>Equação típica</h3>
+<p>$\frac{A}{\theta}-\frac{B}{1-\theta}=0\ \Rightarrow\ \theta=\frac{A}{A+B}$<br>$\frac{A}{\theta}-B=0\ \Rightarrow\ \theta=\frac{A}{B}$</p></div>
+</div>
+
+<h2 id="distribuicoes">pmf / pdf de cada modelo</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Modelo</th><th>$f(x\mid\theta)$</th><th>Valores de $x$</th><th>Média</th></tr></thead>
+<tbody>
+<tr><td>Bernoulli$(p)$</td><td>$p^{x}(1-p)^{1-x}$</td><td>$0,1$</td><td>$p$</td></tr>
+<tr><td>Binomial$(n,p)$</td><td>$\binom{n}{k}p^{k}(1-p)^{n-k}$</td><td>$0,\dots,n$</td><td>$np$</td></tr>
+<tr><td>Geométrica$(p)$ (tentativas até o 1º sucesso, contando ele)</td><td>$(1-p)^{x-1}p$</td><td>$1,2,\dots$</td><td>$\frac1p$</td></tr>
+<tr><td>Poisson$(\lambda)$</td><td>$\frac{\lambda^{x}e^{-\lambda}}{x!}$</td><td>$0,1,2,\dots$</td><td>$\lambda$</td></tr>
+<tr><td>Uniforme discreta $\{1,\dots,N\}$</td><td>$\frac1N$ se $x\le N$; senão $0$</td><td>$1,\dots,N$</td><td>$\frac{N+1}{2}$</td></tr>
+<tr><td>Exponencial$(\lambda)$</td><td>$\lambda e^{-\lambda x}$</td><td>$x\ge0$</td><td>$\frac1\lambda$</td></tr>
+<tr><td>Uniforme$[0,\theta]$</td><td>$\frac1\theta$ se $0\le x\le\theta$; senão $0$</td><td>$[0,\theta]$</td><td>$\frac\theta2$</td></tr>
+<tr><td>Normal$(\mu,\sigma^2)$</td><td>$\frac{1}{\sqrt{2\pi\sigma^2}}e^{-(x-\mu)^2/(2\sigma^2)}$</td><td>$\mathbb R$</td><td>$\mu$</td></tr>
+</tbody></table></div>
+<ul>
+<li><b>Sorteio sem reposição</b> de $k$ itens numerados $1,\dots,N$: cada conjunto específico tem probabilidade $1\big/\binom{N}{k}$, se todos os números forem $\le N$ (senão, $0$).</li>
+<li><b>Parâmetro reescrito</b> (ex.: $p=1/a$): substitua na pmf antes de derivar, ou ache o MLE de $p$ e use <b>invariância</b>: $\hat a=1/\hat p$.</li>
+<li><b>Contínuos:</b> use a densidade no lugar da probabilidade (o $dx$ não depende de $\theta$).</li>
+</ul>
+
+<h2 id="sem-derivada">Quando a derivada não serve</h2>
+<p>Sinal: $f(x\mid\theta)=0$ para alguns $x$ dependendo de $\theta$ (Uniformes, numerações).</p>
+<ol class="steps">
+<li>Escreva $L(\theta)$ <b>por partes</b>: onde algum dado fica impossível, $L=0$.</li>
+<li>Ache os $\theta$ permitidos (os que não zeram nenhum dado).</li>
+<li>Veja se $L$ cresce ou decresce nessa região; o máximo fica na <b>borda</b>.</li>
+</ol>
+<p>Ex. resolvido: <a href="06-mle.html#uniforme">Uniforme$[0,\theta]$, seção 6.5</a>.</p>
+
+<h2 id="agrupados">Dados agrupados e vários grupos</h2>
+<ul>
+<li>Tabela "valor $x$ apareceu $c_x$ vezes": $L=\prod_x f(x\mid\theta)^{c_x}$, ou seja, $\sum_i x_i=\sum_x x\,c_x$ e $n=\sum_x c_x$.</li>
+<li>$m$ grupos, cada um uma Binomial$(k,\theta)$: $L=\prod_j\binom{k}{x_j}\theta^{x_j}(1-\theta)^{k-x_j}\propto\theta^{\sum x_j}(1-\theta)^{mk-\sum x_j}$.</li>
+</ul>
+
+<h2 id="conferir">Conferências rápidas</h2>
+<ul>
+<li>O $\hat\theta$ está no domínio? ($0\le\hat p\le1$, $\hat\lambda\gt0$, $\hat N\ge\max x_i$...)</li>
+<li>Bate com a intuição? A <b>média do modelo</b> com $\hat\theta$ costuma ficar perto de $\bar x$ (método dos momentos).</li>
+<li>Invariância: MLE de $g(\theta)$ é $g(\hat\theta)$.</li>
+</ul>
+<p class="kbd-hint">Treine com os exercícios 9, 10 e 11 da <a href="12-exercicios.html#b-mle">seção 12</a> antes da lista.</p>
+
+<div class="mit-links"><span>PDFs desta página (Drive):</span><a href="https://drive.google.com/file/d/1KlxN6zAnv-MLnhpaTUvTBKVZ5aame8yM/view" target="_blank" rel="noopener" title="MIT 10 · Intro to Statistics, MLE">M10</a><a href="https://drive.google.com/file/d/17yRyo--qjCsMfsi2MPj322gUagn193bd/view" target="_blank" rel="noopener" title="Lista MLE">LMLE</a><a href="15-materiais-mit.html">resumos das aulas →</a></div>
+<div class="pager"><a href="15-materiais-mit.html">← Materiais: resumos das aulas do MIT</a><span></span></div>
+</main>
+</div>
+</body>
+</html>

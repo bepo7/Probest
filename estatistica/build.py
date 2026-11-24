@@ -26,6 +26,7 @@ PAGES = [
     ("13-formulario.html", "Formulário + tabelas interativas", "Formulário", "s13", ["MEX2"]),
     ("14-mapa-listas.html", "Mapa das listas, checklist e fontes", "Mapa das listas", "s14", []),
     ("15-materiais-mit.html", "Materiais: resumos das aulas do MIT", "Materiais do MIT", "s9", []),
+    ("16-formulario-mle.html", "Formulário da Lista MLE (consulta rápida)", "Formulário MLE", "s6", ["M10", "LMLE"]),
 ]
 
 # Arquivos da pasta pública da disciplina no Google Drive (código → (id, descrição curta))
