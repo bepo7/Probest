@@ -26,7 +26,7 @@
 <li><a href="#b-cont">Bayes contínuo e MAP (4–8b)</a></li>
 <li><a href="#b-mle">MLE (9–11)</a></li>
 <li><a href="#b-ic">Intervalos de confiança (12–14)</a></li>
-<li><a href="#b-testes">Testes (15–19c)</a></li>
+<li><a href="#b-testes">Testes (15–19d)</a></li>
 <li><a href="#b-conc">Conceituais (20)</a></li>
 <li><a href="#b-bt">Testes bayesianos e regressão (21–26)</a></li>
 </ol></div>
@@ -216,6 +216,15 @@ $$\Lambda=\frac{0{,}3^x\,0{,}7^{n-x}}{\hat p^{\,x}(1-\hat p)^{n-x}}=\Big(\frac{0
 <details class="sol"><summary>Solução</summary><div>
 <p>$F_0(x)=x/10$. Para cada $i$: $\frac i{10}-F_0(x_{(i)})$ vale $0{,}02;\ 0{,}05;\ 0{,}09;\ 0{,}16;\ 0{,}20;\ 0{,}27;\ 0{,}31;\ 0{,}36;\ \mathbf{0{,}38};\ 0{,}04$, e $F_0(x_{(i)})-\frac{i-1}{10}$ vale $\mathbf{0{,}08};\ 0{,}05;\ 0{,}01;$ e negativos depois, até $0{,}06$ no último.</p>
 <p>$D^+=0{,}38$ (em $x=5{,}2$), $D^-=0{,}08$, $D_{10}=0{,}38\lt0{,}409$ → <b>não rejeita</b> a 5% (p-valor $\approx0{,}08$). Os valores se acumulam abaixo de 5,2 (90% da amostra contra 52% esperados), um sinal de alerta que uma amostra maior provavelmente confirmaria.</p>
+</div></details></div>
+
+<div class="exercise"><span class="tag">teste discreto</span><span class="tag">limiar inteiro</span>
+<p><b>19d.</b> $X$ = número de tentativas até o primeiro sucesso, $X\sim$ Geométrica$(\theta)$. Testa-se $H_0:\theta=0{,}4$ × $H_1:\theta=0{,}15$ com uma observação, rejeitando $H_0$ se $X\ge c$. (a) Ache o menor $c$ inteiro com $\alpha\le0{,}05$. (b) Qual o α real? (c) Qual β?</p>
+<span class="ans" data-label="(a) c" data-answer="7" data-tol="0.001"></span><span class="ans" data-label="(b) α" data-answer="0.046656" data-tol="0.0005"></span><span class="ans" data-label="(c) β" data-answer="0.6229" data-tol="0.002"></span>
+<details class="sol"><summary>Solução</summary><div>
+<p>Sob $H_1$ o sucesso é mais raro, então $X$ tende a ser <b>maior</b>: rejeite para $X$ grande. Para a Geométrica, $P(X\ge c)=(1-\theta)^{c-1}$ (as $c-1$ primeiras tentativas falham).</p>
+<p>(a) $0{,}6^{c-1}\le0{,}05\iff c-1\ge\frac{\ln20}{\ln(1/0{,}6)}=5{,}86$, logo $c-1=6$ e $c=7$. (b) α $=0{,}6^6=0{,}0467$: com dados discretos, o α real fica abaixo do nominal. (c) $\beta=P(X\lt7\mid\theta=0{,}15)=1-0{,}85^6=0{,}623$. Com uma única observação, a potência é baixa ($0{,}377$).</p>
+<p>Mesma ideia do <a href="08-nhst.html#binomial">teste Binomial (8.4)</a> e da <a href="08-nhst.html#exp">observação única (8.7)</a>; é o formato da Lista 5, 8.4.6 problema 1.</p>
 </div></details></div>
 
 <h2 id="b-conc">Bloco F — Conceituais</h2>
