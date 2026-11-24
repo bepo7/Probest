@@ -27,6 +27,8 @@ PAGES = [
     ("14-mapa-listas.html", "Mapa das listas, checklist e fontes", "Mapa das listas", "s14", []),
     ("15-materiais-mit.html", "Materiais: resumos das aulas do MIT", "Materiais do MIT", "s9", []),
     ("16-formulario-mle.html", "Formulário da Lista MLE (consulta rápida)", "Formulário MLE", "s6", ["M10", "LMLE"]),
+    ("17-testes-bayesianos.html", "Testes bayesianos: fator de Bayes e teste MAP", "Testes bayesianos", "s3", ["CFB", "CBT", "B1"]),
+    ("18-regressao.html", "Regressão: inferência, múltipla e logística", "Regressão", "s11", ["CRL", "M26"]),
 ]
 
 # Arquivos da pasta pública da disciplina no Google Drive (código → (id, descrição curta))
@@ -77,6 +79,14 @@ DRIVE = {
     "A2010": ("18Tk45Lj_2sqFcz95NjljXKJtaQWTsOSW", "Gravação da aula de 20/10"),
     "A2710": ("1zywzZnwJomXzvR366YpAdYcFvv4hpjPG", "Gravação da aula de 27/10"),
     "A2910": ("130_U1Gy9A0J0epZnjja3elzb2tFZqVQG", "Gravação da aula de 29/10"),
+    # Materiais postados no Classroom em 24/11 (abrem com a conta da turma)
+    "CFB": ("19AroYumGd09Rg57Pie7aAhIrhPONU1Wq", "Slides: Fator de Bayes (Classroom, 24/11)"),
+    "CBT": ("1WlI9SGLGqHPXtwOt482gtHktC4VqlzHr", "Slides: Bayesian Hypothesis Testing (Classroom, 24/11)"),
+    "CKS": ("1TCrEHylZiWo6D1DCl3U4UglBj-Mp-Ays", "Slides: K-S, qui-quadrado e G (Classroom, 24/11)"),
+    "CRV": ("1wv8wBC2qnZ8X_EZGTnq5admc2d6i3mUb", "Slides: Razão de verossimilhanças (Classroom, 24/11)"),
+    "CAN": ("1yw38Q8VMclPb2NKb86tNXT7xflzQipz7", "Slides: One-way ANOVA (Classroom, 24/11)"),
+    "CRL": ("17Av21POARG1dNHueu-fFXODyvaXsmUbv", "Slides: Linear Regression (Classroom, 24/11)"),
+    "CL3G": ("1I4lbSd4OxuYgQ9DyE_h3WLB8p5n2wwgx", "Gabarito da Lista 3 (Classroom, 24/11)"),
 }
 DRIVE_FOLDER_AULAS = "https://drive.google.com/drive/folders/1aHPftdRk7cT9nLovNcnw9wIZE1utM4AM"
 

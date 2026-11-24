@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Estatística (P2) de Probabilidade e Estatística: inferência bayesiana, MLE, intervalos de confiança e testes de hipótese, com exemplos resolvidos.">
+<title>Testes bayesianos · Probest P2</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23176b87'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>θ</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/site.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/site.js"></script>
+</head>
+<body class="s3">
+<header class="site-header"><a class="brand" href="index.html">Probest P2 · Estatística</a><span class="header-actions"><a class="switch" href="../index.html">↔ Trocar matéria</a><button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">◐ tema</button></span></header>
+<div class="page-wrap">
+<nav class="site-nav" aria-label="Seções"><details ><summary>Seções do site</summary><ol start="0"><li><a href="index.html">Início e roteiro</a></li><li><a href="01-amostras.html">Da probabilidade à estatística</a></li><li><a href="02-bayes-discreto.html">Bayes com hipóteses discretas</a></li><li><a href="03-preditiva-odds.html">Probabilidade preditiva e odds</a></li><li><a href="04-bayes-continuo.html">Priors contínuas e conjugadas</a></li><li><a href="05-map-priors.html">MAP, escolha de priors, MAP × MLE</a></li><li><a href="06-mle.html">Máxima verossimilhança (MLE)</a></li><li><a href="07-intervalos.html">Intervalos de confiança</a></li><li><a href="08-nhst.html">Testes de hipótese: fundamentos</a></li><li><a href="09-testes.html">Catálogo de testes (z, t, χ², F)</a></li><li><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança</a></li><li><a href="11-freq-bayes-regressao.html">Frequentista × Bayesiano, bootstrap, regressão</a></li><li><a href="12-exercicios.html">Exercícios de treino (com solução)</a></li><li><a href="13-formulario.html">Formulário + tabelas interativas</a></li><li><a href="14-mapa-listas.html">Mapa das listas, checklist e fontes</a></li><li><a href="15-materiais-mit.html">Materiais: resumos das aulas do MIT</a></li><li><a href="16-formulario-mle.html">Formulário da Lista MLE (consulta rápida)</a></li><li><a href="17-testes-bayesianos.html" aria-current="page">Testes bayesianos: fator de Bayes e teste MAP</a></li><li><a href="18-regressao.html">Regressão: inferência, múltipla e logística</a></li></ol></details></nav>
+<main class="content">
+<span class="eyebrow">Seção 17 · Inferência bayesiana III</span>
+<h1>Testes bayesianos: fator de Bayes e teste MAP</h1>
+<p class="lead">Material de 24/11 da professora ("Testes Bayesianos"). A <a href="03-preditiva-odds.html#bf">seção 3.5</a> já mostrou o fator de Bayes com hipóteses simples. Aqui entram os casos em que cada modelo tem um <b>parâmetro incerto</b> (e é preciso integrar), a regra que liga o <b>BF ao MAP</b>, o <b>teste MAP com dados contínuos</b> e sua <b>probabilidade de erro</b>, e a comparação com o GLRT.</p>
+
+<div class="toc"><strong>Nesta página</strong><ol>
+<li><a href="#bf-def">Fator de Bayes e verossimilhança marginal</a></li>
+<li><a href="#escala">Como ler o tamanho do BF</a></li>
+<li><a href="#simples">Modelos que fixam a distribuição (sem integral)</a></li>
+<li><a href="#marginal">Modelos com parâmetro incerto (com integral)</a></li>
+<li><a href="#bf-map">BF × MAP: quando os dois discordam</a></li>
+<li><a href="#map-test">Teste MAP com dados contínuos</a></li>
+<li><a href="#erro">Probabilidade de erro do teste MAP</a></li>
+<li><a href="#glrt">BF, MAP e GLRT lado a lado</a></li>
+<li><a href="#vf">Teste conceitual</a></li>
+</ol></div>
+
+<h2 id="bf-def">17.1 Fator de Bayes e verossimilhança marginal</h2>
+<div class="box def"><span class="box-title">Definição</span>
+<p>Dois modelos $M_0$ e $M_1$ tentam explicar os mesmos dados $D$. A <b>verossimilhança marginal</b> (ou evidência) de cada um é</p>
+$$m_i(D)=p(D\mid M_i)=\int_{\Theta_i} p(D\mid\theta_i,M_i)\,\pi_i(\theta_i)\,d\theta_i\qquad(\text{soma se }\theta_i\text{ for discreto}),$$
+<p>e o <b>fator de Bayes</b> é a razão</p>
+$$BF_{10}=\frac{m_1(D)}{m_0(D)},\qquad BF_{01}=\frac1{BF_{10}}.$$
+<p>$BF_{10}\gt1$: os dados favorecem $M_1$; $BF_{10}\lt1$: favorecem $M_0$; $BF_{10}=1$: não mudam nada.</p></div>
+<ul>
+<li>$m_i(D)$ é a <b>média</b> da verossimilhança, ponderada pela prior do parâmetro <i>dentro</i> do modelo. Não é o melhor ajuste (isso seria o máximo, usado no GLRT).</li>
+<li>É a mesma conta da <a href="03-preditiva-odds.html#prior-pred">prior predictive</a>: $m_i(D)$ é a probabilidade (ou densidade) que o modelo $M_i$ dava aos dados antes de vê-los.</li>
+<li>Para dados contínuos, $m_i$ é uma <b>densidade</b> e pode ser maior que 1. O BF também pode ser maior que 1: <b>não é uma probabilidade</b>.</li>
+</ul>
+<div class="box tip"><span class="box-title">A mesma fórmula de sempre</span>
+$$\underbrace{\frac{P(M_1\mid D)}{P(M_0\mid D)}}_{\text{posterior odds}}=BF_{10}\times\underbrace{\frac{P(M_1)}{P(M_0)}}_{\text{prior odds}},\qquad P(M_1\mid D)=\frac{BF_{10}\,P(M_1)}{P(M_0)+BF_{10}\,P(M_1)}.$$
+<p>As probabilidades dos <b>modelos</b> $P(M_i)$ não entram no BF; só entram na conversão para posterior. Já as priors dos <b>parâmetros</b> $\pi_i(\theta_i)$ entram em $m_i(D)$ e mudam o próprio BF.</p></div>
+
+<h2 id="escala">17.2 Como ler o tamanho do BF</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>$BF_{10}$</th><th>Evidência a favor de $M_1$</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>nenhuma preferência</td></tr>
+<tr><td>entre 1 e 3</td><td>fraca</td></tr>
+<tr><td>entre 3 e 10</td><td>moderada</td></tr>
+<tr><td>10 ou mais</td><td>forte</td></tr>
+</tbody></table></div>
+<p>Se $BF_{10}\lt1$, aplique a mesma escala a $BF_{01}=1/BF_{10}$. Ex.: $BF_{10}=0{,}25$ ⇒ $BF_{01}=4$: evidência moderada a favor de $M_0$. Essa escala é uma convenção didática da aula, não um nível de significância.</p>
+
+<h2 id="simples">17.3 Modelos que fixam a distribuição (sem integral)</h2>
+<p>Se cada modelo especifica <b>completamente</b> a distribuição dos dados (hipóteses simples), não há parâmetro a integrar: $m_i(D)$ é só a likelihood avaliada no dado observado.</p>
+<div class="example"><span class="box-title">Exemplo 17.1 — a API ficou mais lenta?</span>
+<p>O tempo de resposta $X$ (ms) de uma API segue $M_0: X\sim N(200;\ 400)$ (versão antiga) ou $M_1: X\sim N(230;\ 400)$ (versão nova, mais lenta). Nos dois, $\sigma=20$. Antes de medir, $P(M_0)=0{,}7$ e $P(M_1)=0{,}3$. Uma requisição levou $x=218$ ms.</p>
+<ol class="steps">
+<li><b>Densidades.</b> O fator $\frac1{\sqrt{2\pi\sigma^2}}$ é o mesmo nos dois modelos e vai se cancelar:
+$$m_0=\tfrac1{20\sqrt{2\pi}}e^{-(218-200)^2/800}=\tfrac1{20\sqrt{2\pi}}e^{-0{,}405}\approx0{,}0133,\qquad m_1=\tfrac1{20\sqrt{2\pi}}e^{-(218-230)^2/800}=\tfrac1{20\sqrt{2\pi}}e^{-0{,}18}\approx0{,}0167.$$</li>
+<li><b>Fator de Bayes.</b> $BF_{10}=e^{-0{,}18+0{,}405}=e^{0{,}225}\approx1{,}25$: evidência fraca a favor de $M_1$ (218 está um pouco mais perto de 230 do que de 200).</li>
+<li><b>Posterior.</b> Posterior odds $=1{,}25\times\frac{0{,}3}{0{,}7}\approx0{,}537$, logo $P(M_1\mid x)=\frac{0{,}537}{1{,}537}\approx0{,}349$ (era 0,30).</li>
+</ol>
+<p><b>Atalho para duas Normais com a mesma variância:</b> $BF_{10}=\exp\!\Big(\dfrac{(x-\mu_0)^2-(x-\mu_1)^2}{2\sigma^2}\Big)$. O BF compara as <b>alturas</b> das duas densidades no ponto observado, não áreas de cauda.</p></div>
+
+<h2 id="marginal">17.4 Modelos com parâmetro incerto (com integral)</h2>
+<p>Agora cada modelo admite <b>vários</b> valores do parâmetro, com uma prior sobre eles. Para avaliar o dado, faça a média da likelihood sobre essa prior. Dois casos aparecem na prova com conta fechada.</p>
+
+<h3>Normal com média incerta</h3>
+<div class="box def"><span class="box-title">Resultado</span>
+<p>Se $X\mid\mu\sim N(\mu,\sigma^2)$ e, dentro de $M_i$, $\mu\sim N(\mu_i,\tau^2)$, então escrevendo $X=\mu+\varepsilon$ (soma de Normais independentes)</p>
+$$X\mid M_i\sim N(\mu_i,\ \sigma^2+\tau^2),\qquad BF_{10}=\exp\!\Big(\frac{(x-\mu_0)^2-(x-\mu_1)^2}{2(\sigma^2+\tau^2)}\Big).$$
+<p>$\sigma^2$: variabilidade dos dados com a média fixa. $\tau^2$: incerteza da prior sobre a média. A variância <b>preditiva</b> soma as duas.</p></div>
+<div class="example"><span class="box-title">Exemplo 17.2 — a mesma API, com médias incertas</span>
+<p>Mesmos dados do Exemplo 17.1, mas agora $M_0$ diz "média em torno de 200" e $M_1$ "em torno de 230", com $\tau^2=900$ ($\tau=30$) nos dois. A variância preditiva vira $400+900=1300$:</p>
+$$BF_{10}=\exp\!\Big(\frac{324-144}{2\cdot1300}\Big)=e^{0{,}0692}\approx1{,}07,\qquad P(M_1\mid x)=\frac{1{,}07(0{,}3)}{0{,}7+1{,}07(0{,}3)}\approx0{,}315.$$
+<div class="table-wrap"><table>
+<thead><tr><th></th><th class="num">Médias fixas</th><th class="num">Médias incertas</th></tr></thead>
+<tbody>
+<tr><td>Variância preditiva</td><td class="num">400</td><td class="num">1300</td></tr>
+<tr><td>$BF_{10}$</td><td class="num">1,25</td><td class="num">1,07</td></tr>
+<tr><td>$P(M_1\mid x)$</td><td class="num">0,349</td><td class="num">0,315</td></tr>
+</tbody></table></div>
+<p>Com prior mais espalhada, as duas preditivas ficam mais largas e parecidas, o BF se aproxima de 1 e a posterior quase não sai da prior.</p></div>
+
+<h3>Moeda honesta × moeda com viés desconhecido</h3>
+<div class="example"><span class="box-title">Exemplo 17.3 — hipótese pontual × hipótese composta</span>
+<p>$M_0$: a moeda é honesta, $p=1/2$. $M_1$: $p$ é desconhecido, com prior Uniforme$(0,1)$ = Beta$(1,1)$. Em $n=10$ lançamentos saíram $k=8$ caras.</p>
+<ol class="steps">
+<li>$m_0=\binom{10}{8}\big(\tfrac12\big)^{10}=\frac{45}{1024}\approx0{,}0439$.</li>
+<li>$m_1=\int_0^1\binom{10}{8}p^8(1-p)^2\,dp=\binom{10}{8}\frac{8!\,2!}{11!}=\frac1{11}\approx0{,}0909$. (Com prior uniforme, $m_1=\frac1{n+1}$ para qualquer $k$: todo resultado é igualmente provável.)</li>
+<li>$BF_{10}=\frac{1/11}{45/1024}\approx2{,}07$: evidência fraca contra a moeda honesta. Com $P(M_0)=P(M_1)=\frac12$, $P(M_1\mid D)=\frac{2{,}07}{3{,}07}\approx0{,}67$.</li>
+</ol>
+<p>Repare que o melhor ajuste de $M_1$ ($p=0{,}8$) daria likelihood $\binom{10}8 0{,}8^8 0{,}2^2\approx0{,}302$, bem maior que 0,0909. O BF <b>penaliza</b> $M_1$ por espalhar a prior por valores de $p$ que explicam mal os dados. O GLRT, que usa o máximo, não faz isso.</p></div>
+<div class="box warn"><span class="box-title">Sensibilidade à prior</span>
+<p>Como $\pi_i(\theta_i)$ entra no BF, priors diferentes podem mudar a conclusão. Justifique a prior <b>antes</b> de ver os dados e confira se escolhas razoáveis levam ao mesmo resultado.</p></div>
+
+<h2 id="bf-map">17.5 BF × MAP: quando os dois discordam</h2>
+<p>O <b>MAP entre modelos</b> escolhe o de maior posterior. Como o denominador $P(D)$ é comum, basta comparar os numeradores $m_i(D)P(M_i)$. Dividindo um pelo outro:</p>
+<div class="box def"><span class="box-title">Regra</span>
+$$\text{MAP escolhe }M_1\iff m_1P(M_1)\gt m_0P(M_0)\iff BF_{10}\gt\frac{P(M_0)}{P(M_1)}.$$
+<p>Os dados precisam vencer a vantagem inicial de $M_0$.</p></div>
+<div class="example"><span class="box-title">Exemplo 17.4 — a linha de produção desregulou?</span>
+<p>Normal: taxa de defeitos $q=0{,}1$ ($M_0$). Desregulada: $q=0{,}3$ ($M_1$). O histórico diz que a máquina está desregulada em 5% das inspeções: $P(M_1)=0{,}05$. Numa amostra de 5 peças, 3 têm defeito.</p>
+<ol class="steps">
+<li>$P(K=3\mid M_0)=\binom53(0{,}1)^3(0{,}9)^2=0{,}0081$; $P(K=3\mid M_1)=\binom53(0{,}3)^3(0{,}7)^2=0{,}1323$.</li>
+<li>$BF_{10}=0{,}1323/0{,}0081\approx16{,}3$: evidência <b>forte</b> a favor de "desregulada".</li>
+<li>Limiar do MAP: $P(M_0)/P(M_1)=0{,}95/0{,}05=19$. Como $16{,}3\lt19$, o <b>MAP escolhe $M_0$</b>.</li>
+<li>Posterior: $P(M_1\mid D)=\frac{16{,}3(0{,}05)}{0{,}95+16{,}3(0{,}05)}\approx0{,}46$. Subiu de 5% para 46%, mas ainda não passou de 50%.</li>
+</ol>
+<p><b>Não há contradição:</b> o BF mede quanto os dados <b>mudaram</b> as chances; o MAP decide combinando dados e prior. Se a prior fosse $P(M_1)=0{,}2$ (limiar 4), o MAP escolheria $M_1$.</p>
+<p>O MAP minimiza a probabilidade média de classificar errado. Se os erros têm custos diferentes (ignorar uma máquina desregulada é caro), uma decisão prática pode usar outro limiar.</p></div>
+
+<h2 id="map-test">17.6 Teste MAP com dados contínuos</h2>
+<p>É o mesmo raciocínio, com hipóteses $H_0$ e $H_1$ de priors $p_0=P(H_0)$ e $p_1=P(H_1)$ e uma observação $Y$ com densidade (ou pmf) conhecida sob cada uma:</p>
+<div class="box def"><span class="box-title">Teste MAP</span>
+$$\text{escolha }H_0\iff f_Y(y\mid H_0)\,p_0\ \ge\ f_Y(y\mid H_1)\,p_1\iff\frac{f_Y(y\mid H_0)}{f_Y(y\mid H_1)}\ge\frac{p_1}{p_0}.$$
+<p>Com $p_0=p_1$, vira o teste de máxima verossimilhança (escolhe a hipótese que dá maior densidade ao dado).</p></div>
+<ol class="steps">
+<li>Escreva $f_Y(y\mid H_0)$ e $f_Y(y\mid H_1)$.</li>
+<li>Monte a razão e simplifique (em geral tirando o log).</li>
+<li>Isole $y$: a regra vira "escolha $H_0$ se $y\ge c$" (ou $\le c$).</li>
+</ol>
+<div class="example"><span class="box-title">Exemplo 17.5 — bit recebido com ruído</span>
+<p>Um transmissor envia $X=+1$ ($H_0$, prob. 0,8) ou $X=-1$ ($H_1$, prob. 0,2). O receptor lê $Y=X+W$, com ruído $W\sim N(0;\ 0{,}25)$ ($\sigma=0{,}5$) independente de $X$.</p>
+<p><b>Razão:</b> $Y\mid H_0\sim N(1;\ \sigma^2)$ e $Y\mid H_1\sim N(-1;\ \sigma^2)$, então</p>
+$$\frac{f(y\mid H_0)}{f(y\mid H_1)}=\exp\!\Big(\frac{(y+1)^2-(y-1)^2}{2\sigma^2}\Big)=e^{2y/\sigma^2}\ \ge\ \frac{p_1}{p_0}\iff y\ \ge\ c=\frac{\sigma^2}{2}\ln\frac{p_1}{p_0}.$$
+<p><b>Limiar:</b> $c=0{,}125\ln(0{,}25)\approx-0{,}173$. Escolha $H_0$ (bit $+1$) se $y\ge-0{,}173$.</p>
+<p>Ex.: leu $y=-0{,}1$. A razão vale $e^{2(-0{,}1)/0{,}25}=e^{-0{,}8}\approx0{,}449\ge0{,}25$ ⇒ escolhe $H_0$. O valor está mais perto de $-1$ do que um teste de ML ($c=0$) toleraria, mas a prior forte de $H_0$ empurra o limiar para a esquerda.</p></div>
+
+<h2 id="erro">17.7 Probabilidade de erro do teste MAP</h2>
+<p>Com a regra "escolha $H_0$ se $y\ge c$", há dois erros:</p>
+<ul>
+<li><b>Tipo I:</b> escolher $H_1$ quando vale $H_0$: $P(Y\lt c\mid H_0)$.</li>
+<li><b>Tipo II:</b> escolher $H_0$ quando vale $H_1$: $P(Y\ge c\mid H_1)$.</li>
+</ul>
+<div class="box def"><span class="box-title">Probabilidade média de erro</span>
+$$P_e=P(\text{erro I}\mid H_0)\,p_0+P(\text{erro II}\mid H_1)\,p_1.$$
+<p>Entre todas as regras de decisão, a regra MAP é a que dá o <b>menor</b> $P_e$.</p></div>
+<div class="example"><span class="box-title">Exemplo 17.6 — erro do receptor do Exemplo 17.5</span>
+<p>Com $c=-0{,}173$ e $\sigma=0{,}5$:</p>
+$$P(Y\lt c\mid H_0)=\Phi\Big(\frac{c-1}{\sigma}\Big)=\Phi(-2{,}35)\approx0{,}0095,\qquad P(Y\ge c\mid H_1)=1-\Phi\Big(\frac{c+1}{\sigma}\Big)=1-\Phi(1{,}65)\approx0{,}049.$$
+$$P_e=0{,}8(0{,}0095)+0{,}2(0{,}049)\approx0{,}0076+0{,}0098=0{,}0174.$$
+<p>Com o limiar de ML ($c=0$), os dois erros valem $\Phi(-2)=0{,}0228$ e $P_e=0{,}0228$. O MAP erra menos <b>na média</b> porque aceita errar um pouco mais na hipótese rara ($H_1$) em troca de errar bem menos na comum.</p></div>
+<div class="box warn"><span class="box-title">Não confunda com o NHST</span>
+<p>No teste frequentista, fixamos α (erro tipo I) e minimizamos β. No teste MAP, não há α fixo: os dois erros são pesados pelas priors e o que se minimiza é $P_e$.</p></div>
+
+<h2 id="glrt">17.8 BF, MAP e GLRT lado a lado</h2>
+<div class="table-wrap"><table>
+<thead><tr><th></th><th>Fator de Bayes</th><th>MAP entre modelos</th><th>GLRT (<a href="10-razao-verossimilhanca.html">§10</a>)</th></tr></thead>
+<tbody>
+<tr><td>Pergunta</td><td>quanto os dados mudam as chances entre os modelos?</td><td>qual modelo é mais provável depois dos dados?</td><td>o ganho de ajuste ao tirar a restrição de $H_0$ é grande o bastante para rejeitá-la?</td></tr>
+<tr><td>Parâmetro desconhecido</td><td><b>integra</b> sobre a prior</td><td>integra (usa o BF)</td><td><b>maximiza</b> (usa o MLE)</td></tr>
+<tr><td>Usa $P(M_i)$?</td><td>não</td><td>sim</td><td>não (não há prior)</td></tr>
+<tr><td>Saída</td><td>número $BF_{10}$</td><td>escolha do modelo, $P(M_i\mid D)$</td><td>rejeita ou não $H_0$; p-valor via $W=-2\ln\Lambda\approx\chi^2_r$</td></tr>
+<tr><td>Controla</td><td>—</td><td>probabilidade média de erro</td><td>erro tipo I (α)</td></tr>
+</tbody></table></div>
+<p>BF e MAP são bayesianos; o GLRT é frequentista e <b>não</b> dá a probabilidade de $H_0$ ser verdadeira.</p>
+
+<h2 id="vf">17.9 Teste conceitual (clique e veja a explicação)</h2>
+<div class="vf" data-ans="F"><p>1. $BF_{10}=4$ significa que $M_1$ tem probabilidade 0,8.</p><div class="fb">O BF multiplica as odds. A probabilidade final depende da prior: com $P(M_1)=0{,}1$, as posterior odds são $4/9$ e $P(M_1\mid D)\approx0{,}31$.</div></div>
+<div class="vf" data-ans="V"><p>2. Mudar $P(M_0)$ e $P(M_1)$ não altera o fator de Bayes.</p><div class="fb">O BF só depende de $m_0(D)$ e $m_1(D)$. As probabilidades dos modelos só entram na conversão para posterior.</div></div>
+<div class="vf" data-ans="F"><p>3. Mudar a prior do parâmetro dentro de $M_1$ não altera o fator de Bayes.</p><div class="fb">Altera: $m_1(D)=\int p(D\mid\theta)\pi_1(\theta)d\theta$ depende de $\pi_1$.</div></div>
+<div class="vf" data-ans="V"><p>4. É possível ter $BF_{10}\gt1$ e o MAP escolher $M_0$.</p><div class="fb">Basta $1\lt BF_{10}\lt P(M_0)/P(M_1)$, como no Exemplo 17.4.</div></div>
+<div class="vf" data-ans="V"><p>5. Com priors iguais, o teste MAP coincide com o teste de máxima verossimilhança.</p><div class="fb">O limiar $p_1/p_0$ vira 1: escolhe-se a hipótese com maior $f(y\mid H_i)$.</div></div>
+<div class="vf" data-ans="F"><p>6. O GLRT e o fator de Bayes tratam o parâmetro desconhecido da mesma forma.</p><div class="fb">O GLRT substitui o parâmetro pelo MLE (máximo); o BF faz a média ponderada pela prior.</div></div>
+<p class="source-note">Fontes: slides da professora "Fator de Bayes: comparação de modelos" e "Bayesian Hypothesis Testing" (material de 24/11); Pishro-Nik, seção 9.1.8 (MAP hypothesis test). Exemplos com números próprios.</p>
+
+<div class="mit-links"><span>PDFs desta página (Drive):</span><a href="https://drive.google.com/file/d/19AroYumGd09Rg57Pie7aAhIrhPONU1Wq/view" target="_blank" rel="noopener" title="Slides: Fator de Bayes (Classroom, 24/11)">CFB</a><a href="https://drive.google.com/file/d/1WlI9SGLGqHPXtwOt482gtHktC4VqlzHr/view" target="_blank" rel="noopener" title="Slides: Bayesian Hypothesis Testing (Classroom, 24/11)">CBT</a><a href="https://drive.google.com/file/d/1LckrMd55JUUzbXDYaRsfCMuZDrY65Va1/view" target="_blank" rel="noopener" title="Livro Pishro-Nik (PDF completo)">B1</a><a href="15-materiais-mit.html">resumos das aulas →</a></div>
+<div class="pager"><a href="16-formulario-mle.html">← Formulário da Lista MLE (consulta rápida)</a><a href="18-regressao.html">Regressão: inferência, múltipla e logística →</a></div>
+</main>
+</div>
+</body>
+</html>

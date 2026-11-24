@@ -86,6 +86,7 @@ $$\underbrace{\frac{P(H\mid D)}{P(H^c\mid D)}}_{\text{posterior odds}} = \underb
 <li>Com dados independentes (dado $H$), os fatores se <b>multiplicam</b>: $O_{\text{post}} = BF_1\cdot BF_2\cdots BF_n\cdot O_{\text{prior}}$. Em log: $\ln O_{\text{post}} = \ln O_{\text{prior}} + \sum \ln BF_i$.</li>
 <li>Se "não $H$" junta várias hipóteses, $P(D\mid H^c) = \frac{\sum_{j\ne i} P(D\mid H_j)P(H_j)}{\sum_{j\ne i}P(H_j)}$ (média ponderada).</li>
 </ul>
+<p><b>Continua na <a href="17-testes-bayesianos.html">seção 17</a></b> (material de 24/11): BF quando cada modelo tem um parâmetro incerto (verossimilhança marginal), escala de interpretação, quando o BF favorece $M_1$ mas o MAP escolhe $M_0$, e o teste MAP com dados contínuos.</p>
 <div class="example"><span class="box-title">Exemplo 3.3 — filtro de spam ingênuo</span>
 <p>25% dos e-mails são spam: prior odds $= 0{,}25/0{,}75 = 1:3$. A palavra "grátis" aparece em 40% dos spams e em 5% dos legítimos.</p>
 <ul class="steps">

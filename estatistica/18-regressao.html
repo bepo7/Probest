@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Estatística (P2) de Probabilidade e Estatística: inferência bayesiana, MLE, intervalos de confiança e testes de hipótese, com exemplos resolvidos.">
+<title>Regressão · Probest P2</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23176b87'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='serif'>θ</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/site.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/site.js"></script>
+</head>
+<body class="s11">
+<header class="site-header"><a class="brand" href="index.html">Probest P2 · Estatística</a><span class="header-actions"><a class="switch" href="../index.html">↔ Trocar matéria</a><button class="theme-toggle" type="button" aria-label="Alternar tema claro/escuro">◐ tema</button></span></header>
+<div class="page-wrap">
+<nav class="site-nav" aria-label="Seções"><details ><summary>Seções do site</summary><ol start="0"><li><a href="index.html">Início e roteiro</a></li><li><a href="01-amostras.html">Da probabilidade à estatística</a></li><li><a href="02-bayes-discreto.html">Bayes com hipóteses discretas</a></li><li><a href="03-preditiva-odds.html">Probabilidade preditiva e odds</a></li><li><a href="04-bayes-continuo.html">Priors contínuas e conjugadas</a></li><li><a href="05-map-priors.html">MAP, escolha de priors, MAP × MLE</a></li><li><a href="06-mle.html">Máxima verossimilhança (MLE)</a></li><li><a href="07-intervalos.html">Intervalos de confiança</a></li><li><a href="08-nhst.html">Testes de hipótese: fundamentos</a></li><li><a href="09-testes.html">Catálogo de testes (z, t, χ², F)</a></li><li><a href="10-razao-verossimilhanca.html">Teste da razão de verossimilhança</a></li><li><a href="11-freq-bayes-regressao.html">Frequentista × Bayesiano, bootstrap, regressão</a></li><li><a href="12-exercicios.html">Exercícios de treino (com solução)</a></li><li><a href="13-formulario.html">Formulário + tabelas interativas</a></li><li><a href="14-mapa-listas.html">Mapa das listas, checklist e fontes</a></li><li><a href="15-materiais-mit.html">Materiais: resumos das aulas do MIT</a></li><li><a href="16-formulario-mle.html">Formulário da Lista MLE (consulta rápida)</a></li><li><a href="17-testes-bayesianos.html">Testes bayesianos: fator de Bayes e teste MAP</a></li><li><a href="18-regressao.html" aria-current="page">Regressão: inferência, múltipla e logística</a></li></ol></details></nav>
+<main class="content">
+<span class="eyebrow">Seção 18 · Regressão</span>
+<h1>Regressão linear: inferência, regressão múltipla e logística</h1>
+<p class="lead">Material de 19/11 da professora ("Linear Regression"), postado em 24/11, mais uma prévia da aula de <b>26/11 (regressão logística)</b>. A <a href="11-freq-bayes-regressao.html#regressao">seção 11.6</a> mostra como achar a reta por mínimos quadrados. Aqui entra o que a prova pode pedir a partir dela: <b>erro-padrão</b> dos coeficientes, <b>IC e teste t</b>, <b>R²</b>, <b>teste F</b>, leitura de uma saída de <b>regressão múltipla</b> com variáveis categóricas e o modelo <b>logístico</b>.</p>
+
+<div class="toc"><strong>Nesta página</strong><ol>
+<li><a href="#modelo">Modelo e hipóteses</a></li>
+<li><a href="#mq">Mínimos quadrados e resíduos</a></li>
+<li><a href="#se">Erro-padrão dos coeficientes</a></li>
+<li><a href="#ic">IC e teste t para um coeficiente</a></li>
+<li><a href="#r2">Decomposição SST = SSR + SSE e R²</a></li>
+<li><a href="#f">Teste F de significância global</a></li>
+<li><a href="#multipla">Regressão múltipla</a></li>
+<li><a href="#dummies">Variáveis categóricas e categoria de referência</a></li>
+<li><a href="#saida">Lendo uma saída completa</a></li>
+<li><a href="#logistica">Regressão logística (prévia da aula de 26/11)</a></li>
+<li><a href="#armadilhas">Armadilhas</a></li>
+</ol></div>
+
+<h2 id="modelo">18.1 Modelo e hipóteses</h2>
+$$Y_i=\beta_0+\beta_1x_i+\varepsilon_i,\qquad i=1,\dots,n.$$
+<ul>
+<li><b>Linearidade:</b> $E[Y\mid x]=\beta_0+\beta_1x$, ou seja, $E[\varepsilon\mid x]=0$. "Linear" é nos <b>coeficientes</b>: $\beta_0+\beta_1x+\beta_2x^2$ também é regressão linear.</li>
+<li><b>Independência:</b> os erros $\varepsilon_i$ são independentes.</li>
+<li><b>Variância constante</b> (homocedasticidade): $\text{Var}(\varepsilon_i)=\sigma^2$ para todo $x$.</li>
+<li><b>Normalidade:</b> $\varepsilon_i\sim N(0,\sigma^2)$. É ela que justifica os ICs e testes com $t$ e $F$ abaixo.</li>
+</ul>
+<p>$\beta_1$ (inclinação): variação esperada de $Y$ quando $x$ aumenta 1 unidade. $\beta_0$ (intercepto): valor esperado de $Y$ quando $x=0$; só tem leitura prática se $x=0$ fizer sentido e estiver perto dos dados.</p>
+
+<h2 id="mq">18.2 Mínimos quadrados e resíduos</h2>
+$$\hat\beta_1=\frac{S_{xy}}{S_{xx}}=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^2},\qquad\hat\beta_0=\bar y-\hat\beta_1\bar x,\qquad\hat y_i=\hat\beta_0+\hat\beta_1x_i,\qquad e_i=y_i-\hat y_i.$$
+<p>A variância dos erros é estimada pela soma dos resíduos ao quadrado, dividida pelos graus de liberdade (n menos o número de coeficientes estimados):</p>
+$$s^2=\hat\sigma^2=\frac{SSE}{n-2}=\frac{\sum e_i^2}{n-2}\qquad\Big(\text{regressão múltipla com }k\text{ preditores: }\frac{SSE}{n-k-1}\Big).$$
+<div class="example" id="ex181"><span class="box-title">Exemplo 18.1 — tamanho do arquivo × tempo de upload</span>
+<p>Seis uploads: $x$ = tamanho (MB), $y$ = tempo (s).</p>
+<div class="table-wrap"><table>
+<thead><tr><th>$x$</th><th class="num">1</th><th class="num">2</th><th class="num">3</th><th class="num">4</th><th class="num">5</th><th class="num">6</th></tr></thead>
+<tbody>
+<tr><td>$y$</td><td class="num">2,0</td><td class="num">2,9</td><td class="num">4,4</td><td class="num">4,6</td><td class="num">6,3</td><td class="num">6,6</td></tr>
+<tr><td>$\hat y$</td><td class="num">2,081</td><td class="num">3,035</td><td class="num">3,990</td><td class="num">4,944</td><td class="num">5,898</td><td class="num">6,852</td></tr>
+<tr><td>$e$</td><td class="num">−0,081</td><td class="num">−0,135</td><td class="num">0,410</td><td class="num">−0,344</td><td class="num">0,402</td><td class="num">−0,252</td></tr>
+</tbody></table></div>
+<ol class="steps">
+<li>$\bar x=3{,}5$, $\bar y=4{,}467$, $S_{xx}=17{,}5$, $S_{xy}=16{,}7$.</li>
+<li>$\hat\beta_1=16{,}7/17{,}5=0{,}954$ s/MB; $\hat\beta_0=4{,}467-0{,}954(3{,}5)=1{,}127$ s. Reta: $\hat y=1{,}127+0{,}954x$.</li>
+<li>$SSE=\sum e_i^2=0{,}537$; $s^2=0{,}537/4=0{,}134$; $s=0{,}366$.</li>
+</ol>
+<p>Os resíduos somam zero (sempre, quando há intercepto) e não mostram padrão claro.</p></div>
+
+<h2 id="se">18.3 Erro-padrão dos coeficientes</h2>
+<div class="box def"><span class="box-title">Fórmulas (regressão simples)</span>
+$$SE(\hat\beta_1)=\frac{s}{\sqrt{S_{xx}}}=\sqrt{\frac{SSE/(n-2)}{\sum(x_i-\bar x)^2}},\qquad SE(\hat\beta_0)=s\sqrt{\frac1n+\frac{\bar x^2}{S_{xx}}}.$$</div>
+<ul>
+<li>Menos ruído ($s$ pequeno) ⇒ estimativas mais precisas.</li>
+<li><b>Mais espalhamento em $x$</b> ($S_{xx}$ grande) ⇒ inclinação mais precisa: pontos distantes "seguram" melhor a reta.</li>
+<li>Para o intercepto: $n$ maior ajuda; $\bar x$ longe de zero atrapalha (estimar $\beta_0$ é extrapolar até $x=0$).</li>
+</ul>
+<div class="example"><span class="box-title">Exemplo 18.1 (cont.)</span>
+<p>$SE(\hat\beta_1)=0{,}366/\sqrt{17{,}5}=0{,}0876$. $SE(\hat\beta_0)=0{,}366\sqrt{\frac16+\frac{3{,}5^2}{17{,}5}}=0{,}366\sqrt{0{,}867}=0{,}341$.</p></div>
+
+<h2 id="ic">18.4 IC e teste t para um coeficiente</h2>
+<div class="box def"><span class="box-title">Pivô</span>
+$$\frac{\hat\beta_j-\beta_j}{SE(\hat\beta_j)}\sim t_\nu,\qquad\nu=n-k-1\quad(\text{simples: }k=1,\ \nu=n-2).$$
+<p><b>IC</b> de nível $1-\alpha$: $\hat\beta_j\pm t_{\alpha/2,\nu}\,SE(\hat\beta_j)$.</p>
+<p><b>Teste</b> $H_0:\beta_j=0$ × $H_1:\beta_j\ne0$: $T=\hat\beta_j/SE(\hat\beta_j)$, p-valor $=2P(t_\nu\ge|T|)$.</p></div>
+<p>Dualidade (igual à <a href="07-intervalos.html#visoes">seção 7.10</a>): o IC de 95% <b>não contém 0</b> ⇔ rejeita $H_0:\beta_j=0$ a 5% ⇔ p-valor $\lt0{,}05$. Rejeitar quer dizer que $x_j$ tem efeito estatisticamente significativo sobre $Y$ (mantidos os outros preditores).</p>
+<div class="example"><span class="box-title">Exemplo 18.1 (cont.) — IC e teste</span>
+<p>$\nu=6-2=4$, $t_{0{,}025;4}=2{,}776$.</p>
+<ul>
+<li><b>Inclinação:</b> IC 95% $=0{,}954\pm2{,}776(0{,}0876)=0{,}954\pm0{,}243=[0{,}71;\ 1{,}20]$ s/MB. $T=0{,}954/0{,}0876=10{,}9$, p-valor $\approx0{,}0004$: o tamanho do arquivo afeta o tempo.</li>
+<li><b>Intercepto:</b> IC 95% $=1{,}127\pm2{,}776(0{,}341)=[0{,}18;\ 2{,}07]$ s. $T=3{,}30$, p-valor $\approx0{,}03$. Leitura: há um custo fixo de ~1 s por upload (conexão, handshake) mesmo para arquivo "vazio".</li>
+<li><b>Previsão</b> para 7 MB: $1{,}127+0{,}954(7)\approx7{,}8$ s (um pouco além dos dados: cuidado).</li>
+</ul></div>
+
+<h2 id="r2">18.5 Decomposição SST = SSR + SSE e R²</h2>
+$$\underbrace{\sum(y_i-\bar y)^2}_{SST\ \text{(total)}}=\underbrace{\sum(\hat y_i-\bar y)^2}_{SSR\ \text{(explicada)}}+\underbrace{\sum(y_i-\hat y_i)^2}_{SSE\ \text{(resíduos)}},\qquad R^2=\frac{SSR}{SST}=1-\frac{SSE}{SST}.$$
+<ul>
+<li>$R^2$ = fração da variação de $Y$ explicada pelo modelo; entre 0 e 1.</li>
+<li>Na regressão simples, $R^2=r^2$ (quadrado da correlação amostral).</li>
+<li>$R^2$ alto <b>não</b> prova causalidade nem que o modelo está certo (olhe os resíduos). Acrescentar preditores nunca diminui $R^2$, mesmo que sejam inúteis.</li>
+</ul>
+<div class="example"><span class="box-title">Exemplo 18.1 (cont.)</span>
+<p>$SST=\sum(y_i-\bar y)^2=16{,}473$; $SSE=0{,}537$; $SSR=15{,}937$. $R^2=15{,}937/16{,}473=0{,}967$: o tamanho explica 96,7% da variação do tempo.</p></div>
+
+<h2 id="f">18.6 Teste F de significância global</h2>
+<div class="box def"><span class="box-title">Teste F</span>
+<p>$H_0:\beta_1=\beta_2=\cdots=\beta_k=0$ (nenhum preditor ajuda; o melhor é prever com $\bar y$) × $H_1$: pelo menos um $\beta_j\ne0$.</p>
+$$F=\frac{MSR}{MSE}=\frac{SSR/k}{SSE/(n-k-1)}\sim F(k,\ n-k-1)\ \text{sob }H_0.$$
+<p>Rejeite para $F$ grande (cauda direita). Em função de $R^2$: $F=\dfrac{R^2/k}{(1-R^2)/(n-k-1)}$.</p></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Fonte</th><th class="num">SQ</th><th class="num">g.l.</th><th class="num">QM</th><th class="num">F</th></tr></thead>
+<tbody>
+<tr><td>Regressão</td><td class="num">SSR</td><td class="num">$k$</td><td class="num">MSR = SSR/$k$</td><td class="num">MSR/MSE</td></tr>
+<tr><td>Resíduos</td><td class="num">SSE</td><td class="num">$n-k-1$</td><td class="num">MSE = SSE/$(n-k-1)$ = $s^2$</td><td></td></tr>
+<tr class="total"><td>Total</td><td class="num">SST</td><td class="num">$n-1$</td><td></td><td></td></tr>
+</tbody></table></div>
+<p>É a mesma ideia da <a href="09-testes.html#anova">ANOVA</a>: variação explicada sobre variação residual, cada uma dividida pelos seus graus de liberdade.</p>
+<div class="example"><span class="box-title">Exemplo 18.1 (cont.)</span>
+<p>$F=\frac{15{,}937/1}{0{,}537/4}=118{,}8$ com $(1,4)$ g.l.; crítico a 5% $=7{,}71$ → rejeita. Na regressão <b>simples</b>, $F=T^2$ ($10{,}9^2\approx118{,}8$) e os dois testes dão o mesmo p-valor.</p></div>
+
+<h2 id="multipla">18.7 Regressão múltipla</h2>
+$$y_i=\beta_0+\beta_1x_{i1}+\beta_2x_{i2}+\cdots+\beta_kx_{ik}+\varepsilon_i\qquad\Longleftrightarrow\qquad\mathbf y=X\boldsymbol\beta+\boldsymbol\varepsilon.$$
+<ul>
+<li>$\beta_j$: variação esperada de $Y$ quando $x_j$ aumenta 1 unidade <b>mantendo os outros preditores fixos</b>. O mesmo $\beta_j$ pode mudar (até de sinal) quando se inclui ou retira outro preditor correlacionado com $x_j$.</li>
+<li>Mínimos quadrados: $\hat{\boldsymbol\beta}=(X^\top X)^{-1}X^\top\mathbf y$; covariância estimada $\widehat{\text{Cov}}(\hat{\boldsymbol\beta})=s^2(X^\top X)^{-1}$, e $SE(\hat\beta_j)$ é a raiz do elemento $j$ da diagonal. Na prova, os SEs vêm prontos na saída.</li>
+<li>Graus de liberdade: $\nu=n-k-1$ ($k$ preditores + 1 intercepto). É o $\nu$ do $t$ de cada coeficiente e do denominador do $F$.</li>
+</ul>
+
+<h2 id="dummies">18.8 Variáveis categóricas e categoria de referência</h2>
+<p>Uma variável com $c$ categorias (ex.: período = manhã, tarde, noite) entra como $c-1$ variáveis <b>dummy</b> (0/1). A categoria que fica sem dummy é a <b>referência</b>.</p>
+<div class="example"><span class="box-title">Exemplo — período do dia, referência "tarde"</span>
+<p>$D_{\text{manhã}}=1$ se manhã (0 senão); $D_{\text{noite}}=1$ se noite (0 senão). Tarde ⇒ as duas valem 0.</p>
+$$\text{CPU}=\beta_0+\beta_1\,\text{Usuários}+\beta_M D_{\text{manhã}}+\beta_N D_{\text{noite}}+\varepsilon.$$
+<p>$\beta_N=-3$ significa: <b>à noite</b>, com o mesmo número de usuários, a CPU é em média 3 pontos <b>menor do que à tarde</b>. Cada coeficiente de dummy é uma diferença em relação à referência.</p></div>
+<div class="box warn"><span class="box-title">Por que não $c$ dummies?</span>
+<p>Com intercepto, as $c$ dummies somam 1 em toda linha, igual à coluna do intercepto: colinearidade perfeita, $X^\top X$ não tem inversa e os coeficientes não ficam determinados ("armadilha das dummies"). Por isso uma categoria sai.</p></div>
+
+<h2 id="saida">18.9 Lendo uma saída completa</h2>
+<div class="example"><span class="box-title">Exemplo 18.2 — uso de CPU de um servidor</span>
+<p>$n=20$ medições. Preditores: Usuários (centenas), Taxa (Mbps) e Noite (dummy; referência: dia). Saída:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Coeficiente</th><th class="num">Estimativa</th><th class="num">SE</th><th class="num">$t$</th><th class="num">p-valor</th><th class="num">IC 95%</th></tr></thead>
+<tbody>
+<tr><td>Intercepto</td><td class="num">8,20</td><td class="num">2,10</td><td class="num">3,90</td><td class="num">0,001</td><td class="num">[3,75; 12,65]</td></tr>
+<tr><td>Usuários</td><td class="num">1,85</td><td class="num">0,40</td><td class="num">4,63</td><td class="num">0,0003</td><td class="num">[1,00; 2,70]</td></tr>
+<tr><td>Taxa</td><td class="num">0,12</td><td class="num">0,09</td><td class="num">1,33</td><td class="num">0,20</td><td class="num">[−0,07; 0,31]</td></tr>
+<tr><td>Noite</td><td class="num">−3,40</td><td class="num">1,20</td><td class="num">−2,83</td><td class="num">0,012</td><td class="num">[−5,94; −0,86]</td></tr>
+</tbody></table></div>
+<p>$SSE=64$, $SST=400$.</p>
+<ol class="steps">
+<li><b>Graus de liberdade:</b> $k=3$, $\nu=20-3-1=16$, $t_{0{,}025;16}=2{,}12$.</li>
+<li><b>Conferindo uma linha:</b> Taxa: $t=0{,}12/0{,}09=1{,}33$; IC $=0{,}12\pm2{,}12(0{,}09)=[-0{,}07;\ 0{,}31]$ contém 0 ⇒ não significativa a 5% (p = 0,20). Usuários e Noite são significativas.</li>
+<li><b>Interpretação:</b> cada 100 usuários a mais somam ~1,85 ponto de CPU (mesma taxa, mesmo período); à noite a CPU é ~3,4 pontos menor que de dia, com os outros fixos.</li>
+<li><b>R²:</b> $1-64/400=0{,}84$.</li>
+<li><b>Teste F:</b> $SSR=336$, $F=\frac{336/3}{64/16}=\frac{112}{4}=28$ com $(3,16)$ g.l.; crítico 5% $\approx3{,}24$ ⇒ o modelo como um todo é significativo.</li>
+<li><b>Previsão:</b> 500 usuários, 40 Mbps, à noite: $8{,}2+1{,}85(5)+0{,}12(40)-3{,}4=18{,}85\%$.</li>
+</ol>
+<p>"Taxa não significativa" não prova que a taxa não importa: pode ser falta de dados ou correlação com Usuários (os dois sobem juntos), o que infla o SE.</p></div>
+
+<h2 id="logistica">18.10 Regressão logística (prévia da aula de 26/11)</h2>
+<div class="box tip"><span class="box-title">Prévia</span><p>A aula de regressão logística é em 26/11. Esta seção usa o que já apareceu no último slide de "Teste Chi-Square, Teste KS" (GLRT com modelo logístico) e a forma padrão do modelo. Ela será revisada depois da aula.</p></div>
+<p>Quando a resposta é binária ($Y=1$ erro, $Y=0$ sucesso), uma reta para $P(Y=1)$ pode sair de $[0,1]$. A regressão logística modela as <b>log-odds</b> como função linear:</p>
+$$\ln\frac{p}{1-p}=\beta_0+\beta_1x_1+\cdots+\beta_kx_k=\eta\qquad\Longleftrightarrow\qquad p=P(Y=1\mid x)=\frac{1}{1+e^{-\eta}}.$$
+<ul>
+<li><b>Interpretação:</b> aumentar $x_j$ em 1 soma $\beta_j$ às log-odds, ou seja, <b>multiplica as odds</b> por $e^{\beta_j}$ (razão de chances). Ligação direta com as <a href="03-preditiva-odds.html#odds">odds da seção 3.4</a>.</li>
+<li><b>Estimação:</b> por <a href="06-mle.html">máxima verossimilhança</a>, com likelihood de Bernoulli $L(\boldsymbol\beta)=\prod p_i^{y_i}(1-p_i)^{1-y_i}$. Não há fórmula fechada; o software maximiza numericamente.</li>
+<li><b>Comparar modelos aninhados:</b> GLRT (<a href="10-razao-verossimilhanca.html">§10</a>) com $W=2[\ell(\hat\beta_{\text{completo}})-\ell(\hat\beta_{\text{restrito}})]\approx\chi^2_r$, $r$ = número de coeficientes a mais.</li>
+</ul>
+<div class="example"><span class="box-title">Exemplo 18.3 — erro de requisição × carga e servidor</span>
+<p>$Y=1$ se a requisição falhou; $C$ = carga (%); $S=1$ para o servidor B, $0$ para o A. Ajuste do modelo completo:</p>
+$$\ln\frac{p}{1-p}=-4+0{,}05\,C+0{,}8\,S.$$
+<ol class="steps">
+<li><b>Probabilidade</b> no servidor A com carga 60%: $\eta=-4+3=-1$, $p=\frac1{1+e^{1}}\approx0{,}269$. No B: $\eta=-0{,}2$, $p\approx0{,}450$.</li>
+<li><b>Razão de chances</b> B × A (mesma carga): $e^{0{,}8}\approx2{,}23$: as odds de erro no B são 2,2 vezes as do A. 10 pontos a mais de carga multiplicam as odds por $e^{0{,}5}\approx1{,}65$.</li>
+<li><b>O servidor importa, levando em conta a carga?</b> $H_0:\beta_S=0$. Modelo restrito (só $C$): $\ell=-210{,}4$; completo: $\ell=-205{,}1$. $W=2(-205{,}1+210{,}4)=10{,}6$ com 1 g.l. (um coeficiente a mais); $10{,}6\gt3{,}84$ ⇒ rejeita $H_0$ (p ≈ 0,001).</li>
+</ol>
+<p>Repare: a razão de chances <b>não</b> é a razão de probabilidades ($0{,}450/0{,}269=1{,}67\ne2{,}23$).</p></div>
+
+<h2 id="armadilhas">18.11 Armadilhas</h2>
+<ul>
+<li>Graus de liberdade: $n-2$ na simples, $n-k-1$ na múltipla ($k$ = preditores, sem contar o intercepto).</li>
+<li>$SE(\hat\beta_1)$ usa $\sqrt{S_{xx}}$ no denominador, não $S_{xx}$.</li>
+<li>IC que contém 0 ⇒ "não significativo", não "efeito zero".</li>
+<li>Coeficiente de regressão múltipla = efeito "com os outros fixos". Não compare com o coeficiente da regressão simples da mesma variável.</li>
+<li>Dummy: o coeficiente é diferença em relação à <b>referência</b>. $c$ categorias ⇒ $c-1$ dummies.</li>
+<li>$R^2$ alto não é causalidade; extrapolar para longe dos dados é arriscado; olhe os resíduos.</li>
+<li>Logística: $e^{\beta}$ multiplica <b>odds</b>, não probabilidades.</li>
+</ul>
+<p class="source-note">Fontes: slides da professora "Linear Regression" (aula de 19/11, postados em 24/11; inclui o estudo de caso de CPU em data center); último slide de "Testes de aderência" (GLRT com modelo logístico); MIT 18.05 aula 26. Exemplos com números próprios.</p>
+
+<div class="mit-links"><span>PDFs desta página (Drive):</span><a href="https://drive.google.com/file/d/17Av21POARG1dNHueu-fFXODyvaXsmUbv/view" target="_blank" rel="noopener" title="Slides: Linear Regression (Classroom, 24/11)">CRL</a><a href="https://drive.google.com/file/d/1DRbcuGVnKbMtEJHFqJg9MvLV9RC7RBmq/view" target="_blank" rel="noopener" title="MIT 26 · Linear Regression">M26</a><a href="15-materiais-mit.html">resumos das aulas →</a></div>
+<div class="pager"><a href="17-testes-bayesianos.html">← Testes bayesianos: fator de Bayes e teste MAP</a><span></span></div>
+</main>
+</div>
+</body>
+</html>

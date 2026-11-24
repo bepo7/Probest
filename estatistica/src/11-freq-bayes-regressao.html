@@ -8,7 +8,7 @@
 <li><a href="#pvalor-post">p-valor × probabilidade posterior</a></li>
 <li><a href="#parada">Regras de parada e princípio da verossimilhança</a></li>
 <li><a href="#bootstrap">Bootstrap</a></li>
-<li><a href="#regressao">Regressão linear</a></li>
+<li><a href="#regressao">Regressão linear</a> (inferência, múltipla e logística na <a href="18-regressao.html">seção 18</a>)</li>
 </ol></div>
 
 <h2 id="comparacao">11.1 As duas escolas lado a lado</h2>
@@ -68,6 +68,7 @@ $$P(H_0\mid D)=\frac{P(D\mid H_0)P(H_0)}{P(D\mid H_0)P(H_0)+P(D\mid H_1)P(H_1)}.
 <p>Se você confia num modelo (ex.: Exponencial), estime o parâmetro (MLE), gere amostras <b>do modelo ajustado</b> em vez de reamostrar os dados, e siga os mesmos passos.</p></div>
 
 <h2 id="regressao">11.6 Regressão linear (mínimos quadrados)</h2>
+<div class="box tip"><span class="box-title">Matéria da P2</span><p>A professora deu regressão na aula de 19/11 e terá regressão logística em 26/11. Esta seção é só o ajuste da reta; erro-padrão, IC e teste t dos coeficientes, R², teste F, regressão múltipla, dummies e logística estão na <a href="18-regressao.html">seção 18</a>.</p></div>
 <p>Modelo: $y_i=a+b\,x_i+\varepsilon_i$, com erros $\varepsilon_i$ independentes de média 0. Escolhemos $a,b$ que minimizam a soma dos quadrados dos resíduos $\sum(y_i-a-bx_i)^2$:</p>
 <div class="box def"><span class="box-title">Fórmulas</span>
 $$\hat b=\frac{S_{xy}}{S_{xx}}=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^2},\qquad \hat a=\bar y-\hat b\,\bar x.$$

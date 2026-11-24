@@ -9,6 +9,7 @@
 <li><a href="#b-ic">Intervalos de confiança (12–14)</a></li>
 <li><a href="#b-testes">Testes (15–19c)</a></li>
 <li><a href="#b-conc">Conceituais (20)</a></li>
+<li><a href="#b-bt">Testes bayesianos e regressão (21–26)</a></li>
 </ol></div>
 
 <h2 id="b-bayes">Bloco A — Bayes discreto, preditiva e odds</h2>
@@ -209,3 +210,52 @@ $$\Lambda=\frac{0{,}3^x\,0{,}7^{n-x}}{\hat p^{\,x}(1-\hat p)^{n-x}}=\Big(\frac{0
 <div class="vf" data-ans="F"><p>g) No K-S, basta calcular $\max_i|i/n-F_0(x_{(i)})|$.</p><div class="fb">Falta o lado de antes do salto: $D^-=\max_i\{F_0(x_{(i)})-(i-1)/n\}$. A maior distância pode estar logo antes de um degrau.</div></div>
 <div class="vf" data-ans="F"><p>h) Posso usar a tabela clássica do K-S para testar "os dados são Exponenciais" com $\lambda$ estimado por $1/\bar x$ dos mesmos dados.</p><div class="fb">A tabela clássica supõe $F_0$ totalmente especificada. Com parâmetro estimado, o modelo se ajusta aos dados e o teste precisa ser recalibrado (Lilliefors ou simulação).</div></div>
 <div class="vf" data-ans="V"><p>i) O teste G para contagens multinomiais é um caso particular do teste de razão de verossimilhança.</p><div class="fb">$G=-2\ln\Lambda$ com $\hat p_i=O_i/n$ no denominador e $p_{0i}$ no numerador (seção 10.8).</div></div>
+
+<h2 id="b-bt">Bloco G — Testes bayesianos e regressão</h2>
+<p>Material de 24/11: <a href="17-testes-bayesianos.html">seção 17</a> e <a href="18-regressao.html">seção 18</a>.</p>
+
+<div class="exercise"><span class="tag">fator de Bayes</span><span class="tag">marginal</span>
+<p><b>21.</b> $M_0$: um sensor dispara com probabilidade $p=\frac12$ por teste. $M_1$: $p$ desconhecido, prior Uniforme$(0,1)$. Em 6 testes, disparou nas 6 vezes. (a) Calcule $BF_{10}$. (b) Com $P(M_0)=0{,}8$, qual $P(M_1\mid D)$?</p>
+<span class="ans" data-label="(a) BF₁₀" data-answer="64/7" data-tol="0.01"></span><span class="ans" data-label="(b) P(M₁ | D)" data-answer="0.6957" data-tol="0.002"></span>
+<details class="sol"><summary>Solução</summary><div>
+<p>(a) $m_0=(1/2)^6=1/64$. $m_1=\int_0^1p^6dp=1/7$ (ou a regra $\frac1{n+1}$). $BF_{10}=\frac{1/7}{1/64}=\frac{64}7\approx9{,}14$: evidência moderada (quase forte) para $M_1$.</p>
+<p>(b) Posterior odds $=9{,}14\times\frac{0{,}2}{0{,}8}=2{,}29$ ⇒ $P(M_1\mid D)=\frac{2{,}29}{3{,}29}\approx0{,}696$.</p>
+</div></details></div>
+
+<div class="exercise"><span class="tag">BF × MAP</span>
+<p><b>22.</b> O número de falhas por dia de um cluster é Poisson com $\lambda=2$ (normal, $M_0$) ou $\lambda=5$ (degradado, $M_1$), com $P(M_1)=0{,}1$. Num dia houve 4 falhas. (a) $BF_{10}$? (b) $P(M_1\mid D)$? (c) Qual modelo o MAP escolhe?</p>
+<span class="ans" data-label="(a) BF₁₀" data-answer="1.945" data-tol="0.005"></span><span class="ans" data-label="(b) P(M₁ | D)" data-answer="0.1777" data-tol="0.002"></span>
+<details class="sol"><summary>Solução</summary><div>
+<p>(a) $BF_{10}=\frac{5^4e^{-5}/4!}{2^4e^{-2}/4!}=(2{,}5)^4e^{-3}=39{,}06(0{,}0498)\approx1{,}94$: fraca a favor de $M_1$.</p>
+<p>(b) $\frac{1{,}94(0{,}1)}{0{,}9+1{,}94(0{,}1)}\approx0{,}178$.</p>
+<p>(c) Limiar $P(M_0)/P(M_1)=9$; $1{,}94\lt9$ ⇒ MAP escolhe $M_0$ (normal).</p>
+</div></details></div>
+
+<div class="exercise"><span class="tag">teste MAP</span><span class="tag">erro</span>
+<p><b>23.</b> Sob $H_0$, $Y\sim N(0,1)$; sob $H_1$, $Y\sim N(2,1)$. $P(H_0)=0{,}6$. (a) Ache o limiar $c$ do teste MAP ("escolha $H_0$ se $y\le c$"). (b) Calcule a probabilidade média de erro.</p>
+<span class="ans" data-label="(a) c" data-answer="1.2027" data-tol="0.003"></span><span class="ans" data-label="(b) Pₑ" data-answer="0.1538" data-tol="0.003"></span>
+<details class="sol"><summary>Solução</summary><div>
+<p>(a) $\frac{f(y\mid H_0)}{f(y\mid H_1)}=\exp\big(\frac{(y-2)^2-y^2}{2}\big)=e^{2-2y}\ge\frac{0{,}4}{0{,}6}$ ⇔ $2-2y\ge\ln\frac23$ ⇔ $y\le1-\frac12\ln\frac23=1{,}203$.</p>
+<p>(b) $P_e=0{,}6\,P(Y\gt1{,}203\mid H_0)+0{,}4\,P(Y\le1{,}203\mid H_1)=0{,}6[1-\Phi(1{,}203)]+0{,}4\,\Phi(-0{,}797)=0{,}6(0{,}1145)+0{,}4(0{,}2127)\approx0{,}0687+0{,}0851=0{,}154$.</p>
+</div></details></div>
+
+<div class="exercise"><span class="tag">regressão</span><span class="tag">IC</span>
+<p><b>24.</b> Uma regressão simples com $n=8$ pontos deu $S_{xx}=42$, $S_{xy}=63$, $SST=100{,}5$ e $SSE=6$. (a) $\hat\beta_1$? (b) $SE(\hat\beta_1)$? (c) Limite inferior do IC de 95% para $\beta_1$ ($t_{0{,}025;6}=2{,}447$). (d) $R^2$?</p>
+<span class="ans" data-label="(a) β̂₁" data-answer="1.5" data-tol="0.001"></span><span class="ans" data-label="(b) SE(β̂₁)" data-answer="0.1543" data-tol="0.001"></span><span class="ans" data-label="(c) limite inferior" data-answer="1.122" data-tol="0.003"></span><span class="ans" data-label="(d) R²" data-answer="0.9403" data-tol="0.002"></span>
+<details class="sol"><summary>Solução</summary><div>
+<p>(a) $63/42=1{,}5$. (b) $s^2=6/(8-2)=1$, $SE=1/\sqrt{42}=0{,}1543$. (c) $1{,}5\pm2{,}447(0{,}1543)=1{,}5\pm0{,}378=[1{,}122;\ 1{,}878]$: não contém 0, inclinação significativa ($T=9{,}72$). (d) $R^2=1-6/100{,}5=0{,}940$ (ou $SSR=\hat\beta_1S_{xy}=94{,}5$).</p>
+</div></details></div>
+
+<div class="exercise"><span class="tag">regressão múltipla</span><span class="tag">F</span>
+<p><b>25.</b> Uma regressão com $k=4$ preditores e $n=25$ observações tem $R^2=0{,}6$. Calcule a estatística $F$ global e decida a 5% ($F_{0{,}05}(4,20)=2{,}87$).</p>
+<span class="ans" data-label="F" data-answer="7.5" data-tol="0.01"></span>
+<details class="sol"><summary>Solução</summary><div>
+<p>$F=\frac{R^2/k}{(1-R^2)/(n-k-1)}=\frac{0{,}6/4}{0{,}4/20}=\frac{0{,}15}{0{,}02}=7{,}5\gt2{,}87$ ⇒ rejeita $H_0:\beta_1=\cdots=\beta_4=0$ (p ≈ 0,0007). Pelo menos um preditor ajuda; o teste não diz qual.</p>
+</div></details></div>
+
+<div class="exercise"><span class="tag">logística</span>
+<p><b>26.</b> Um modelo logístico para a probabilidade de timeout é $\ln\frac p{1-p}=-2+0{,}04x$, com $x$ = latência de rede (ms). (a) Qual $p$ para $x=50$? (b) Por quanto as odds são multiplicadas quando $x$ aumenta 10 ms?</p>
+<span class="ans" data-label="(a) p" data-answer="0.5" data-tol="0.001"></span><span class="ans" data-label="(b) fator das odds" data-answer="1.4918" data-tol="0.002"></span>
+<details class="sol"><summary>Solução</summary><div>
+<p>(a) $\eta=-2+2=0$ ⇒ $p=\frac1{1+e^0}=0{,}5$. (b) $e^{0{,}04\cdot10}=e^{0{,}4}\approx1{,}49$: as odds sobem 49% (a probabilidade não sobe 49%).</p>
+</div></details></div>

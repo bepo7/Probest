@@ -17,6 +17,9 @@
 <tr><th>Normal-Normal</th><td>$a=\frac1{\sigma^2_{\text{prior}}}$, $b=\frac n{\sigma^2}$ · $\mu_{\text{post}}=\frac{a\mu_{\text{prior}}+b\bar x}{a+b}$ · $\sigma^2_{\text{post}}=\frac1{a+b}$</td><td><a href="04-bayes-continuo.html#normal">§4.6</a></td></tr>
 <tr><th>Dirichlet</th><td>$\theta=(\theta_1..\theta_K)\sim$ Dir$(\alpha_1..\alpha_K)$ · $E[\theta_i]=\alpha_i/\alpha_0$ · + contagens $o_i$ → Dir$(\alpha_i+o_i)$ · $K=2$: Beta</td><td><a href="04-bayes-continuo.html#dirichlet">§4.9</a></td></tr>
 <tr><th>MAP</th><td>$\arg\max_\theta p(x\mid\theta)f(\theta)$ · prior uniforme ⇒ MAP = MLE</td><td><a href="05-map-priors.html">§5</a></td></tr>
+<tr><th>BF marginal</th><td>$m_i(D)=\int p(D\mid\theta,M_i)\pi_i(\theta)d\theta$ · $BF_{10}=m_1/m_0$ · escala: 1–3 fraca, 3–10 moderada, ≥10 forte · média $\sim N(\mu_i,\tau^2)$: $X\mid M_i\sim N(\mu_i,\sigma^2+\tau^2)$ · prior uniforme em $p$: $m_1=\frac1{n+1}$</td><td><a href="17-testes-bayesianos.html#marginal">§17.4</a></td></tr>
+<tr><th>BF × MAP</th><td>MAP escolhe $M_1\iff BF_{10}\gt P(M_0)/P(M_1)$ · $P(M_1\mid D)=\frac{BF_{10}P(M_1)}{P(M_0)+BF_{10}P(M_1)}$</td><td><a href="17-testes-bayesianos.html#bf-map">§17.5</a></td></tr>
+<tr><th>Teste MAP</th><td>escolha $H_0$ se $\frac{f(y\mid H_0)}{f(y\mid H_1)}\ge\frac{p_1}{p_0}$ · $Y=\pm1+N(0,\sigma^2)$: $c=\frac{\sigma^2}2\ln\frac{p_1}{p_0}$ · $P_e=p_0P(\text{erro}\mid H_0)+p_1P(\text{erro}\mid H_1)$ (mínimo no MAP)</td><td><a href="17-testes-bayesianos.html#map-test">§17.6</a></td></tr>
 </tbody></table></div>
 
 <h2 id="freq">13.2 Estimação frequentista</h2>
@@ -76,3 +79,16 @@
 <p>Para qualquer outro valor, use a calculadora:</p>
 <div data-widget="tables"></div>
 <p class="kbd-hint">Na prova, use a tabela fornecida. Tabelas do MIT: a de $z$ dá $\Phi(z)$ (cauda esquerda); as de $t$ e $\chi^2$ dão valores críticos de <b>cauda direita</b>.</p>
+
+<h2 id="regressao">13.5 Regressão e ANOVA</h2>
+<div class="table-wrap"><table>
+<tbody>
+<tr><th>Reta</th><td>$\hat\beta_1=\frac{S_{xy}}{S_{xx}}$ · $\hat\beta_0=\bar y-\hat\beta_1\bar x$ · $s^2=\frac{SSE}{n-2}$ (múltipla: $\frac{SSE}{n-k-1}$)</td><td><a href="18-regressao.html#mq">§18.2</a></td></tr>
+<tr><th>Erro-padrão</th><td>$SE(\hat\beta_1)=\frac{s}{\sqrt{S_{xx}}}$ · $SE(\hat\beta_0)=s\sqrt{\frac1n+\frac{\bar x^2}{S_{xx}}}$</td><td><a href="18-regressao.html#se">§18.3</a></td></tr>
+<tr><th>IC e teste t</th><td>$\hat\beta_j\pm t_{\alpha/2,\nu}SE(\hat\beta_j)$ · $T=\hat\beta_j/SE$ · $\nu=n-k-1$ · IC sem 0 ⇔ rejeita $\beta_j=0$</td><td><a href="18-regressao.html#ic">§18.4</a></td></tr>
+<tr><th>R²</th><td>$SST=SSR+SSE$ · $R^2=\frac{SSR}{SST}=1-\frac{SSE}{SST}$ · simples: $R^2=r^2$</td><td><a href="18-regressao.html#r2">§18.5</a></td></tr>
+<tr><th>Teste F</th><td>$F=\frac{SSR/k}{SSE/(n-k-1)}=\frac{R^2/k}{(1-R^2)/(n-k-1)}\sim F(k,n-k-1)$ · simples: $F=T^2$</td><td><a href="18-regressao.html#f">§18.6</a></td></tr>
+<tr><th>Dummies</th><td>$c$ categorias → $c-1$ dummies · coeficiente = diferença para a referência</td><td><a href="18-regressao.html#dummies">§18.8</a></td></tr>
+<tr><th>Logística</th><td>$\ln\frac p{1-p}=\beta_0+\beta_1x$ · $p=\frac1{1+e^{-\eta}}$ · $e^{\beta_j}$ = razão de chances · GLRT $W=2(\ell_c-\ell_r)\approx\chi^2_r$</td><td><a href="18-regressao.html#logistica">§18.10</a></td></tr>
+<tr><th>ANOVA</th><td>$F=\frac{MS_B}{MS_W}\sim F(k-1,N-k)$ · grupos de tamanho $m$: $MS_W=$ média dos $s_i^2$, $MS_B=m\cdot$(variância das médias)</td><td><a href="09-testes.html#anova">§9.10</a></td></tr>
+</tbody></table></div>
