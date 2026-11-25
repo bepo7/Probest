@@ -83,10 +83,10 @@
 
 <h2 id="binomial">8.4 Exemplo discreto: teste Binomial</h2>
 <div class="example"><span class="box-title">Exemplo 8.1 — adivinho de cara ou coroa</span>
-<p>Uma pessoa diz que prevê o resultado de uma moeda justa melhor que o acaso. Em 20 tentativas, seja $X$ o número de acertos e $\theta$ a probabilidade de acerto.</p>
+<p>Uma pessoa diz que prevê o resultado de uma moeda justa melhor que o acaso. Em 20 tentativas, seja $X$ o número de acertos e $\theta$ a probabilidade de acerto. Teste ao nível $\alpha=0{,}05$.</p>
 <ul class="steps">
 <li>$H_0:\theta=0{,}5$ (chuta ao acaso); $H_1:\theta\gt0{,}5$. Estatística: $X$; distribuição nula: Bin$(20;\ 0{,}5)$.</li>
-<li>Região de rejeição $\{X\ge 15\}$: $\alpha=P(X\ge15\mid\theta=0{,}5)=0{,}0207$. (Com $\{X\ge14\}$ seria $0{,}0577\gt0{,}05$; em testes discretos não dá para acertar $\alpha$ exatamente, então pegue a maior região com $\alpha\le$ o nível pedido.)</li>
+<li>Região de rejeição $\{X\ge 15\}$: $\alpha=P(X\ge15\mid\theta=0{,}5)=0{,}0207$. (Com $\{X\ge14\}$ seria $0{,}0577\gt0{,}05$; em testes discretos não dá para acertar $\alpha$ exatamente, então pegue a maior região com $\alpha\le$ o nível pedido, aqui 0,05.)</li>
 <li>Potência se na verdade $\theta=0{,}7$: $P(X\ge15\mid\theta=0{,}7)=0{,}416$. Ou seja, $\beta=0{,}584$: com só 20 tentativas, há 58% de chance de não detectar um bom adivinho.</li>
 <li>Se a pessoa acertar 14: não rejeitamos $H_0$ ao nível 0,05. O p-valor é $P(X\ge14\mid H_0)=0{,}0577$.</li>
 </ul></div>
