@@ -87,12 +87,53 @@ $$\text{Var}(X)\le E\Big[\Big(X-\tfrac{a+b}{2}\Big)^2\Big]\le\Big(\frac{b-a}{2}\
 <p>Notas de avaliação de um app vão de 0 a 10. Com $n=400$ avaliações e $\bar x=6{,}1$: $\sigma_{\max}=5$, margem $=1{,}96\cdot5/20=0{,}49$. IC 95% (conservador): $[5{,}61;\ 6{,}59]$. A proporção (seção 7.5) é o caso particular $[a,b]=[0,1]$.</p></div>
 
 <h2 id="t">7.7 Média, amostra normal pequena, σ desconhecido (t)</h2>
+<p>É o caso mais comum na prática: você quer um IC para a média $\mu$, mas <b>não conhece $\sigma$</b> e tem <b>poucos dados</b>. Use $t$ quando as três condições valem juntas:</p>
+<ol>
+<li>o alvo é a <b>média</b> $\mu$;</li>
+<li>$\sigma$ é <b>desconhecido</b>, então entra o desvio padrão amostral $s$ no lugar;</li>
+<li>a amostra é <b>pequena</b> (regra prática: $n\lt30$) e os dados são (aproximadamente) <b>normais</b>.</li>
+</ol>
 <div class="box def"><span class="box-title">Fórmula</span>
-$$\bar x\pm t_{\alpha/2,\,n-1}\,\frac{s}{\sqrt n},\qquad\text{pois } T=\frac{\bar X-\mu}{S/\sqrt n}\sim t_{n-1}.$$</div>
+$$\bar x\pm t_{\alpha/2,\,n-1}\,\frac{s}{\sqrt n},\qquad\text{pois } T=\frac{\bar X-\mu}{S/\sqrt n}\sim t_{n-1}.$$
+<p>É a mesma estrutura do caso $z$ (seção 7.3): <b>estimativa ± quantil × erro padrão</b>. Mudam duas coisas: $\sigma$ vira $s$ e $z_{\alpha/2}$ vira $t_{\alpha/2,\,n-1}$, com $n-1$ graus de liberdade.</p></div>
+
+<div class="box tip"><span class="box-title">Por que trocar $z$ por $t$?</span>
+<p>Com $\sigma$ conhecido, só $\bar X$ varia de amostra para amostra. Com $s$ no lugar de $\sigma$, o denominador <b>também</b> varia: em algumas amostras $s$ sai menor que $\sigma$ e a estatística fica "esticada". A distribuição $t$ tem caudas mais pesadas que a normal justamente para acomodar essa incerteza extra, então o quantil é maior e o intervalo fica mais largo.</p>
+<p>Quanto maior $n$, mais preciso é $s$ e mais $t$ se aproxima de $z$. Por isso, com $n$ grande, a seção 7.4 volta a usar $z$.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>g.l. ($n-1$)</th><th>2</th><th>5</th><th>9</th><th>15</th><th>29</th><th>60</th><th>$\infty$ ($z$)</th></tr></thead>
+<tbody><tr><td>$t_{0,025}$ (IC 95%)</td><td class="num">4,303</td><td class="num">2,571</td><td class="num">2,262</td><td class="num">2,131</td><td class="num">2,045</td><td class="num">2,000</td><td class="num">1,960</td></tr></tbody>
+</table></div>
+<p>Com 3 observações (2 g.l.), o quantil é mais que o dobro de 1,96. A partir de uns 30 dados, a diferença fica pequena.</p></div>
+
+<div class="box def"><span class="box-title">Passo a passo</span>
+<ol class="steps">
+<li>Calcule $\bar x$ e $s=\sqrt{\frac{1}{n-1}\sum(x_i-\bar x)^2}$ (divide por $n-1$, não por $n$).</li>
+<li>Graus de liberdade: $\nu=n-1$.</li>
+<li>Na tabela $t$, procure a linha $\nu$ e a coluna da cauda $\alpha/2$ (para 95%, cauda 0,025).</li>
+<li>Erro padrão: $s/\sqrt n$.</li>
+<li>Margem $=t_{\alpha/2,\,\nu}\cdot s/\sqrt n$; IC $=\bar x\pm$ margem.</li>
+</ol></div>
+
 <div class="example"><span class="box-title">Exemplo 7.5</span>
 <p>Dez pesagens de um lote de café (supostas normais) dão $\bar x=4{,}8$ kg e $s=0{,}9$ kg. IC de 95% para a média?</p>
-<p>$t_{0,025;\,9}=2{,}262$ (tabela $t$, 9 g.l., cauda 0,025). Margem $=2{,}262\cdot\frac{0{,}9}{\sqrt{10}}=0{,}644$. IC: $[4{,}16;\ 5{,}44]$ kg.</p>
-<p>Com $z$ (errado aqui), a margem seria $0{,}558$: menor, porque ignoraria a incerteza em $s$.</p></div>
+<ol class="steps">
+<li>$\sigma$ desconhecido, $n=10$ pequeno, dados normais: caso $t$.</li>
+<li>$\nu=10-1=9$.</li>
+<li>$t_{0,025;\,9}=2{,}262$ (tabela $t$, 9 g.l., cauda 0,025).</li>
+<li>Erro padrão $=\frac{0{,}9}{\sqrt{10}}=0{,}285$.</li>
+<li>Margem $=2{,}262\cdot0{,}285=0{,}644$. IC: $[4{,}16;\ 5{,}44]$ kg.</li>
+</ol>
+<p>Com $z$ (errado aqui), a margem seria $1{,}96\cdot0{,}285=0{,}558$: menor, porque ignoraria a incerteza em $s$, e o intervalo teria nível real abaixo de 95%.</p></div>
+
+<div class="box warn"><span class="box-title">Erros comuns</span>
+<ul>
+<li>Usar $n$ em vez de $n-1$ nos graus de liberdade (ou no denominador de $s$).</li>
+<li>Usar a coluna $\alpha$ em vez de $\alpha/2$ num IC bilateral.</li>
+<li>Usar $t$ quando o enunciado <b>dá</b> $\sigma$: aí é $z$, mesmo com $n$ pequeno (seção 7.3).</li>
+<li>Com $n$ pequeno e dados claramente não normais (muito assimétricos), nem $t$ nem $z$ garantem o nível.</li>
+</ul>
+<p>O teste $t$ (seção <a href="09-testes.html#t">9.3</a>) usa a mesma estatística $T$; a versão com duas amostras está em <a href="09-testes.html#t2">9.4</a>.</p></div>
 
 <h2 id="var">7.8 Variância de uma amostra normal (χ²)</h2>
 <div class="box def"><span class="box-title">Fórmula</span>
