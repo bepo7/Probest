@@ -117,14 +117,69 @@ $$\bar x\pm t_{\alpha/2,\,n-1}\,\frac{s}{\sqrt n},\qquad\text{pois } T=\frac{\ba
 <p>O teste $t$ (seção <a href="09-testes.html#t">9.3</a>) usa a mesma estatística $T$; a versão com duas amostras está em <a href="09-testes.html#t2">9.4</a>.</p></div>
 
 <h2 id="var">7.8 Variância de uma amostra normal (χ²)</h2>
-<div class="box def"><span class="box-title">Fórmula</span>
-<p>Como $\frac{(n-1)S^2}{\sigma^2}\sim\chi^2_{n-1}$:</p>
-$$\left[\frac{(n-1)s^2}{\chi^2_{\alpha/2,\,n-1}},\ \frac{(n-1)s^2}{\chi^2_{1-\alpha/2,\,n-1}}\right]$$
-<p>(o valor crítico <b>maior</b> vai no denominador do limite <b>inferior</b>). Para $\sigma$, tire a raiz dos dois extremos.</p></div>
+<p>Até aqui o alvo era a média. Agora a pergunta é <b>quanto os dados variam</b>: queremos um IC para a variância $\sigma^2$ (ou para o desvio padrão $\sigma$). Use quando:</p>
+<ol>
+<li>o alvo é $\sigma^2$ ou $\sigma$ (não a média);</li>
+<li>os dados são <b>normais</b>. Aqui essa hipótese é essencial: ao contrário do IC da média, não existe TCL que salve o IC da variância quando os dados não são normais, mesmo com $n$ grande.</li>
+</ol>
+
+<div class="box def"><span class="box-title">O pivô e a fórmula</span>
+<p>Para uma amostra normal, a quantidade abaixo tem distribuição conhecida e contém o $\sigma^2$ desconhecido:</p>
+$$\frac{(n-1)S^2}{\sigma^2}\sim\chi^2_{n-1}.$$
+<p>Isolando $\sigma^2$, o IC de nível $1-\alpha$ é</p>
+$$\left[\frac{(n-1)s^2}{\chi^2_{\alpha/2,\,n-1}},\ \frac{(n-1)s^2}{\chi^2_{1-\alpha/2,\,n-1}}\right].$$
+<p>Notação: $\chi^2_{c,\,\nu}$ é o valor com <b>área $c$ à direita</b>. Então $\chi^2_{\alpha/2}$ é o quantil <b>grande</b> e $\chi^2_{1-\alpha/2}$ é o <b>pequeno</b>. Para $\sigma$, tire a raiz dos dois extremos.</p></div>
+
+<div class="box tip"><span class="box-title">De onde vem a fórmula (e por que o quantil maior vai no limite inferior)</span>
+<p>Com probabilidade $1-\alpha$, o pivô cai entre os dois quantis:</p>
+$$P\!\left(\chi^2_{1-\alpha/2}\ \le\ \frac{(n-1)S^2}{\sigma^2}\ \le\ \chi^2_{\alpha/2}\right)=1-\alpha.$$
+<p>Agora isole $\sigma^2$. Como ele está no <b>denominador</b>, inverter as frações inverte as desigualdades:</p>
+$$\frac{(n-1)S^2}{\chi^2_{\alpha/2}}\ \le\ \sigma^2\ \le\ \frac{(n-1)S^2}{\chi^2_{1-\alpha/2}}.$$
+<p>Dividir pelo número maior dá o resultado menor: por isso o quantil grande vai no limite inferior.</p></div>
+
+<div class="box tip"><span class="box-title">Por que não é "estimativa ± margem"?</span>
+<p>Nos ICs da média, $z$ e $t$ são simétricos em torno de zero, e o intervalo fica centrado em $\bar x$. A $\chi^2$ só assume valores positivos e é <b>assimétrica</b> (cauda longa à direita), então os dois quantis são diferentes e o intervalo <b>não fica centrado em $s^2$</b>: o limite superior fica bem mais longe de $s^2$ que o inferior.</p>
+<div class="table-wrap"><table>
+<thead><tr><th></th><th>Média ($z$ ou $t$)</th><th>Variância ($\chi^2$)</th></tr></thead>
+<tbody>
+<tr><td>Formato</td><td>estimativa ± margem</td><td>$(n-1)s^2$ dividido por dois quantis</td></tr>
+<tr><td>Quantis da tabela</td><td>um só (com ±)</td><td>dois diferentes</td></tr>
+<tr><td>Simetria</td><td>centrado em $\bar x$</td><td>não centrado em $s^2$</td></tr>
+<tr><td>Sem normalidade</td><td>com $n$ grande, TCL ajuda</td><td>não vale, mesmo com $n$ grande</td></tr>
+</tbody></table></div></div>
+
+<div class="box def"><span class="box-title">Passo a passo</span>
+<ol class="steps">
+<li>Calcule $s^2=\frac{1}{n-1}\sum(x_i-\bar x)^2$ (ou use o dado do enunciado; se vier $s$, eleve ao quadrado).</li>
+<li>Graus de liberdade: $\nu=n-1$.</li>
+<li>Na tabela $\chi^2$, linha $\nu$, pegue <b>dois</b> valores: área à direita $\alpha/2$ (o grande) e $1-\alpha/2$ (o pequeno).</li>
+<li>Numerador comum: $(n-1)s^2$.</li>
+<li>Limite inferior = numerador ÷ quantil grande; limite superior = numerador ÷ quantil pequeno.</li>
+<li>Se pedirem $\sigma$, tire a raiz dos dois limites.</li>
+</ol></div>
+
 <div class="example"><span class="box-title">Exemplo 7.6 — mesma amostra do 7.5</span>
-<p>$n=10$, $s^2=0{,}81$. Tabela $\chi^2$ com 9 g.l.: $\chi^2_{0,025;9}=19{,}02$ e $\chi^2_{0,975;9}=2{,}70$.</p>
-$$\sigma^2\in\left[\frac{9(0{,}81)}{19{,}02},\ \frac{9(0{,}81)}{2{,}70}\right]=[0{,}383;\ 2{,}70],\qquad \sigma\in[0{,}62;\ 1{,}64].$$
-<p>O intervalo <b>não é simétrico</b> em torno de $s^2$, porque a $\chi^2$ é assimétrica.</p></div>
+<p>Dez pesagens de café: $n=10$, $s=0{,}9$ kg, logo $s^2=0{,}81$. IC de 95% para $\sigma^2$ e para $\sigma$?</p>
+<ol class="steps">
+<li>$s^2=0{,}81$.</li>
+<li>$\nu=9$.</li>
+<li>Tabela $\chi^2$ com 9 g.l.: $\chi^2_{0,025;9}=19{,}02$ (grande) e $\chi^2_{0,975;9}=2{,}70$ (pequeno).</li>
+<li>$(n-1)s^2=9\cdot0{,}81=7{,}29$.</li>
+<li>$\sigma^2\in\left[\frac{7{,}29}{19{,}02},\ \frac{7{,}29}{2{,}70}\right]=[0{,}383;\ 2{,}70]$.</li>
+<li>$\sigma\in[\sqrt{0{,}383};\ \sqrt{2{,}70}]=[0{,}62;\ 1{,}64]$ kg.</li>
+</ol>
+<p>Repare: $s^2=0{,}81$ está a $0{,}43$ do limite inferior e a $1{,}89$ do superior. É a assimetria da $\chi^2$ aparecendo no intervalo.</p></div>
+
+<div class="box warn"><span class="box-title">Erros comuns</span>
+<ul>
+<li>Trocar os quantis: colocar o pequeno no limite inferior dá um "intervalo" com o limite inferior maior que o superior.</li>
+<li>Confundir a convenção da tabela: algumas tabelas dão a área à <b>esquerda</b>. Nelas, o quantil grande para 95% aparece na coluna 0,975. Confira se o valor que você pegou é o maior dos dois.</li>
+<li>Usar $s$ em vez de $s^2$ no numerador.</li>
+<li>Tentar "$s^2\pm$ margem": não existe essa forma aqui.</li>
+<li>Usar $n$ em vez de $n-1$ nos graus de liberdade ou no numerador.</li>
+</ul>
+<p>O teste de hipótese que usa o mesmo pivô está na seção <a href="09-testes.html#var">9.6</a>.</p></div>
+
 <div class="box tip"><span class="box-title">Outros pivôs</span>
 <p>Para amostras Exponencial$(\theta)$: $\theta\sum X_i\sim$ Gamma$(n,1)$, o que dá um IC exato para a taxa. A ideia é sempre a mesma: ache uma quantidade com distribuição conhecida e isole o parâmetro.</p></div>
 
