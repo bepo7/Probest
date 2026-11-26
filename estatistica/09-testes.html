@@ -160,11 +160,36 @@ $$F=\frac{S_X^2}{S_Y^2}\ \sim\ F(n_X-1,\ n_Y-1)\ \text{ sob } H_0:\sigma_X^2=\si
 <p>Útil para checar a suposição do t pooled. No Exemplo 9.3: $F=16/20=0{,}8$ com $(11,9)$ g.l.; os críticos bilaterais a 5% são $0{,}279$ e $3{,}91$, então não há evidência contra variâncias iguais (p-valor $\approx0{,}72$).</p>
 
 <h2 id="anova">9.10 ANOVA de um fator</h2>
-<p>Compara as médias de $k$ grupos normais com a mesma variância. $H_0$: todas as médias iguais.</p>
-$$F=\frac{\text{MS}_B}{\text{MS}_W}=\frac{\frac{1}{k-1}\sum_i n_i(\bar x_i-\bar x)^2}{\frac{1}{N-k}\sum_i\sum_j(x_{ij}-\bar x_i)^2}\ \sim\ F(k-1,\ N-k).$$
-<div class="example"><span class="box-title">Exemplo 9.9</span>
-<p>Três algoritmos, 4 execuções cada (tempo em s): A: 12,14,11,13; B: 15,17,16,16; C: 13,12,14,13. Médias $12{,}5;\ 16;\ 13$; média geral $13{,}83$.</p>
-<p>$SS_B=4[(12{,}5-13{,}83)^2+(16-13{,}83)^2+(13-13{,}83)^2]=28{,}67$; $SS_W=5+2+2=9$. $F=\frac{28{,}67/2}{9/9}=14{,}3$, com $(2,9)$ g.l.; crítico $4{,}26$ → rejeita: pelo menos uma média difere (p-valor $\approx0{,}002$).</p></div>
+<p>Compara as médias de $k$ grupos normais com a mesma variância. $H_0$: todas as médias iguais. A ideia é comparar duas variações: a <b>entre</b> grupos (as médias se afastam umas das outras?) e a <b>dentro</b> dos grupos (o ruído natural de cada um).</p>
+<div class="box def"><span class="box-title">SS e MS: as duas etapas da conta</span>
+<p><b>SS</b> (<i>sum of squares</i>, soma de quadrados) é só a soma dos desvios ao quadrado, sem dividir por nada:</p>
+$$SS_B=\sum_i n_i(\bar x_i-\bar x)^2\quad\text{(entre grupos)}\qquad SS_W=\sum_i\sum_j(x_{ij}-\bar x_i)^2\quad\text{(dentro dos grupos)}$$
+<p><b>MS</b> (<i>mean square</i>, quadrado médio) é o SS dividido pelos seus graus de liberdade. É uma variância, como $s^2=\frac{\sum(x-\bar x)^2}{n-1}$:</p>
+$$MS_B=\frac{SS_B}{k-1}\qquad MS_W=\frac{SS_W}{N-k}$$
+<p>A estatística do teste é a razão dos dois MS ($N$ = total de observações):</p>
+$$F=\frac{MS_B}{MS_W}\ \sim\ F(k-1,\ N-k)\ \text{ sob }H_0.$$
+<p>Se as médias forem iguais, os dois MS estimam a mesma $\sigma^2$ e $F\approx1$. Médias diferentes inflam $MS_B$, então rejeita para $F$ <b>grande</b> (unilateral à direita).</p></div>
+<div class="example"><span class="box-title">Exemplo 9.9 — três algoritmos têm o mesmo tempo médio?</span>
+<p>Três algoritmos, 4 execuções cada (tempo em s): A: 12, 14, 11, 13; B: 15, 17, 16, 16; C: 13, 12, 14, 13. Então $k=3$, $n_i=4$, $N=12$.</p>
+<ol class="steps">
+<li><b>Médias:</b> $\bar x_A=12{,}5$, $\bar x_B=16$, $\bar x_C=13$; média geral $\bar x=13{,}83$.</li>
+<li><b>$SS_B$</b> (cada desvio da média do grupo pesa $n_i=4$):
+$$SS_B=4\big[(12{,}5-13{,}83)^2+(16-13{,}83)^2+(13-13{,}83)^2\big]=4(1{,}78+4{,}69+0{,}69)=28{,}67$$</li>
+<li><b>$SS_W$</b> (cada dado contra a média do <b>próprio</b> grupo):
+$$A:\ 0{,}25+2{,}25+2{,}25+0{,}25=5\qquad B:\ 1+1+0+0=2\qquad C:\ 0+1+1+0=2$$
+$$SS_W=5+2+2=9$$</li>
+<li><b>Dividir pelos g.l. (SS vira MS):</b>
+$$MS_B=\frac{SS_B}{k-1}=\frac{28{,}67}{2}=14{,}33\qquad MS_W=\frac{SS_W}{N-k}=\frac{9}{9}=1$$</li>
+<li><b>Estatística:</b> $F=\dfrac{MS_B}{MS_W}=\dfrac{14{,}33}{1}=14{,}3$, com $(2,\,9)$ g.l.</li>
+<li><b>Decisão:</b> $F_{0{,}05;\,2,\,9}=4{,}26$ e $14{,}3\gt4{,}26$ → rejeita $H_0$: pelo menos uma média difere. O p-valor é $P(F_{2,9}\gt14{,}3)\approx0{,}002$.</li>
+</ol>
+<div class="table-wrap"><table>
+<tr><th>Fonte</th><th>SS</th><th>g.l.</th><th>MS = SS/g.l.</th><th>F</th></tr>
+<tr><td>Entre grupos (B)</td><td class="num">28,67</td><td class="num">2</td><td class="num">14,33</td><td class="num">14,3</td></tr>
+<tr><td>Dentro dos grupos (W)</td><td class="num">9</td><td class="num">9</td><td class="num">1</td><td></td></tr>
+<tr><td>Total</td><td class="num">37,67</td><td class="num">11</td><td></td><td></td></tr>
+</table></div>
+<p>Essa é a "tabela ANOVA". As linhas de SS somam o total ($28{,}67+9=37{,}67$), e os g.l. também ($2+9=11=N-1$).</p></div>
 <div class="box tip"><span class="box-title">Atalho dos slides: grupos do mesmo tamanho</span>
 <p>Com $k$ grupos de $m$ observações cada (é a forma usada nos slides da professora, que chamam os grupos de $n$):</p>
 $$MS_W=\underbrace{\frac{s_1^2+s_2^2+\cdots+s_k^2}{k}}_{\text{média das variâncias dos grupos}}$$
