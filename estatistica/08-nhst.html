@@ -144,14 +144,46 @@ $$n\ \ge\ \left(\frac{(z_\alpha+z_\beta)\,\sigma}{|\mu_1-\mu_0|}\right)^2,\qquad
 <p>Use o visualizador: mude $\alpha$, $n$ e $\mu_1$ e veja a área de potência (laranja) e a área $\alpha$ (azul) mudarem. É exatamente o "esboço" que as questões pedem.</p>
 
 <h2 id="exp">8.7 Teste com uma única observação</h2>
-<div class="example"><span class="box-title">Exemplo 8.3 — Exponencial</span>
-<p>A vida útil $X$ de um componente é Exponencial$(\lambda)$. O padrão é $\lambda=1$ (média 1 ano). Um fornecedor diz que o dele dura mais ($\lambda\lt1$). Você testa <b>um</b> componente: $H_0:\lambda=1$, $H_1:\lambda\lt1$, rejeitando se $X\gt c$.</p>
+<p>Nem todo teste usa média amostral e normal. Às vezes você tem <b>um</b> dado só, e a distribuição dele é conhecida (exponencial, uniforme, Poisson...). A receita é a mesma das seções anteriores: escolha a região de rejeição, calcule $\alpha$ sob $H_0$ e a potência sob $H_1$. A diferença é que as probabilidades saem direto da distribuição de $X$, sem tabela $z$.</p>
+<div class="box tip"><span class="box-title">A única conta que você precisa (Exponencial)</span>
+<p>Se $X\sim\text{Exponencial}(\lambda)$, com densidade $f(x)=\lambda e^{-\lambda x}$ para $x\ge0$ e média $1/\lambda$, a cauda direita é</p>
+$$P(X\gt x\mid\lambda)=\int_x^\infty\lambda e^{-\lambda t}\,dt=e^{-\lambda x}.$$
+<p>Lê-se: a chance de durar mais que $x$ é $e^{-\lambda x}$. Quanto <b>menor</b> o $\lambda$, maior a média e mais provável durar muito.</p></div>
+<div class="example"><span class="box-title">Exemplo 8.3 — o componente do fornecedor dura mais?</span>
+<p>A vida útil $X$ (em anos) de um componente é Exponencial$(\lambda)$. O padrão do mercado é $\lambda=1$, ou seja, média de 1 ano. Um fornecedor diz que o componente dele dura mais, o que significa $\lambda\lt1$. Você testa <b>um</b> componente, ao nível $\alpha=0{,}05$.</p>
+<ol class="steps">
+<li><b>Hipóteses:</b> $H_0:\lambda=1$ (igual ao padrão) contra $H_1:\lambda\lt1$ (dura mais).</li>
+<li><b>Formato da região de rejeição:</b> se $H_1$ for verdade, o componente tende a durar <b>muito</b>. Então rejeitamos $H_0$ quando a duração observada for grande: rejeita se $X\gt c$. Falta achar o corte $c$.</li>
+<li><b>Achar $c$ pelo $\alpha$:</b> $\alpha$ é a chance de rejeitar quando $H_0$ é verdade, ou seja, quando $\lambda=1$:
+$$\alpha=P(X\gt c\mid\lambda=1)=e^{-1\cdot c}=e^{-c}.$$
+Igualando a 0,05:
+$$e^{-c}=0{,}05\ \Rightarrow\ -c=\ln0{,}05\ \Rightarrow\ c=-\ln0{,}05=\ln20\approx3{,}0\text{ anos}.$$
+Tradução: um componente <b>padrão</b> só passa de 3 anos em 5% dos casos. Se o seu passar, é evidência de que ele não é padrão.</li>
+<li><b>Potência se o fornecedor estiver certo,</b> com $\lambda=0{,}25$ (média de 4 anos). A potência é a chance de rejeitar, agora calculada com o $\lambda$ verdadeiro:
+$$1-\beta=P(X\gt3{,}0\mid\lambda=0{,}25)=e^{-0{,}25\cdot3{,}0}=e^{-0{,}75}\approx0{,}47.$$
+Logo $\beta\approx0{,}53$. Mesmo com um componente 4 vezes mais durável, o teste com <b>um só</b> componente erra (não rejeita) em mais da metade das vezes. Pouca informação, pouca potência.</li>
+<li><b>Decisão com um dado observado.</b> O p-valor é a chance, sob $H_0$, de algo pelo menos tão extremo quanto o observado (aqui, "extremo" = durar tanto ou mais):
 <ul>
-<li>$\alpha=P(X\gt c\mid\lambda=1)=e^{-c}=0{,}05\Rightarrow c=\ln20\approx3{,}0$ anos.</li>
-<li>Potência se $\lambda=0{,}25$ (média 4 anos): $P(X\gt3{,}0\mid\lambda=0{,}25)=e^{-0{,}25\cdot3{,}0}\approx0{,}47$; $\beta\approx0{,}53$.</li>
-<li>Se o componente durou 2,2 anos: não rejeita; p-valor $=e^{-2{,}2}=0{,}11$.</li>
-</ul>
+<li>Durou 2,2 anos: $p=P(X\ge2{,}2\mid\lambda=1)=e^{-2{,}2}\approx0{,}11\gt0{,}05$ → <b>não rejeita</b>. Coerente com $2{,}2\lt c=3{,}0$.</li>
+<li>Durou 4 anos: $p=e^{-4}\approx0{,}018\lt0{,}05$ → <b>rejeita</b>. Coerente com $4\gt3{,}0$.</li>
+</ul></li>
+</ol>
+<p>Potência para outros valores de $\lambda$ (sempre $e^{-\lambda c}$ com $c=\ln20$):</p>
+<div class="table-wrap"><table>
+<tr><th>$\lambda$ verdadeiro</th><th>média $1/\lambda$</th><th>potência $e^{-\lambda c}$</th><th>$\beta$</th></tr>
+<tr><td class="num">1 ($H_0$)</td><td class="num">1 ano</td><td class="num">0,05 (é o $\alpha$)</td><td class="num">—</td></tr>
+<tr><td class="num">0,5</td><td class="num">2 anos</td><td class="num">0,22</td><td class="num">0,78</td></tr>
+<tr><td class="num">0,25</td><td class="num">4 anos</td><td class="num">0,47</td><td class="num">0,53</td></tr>
+<tr><td class="num">0,1</td><td class="num">10 anos</td><td class="num">0,74</td><td class="num">0,26</td></tr>
+</table></div>
+<p>Quanto mais longe de $H_0$ estiver o $\lambda$ verdadeiro, maior a potência. Em $\lambda=1$ a "potência" vale exatamente $\alpha$.</p>
 <p><b>Lição:</b> para qualquer distribuição, $\alpha$ e $\beta$ são só probabilidades de a estatística cair (ou não) na região de rejeição, calculadas sob cada hipótese. Não precisa ser normal.</p></div>
+<div class="box warn"><span class="box-title">Erros comuns</span>
+<ul>
+<li>Trocar o lado da região: $H_1:\lambda\lt1$ significa durar <b>mais</b>, então rejeita para $X$ <b>grande</b>. Se fosse $H_1:\lambda\gt1$, rejeitaria para $X\lt c$, com $\alpha=P(X\lt c)=1-e^{-c}$.</li>
+<li>Usar o $\lambda$ errado: $\alpha$ sempre com o valor de $H_0$; potência e $\beta$ com o valor alternativo.</li>
+<li>Confundir parametrizações: se o enunciado der a <b>média</b> $\theta$, então $\lambda=1/\theta$ e a cauda é $e^{-x/\theta}$.</li>
+</ul></div>
 
 <h2 id="beta-mu">8.8 β como função do parâmetro (curva de potência)</h2>
 <p>Para o teste z <b>bilateral</b> de $H_0:\mu=\mu_0$ (aceita se $|Z|\le z_{\alpha/2}$), se o valor verdadeiro é $\mu$:</p>
