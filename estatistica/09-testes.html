@@ -167,7 +167,9 @@ $$F=\frac{\text{MS}_B}{\text{MS}_W}=\frac{\frac{1}{k-1}\sum_i n_i(\bar x_i-\bar 
 <p>$SS_B=4[(12{,}5-13{,}83)^2+(16-13{,}83)^2+(13-13{,}83)^2]=28{,}67$; $SS_W=5+2+2=9$. $F=\frac{28{,}67/2}{9/9}=14{,}3$, com $(2,9)$ g.l.; crítico $4{,}26$ → rejeita: pelo menos uma média difere (p-valor $\approx0{,}002$).</p></div>
 <div class="box tip"><span class="box-title">Atalho dos slides: grupos do mesmo tamanho</span>
 <p>Com $k$ grupos de $m$ observações cada (é a forma usada nos slides da professora, que chamam os grupos de $n$):</p>
-$$MS_W=\frac{s_1^2+s_2^2+\cdots+s_k^2}{k}\ (\text{média das variâncias dos grupos}),\qquad MS_B=m\cdot\underbrace{\frac{\sum_i(\bar x_i-\bar x)^2}{k-1}}_{\text{variância das médias}},\qquad F\sim F(k-1,\ k(m-1)).$$
+$$MS_W=\underbrace{\frac{s_1^2+s_2^2+\cdots+s_k^2}{k}}_{\text{média das variâncias dos grupos}}$$
+$$MS_B=m\cdot\underbrace{\frac{\sum_i(\bar x_i-\bar x)^2}{k-1}}_{\text{variância das médias}}$$
+$$F=\frac{MS_B}{MS_W}\sim F(k-1,\ k(m-1)).$$
 <p>No Exemplo 9.9: $s^2_A=\frac53$, $s^2_B=s^2_C=\frac23$ ⇒ $MS_W=1$; variância das médias $=\frac{7{,}17}{2}=3{,}58$ ⇒ $MS_B=4(3{,}58)=14{,}3$. Mesmo $F=14{,}3$.</p>
 <p>Hipóteses: grupos normais, <b>mesma variância</b>, observações independentes. Rejeitar diz só que <b>alguma</b> média difere, não qual.</p></div>
 
