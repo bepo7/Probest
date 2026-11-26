@@ -88,8 +88,11 @@ $$s_p^2=\frac{(n_X-1)s_X^2+(n_Y-1)s_Y^2}{n_X+n_Y-2},\qquad T=\frac{(\bar X-\bar 
 <div class="example"><span class="box-title">Exemplo 9.4</span>
 <p>Cinco servidores tiveram a latência medida antes e depois de uma otimização. Diferenças (antes − depois, em ms): $2,4,1,3,5$. $\bar d=3$, $s_d^2=2{,}5$, $s_d=1{,}581$. $t=\frac{3}{1{,}581/\sqrt5}=4{,}24$ com 4 g.l. Bilateral a 5%: $t_{0,025;4}=2{,}776$ → rejeita "sem efeito". p-valor $\approx0{,}013$.</p></div>
 <ul>
-<li><b>z de duas amostras</b> (σ's conhecidos ou $n$'s grandes): $Z=\dfrac{\bar X-\bar Y-\delta_0}{\sqrt{\sigma_X^2/n_X+\sigma_Y^2/n_Y}}$.</li>
-<li><b>Welch</b> (variâncias desconhecidas e diferentes): $T=\dfrac{\bar X-\bar Y}{\sqrt{s_X^2/n_X+s_Y^2/n_Y}}$, com g.l. aproximados (fórmula de Welch). Mencionado no MIT; a disciplina cobra o pooled.</li>
+<li><b>z de duas amostras</b> (σ's conhecidos ou $n$'s grandes):
+$$Z=\frac{\bar X-\bar Y-\delta_0}{\sqrt{\sigma_X^2/n_X+\sigma_Y^2/n_Y}}\sim N(0,1).$$</li>
+<li><b>Welch</b> (variâncias desconhecidas e diferentes):
+$$T=\frac{\bar X-\bar Y}{\sqrt{s_X^2/n_X+s_Y^2/n_Y}},$$
+com g.l. aproximados (fórmula de Welch). Mencionado no MIT; a disciplina cobra o pooled.</li>
 </ul>
 
 <h2 id="var">9.6 χ² para a variância (amostra normal)</h2>
