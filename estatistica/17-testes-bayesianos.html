@@ -21,6 +21,19 @@
 <h1>Testes bayesianos: fator de Bayes e teste MAP</h1>
 <p class="lead">Material de 24/11 da professora ("Testes Bayesianos"). A <a href="03-preditiva-odds.html#bf">seção 3.5</a> já mostrou o fator de Bayes com hipóteses simples. Aqui entram os casos em que cada modelo tem um <b>parâmetro incerto</b> (e é preciso integrar), a regra que liga o <b>BF ao MAP</b>, o <b>teste MAP com dados contínuos</b> e sua <b>probabilidade de erro</b>, e a comparação com o GLRT.</p>
 
+<div class="box tip"><span class="box-title">Resumo: o que lembrar desta seção</span>
+<ol>
+<li><b>Evidência de um modelo</b> ($m_i$): a likelihood dos dados <b>média</b> sobre a prior do parâmetro. Se o modelo fixa tudo (hipótese simples), é só a likelihood no dado observado. <a href="#bf-def">§17.1</a></li>
+<li><b>Fator de Bayes:</b> $BF_{10}=m_1/m_0$. Maior que 1 favorece $M_1$; de 1 a 3 é fraca, de 3 a 10 moderada, 10 ou mais forte. Se der menor que 1, inverta e leia $BF_{01}$. <a href="#escala">§17.2</a></li>
+<li><b>Posterior:</b> posterior odds $=BF_{10}\times$ prior odds. O BF não usa $P(M_i)$; a conversão para probabilidade usa. <a href="#bf-def">§17.1</a></li>
+<li><b>Normal com média incerta</b> ($\mu\sim N(\mu_i,\tau^2)$): use a variância preditiva $\sigma^2+\tau^2$ no lugar de $\sigma^2$ e compare as alturas das densidades no ponto observado. <a href="#marginal">§17.4</a></li>
+<li><b>Moeda com prior uniforme:</b> $m_1=\frac1{n+1}$. O BF penaliza o modelo que espalha a prior por valores que explicam mal os dados (o GLRT, que maximiza, não penaliza). <a href="#marginal">§17.4</a></li>
+<li><b>BF × MAP:</b> o MAP escolhe $M_1$ só se $BF_{10}\gt P(M_0)/P(M_1)$. Evidência forte pode não bastar contra uma prior forte. <a href="#bf-map">§17.5</a></li>
+<li><b>Teste MAP:</b> escolha $H_0$ se $f(y\mid H_0)\,p_0\ge f(y\mid H_1)\,p_1$; isole $y$ para achar o limiar $c$. No bit $\pm1$ com ruído normal: $c=\frac{\sigma^2}{2}\ln\frac{p_1}{p_0}$. Com priors iguais, vira o teste de máxima verossimilhança ($c=0$). <a href="#map-test">§17.6</a></li>
+<li><b>Erro do MAP:</b> $P_e=p_0\,P(\text{erro}\mid H_0)+p_1\,P(\text{erro}\mid H_1)$. O MAP minimiza $P_e$; não existe α fixo como no NHST. <a href="#erro">§17.7</a></li>
+<li><b>BF e MAP integram</b> o parâmetro desconhecido; o <b>GLRT maximiza</b> e não dá a probabilidade de $H_0$. <a href="#glrt">§17.8</a></li>
+</ol></div>
+
 <div class="toc"><strong>Nesta página</strong><ol>
 <li><a href="#bf-def">Fator de Bayes e verossimilhança marginal</a></li>
 <li><a href="#escala">Como ler o tamanho do BF</a></li>
@@ -66,7 +79,8 @@ $$\underbrace{\frac{P(M_1\mid D)}{P(M_0\mid D)}}_{\text{posterior odds}}=BF_{10}
 <p>O tempo de resposta $X$ (ms) de uma API segue $M_0: X\sim N(200;\ 400)$ (versão antiga) ou $M_1: X\sim N(230;\ 400)$ (versão nova, mais lenta). Nos dois, $\sigma=20$. Antes de medir, $P(M_0)=0{,}7$ e $P(M_1)=0{,}3$. Uma requisição levou $x=218$ ms.</p>
 <ol class="steps">
 <li><b>Densidades.</b> O fator $\frac1{\sqrt{2\pi\sigma^2}}$ é o mesmo nos dois modelos e vai se cancelar:
-$$m_0=\tfrac1{20\sqrt{2\pi}}e^{-(218-200)^2/800}=\tfrac1{20\sqrt{2\pi}}e^{-0{,}405}\approx0{,}0133,\qquad m_1=\tfrac1{20\sqrt{2\pi}}e^{-(218-230)^2/800}=\tfrac1{20\sqrt{2\pi}}e^{-0{,}18}\approx0{,}0167.$$</li>
+$$m_0=\tfrac1{20\sqrt{2\pi}}e^{-(218-200)^2/800}=\tfrac1{20\sqrt{2\pi}}e^{-0{,}405}\approx0{,}0133,$$
+$$m_1=\tfrac1{20\sqrt{2\pi}}e^{-(218-230)^2/800}=\tfrac1{20\sqrt{2\pi}}e^{-0{,}18}\approx0{,}0167.$$</li>
 <li><b>Fator de Bayes.</b> $BF_{10}=e^{-0{,}18+0{,}405}=e^{0{,}225}\approx1{,}25$: evidência fraca a favor de $M_1$ (218 está um pouco mais perto de 230 do que de 200).</li>
 <li><b>Posterior.</b> Posterior odds $=1{,}25\times\frac{0{,}3}{0{,}7}\approx0{,}537$, logo $P(M_1\mid x)=\frac{0{,}537}{1{,}537}\approx0{,}349$ (era 0,30).</li>
 </ol>
@@ -148,7 +162,8 @@ $$P_e=P(\text{erro I}\mid H_0)\,p_0+P(\text{erro II}\mid H_1)\,p_1.$$
 <p>Entre todas as regras de decisão, a regra MAP é a que dá o <b>menor</b> $P_e$.</p></div>
 <div class="example"><span class="box-title">Exemplo 17.6 — erro do receptor do Exemplo 17.5</span>
 <p>Com $c=-0{,}173$ e $\sigma=0{,}5$:</p>
-$$P(Y\lt c\mid H_0)=\Phi\Big(\frac{c-1}{\sigma}\Big)=\Phi(-2{,}35)\approx0{,}0095,\qquad P(Y\ge c\mid H_1)=1-\Phi\Big(\frac{c+1}{\sigma}\Big)=1-\Phi(1{,}65)\approx0{,}049.$$
+$$P(Y\lt c\mid H_0)=\Phi\Big(\frac{c-1}{\sigma}\Big)=\Phi(-2{,}35)\approx0{,}0095,$$
+$$P(Y\ge c\mid H_1)=1-\Phi\Big(\frac{c+1}{\sigma}\Big)=1-\Phi(1{,}65)\approx0{,}049.$$
 $$P_e=0{,}8(0{,}0095)+0{,}2(0{,}049)\approx0{,}0076+0{,}0098=0{,}0174.$$
 <p>Com o limiar de ML ($c=0$), os dois erros valem $\Phi(-2)=0{,}0228$ e $P_e=0{,}0228$. O MAP erra menos <b>na média</b> porque aceita errar um pouco mais na hipótese rara ($H_1$) em troca de errar bem menos na comum.</p></div>
 <div class="box def" id="map-geral"><span class="box-title">Forma geral (slides da professora: Pishro-Nik, Exemplo 9.10)</span>
