@@ -21,18 +21,19 @@
 <h1>Testes bayesianos: fator de Bayes e teste MAP</h1>
 <p class="lead">Material de 24/11 da professora ("Testes Bayesianos"). A <a href="03-preditiva-odds.html#bf">seção 3.5</a> já mostrou o fator de Bayes com hipóteses simples. Aqui entram os casos em que cada modelo tem um <b>parâmetro incerto</b> (e é preciso integrar), a regra que liga o <b>BF ao MAP</b>, o <b>teste MAP com dados contínuos</b> e sua <b>probabilidade de erro</b>, e a comparação com o GLRT.</p>
 
-<div class="box tip"><span class="box-title">Resumo: o que lembrar desta seção</span>
+<div class="box tip"><span class="box-title">Pré-requisito: o que lembrar da seção 3</span>
+<p>Esta seção parte direto do que foi visto em <a href="03-preditiva-odds.html">Probabilidade preditiva e odds</a>. O essencial:</p>
 <ol>
-<li><b>Evidência de um modelo</b> ($m_i$): a likelihood dos dados <b>média</b> sobre a prior do parâmetro. Se o modelo fixa tudo (hipótese simples), é só a likelihood no dado observado. <a href="#bf-def">§17.1</a></li>
-<li><b>Fator de Bayes:</b> $BF_{10}=m_1/m_0$. Maior que 1 favorece $M_1$; de 1 a 3 é fraca, de 3 a 10 moderada, 10 ou mais forte. Se der menor que 1, inverta e leia $BF_{01}$. <a href="#escala">§17.2</a></li>
-<li><b>Posterior:</b> posterior odds $=BF_{10}\times$ prior odds. O BF não usa $P(M_i)$; a conversão para probabilidade usa. <a href="#bf-def">§17.1</a></li>
-<li><b>Normal com média incerta</b> ($\mu\sim N(\mu_i,\tau^2)$): use a variância preditiva $\sigma^2+\tau^2$ no lugar de $\sigma^2$ e compare as alturas das densidades no ponto observado. <a href="#marginal">§17.4</a></li>
-<li><b>Moeda com prior uniforme:</b> $m_1=\frac1{n+1}$. O BF penaliza o modelo que espalha a prior por valores que explicam mal os dados (o GLRT, que maximiza, não penaliza). <a href="#marginal">§17.4</a></li>
-<li><b>BF × MAP:</b> o MAP escolhe $M_1$ só se $BF_{10}\gt P(M_0)/P(M_1)$. Evidência forte pode não bastar contra uma prior forte. <a href="#bf-map">§17.5</a></li>
-<li><b>Teste MAP:</b> escolha $H_0$ se $f(y\mid H_0)\,p_0\ge f(y\mid H_1)\,p_1$; isole $y$ para achar o limiar $c$. No bit $\pm1$ com ruído normal: $c=\frac{\sigma^2}{2}\ln\frac{p_1}{p_0}$. Com priors iguais, vira o teste de máxima verossimilhança ($c=0$). <a href="#map-test">§17.6</a></li>
-<li><b>Erro do MAP:</b> $P_e=p_0\,P(\text{erro}\mid H_0)+p_1\,P(\text{erro}\mid H_1)$. O MAP minimiza $P_e$; não existe α fixo como no NHST. <a href="#erro">§17.7</a></li>
-<li><b>BF e MAP integram</b> o parâmetro desconhecido; o <b>GLRT maximiza</b> e não dá a probabilidade de $H_0$. <a href="#glrt">§17.8</a></li>
-</ol></div>
+<li><b>Tabela bayesiana:</b> para cada hipótese, numerador $=$ prior $\times$ likelihood; posterior $=$ numerador $\div$ total da coluna. <a href="02-bayes-discreto.html">§2</a></li>
+<li><b>Prior predictive</b> (antes dos dados): $P(x)=\sum_i P(x\mid H_i)\,P(H_i)$. É o <b>total da coluna do numerador</b>. A evidência $m_i(D)$ desta seção é essa mesma conta, feita sobre os valores do parâmetro <b>dentro</b> de cada modelo. <a href="03-preditiva-odds.html#prior-pred">§3.1</a></li>
+<li><b>Posterior predictive</b> (próximo resultado): a mesma soma, mas com a posterior no lugar da prior: $P(x_{\text{novo}}\mid D)=\sum_i P(x_{\text{novo}}\mid H_i)\,P(H_i\mid D)$. <a href="03-preditiva-odds.html#post-pred">§3.2</a></li>
+<li><b>Odds:</b> $O=\dfrac{p}{1-p}$ e, de volta, $p=\dfrac{O}{1+O}$. "1 para 4" é $O=1/4$, $p=0{,}2$. Com 3 ou mais hipóteses, divida por $1-P(H)$, a soma de <b>todas</b> as outras. <a href="03-preditiva-odds.html#odds">§3.4</a></li>
+<li><b>Fator de Bayes:</b> $BF=\dfrac{P(D\mid H)}{P(D\mid H^c)}$, e <b>posterior odds $=BF\times$ prior odds</b>. $BF\gt1$ é evidência a favor de $H$; $BF=1$ não muda nada. <a href="03-preditiva-odds.html#bf">§3.5</a></li>
+<li><b>Vários dados independentes:</b> os BFs se multiplicam, $O_{\text{post}}=BF_1\cdot BF_2\cdots O_{\text{prior}}$. Em log, somam. <a href="03-preditiva-odds.html#bf">§3.5</a></li>
+<li><b>Likelihood Poisson ou Normal:</b> as partes iguais nas duas hipóteses (fatoriais, $\frac1{\sqrt{2\pi}\sigma}$) se cancelam no BF; faça a conta em log. <a href="03-preditiva-odds.html#poisson">§3.6</a></li>
+<li><b>Independência só condicional:</b> dado $H$, os resultados são independentes; sem saber $H$, não são. Por isso $P(\text{dois defeitos})=\sum\theta^2P(\theta\mid D)$, e não o quadrado da preditiva. <a href="03-preditiva-odds.html#duas">§3.7</a></li>
+</ol>
+<p>O que muda aqui: na seção 3 cada hipótese fixava o parâmetro; agora cada modelo pode ter um parâmetro <b>incerto</b>, e a likelihood vira uma média sobre a prior desse parâmetro.</p></div>
 
 <div class="toc"><strong>Nesta página</strong><ol>
 <li><a href="#bf-def">Fator de Bayes e verossimilhança marginal</a></li>
